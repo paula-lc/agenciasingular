@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/logo-agencia-singular.webp" type="image/webp">
-  <link rel="stylesheet" href="assets/css/styles.css?v=10">
+  <link rel="stylesheet" href="assets/css/styles.css?v=11">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -166,15 +166,17 @@
             <!-- Logo animado por capas (orden de Figma: jaguar, estrella rosa, SINGULAR, Agencia, patas y cola delante) -->
             <div class="alogo hero__logo" role="img" aria-label="Agencia Singular: logotipo con jaguar y estrellas">
               <div class="alogo__leap alogo__leap--back">
-                <img class="alogo__jaguar" src="assets/img/logo/logo-jaguar.webp" alt="" width="672" height="518" fetchpriority="high">
-                <span class="alogo__bstar"><img src="assets/img/logo/logo-star-black.webp" alt="" width="100" height="132"></span>
+                <div class="alogo__swing">
+                  <img class="alogo__tailback" src="assets/img/logo/logo-tail.webp" alt="" width="307" height="269">
+                </div>
+                <img class="alogo__jaguar" src="assets/img/logo/logo-jaguar.webp" alt="" width="606" height="518" fetchpriority="high">
               </div>
               <img class="alogo__rstar" src="assets/img/logo/logo-star-red.webp" alt="" width="444" height="576">
               <img class="alogo__singular" src="assets/img/logo/logo-singular.webp" alt="" width="863" height="132">
               <img class="alogo__agencia" src="assets/img/logo/logo-agencia.webp" alt="" width="1051" height="394">
               <div class="alogo__leap alogo__leap--front">
                 <img class="alogo__feet" src="assets/img/logo/logo-feet.webp" alt="" width="529" height="148">
-                <img class="alogo__tail" src="assets/img/logo/logo-tail-front.webp" alt="" width="83" height="190">
+                <div class="alogo__swing"><img class="alogo__tail" src="assets/img/logo/logo-tail-front.webp" alt="" width="83" height="190"></div>
               </div>
             </div>
             <h1 id="hero-title">
@@ -934,6 +936,6 @@
     <a class="btn btn--yellow" href="#contacto"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Diagnóstico gratis</a>
   </div>
 
-  <script src="assets/js/main.js?v=10" defer></script>
+  <script src="assets/js/main.js?v=11" defer></script>
 </body>
 </html>
