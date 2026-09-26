@@ -3,7 +3,7 @@
   "short_name": "Singular",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#3e6083",
+  "background_color": "#ebe7d0",
   "theme_color": "#3e6083",
   "icons": [
     { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
