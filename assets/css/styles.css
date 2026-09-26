@@ -89,13 +89,33 @@ ul, ol.steps { margin: 0; padding: 0; }
   font-family: var(--font-body); font-weight: 800; font-size: 15px; letter-spacing: 1.5px;
   text-transform: uppercase; text-decoration: none; cursor: pointer;
   border: 0; border-radius: 99px; padding: 14px 28px 14px 24px;
-  transition: transform .15s ease, box-shadow .15s ease, background-color .15s;
+  transition: transform .45s cubic-bezier(.34, 1.8, .5, 1), box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
 }
+.btn .icon { transition: transform .45s cubic-bezier(.34, 1.8, .5, 1), fill .2s ease, color .2s ease; }
 .btn:hover { transform: translate(-2px, -2px); }
-.btn:active { transform: translate(1px, 1px); }
+.btn:active { transform: scale(.9); transition-duration: .08s; }
+
+/* Rebote al hacer clic (la clase la añade main.js) */
+.btn.is-bouncing { animation: btn-bounce .6s cubic-bezier(.28, .84, .42, 1); }
+.btn.is-bouncing .icon { animation: star-pop .6s cubic-bezier(.34, 1.8, .5, 1); }
+@keyframes btn-bounce {
+  0%   { transform: scale(1, 1); }
+  18%  { transform: scale(.86, .9); }
+  40%  { transform: scale(1.1, 1.05) translateY(-3px); }
+  60%  { transform: scale(.96, .98); }
+  80%  { transform: scale(1.03, 1.01); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes star-pop {
+  0%   { transform: scale(1) rotate(0); }
+  40%  { transform: scale(1.45) rotate(-25deg); }
+  70%  { transform: scale(.9) rotate(10deg); }
+  100% { transform: scale(1) rotate(0); }
+}
 
 .btn--yellow { background: var(--yellow); color: var(--blue-deep); box-shadow: 0 4px 4px rgba(0,0,0,.2); }
 .btn--yellow .icon { color: var(--crimson); }
+.btn--yellow:hover .icon { fill: var(--crimson); transform: rotate(-18deg) scale(1.15); }
 .btn--retro {
   background: var(--yellow); color: var(--blue-deep); border-radius: var(--radius-sm);
   padding: 15px 36px; font-size: 16px; letter-spacing: 3px; box-shadow: var(--shadow-retro);
@@ -106,7 +126,10 @@ ul, ol.steps { margin: 0; padding: 0; }
   background: transparent; color: var(--yellow); border: 1.5px solid var(--yellow);
   font-weight: 600; font-size: 13px; padding: 9px 16px; letter-spacing: 1.5px;
 }
-.btn--outline:hover { background: rgba(250,180,25,.12); transform: none; }
+.btn--outline:hover,
+.btn--outline:focus-visible { background: var(--yellow); color: var(--blue-deep); border-color: var(--yellow); }
+.btn--outline:hover .icon,
+.btn--outline:focus-visible .icon { fill: var(--crimson); color: var(--crimson); transform: rotate(-18deg) scale(1.2); }
 .btn--ghost-cream { background: transparent; color: var(--cream); border: 2px solid var(--cream); }
 .btn--ghost-cream:hover { background: var(--cream); color: var(--blue); }
 .btn--block { width: 100%; }

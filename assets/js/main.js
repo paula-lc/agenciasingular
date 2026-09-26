@@ -57,6 +57,22 @@ if (contactSection && stickyCta && "IntersectionObserver" in window) {
 }
 
 /* ------------------------------------------------------------------
+   Rebote de los botones al hacer clic
+   ------------------------------------------------------------------ */
+if (!reduceMotion) {
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn");
+    if (!btn) return;
+    btn.classList.remove("is-bouncing");
+    void btn.offsetWidth; // reinicia la animación si se pulsa varias veces
+    btn.classList.add("is-bouncing");
+  });
+  document.addEventListener("animationend", (e) => {
+    if (e.animationName === "btn-bounce") e.target.classList.remove("is-bouncing");
+  });
+}
+
+/* ------------------------------------------------------------------
    Aparición suave al hacer scroll
    ------------------------------------------------------------------ */
 const revealEls = document.querySelectorAll(".reveal");
