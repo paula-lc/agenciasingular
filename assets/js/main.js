@@ -43,7 +43,10 @@ let contactVisible = false;
 
 /* Marca en la cabecera el botón de la sección visible */
 const navLinks = [...document.querySelectorAll('.nav__links a[href^="#"]')];
-const pageSections = [...document.querySelectorAll("main section[id]")];
+// Solo las secciones con botón: cada una sigue marcada hasta que empieza la siguiente
+const pageSections = navLinks
+  .map((a) => document.getElementById(a.getAttribute("href").slice(1)))
+  .filter(Boolean);
 
 function setActiveNav(id) {
   navLinks.forEach((a) => {
