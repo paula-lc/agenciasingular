@@ -729,8 +729,9 @@ ul, ol.steps { margin: 0; padding: 0; }
 .compare { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--white); border-radius: var(--radius); overflow: hidden; }
 .compare th, .compare td { padding: 12px 14px; border-bottom: 2px solid var(--cream); text-align: left; vertical-align: top; }
 .compare th { background: var(--blue); color: var(--cream); font-family: var(--font-display); font-weight: 400; font-size: 14px; }
-.table-wrap { overflow-x: auto; }
-@media (max-width: 900px) { .article { grid-template-columns: 1fr; } .toc { position: static; } }
+.article > * { min-width: 0; }
+.table-wrap { overflow-x: auto; max-width: 100%; }
+@media (max-width: 900px) { .article { grid-template-columns: minmax(0, 1fr); } .toc { position: static; } }
 
 .legal { max-width: 820px; padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(48px, 6vw, 80px); }
 .notfound { text-align: center; padding: clamp(64px, 10vw, 120px) 0; }
