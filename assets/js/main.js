@@ -41,10 +41,53 @@ const stickyCta = document.querySelector("[data-sticky-cta]");
 const contactSection = document.getElementById("contacto");
 let contactVisible = false;
 
+/* Marca en la cabecera el botón de la sección visible */
+const navLinks = [...document.querySelectorAll('.nav__links a[href^="#"]')];
+const pageSections = [...document.querySelectorAll("main section[id]")];
+
+function setActiveNav(id) {
+  navLinks.forEach((a) => {
+    const active = a.getAttribute("href") === `#${id}`;
+    a.classList.toggle("is-active", active);
+    if (active) a.setAttribute("aria-current", "location");
+    else a.removeAttribute("aria-current");
+  });
+}
+
+let navLock = null;
+function updateActiveNav() {
+  if (!navLinks.length || navLock) return;
+  // Línea de referencia: un tercio de la pantalla por debajo de la cabecera
+  const line = (header?.offsetHeight || 0) + window.innerHeight * 0.3;
+  let current = null;
+  for (const s of pageSections) {
+    if (s.getBoundingClientRect().top <= line) current = s;
+  }
+  // Al llegar al final de la página, la última sección
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+    current = pageSections[pageSections.length - 1];
+  }
+  setActiveNav(current?.id);
+}
+
+// Al hacer clic se marca al momento y se ignora el scroll suave hasta que termina
+const releaseNavLock = () => { clearTimeout(navLock); navLock = null; updateActiveNav(); };
+navLinks.forEach((a) => a.addEventListener("click", () => {
+  setActiveNav(a.getAttribute("href").slice(1));
+  clearTimeout(navLock);
+  navLock = setTimeout(releaseNavLock, 1200);
+}));
+window.addEventListener("scrollend", () => { if (navLock) releaseNavLock(); });
+
+let navTicking = false;
 function onScroll() {
   const y = window.scrollY;
   header?.classList.toggle("is-scrolled", y > 10);
   stickyCta?.classList.toggle("is-visible", y > 600 && !contactVisible);
+  if (!navTicking) {
+    navTicking = true;
+    requestAnimationFrame(() => { updateActiveNav(); navTicking = false; });
+  }
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
