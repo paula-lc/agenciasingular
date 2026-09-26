@@ -130,8 +130,10 @@ ul, ol.steps { margin: 0; padding: 0; }
   font-weight: 600; font-size: 13px; padding: 9px 16px; letter-spacing: 1.5px;
 }
 .btn--outline:hover,
+.btn--outline.is-active,
 .btn--outline:focus-visible { background: var(--yellow); color: var(--blue-deep); border-color: var(--yellow); }
 .btn--outline:hover .icon,
+.btn--outline.is-active .icon,
 .btn--outline:focus-visible .icon { fill: var(--crimson); color: var(--crimson); transform: rotate(-18deg) scale(1.2); }
 .btn--ghost-cream { background: transparent; color: var(--cream); border: 2px solid var(--cream); }
 .btn--ghost-cream:hover { background: var(--cream); color: var(--blue); }
@@ -387,6 +389,12 @@ ul, ol.steps { margin: 0; padding: 0; }
 .service__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .service h3 { font-size: 21px; line-height: 1.2; }
 .service p { font-size: 15px; line-height: 1.6; }
+.btn--service {
+  margin-top: 4px; width: 100%; background: var(--blue); color: var(--cream); border-radius: var(--radius-sm);
+  font-size: 13px; padding: 11px 16px; box-shadow: 3px 3px 0 var(--crimson);
+}
+.btn--service:hover { background: var(--yellow); color: var(--blue-deep); box-shadow: 5px 5px 0 var(--crimson); }
+.btn--service:hover .icon { transform: translateX(4px); }
 .service__tag { margin-top: auto; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--crimson); }
 
 .trastienda {

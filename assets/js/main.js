@@ -290,6 +290,14 @@ if (quiz) {
    Botones "Lo quiero" → preseleccionan el pack en el formulario
    ------------------------------------------------------------------ */
 document.addEventListener("click", (e) => {
+  const link = e.target.closest("[data-service]");
+  if (!link) return;
+  const msg = document.getElementById("f-msg");
+  const line = `Me interesa el servicio: ${link.dataset.service}.`;
+  if (msg && !msg.value.includes(line)) msg.value = (msg.value ? msg.value + "\n" : "") + line;
+});
+
+document.addEventListener("click", (e) => {
   const link = e.target.closest("[data-pack]");
   if (!link) return;
   const pack = link.dataset.pack;
