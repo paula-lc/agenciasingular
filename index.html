@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/logo-agencia-singular.webp" type="image/webp">
-  <link rel="stylesheet" href="assets/css/styles.css?v=8">
+  <link rel="stylesheet" href="assets/css/styles.css?v=9">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -163,10 +163,20 @@
         <div class="container hero__grid">
           <div>
             <p class="hero__tagline">la solución para centrarte en tu negocio</p>
-            <picture>
-              <source srcset="assets/img/logo-agencia-singular.webp" type="image/webp">
-              <img class="hero__logo" src="assets/img/logo-agencia-singular.png" alt="Agencia Singular: logotipo con leopardo y estrellas" width="537" height="201" fetchpriority="high">
-            </picture>
+            <!-- Logo animado por capas (orden de Figma: jaguar, estrella rosa, SINGULAR, Agencia, patas y cola delante) -->
+            <div class="alogo hero__logo" role="img" aria-label="Agencia Singular: logotipo con jaguar y estrellas">
+              <div class="alogo__leap alogo__leap--back">
+                <img class="alogo__jaguar" src="assets/img/logo/logo-jaguar.webp" alt="" width="672" height="518" fetchpriority="high">
+                <span class="alogo__bstar"><img src="assets/img/logo/logo-star-black.webp" alt="" width="100" height="132"></span>
+              </div>
+              <img class="alogo__rstar" src="assets/img/logo/logo-star-red.webp" alt="" width="444" height="576">
+              <img class="alogo__singular" src="assets/img/logo/logo-singular.webp" alt="" width="863" height="132">
+              <img class="alogo__agencia" src="assets/img/logo/logo-agencia.webp" alt="" width="1051" height="394">
+              <div class="alogo__leap alogo__leap--front">
+                <img class="alogo__feet" src="assets/img/logo/logo-feet.webp" alt="" width="529" height="148">
+                <img class="alogo__tail" src="assets/img/logo/logo-tail-front.webp" alt="" width="83" height="190">
+              </div>
+            </div>
             <h1 id="hero-title">
               <span class="highlight">Transformamos la imagen digital de tu negocio.</span>
               <span class="visually-hidden"> Agencia de marketing para pequeños negocios: SEO local, Google Maps y posicionamiento en IA.</span>
@@ -924,6 +934,6 @@
     <a class="btn btn--yellow" href="#contacto"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Diagnóstico gratis</a>
   </div>
 
-  <script src="assets/js/main.js?v=8" defer></script>
+  <script src="assets/js/main.js?v=9" defer></script>
 </body>
 </html>

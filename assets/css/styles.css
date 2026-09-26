@@ -219,6 +219,84 @@ ul, ol.steps { margin: 0; padding: 0; }
 .hero__grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
 .hero__tagline { font-size: 15px; letter-spacing: clamp(.08em, 1vw, .3em); color: var(--yellow); font-style: italic; font-weight: 500; margin-bottom: 10px; }
 .hero__logo { width: min(537px, 100%); margin: 0 0 22px -6px; }
+
+/* ==========================================================================
+   Logo animado (capas exportadas del Figma, nodo 71:20)
+   Caja de referencia: 1546 × 576 px del frame original
+   ========================================================================== */
+.alogo { position: relative; width: min(560px, 100%); aspect-ratio: 1546 / 576; }
+.alogo img { position: absolute; height: auto; max-width: none; }
+.alogo__leap { position: absolute; inset: 0; pointer-events: none; transform-origin: 78% 50%; }
+.alogo__jaguar   { left: 56.533%; top: 6.424%;  width: 43.467%; }
+.alogo__bstar    { position: absolute; left: 69.922%; top: 6.076%; width: 6.468%; aspect-ratio: 100 / 132; transform-origin: 50% 55%; }
+.alogo__bstar img { position: static; width: 100%; transform-origin: 50% 55%; }
+.alogo__rstar    { left: 0;       top: 0;       width: 28.719%; transform-origin: 38% 30%; }
+.alogo__singular { left: 31.113%; top: 71.181%; width: 55.821%; }
+.alogo__agencia  { left: 3.881%;  top: 18.75%;  width: 67.982%; }
+.alogo__feet     { left: 60.802%; top: 70.312%; width: 34.217%; }
+.alogo__tail     { left: 56.404%; top: 19.965%; width: 5.369%; }
+
+/* Entrada: estrella rosa → "Agencia" se escribe → salta el jaguar → cae "SINGULAR." → la estrella negra aparece */
+.alogo__rstar    { animation: alogo-rstar-in .8s cubic-bezier(.34, 1.4, .5, 1) both, alogo-rstar-idle 6s 2.4s ease-in-out infinite; }
+.alogo__agencia  { animation: alogo-write 1.1s .25s cubic-bezier(.6, .1, .3, 1) both; }
+.alogo__leap     { animation: alogo-leap 1s .55s cubic-bezier(.2, .8, .3, 1) both; }
+.alogo__singular { animation: alogo-drop .75s 1s cubic-bezier(.3, 1.5, .5, 1) both; }
+.alogo__bstar    { animation: alogo-pop .6s 1.45s cubic-bezier(.34, 1.8, .5, 1) both; }
+.alogo__bstar img { animation: alogo-swing 3.2s 2.2s ease-in-out infinite; }
+
+/* Al pasar el ratón: el jaguar ruge y la estrella negra da una vuelta */
+.alogo:hover .alogo__jaguar,
+.alogo:hover .alogo__feet,
+.alogo:hover .alogo__tail { animation: alogo-roar .5s ease-in-out; }
+.alogo:hover .alogo__bstar img { animation: alogo-spin .9s cubic-bezier(.34, 1.4, .5, 1); }
+
+@keyframes alogo-rstar-in {
+  0%   { opacity: 0; transform: scale(0) rotate(-200deg); }
+  60%  { opacity: 1; transform: scale(1.12) rotate(8deg); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes alogo-rstar-idle {
+  0%, 84%, 100% { transform: none; filter: none; }
+  90% { transform: scale(1.06) rotate(-5deg); filter: brightness(1.15); }
+}
+@keyframes alogo-write {
+  0%   { clip-path: inset(-20% 100% -20% -5%); }
+  100% { clip-path: inset(-20% -5% -20% -5%); }
+}
+@keyframes alogo-leap {
+  0%   { opacity: 0; transform: translate(26%, -16%) rotate(14deg) scale(.85); }
+  55%  { opacity: 1; transform: translate(-2.5%, 3%) rotate(-3deg) scale(1.02); }
+  78%  { transform: translate(.8%, -1%) rotate(1deg); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes alogo-drop {
+  0%   { opacity: 0; transform: translateY(-70%); }
+  60%  { opacity: 1; transform: translateY(6%); }
+  80%  { transform: translateY(-3%); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes alogo-pop {
+  0%   { opacity: 0; transform: scale(0) rotate(-180deg); }
+  70%  { opacity: 1; transform: scale(1.35) rotate(12deg); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes alogo-swing {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-14deg); }
+  75% { transform: rotate(14deg); }
+}
+@keyframes alogo-spin {
+  0%   { transform: rotate(0) scale(1); }
+  60%  { transform: rotate(380deg) scale(1.3); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes alogo-roar {
+  0%, 100% { transform: none; }
+  20% { transform: translate(-4px, -5px); }
+  40% { transform: translate(3px, 2px); }
+  60% { transform: translate(-3px, -2px); }
+  80% { transform: translate(1px, 1px); }
+}
 .hero h1 { font-family: var(--font-body); font-weight: 400; }
 .highlight {
   display: inline; background: var(--yellow); color: var(--blue-deep); font-family: var(--font-display);
