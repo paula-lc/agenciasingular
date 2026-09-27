@@ -383,10 +383,17 @@ ul, ol.steps { margin: 0; padding: 0; }
   .hero__photo { inset: 0 0 0 0; }
   .ai-card { left: -8px; }
 }
+/* Móvil: la foto se ve entera; la conversación con la IA solo pisa el borde inferior */
 @media (max-width: 520px) {
-  .hero__visual { min-height: 400px; }
-  .maps-chip { right: 8px; top: 14px; }
-  .ai-card { left: 8px; bottom: 14px; width: calc(100% - 16px); }
+  .hero__visual { min-height: 0; display: flex; flex-direction: column; }
+  .hero__photo { position: relative; inset: auto; aspect-ratio: 4 / 5; }
+  .maps-chip { top: 12px; right: 12px; padding: 7px 10px; gap: 8px; font-size: 12px; border-width: 2px; box-shadow: 3px 3px 0 var(--blue-ink); }
+  .maps-chip .pin { width: 26px; height: 26px; }
+  .maps-chip .pin .icon { width: 14px; height: 14px; }
+  .ai-card { position: relative; left: auto; bottom: auto; width: auto; margin: -74px 14px 0; padding: 12px 14px; font-size: 13px; }
+  .ai-card__q { margin-left: 12%; padding: 7px 10px; }
+  .ai-card__a { margin-top: 8px; }
+  .ai-card__label { margin-top: 6px; font-size: 10px; }
 }
 
 /* Cinta de sectores */
