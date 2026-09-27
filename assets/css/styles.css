@@ -705,8 +705,22 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .chips legend { margin-bottom: 10px; }
 .chip { position: relative; }
 .chip input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
-.chip span { display: inline-flex; padding: 8px 14px; border-radius: 99px; border: 2px solid var(--blue); font-size: 14px; font-weight: 700; cursor: pointer; background: var(--cream-soft); }
-.chip input:checked + span { background: var(--blue); color: var(--cream); }
+.chip span {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 99px; border: 2px solid var(--blue);
+  font-size: 14px; font-weight: 700; cursor: pointer; background: var(--cream-soft); color: var(--blue);
+  transition: background-color .2s, color .2s, box-shadow .25s, transform .45s cubic-bezier(.34, 1.8, .5, 1);
+}
+.chip:hover span { transform: translateY(-2px); box-shadow: 3px 3px 0 var(--crimson); background: var(--white); }
+.chip:active span { transform: scale(.94); transition-duration: .1s; }
+.chip input:checked + span { background: var(--blue); color: var(--cream); box-shadow: 3px 3px 0 var(--yellow); animation: chip-pop .45s cubic-bezier(.34, 1.8, .5, 1); }
+.chip:hover input:checked + span { background: var(--blue); }
+/* Marca de elegido: una estrellita amarilla que aparece al seleccionar */
+.chip span::before { content: "★"; display: inline-block; width: 0; opacity: 0; margin-right: -8px; color: var(--yellow); transform: scale(0) rotate(-90deg); transition: width .3s, opacity .2s, margin .3s, transform .45s cubic-bezier(.34, 1.8, .5, 1); }
+.chip input:checked + span::before { width: 1em; opacity: 1; margin-right: 0; transform: none; }
+.chip--service span::before { display: none; }
+.chip span .icon { transition: transform .45s cubic-bezier(.34, 1.8, .5, 1); }
+.chip:hover span .icon { transform: rotate(-12deg) scale(1.15); }
+@keyframes chip-pop { 0% { transform: scale(.92); } 60% { transform: scale(1.06); } 100% { transform: scale(1); } }
 .chip input:focus-visible + span { outline: 3px solid var(--orange); outline-offset: 2px; }
 .form .btn--send {
   background: var(--crimson); color: var(--white); border: 2px solid var(--blue); border-radius: var(--radius-sm);
@@ -918,7 +932,7 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
 .nav__cta:hover::after, .sticky-cta .btn:hover::after { animation-play-state: paused; }
 @keyframes cta-shine { 0% { left: -40%; } 12%, 100% { left: 130%; } }
 /* Contratar en móvil: si ya viene un servicio elegido, se muestra solo ese con opción de cambiarlo */
-.chips__change { font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--crimson); background: none; border: 0; cursor: pointer; padding: 8px 4px; }
+.chips__change { order: 99; font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--crimson); background: none; border: 0; cursor: pointer; padding: 8px 4px; }
 .chips--services.is-collapsed .chips__group,
 .chips--services.is-collapsed .chip:not(:has(input:checked)) { display: none; }
 /* Logo del pie: quieto; al pasar el ratón el jaguar mueve la cola */
@@ -952,5 +966,23 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
   .quiz { grid-template-columns: minmax(0, 1fr); }
   .quiz__reco .btn { justify-self: stretch; padding: 13px 14px; }
   .quiz__reco .cta-pack { display: none; }  /* el nombre del pack ya está justo encima */
+}
+
+/* Contratar: título en dos líneas fijas (no salta al cambiar de servicio) */
+.hire-title { display: flex; flex-direction: column; min-height: calc(2 * 1.15em + 1em); }
+.hire-title__kicker { font-size: .45em; letter-spacing: .12em; color: var(--cream); text-shadow: none; margin-bottom: .2em; }
+.service-info { transition: opacity .25s; }
+.service-info:not([hidden]) { animation: panel-in .35s cubic-bezier(.3, 1.2, .5, 1); }
+
+/* Contratar en móvil: primero el selector, justo debajo la información del servicio y después el resto */
+@media (max-width: 900px) {
+  .contact:has(#hire-form) { display: flex; flex-direction: column; gap: 22px; }
+  .contact:has(#hire-form) > #hire-form { display: contents; }
+  #hire-form > * { order: 3; }
+  #hire-form > .chips--services { order: 1; }
+  .contact:has(#hire-form) .contact-aside { order: 2; }
+  .contact:has(#hire-form) .service-info { padding: 18px 20px; }
+  .contact:has(#hire-form) .service-info .icon-tile { display: none; }
+  .contact:has(#hire-form) .service-info h4 { margin-top: 12px; }
 }
 

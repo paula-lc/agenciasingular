@@ -479,7 +479,8 @@ if (hireForm) {
     });
     document.querySelectorAll("[data-info]").forEach((card) => { card.hidden = card.dataset.info !== slug; });
     if (radio) {
-      title.textContent = `Contratar ${radio.value}`;
+      title.textContent = radio.value;
+      document.querySelector("[data-hire-kicker]").textContent = "Contratar";
       document.title = `Contratar ${radio.value} · Agencia Singular`;
       if (updateUrl) history.replaceState(null, "", `?servicio=${slug}`);
     }
