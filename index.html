@@ -303,7 +303,7 @@
               try { localStorage.setItem("hero-negocio", b.id); } catch (e) {}
               var $ = function (s) { return document.querySelector("[data-hero-" + s + "]"); };
               var base = "assets/img/hero/" + b.photo;
-              var v = "?v=2"; /* súbelo al cambiar alguna foto para que el navegador la recargue */
+              var v = "?v=3"; /* súbelo al cambiar alguna foto para que el navegador la recargue */
               $("source").srcset = base + ".webp" + v;
               $("img").src = base + ".jpg" + v;
               $("img").alt = b.alt;
