@@ -118,6 +118,18 @@ if (!reduceMotion) {
   });
 }
 
+/* Tarjetas de servicios: rebotan al hacer clic y después abren el formulario */
+document.querySelectorAll("a.service").forEach((card) => {
+  card.addEventListener("click", (e) => {
+    if (reduceMotion || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    card.classList.remove("is-bouncing");
+    void card.offsetWidth;
+    card.classList.add("is-bouncing");
+    setTimeout(() => { window.location.href = card.href; }, 380);
+  });
+});
+
 /* Logo del menú: rebota al hacer clic. En la portada sube arriba; en otras páginas
    espera a que termine el rebote antes de ir al inicio */
 document.querySelectorAll(".nav__logo").forEach((link) => {
