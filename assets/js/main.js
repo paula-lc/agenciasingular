@@ -128,6 +128,22 @@ if (!reduceMotion) {
   });
 }
 
+/* Logo del pie: rebota y vuelve arriba */
+document.querySelectorAll(".footer-logo").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!reduceMotion) {
+      link.classList.remove("is-bouncing");
+      void link.offsetWidth;
+      link.classList.add("is-bouncing");
+    }
+    setTimeout(() => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }), reduceMotion ? 0 : 250);
+  });
+});
+document.addEventListener("animationend", (e) => {
+  if (e.animationName === "btn-bounce") e.target.classList?.remove("is-bouncing");
+});
+
 /* Tarjetas de servicios: rebotan al hacer clic y después abren el formulario */
 document.querySelectorAll("a.service").forEach((card) => {
   card.addEventListener("click", (e) => {
