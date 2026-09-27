@@ -278,6 +278,7 @@ ul, ol.steps { margin: 0; padding: 0; }
 .alogo__singular { left: 31.113%; top: 71.181%; width: 55.821%; }
 .alogo__agencia  { left: 3.881%;  top: 18.75%;  width: 67.982%; }
 .alogo__feet     { left: 60.802%; top: 70.312%; width: 34.217%; }
+.alogo__claws    { left: 90.362%; top: 70.312%; width: 4.657%; transform-origin: 15% 0%; } /* garras de la otra pata delantera */
 
 /* Entrada: la estrella rosa se despliega desde su cola → "Agencia" se escribe → salta el jaguar
    → cae "SINGULAR." → la cola (con la estrella negra) empieza a balancearse */
@@ -305,6 +306,11 @@ ul, ol.steps { margin: 0; padding: 0; }
    para no tocar la animación de entrada, así al quitar el ratón vuelve a su sitio sin reiniciarse nada */
 .alogo__rstar { transition: scale .25s ease; }
 .hero__logo:hover .alogo__rstar { scale: 1.1; transition: scale .45s cubic-bezier(.3, 1.8, .5, 1); }
+/* Al pasar el ratón el jaguar mueve un poco las patas delanteras; con "rotate" (no "transform")
+   para no pisar el zarpazo periódico, y al quitar el ratón vuelven a su sitio con suavidad */
+.alogo__paw, .alogo__claws { transition: rotate .3s ease; }
+.hero__logo:hover .alogo__paw { rotate: -12deg; transition: rotate .5s cubic-bezier(.3, 1.8, .5, 1); }
+.hero__logo:hover .alogo__claws { rotate: -14deg; transition: rotate .5s .08s cubic-bezier(.3, 1.8, .5, 1); }
 /* Zarpazo de la pata cada pocos segundos (solo en el logo grande) */
 .hero__logo .alogo__paw { animation: alogo-paw 6s 2.6s ease-in-out infinite; }
 @keyframes alogo-paw {
