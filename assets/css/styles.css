@@ -99,7 +99,8 @@ ul, ol.steps { margin: 0; padding: 0; }
 .btn:active { transform: scale(.9); transition-duration: .08s; }
 
 /* Rebote al hacer clic (la clase la añade main.js) */
-.btn.is-bouncing { animation: btn-bounce .6s cubic-bezier(.28, .84, .42, 1); }
+.btn.is-bouncing,
+.alogo--nav.is-bouncing { animation: btn-bounce .6s cubic-bezier(.28, .84, .42, 1); }
 .btn.is-bouncing .icon { animation: star-pop .6s cubic-bezier(.34, 1.8, .5, 1); }
 @keyframes btn-bounce {
   0%   { transform: scale(1, 1); }
@@ -129,6 +130,7 @@ ul, ol.steps { margin: 0; padding: 0; }
   background: transparent; color: var(--yellow); border: 1.5px solid var(--yellow);
   font-weight: 600; font-size: 13px; padding: 9px 16px; letter-spacing: 1.5px;
 }
+.nav .btn:hover { box-shadow: 3px 3px 0 var(--crimson); }
 .btn--outline:hover,
 .btn--outline.is-active,
 .btn--outline:focus-visible { background: var(--yellow); color: var(--blue-deep); border-color: var(--yellow); }
@@ -180,7 +182,7 @@ ul, ol.steps { margin: 0; padding: 0; }
   position: sticky; top: 0; z-index: 50; background: var(--blue);
   transition: box-shadow .2s;
 }
-.site-header.is-scrolled { box-shadow: 0 6px 0 rgba(31,51,73,.25); }
+.site-header.is-scrolled { box-shadow: 0 3px 0 var(--yellow); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--header-h); }
 .nav__logo { display: block; flex: none; }
 .alogo--nav { width: 160px; }
@@ -198,10 +200,10 @@ ul, ol.steps { margin: 0; padding: 0; }
   width: 44px; height: 44px; border-radius: 50%; cursor: pointer; place-items: center;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1240px) {
   .nav__cta { display: none; }
 }
-@media (max-width: 920px) {
+@media (max-width: 1060px) {
   .nav__toggle { display: grid; }
   .nav__links {
     position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch;
@@ -218,8 +220,10 @@ ul, ol.steps { margin: 0; padding: 0; }
    ========================================================================== */
 .hero { padding: clamp(32px, 5vw, 56px) 0 clamp(56px, 7vw, 80px); }
 .hero__grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
-.hero__tagline { font-size: 15px; letter-spacing: clamp(.08em, 1vw, .3em); color: var(--yellow); font-style: italic; font-weight: 500; margin-bottom: 10px; }
-.hero__logo { width: min(560px, 100%); margin: 0 0 22px -6px; }
+.hero__brand { width: min(560px, 100%); margin: 0 0 22px -6px; }
+/* El espaciado entre letras deja hueco tras la última: se compensa a la izquierda para centrar de verdad */
+.hero__tagline { font-size: 15px; letter-spacing: clamp(.08em, 1vw, .3em); padding-left: clamp(.08em, 1vw, .3em); text-align: center; color: var(--yellow); font-style: italic; font-weight: 500; margin-bottom: 10px; }
+.hero__logo { width: 100%; }
 
 /* ==========================================================================
    Logo animado (capas exportadas del Figma, nodo 71:20)

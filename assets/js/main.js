@@ -118,6 +118,26 @@ if (!reduceMotion) {
   });
 }
 
+/* Logo del menú: rebota al hacer clic. En la portada sube arriba; en otras páginas
+   espera a que termine el rebote antes de ir al inicio */
+document.querySelectorAll(".nav__logo").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    const logo = link.querySelector(".alogo");
+    if (logo && !reduceMotion) {
+      logo.classList.remove("is-bouncing");
+      void logo.offsetWidth;
+      logo.classList.add("is-bouncing");
+    }
+    if (document.getElementById("hero-title")) {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    } else {
+      setTimeout(() => { window.location.href = link.href; }, reduceMotion ? 0 : 420);
+    }
+  });
+});
+
 /* ------------------------------------------------------------------
    Aparición suave al hacer scroll
    ------------------------------------------------------------------ */
