@@ -251,31 +251,58 @@ if (tablist) {
    Test de visibilidad
    ------------------------------------------------------------------ */
 const QUESTIONS = [
-  { area: "Google Maps", q: "¿Tu negocio aparece en Google Maps con la ficha verificada?", hint: "Busca el nombre de tu negocio en Google Maps desde el móvil.",
+  { svc: "google-maps", area: "Google Maps", q: "¿Tu negocio aparece en Google Maps con la ficha verificada?", hint: "Busca el nombre de tu negocio en Google Maps desde el móvil.",
     opts: [["Sí, y está completa", 2], ["Sí, pero a medias", 1], ["No / no lo sé", 0]],
     tip: "<strong>Reclama y completa tu Perfil de Empresa de Google</strong>: categoría principal exacta, horario, servicios y al menos 10 fotos reales." },
-  { area: "Reseñas", q: "¿Cuántas reseñas tienes en Google?", hint: "Las reseñas pesan en Maps y en lo que recomienda la IA.",
+  { svc: "google-maps", area: "Reseñas", q: "¿Cuántas reseñas tienes en Google?", hint: "Las reseñas pesan en Maps y en lo que recomienda la IA.",
     opts: [["Más de 50", 2], ["Entre 10 y 50", 1], ["Menos de 10", 0]],
     tip: "<strong>Pide reseñas de forma sistemática</strong>: un QR en el mostrador y un mensaje tras cada visita. Y responde a todas, también a las malas." },
-  { area: "Web", q: "¿Tienes web propia (no solo Instagram)?", hint: "Una web es la fuente oficial que leen Google y las IA.",
+  { svc: "diseno-web", area: "Web", q: "¿Tienes web propia (no solo Instagram)?", hint: "Una web es la fuente oficial que leen Google y las IA.",
     opts: [["Sí, y es reciente", 2], ["Sí, pero antigua o lenta", 1], ["No tengo", 0]],
     tip: "<strong>Una web sencilla y rápida</strong> con tus servicios, precios orientativos, zona y contacto es la base de todo lo demás." },
-  { area: "Web", q: "¿Tu web tiene una página para cada servicio importante?", hint: "Ej.: “manicura semipermanente”, “ramos de novia”, “cambio de neumáticos”.",
+  { svc: "diseno-web", area: "Web", q: "¿Tu web tiene una página para cada servicio importante?", hint: "Ej.: “manicura semipermanente”, “ramos de novia”, “cambio de neumáticos”.",
     opts: [["Sí", 2], ["Todo está en una sola página", 1], ["No tengo web", 0]],
     tip: "<strong>Crea una página por servicio clave</strong> que responda: qué es, precio, duración, para quién y dónde. Así Google y la IA saben por qué recomendarte." },
-  { area: "IA", q: "Si preguntas a ChatGPT o Gemini por tu servicio en tu zona, ¿te nombra?", hint: "Pruébalo: “¿qué [tu servicio] me recomiendas en [tu barrio]?”.",
+  { svc: "ia", area: "IA", q: "Si preguntas a ChatGPT o Gemini por tu servicio en tu zona, ¿te nombra?", hint: "Pruébalo: “¿qué [tu servicio] me recomiendas en [tu barrio]?”.",
     opts: [["Sí, aparezco", 2], ["Aparece mi competencia", 0], ["No lo he probado", 0]],
     tip: "<strong>Hazte visible para la IA</strong>: mismos datos (nombre, dirección, teléfono) en todas partes, preguntas frecuentes en tu web y menciones en medios o blogs locales." },
-  { area: "Coherencia", q: "¿Tu nombre, dirección, teléfono y horario son iguales en todas partes?", hint: "Web, Google, redes, directorios, TripAdvisor, Páginas Amarillas…",
+  { svc: "google-maps", area: "Coherencia", q: "¿Tu nombre, dirección, teléfono y horario son iguales en todas partes?", hint: "Web, Google, redes, directorios, TripAdvisor, Páginas Amarillas…",
     opts: [["Sí, lo he revisado", 2], ["Creo que sí", 1], ["Seguro que hay diferencias", 0]],
     tip: "<strong>Unifica tus datos</strong> en todas las plataformas. Las incoherencias hacen que Google y la IA desconfíen de tu información." },
-  { area: "Imagen", q: "¿Tienes fotos profesionales de tu local, equipo y productos?", hint: "Las fotos reales generan más clics y visitas que las de stock.",
+  { svc: "fotografia", area: "Imagen", q: "¿Tienes fotos profesionales de tu local, equipo y productos?", hint: "Las fotos reales generan más clics y visitas que las de stock.",
     opts: [["Sí", 2], ["Algunas hechas con el móvil", 1], ["No / uso fotos de internet", 0]],
     tip: "<strong>Invierte en una sesión de fotos real</strong>: fachada, interior, equipo y tus 5 productos o servicios estrella. Súbelas a Maps, web y redes." },
-  { area: "Constancia", q: "¿Publicas novedades en Google o redes al menos una vez por semana?", hint: "La actividad reciente es una señal de negocio vivo.",
+  { svc: "redes-sociales", area: "Constancia", q: "¿Publicas novedades en Google o redes al menos una vez por semana?", hint: "La actividad reciente es una señal de negocio vivo.",
     opts: [["Sí", 2], ["De vez en cuando", 1], ["Casi nunca", 0]],
     tip: "<strong>Programa una publicación semanal</strong> en tu ficha de Google (ofertas, novedades, eventos). 15 minutos que marcan la diferencia." },
 ];
+
+const SERVICE_NAMES = {
+  "google-maps": "Google Maps y reseñas", "diseno-web": "Diseño web", "ia": "Posicionamiento en IA",
+  "fotografia": "Fotografía local", "redes-sociales": "Redes sociales",
+};
+const PACKS = {
+  encuentren: { slug: "pack-encuentren", name: "Pack Que te encuentren", short: "Que te encuentren" },
+  escaparate: { slug: "pack-escaparate", name: "Pack Escaparate", short: "Escaparate" },
+  visible: { slug: "pack-visible", name: "Plan Siempre visible", short: "Siempre visible" },
+};
+
+/* Elige el pack según qué ha fallado (g(servicio) = puntos perdidos) */
+function recommend(g, score) {
+  if (g("diseno-web") >= 2) {
+    return { pack: PACKS.escaparate, why: g("fotografia") >= 1
+      ? "Tu web no está a la altura y te faltan fotos reales: el Escaparate te da web nueva, sesión de fotos y Google Maps en un solo paso."
+      : "Tu web es el punto débil, y es la fuente que leen Google y las IA. El Escaparate incluye web nueva, SEO local y Google Maps." };
+  }
+  if (score >= 75) {
+    return { pack: PACKS.visible, why: "Tienes buena base. Con el plan mensual mantienes la ficha activa, las reseñas al día y vigilas qué dicen las IA de ti." };
+  }
+  if (g("google-maps") + g("ia") >= 3) {
+    return { pack: PACKS.encuentren, why: "Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Este pack ataca justo eso, rápido y por menos." };
+  }
+  return { pack: g("redes-sociales") + g("fotografia") >= 2 ? PACKS.visible : PACKS.encuentren,
+    why: "Te falta constancia más que una gran reforma: pequeñas mejoras cada mes para seguir subiendo en Google, Maps y las IA." };
+}
 
 const quiz = document.querySelector("[data-quiz]");
 let quizSummary = "";
@@ -322,25 +349,46 @@ if (quiz) {
   const showResult = () => {
     const total = answers.reduce((s, a) => s + a.pts, 0);
     const score = Math.round((total / (QUESTIONS.length * 2)) * 100);
-    let title, text, pack, color;
+    let title, text, color;
     if (score < 40) {
       title = "Eres casi invisible";
       text = "Tus clientes potenciales no te están encontrando. La buena noticia: hay mucho margen y los primeros cambios se notan rápido.";
-      pack = "Escaparate"; color = "var(--crimson)";
+      color = "var(--crimson)";
     } else if (score < 75) {
       title = "Vas por buen camino";
       text = "Tienes una base, pero hay huecos que están regalando clientes a tu competencia. Con unos ajustes puedes dar el salto.";
-      pack = "Que te encuentren"; color = "var(--orange)";
+      color = "var(--orange)";
     } else {
       title = "¡Eres bastante visible!";
       text = "Lo estás haciendo bien. El siguiente paso es mantenerte arriba y asegurarte de que la IA te recomienda a ti.";
-      pack = "Siempre visible"; color = "var(--mustard)";
+      color = "var(--mustard)";
     }
+
+    // Puntos perdidos por servicio (0 = perfecto)
+    const gap = {};
+    QUESTIONS.forEach((q, i) => { gap[q.svc] = (gap[q.svc] || 0) + (2 - answers[i].pts); });
+    const g = (k) => gap[k] || 0;
+    const reco = recommend(g, score);
 
     const ring = $("[data-score-ring]");
     ring.style.setProperty("--ring", color);
     $("[data-score-title]").textContent = `${score}/100 · ${title}`;
-    $("[data-score-text]").textContent = `${text} Pack recomendado: ${pack}.`;
+    $("[data-score-text]").textContent = text;
+    $("[data-reco-name]").textContent = reco.pack.name;
+    $("[data-reco-why]").textContent = reco.why;
+
+    // Servicios a la carta: los que más puntos han perdido (máx. 3)
+    const alt = Object.entries(gap).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    const altList = $("[data-reco-alt]");
+    altList.innerHTML = "";
+    alt.forEach(([k]) => {
+      const a = document.createElement("a");
+      a.className = "quiz__alt-item";
+      a.href = `contratar.html?servicio=${k}&test=${score}`;
+      a.textContent = SERVICE_NAMES[k];
+      altList.appendChild(a);
+    });
+    $("[data-reco-alt-wrap]").hidden = alt.length === 0;
 
     const tips = $("[data-quiz-tips]");
     tips.innerHTML = "";
@@ -370,9 +418,10 @@ if (quiz) {
       requestAnimationFrame(step);
     }
 
-    quizSummary = `Resultado del test de visibilidad: ${score}/100 (${title}). Pack sugerido: ${pack}.`;
+    quizSummary = `Resultado del test de visibilidad: ${score}/100 (${title}). Recomendación: ${reco.pack.name}.`;
     const cta = $("[data-quiz-cta]");
-    cta.dataset.pack = pack;
+    cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
+    cta.textContent = `Pedir propuesta: ${reco.pack.short}`;
 
     qWrap.hidden = true;
     resultWrap.classList.add("is-visible");
@@ -439,6 +488,11 @@ if (hireForm) {
   const wanted = new URLSearchParams(location.search).get("servicio");
   const initial = radios.find((r) => r.dataset.slug === wanted);
   if (initial) initial.checked = true;
+  const testScore = new URLSearchParams(location.search).get("test");
+  const msg = hireForm.querySelector('textarea[name="mensaje"]');
+  if (testScore && /^\d{1,3}$/.test(testScore) && msg && !msg.value) {
+    msg.value = `Vengo del test de visibilidad: mi nota es ${testScore}/100.`;
+  }
   showService(initial, false);
 
   // En móvil, si ya viene un servicio elegido, se recoge el selector y se muestra solo ese
