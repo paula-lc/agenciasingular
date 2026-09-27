@@ -518,6 +518,25 @@ if (hireForm) {
   if (initial && small.matches) collapse(true);
   change?.addEventListener("click", () => collapse(false));
   radios.forEach((r) => r.addEventListener("change", () => { if (small.matches) collapse(true); }));
+
+  // Packs y servicios a la carta: al elegir uno, el otro grupo se pliega (y se puede volver a abrir)
+  const toggles = [...picker.querySelectorAll("[data-group-toggle]")];
+  const fold = (group, folded) => {
+    const btn = toggles.find((t) => t.dataset.groupToggle === group);
+    if (!btn || (btn.getAttribute("aria-expanded") === "false") === folded) return;
+    btn.setAttribute("aria-expanded", String(!folded));
+    picker.querySelectorAll(`.chip[data-group="${group}"]`).forEach((chip) => {
+      chip.hidden = folded;
+      chip.classList.toggle("is-unfolding", !folded);
+    });
+  };
+  const foldOthers = (radio) => {
+    const mine = radio?.closest(".chip")?.dataset.group;
+    if (mine) toggles.forEach((t) => fold(t.dataset.groupToggle, t.dataset.groupToggle !== mine));
+  };
+  toggles.forEach((t) => t.addEventListener("click", () => fold(t.dataset.groupToggle, t.getAttribute("aria-expanded") === "true")));
+  radios.forEach((r) => r.addEventListener("change", () => foldOthers(r)));
+  foldOthers(initial);
 }
 
 /* Envío de cualquier formulario de contacto de la web */

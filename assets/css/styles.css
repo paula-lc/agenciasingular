@@ -301,13 +301,21 @@ ul, ol.steps { margin: 0; padding: 0; }
   80%  { transform: scale(.97) rotate(2deg); }
   100% { clip-path: circle(150% at 99% 99%); transform: none; }
 }
+/* Brillo de la estrella: el destello periódico (--rstar-idle) y el del hover (--rstar-hover) van por separado,
+   así al quitar el ratón el brillo se apaga poco a poco sin reiniciar ninguna animación */
+@property --rstar-idle { syntax: "<number>"; inherits: false; initial-value: 0; }
+@property --rstar-hover { syntax: "<number>"; inherits: false; initial-value: 0; }
 @keyframes alogo-rstar-idle {
-  0%, 82%, 100% { filter: none; }
-  90% { filter: brightness(1.25) drop-shadow(0 0 6px rgba(255, 214, 120, .55)); }
+  0%, 82%, 100% { --rstar-idle: 0; }
+  90% { --rstar-idle: 1; }
 }
 /* Al pasar el ratón por el logo grande, la estrella rosa brilla mientras dure el hover */
-.alogo__rstar { transition: filter .35s ease; }
-.hero__logo:hover .alogo__rstar { animation: none; filter: brightness(1.25) drop-shadow(0 0 8px rgba(255, 214, 120, .6)); }
+.alogo__rstar {
+  --rstar-glow: max(var(--rstar-idle), var(--rstar-hover));
+  filter: brightness(calc(1 + .25 * var(--rstar-glow))) drop-shadow(0 0 calc(8px * var(--rstar-glow)) rgba(255, 214, 120, calc(.6 * var(--rstar-glow))));
+  transition: --rstar-hover .5s ease;
+}
+.hero__logo:hover .alogo__rstar { --rstar-hover: 1; transition-duration: .3s; }
 /* Zarpazo de la pata cada pocos segundos (solo en el logo grande) */
 .hero__logo .alogo__paw { animation: alogo-paw 6s 2.6s ease-in-out infinite; }
 @keyframes alogo-paw {
@@ -868,8 +876,14 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .service-info h4 { font-family: var(--font-body); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin: 18px 0 10px; }
 .service-info__time { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--yellow); }
 .service-info__time .icon { color: var(--yellow); }
-.chips__group { flex-basis: 100%; margin: 6px 0 -2px; font-family: var(--font-body); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--crimson); }
-.chips__group:first-of-type { margin-top: 0; }
+.chips__group { flex-basis: 100%; display: flex; align-items: center; gap: 6px; margin: 6px 0 -2px; padding: 4px 0; background: none; border: 0; cursor: pointer; text-align: left; font-family: var(--font-body); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--crimson); }
+.chips__group[data-group-toggle="packs"] { margin-top: 0; }
+.chips__group:hover { color: var(--blue); }
+.chips__arrow { display: inline-block; transition: transform .25s ease; }
+.chips__group[aria-expanded="false"] .chips__arrow { transform: rotate(-90deg); }
+.chip--service[hidden] { display: none; }
+.chip--service.is-unfolding { animation: chip-unfold .3s ease both; }
+@keyframes chip-unfold { from { opacity: 0; translate: 0 -6px; } }
 .service-info__price { font-family: var(--font-display); font-size: 26px; color: var(--yellow); margin: -2px 0 10px; }
 
 /* ==========================================================================
