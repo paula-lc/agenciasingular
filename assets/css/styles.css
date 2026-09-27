@@ -120,7 +120,9 @@ ul, ol.steps { margin: 0; padding: 0; }
 
 .btn--yellow { background: var(--yellow); color: var(--blue-deep); }
 .btn--yellow .icon { color: var(--crimson); }
-.btn--yellow:hover .icon { fill: var(--crimson); transform: rotate(-18deg) scale(1.15); }
+.btn--yellow:hover .icon { transform: rotate(-18deg) scale(1.15); }
+/* Solo las estrellas se rellenan al pasar el ratón; los iconos de línea (libro, estetoscopio) no */
+.btn--yellow:hover .icon:has(use[href^="#i-star"]) { fill: var(--crimson); }
 /* Botón de diagnóstico en la cabecera: crema, para no confundirse con la sección marcada en amarillo */
 .btn--cream { background: var(--cream-warm); color: var(--blue-deep); }
 .btn--cream .icon { color: var(--crimson); }
@@ -348,6 +350,13 @@ ul, ol.steps { margin: 0; padding: 0; }
 }
 .hero__photo img { width: 100%; height: 100%; object-fit: cover; }
 .hero__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(62,96,131,0) 40%, rgba(31,51,73,.55)); }
+/* Destello de luz que cruza la foto una sola vez al cargar */
+.hero__photo::before {
+  content: ""; position: absolute; inset: -20% auto -20% -60%; width: 45%; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg, transparent 0%, rgba(255,248,225,.08) 30%, rgba(255,248,225,.45) 50%, rgba(255,248,225,.08) 70%, transparent 100%);
+  transform: skewX(-18deg); animation: photo-shine 1.4s 1.1s cubic-bezier(.4, 0, .2, 1) both;
+}
+@keyframes photo-shine { from { left: -60%; } to { left: 130%; } }
 
 /* Burbuja de chat IA (demostración) */
 .ai-card {
@@ -892,4 +901,18 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .hero { overflow-x: clip; }
 /* Con el menú móvil abierto, la barra fija de diagnóstico sobra (ya está en el menú) */
 body:has(.nav__links.is-open) .sticky-cta { display: none; }
+
+/* Botón de diagnóstico (cabecera y barra fija del móvil): late dos veces cada 3,5 s */
+.nav__cta, .sticky-cta .btn { animation: cta-heartbeat 3.5s 2.5s ease-in-out infinite; }
+.nav__cta:hover, .nav__cta:focus-visible, .sticky-cta .btn:hover { animation-play-state: paused; }
+@keyframes cta-heartbeat {
+  0%, 20%, 100% { scale: 1; }
+  5%  { scale: 1.07; }
+  10% { scale: 1; }
+  15% { scale: 1.07; }
+}
+/* Contratar en móvil: si ya viene un servicio elegido, se muestra solo ese con opción de cambiarlo */
+.chips__change { font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--crimson); background: none; border: 0; cursor: pointer; padding: 8px 4px; }
+.chips--services.is-collapsed .chips__group,
+.chips--services.is-collapsed .chip:not(:has(input:checked)) { display: none; }
 

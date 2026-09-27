@@ -50,7 +50,7 @@ site.webmanifest · favicon.svg
 | **WhatsApp** (se oculta si está vacío) | `assets/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Formspree, Web3Forms o Netlify Forms | `assets/js/main.js` → `SITE.formEndpoint` |
 | **Precios de los packs** (propuestos: 290 € / 1.290 € / 2.490 € / 149 €/mes) | `index.html` (tarjetas, FAQ y JSON-LD), `llms.txt` |
-| **Instagram** (`@agenciasingular`) | HTML y JSON-LD (`sameAs`) |
+| **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
 | **Ciudad o zona**: si trabajáis en una ciudad concreta, añadidla al JSON-LD (`address`, `areaServed`) y a los textos para reforzar el SEO local | `index.html` |
 

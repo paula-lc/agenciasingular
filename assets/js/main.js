@@ -440,6 +440,18 @@ if (hireForm) {
   const initial = radios.find((r) => r.dataset.slug === wanted);
   if (initial) initial.checked = true;
   showService(initial, false);
+
+  // En móvil, si ya viene un servicio elegido, se recoge el selector y se muestra solo ese
+  const picker = hireForm.querySelector(".chips--services");
+  const change = hireForm.querySelector("[data-change-service]");
+  const small = window.matchMedia("(max-width: 900px)");
+  const collapse = (on) => {
+    picker.classList.toggle("is-collapsed", on);
+    change.hidden = !on;
+  };
+  if (initial && small.matches) collapse(true);
+  change?.addEventListener("click", () => collapse(false));
+  radios.forEach((r) => r.addEventListener("change", () => { if (small.matches) collapse(true); }));
 }
 
 /* Envío de cualquier formulario de contacto de la web */
