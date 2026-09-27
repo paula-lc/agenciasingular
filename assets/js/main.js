@@ -41,46 +41,55 @@ const stickyCta = document.querySelector("[data-sticky-cta]");
 const contactSection = document.getElementById("contacto");
 let contactVisible = false;
 
-/* Marca en la cabecera el botón de la sección visible */
+/* Marca la sección visible en la cabecera, en el menú móvil y en el índice lateral */
 const navLinks = [...document.querySelectorAll('.nav__links a[href^="#"]')];
-// Solo las secciones con botón: cada una sigue marcada hasta que empieza la siguiente
-const pageSections = navLinks
-  .map((a) => document.getElementById(a.getAttribute("href").slice(1)))
-  .filter(Boolean);
+const railLinks = [...document.querySelectorAll('.section-rail a[href^="#"]')];
+const sectionOf = (a) => document.getElementById(a.getAttribute("href").slice(1));
+// Escritorio: solo las secciones con botón; cada una sigue marcada hasta que empieza la siguiente
+const mainSections = navLinks.filter((a) => !a.closest(".nav__extra")).map(sectionOf).filter(Boolean);
+// Todas las secciones de la página (índice lateral y menú móvil)
+const allSections = [...new Set([...railLinks, ...navLinks].map(sectionOf).filter(Boolean))]
+  .sort((x, y) => (x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+const mobileNav = window.matchMedia("(max-width: 1060px)");
 
-function setActiveNav(id) {
-  navLinks.forEach((a) => {
-    const active = a.getAttribute("href") === `#${id}`;
-    a.classList.toggle("is-active", active);
-    if (active) a.setAttribute("aria-current", "location");
-    else a.removeAttribute("aria-current");
-  });
+const markLinks = (links, id) => links.forEach((a) => {
+  const active = a.getAttribute("href") === `#${id}`;
+  a.classList.toggle("is-active", active);
+  if (active) a.setAttribute("aria-current", "location");
+  else a.removeAttribute("aria-current");
+});
+
+function currentOf(sections) {
+  // Línea de referencia: un tercio de la pantalla por debajo de la cabecera
+  const line = (header?.offsetHeight || 0) + window.innerHeight * 0.3;
+  let current = null;
+  for (const s of sections) if (s.getBoundingClientRect().top <= line) current = s;
+  // Al llegar al final de la página, la última sección
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1];
+  return current?.id;
+}
+
+function setActive(id) {
+  markLinks(railLinks, id);
+  markLinks(navLinks, mobileNav.matches ? id : (mainSections.some((s) => s.id === id) ? id : currentOf(mainSections)));
 }
 
 let navLock = null;
 function updateActiveNav() {
-  if (!navLinks.length || navLock) return;
-  // Línea de referencia: un tercio de la pantalla por debajo de la cabecera
-  const line = (header?.offsetHeight || 0) + window.innerHeight * 0.3;
-  let current = null;
-  for (const s of pageSections) {
-    if (s.getBoundingClientRect().top <= line) current = s;
-  }
-  // Al llegar al final de la página, la última sección
-  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-    current = pageSections[pageSections.length - 1];
-  }
-  setActiveNav(current?.id);
+  if (navLock || (!navLinks.length && !railLinks.length)) return;
+  markLinks(railLinks, currentOf(allSections));
+  markLinks(navLinks, mobileNav.matches ? currentOf(allSections) : currentOf(mainSections));
 }
 
 // Al hacer clic se marca al momento y se ignora el scroll suave hasta que termina
 const releaseNavLock = () => { clearTimeout(navLock); navLock = null; updateActiveNav(); };
-navLinks.forEach((a) => a.addEventListener("click", () => {
-  setActiveNav(a.getAttribute("href").slice(1));
+[...navLinks, ...railLinks].forEach((a) => a.addEventListener("click", () => {
+  setActive(a.getAttribute("href").slice(1));
   clearTimeout(navLock);
   navLock = setTimeout(releaseNavLock, 1200);
 }));
 window.addEventListener("scrollend", () => { if (navLock) releaseNavLock(); });
+mobileNav.addEventListener?.("change", updateActiveNav);
 
 let navTicking = false;
 function onScroll() {
