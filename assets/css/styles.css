@@ -197,10 +197,11 @@ ul, ol.steps { margin: 0; padding: 0; }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--header-h); }
 .nav__logo { display: block; flex: none; }
 .alogo--nav { width: 160px; }
-.nav__links { display: flex; align-items: center; gap: 14px; list-style: none; }
+.nav__links { display: flex; align-items: center; gap: 10px; list-style: none; }
+.nav__links .btn { white-space: nowrap; }
 .nav__links a .icon { width: 16px; height: 16px; }
-/* Secciones extra: solo aparecen en el menú desplegable del móvil */
-.nav__extra { display: none; }
+/* Botón de diagnóstico dentro del menú: solo en el desplegable del móvil */
+.nav__mcta { display: none; }
 .nav__actions { display: flex; align-items: center; gap: 12px; }
 .nav__ig {
   width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%;
@@ -215,20 +216,31 @@ ul, ol.steps { margin: 0; padding: 0; }
   width: 44px; height: 44px; border-radius: 50%; cursor: pointer; place-items: center;
 }
 
+/* Portátiles: menú más compacto para que quepa también el botón de diagnóstico */
+@media (max-width: 1400px) {
+  .nav { gap: 14px; }
+  .nav__links { gap: 6px; }
+  .nav__links .btn { padding: 9px 12px; letter-spacing: .8px; gap: 6px; }
+  .nav__cta { padding: 9px 14px; letter-spacing: .8px; }
+  .nav__ig { display: none; }
+  .alogo--nav { width: 140px; }
+}
 @media (max-width: 1240px) {
   .nav__cta { display: none; }
+  .nav__ig { display: grid; }
 }
-@media (max-width: 1060px) {
+@media (max-width: 1120px) {
   .nav__toggle { display: grid; }
   .nav__links {
     position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch;
     background: var(--blue); padding: 8px var(--gutter) 24px; gap: 10px;
-    border-bottom: 4px solid var(--yellow);
+    border-bottom: 3px solid var(--crimson);
     display: none;
   }
   .nav__links.is-open { display: flex; }
   .nav__links.is-open { max-height: calc(100vh - var(--header-h)); overflow-y: auto; }
-  .nav__links .nav__extra { display: list-item; }
+  .nav__links .nav__mcta { display: list-item; margin-top: 6px; }
+  .nav__links .nav__mcta .btn { justify-content: center; }
   .nav__links .btn { width: 100%; justify-content: flex-start; font-size: 15px; padding: 12px 18px; }
 }
 
@@ -859,3 +871,8 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .section-rail li:nth-child(8) .section-rail__label { transition-delay: 175ms; }
 .section-rail li:nth-child(9) .section-rail__label { transition-delay: 200ms; }
 .section-rail li:nth-child(10) .section-rail__label { transition-delay: 225ms; }
+/* El salto de entrada del jaguar no debe ensanchar la página en móvil */
+.hero { overflow-x: clip; }
+/* Con el menú móvil abierto, la barra fija de diagnóstico sobra (ya está en el menú) */
+body:has(.nav__links.is-open) .sticky-cta { display: none; }
+

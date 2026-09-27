@@ -45,15 +45,16 @@ let contactVisible = false;
 const navLinks = [...document.querySelectorAll('.nav__links a[href^="#"]')];
 const railLinks = [...document.querySelectorAll('.section-rail a[href^="#"]')];
 const sectionOf = (a) => document.getElementById(a.getAttribute("href").slice(1));
-// Escritorio: solo las secciones con botón; cada una sigue marcada hasta que empieza la siguiente
-const mainSections = navLinks.filter((a) => !a.closest(".nav__extra")).map(sectionOf).filter(Boolean);
-// Todas las secciones de la página (índice lateral y menú móvil)
-const allSections = [...new Set([...railLinks, ...navLinks].map(sectionOf).filter(Boolean))]
+// Secciones que cubre cada botón (p. ej. "Packs y servicios" cubre packs y servicios)
+const sectionsOf = (a) => (a.dataset.sections || a.getAttribute("href").slice(1)).split(" ");
+// Todas las secciones de la página, en orden
+const allSections = [...new Set([...railLinks, ...navLinks].map(sectionOf).filter(Boolean)),
+  ...navLinks.flatMap((a) => sectionsOf(a).map((id) => document.getElementById(id))).filter(Boolean)]
+  .filter((v, i, arr) => arr.indexOf(v) === i)
   .sort((x, y) => (x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
-const mobileNav = window.matchMedia("(max-width: 1060px)");
 
 const markLinks = (links, id) => links.forEach((a) => {
-  const active = a.getAttribute("href") === `#${id}`;
+  const active = links === navLinks ? sectionsOf(a).includes(id) : a.getAttribute("href") === `#${id}`;
   a.classList.toggle("is-active", active);
   if (active) a.setAttribute("aria-current", "location");
   else a.removeAttribute("aria-current");
@@ -78,9 +79,8 @@ let navLock = null;
 function updateActiveNav() {
   if (navLock || (!navLinks.length && !railLinks.length)) return;
   markLinks(railLinks, currentOf(allSections));
-  const here = currentOf(allSections);
-  // Escritorio: solo se marca el botón de la sección en la que estás; las secciones sin botón no marcan ninguno
-  markLinks(navLinks, mobileNav.matches || mainSections.some((s) => s.id === here) ? here : null);
+  // Solo se marca el botón de la sección en la que estás; las secciones sin botón no marcan ninguno
+  markLinks(navLinks, currentOf(allSections));
 }
 
 // Al hacer clic se marca al momento y se ignora el scroll suave hasta que termina
@@ -91,7 +91,6 @@ const releaseNavLock = () => { clearTimeout(navLock); navLock = null; updateActi
   navLock = setTimeout(releaseNavLock, 1200);
 }));
 window.addEventListener("scrollend", () => { if (navLock) releaseNavLock(); });
-mobileNav.addEventListener?.("change", updateActiveNav);
 
 let navTicking = false;
 function onScroll() {
