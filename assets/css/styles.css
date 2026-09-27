@@ -120,6 +120,9 @@ ul, ol.steps { margin: 0; padding: 0; }
 .btn--yellow { background: var(--yellow); color: var(--blue-deep); }
 .btn--yellow .icon { color: var(--crimson); }
 .btn--yellow:hover .icon { fill: var(--crimson); transform: rotate(-18deg) scale(1.15); }
+/* Iconos de línea (estetoscopio): se giran pero no se rellenan */
+.btn:hover .icon--line { fill: none; }
+.btn--retro .icon { color: var(--crimson); }
 .btn--retro {
   background: var(--yellow); color: var(--blue-deep); border-radius: var(--radius-sm);
   padding: 15px 36px; font-size: 16px; letter-spacing: 3px; box-shadow: var(--shadow-retro);
@@ -769,4 +772,6 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .service-info h4 { font-family: var(--font-body); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin: 18px 0 10px; }
 .service-info__time { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--yellow); }
 .service-info__time .icon { color: var(--yellow); }
-
+.chips__group { flex-basis: 100%; margin: 6px 0 -2px; font-family: var(--font-body); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--crimson); }
+.chips__group:first-of-type { margin-top: 0; }
+.service-info__price { font-family: var(--font-display); font-size: 26px; color: var(--yellow); margin: -2px 0 10px; }
