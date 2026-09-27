@@ -10,6 +10,7 @@
   --blue-ink: #1f3349;
   --cream: #ebe7d0;
   --cream-soft: #f4f1e2;
+  --cream-warm: #efdcb0;     /* crema cálido del botón de diagnóstico */
   --yellow: #fab419;
   --mustard: #d9a621;
   --crimson: #bf2e59;
@@ -121,7 +122,7 @@ ul, ol.steps { margin: 0; padding: 0; }
 .btn--yellow .icon { color: var(--crimson); }
 .btn--yellow:hover .icon { fill: var(--crimson); transform: rotate(-18deg) scale(1.15); }
 /* Botón de diagnóstico en la cabecera: crema, para no confundirse con la sección marcada en amarillo */
-.btn--cream { background: var(--cream); color: var(--blue-deep); }
+.btn--cream { background: var(--cream-warm); color: var(--blue-deep); }
 .btn--cream .icon { color: var(--crimson); }
 .btn--cream:hover .icon { transform: rotate(-18deg) scale(1.15); }
 /* Iconos de línea (estetoscopio): se giran pero no se rellenan */
@@ -204,7 +205,9 @@ ul, ol.steps { margin: 0; padding: 0; }
   border: 1px solid var(--yellow); color: var(--yellow); transition: background-color .15s;
 }
 .nav__ig:hover { background: rgba(250,180,25,.14); }
-.nav__cta { padding: 10px 18px; font-size: 13px; }
+/* Misma altura que los botones del menú (41 px) para que queden alineados */
+.nav__cta { padding: 9px 18px; font-size: 13px; border: 1.5px solid transparent; }
+.nav__cta .icon { width: 18px; height: 18px; }
 .nav__toggle {
   display: none; background: none; border: 1.5px solid var(--yellow); color: var(--yellow);
   width: 44px; height: 44px; border-radius: 50%; cursor: pointer; place-items: center;
@@ -555,12 +558,27 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .sector-tab {
   font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; padding: 10px 16px; border-radius: 99px;
   border: 2px solid var(--cream); background: transparent; color: var(--cream); display: inline-flex; gap: 8px; align-items: center;
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .5s cubic-bezier(.34, 1.6, .5, 1);
 }
+.sector-tab:hover { transform: translateY(-3px); }
+.sector-tab:active { transform: scale(.94); transition-duration: .1s; }
+.sector-tab .icon { transition: transform .5s cubic-bezier(.34, 1.8, .5, 1); }
+.sector-tab:hover .icon { transform: rotate(-12deg) scale(1.12); }
 .sector-tab .icon { width: 18px; height: 18px; }
-.sector-tab[aria-selected="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--blue-deep); }
+.sector-tab[aria-selected="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--blue-deep); animation: tab-pop .5s cubic-bezier(.34, 1.6, .5, 1); }
 .sector-tab:hover:not([aria-selected="true"]) { background: rgba(235,231,208,.12); }
 .sector-panel { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
 .sector-panel[hidden] { display: none; }
+.sector-panel:not([hidden]) { animation: panel-in .45s cubic-bezier(.3, 1.2, .5, 1); }
+@keyframes tab-pop {
+  0%   { transform: scale(.92); }
+  60%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+@keyframes panel-in {
+  from { opacity: 0; translate: 0 10px; }
+  to   { opacity: 1; translate: none; }
+}
 .sector-panel__main { background: var(--cream); color: var(--blue); border-radius: var(--radius); padding: clamp(24px, 3vw, 36px); }
 .sector-panel__main h3 { font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 12px; }
 .sector-panel__main p { font-size: 16px; }
