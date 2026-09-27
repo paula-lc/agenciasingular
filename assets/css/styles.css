@@ -732,7 +732,7 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
    ========================================================================== */
 .site-footer { background: var(--blue); color: var(--cream); padding: 48px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 32px; }
-.footer-brand img { width: 170px; }
+.footer-brand > img, .footer-logo > img { width: 170px; }
 .footer-logo { display: inline-block; }
 .footer-logo.is-bouncing { animation: btn-bounce .6s cubic-bezier(.28, .84, .42, 1); }
 .text-link { color: inherit; font-weight: 800; text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 3px; }
@@ -915,4 +915,9 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
 .chips__change { font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--crimson); background: none; border: 0; cursor: pointer; padding: 8px 4px; }
 .chips--services.is-collapsed .chips__group,
 .chips--services.is-collapsed .chip:not(:has(input:checked)) { display: none; }
+/* Logo del pie: quieto; al pasar el ratón el jaguar mueve la cola */
+.alogo--footer { width: 170px; }
+.alogo--footer :is(.alogo__rstar, .alogo__agencia, .alogo__singular, .alogo__leap, .alogo__beat, .alogo__swing) { animation: none !important; }
+.footer-logo:hover .alogo--footer .alogo__swing,
+.footer-logo:focus-visible .alogo--footer .alogo__swing { animation: alogo-swing 1.1s ease-in-out infinite !important; }
 
