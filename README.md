@@ -7,6 +7,7 @@ Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singul
 ```
 index.html                              Landing principal
 guia-aparecer-en-ia-y-google-maps.html  Guía gratuita (contenido SEO y captación)
+contratar.html                          Formulario de contratación adaptado a cada servicio (?servicio=seo-local…)
 aviso-legal.html · privacidad.html      Plantillas legales (completar datos)
 404.html
 assets/css/styles.css                   Estilos (tokens de marca en :root)

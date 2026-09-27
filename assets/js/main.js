@@ -336,14 +336,6 @@ if (quiz) {
    Botones "Lo quiero" → preseleccionan el pack en el formulario
    ------------------------------------------------------------------ */
 document.addEventListener("click", (e) => {
-  const link = e.target.closest("[data-service]");
-  if (!link) return;
-  const msg = document.getElementById("f-msg");
-  const line = `Me interesa el servicio: ${link.dataset.service}.`;
-  if (msg && !msg.value.includes(line)) msg.value = (msg.value ? msg.value + "\n" : "") + line;
-});
-
-document.addEventListener("click", (e) => {
   const link = e.target.closest("[data-pack]");
   if (!link) return;
   const pack = link.dataset.pack;
@@ -366,8 +358,41 @@ if (SITE.whatsapp && waItem) {
     `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio.")}`;
 }
 
-const form = document.getElementById("contact-form");
-if (form) {
+/* Página de contratación: muestra las preguntas y la información del servicio elegido */
+const hireForm = document.getElementById("hire-form");
+if (hireForm) {
+  const radios = [...hireForm.querySelectorAll('input[name="servicio"]')];
+  const title = document.querySelector("[data-hire-title]");
+  const showService = (radio, updateUrl) => {
+    const slug = radio?.dataset.slug || "";
+    hireForm.querySelectorAll("[data-fields]").forEach((fs) => {
+      const on = fs.dataset.fields === slug;
+      fs.hidden = !on;
+      fs.disabled = !on; // los campos ocultos no se envían
+    });
+    document.querySelectorAll("[data-info]").forEach((card) => { card.hidden = card.dataset.info !== slug; });
+    if (radio) {
+      title.textContent = `Contratar ${radio.value}`;
+      document.title = `Contratar ${radio.value} · Agencia Singular`;
+      if (updateUrl) history.replaceState(null, "", `?servicio=${slug}`);
+    }
+  };
+  radios.forEach((r) => r.addEventListener("change", () => showService(r, true)));
+  const wanted = new URLSearchParams(location.search).get("servicio");
+  const initial = radios.find((r) => r.dataset.slug === wanted);
+  if (initial) initial.checked = true;
+  showService(initial, false);
+}
+
+/* Envío de cualquier formulario de contacto de la web */
+const fieldLabel = (el) => {
+  const legend = el.closest("fieldset.chips")?.querySelector("legend");
+  if ((el.type === "checkbox" || el.type === "radio") && legend) return legend.textContent.trim();
+  const label = el.id && document.querySelector(`label[for="${el.id}"]`);
+  return label ? label.childNodes[0].textContent.trim() : el.name;
+};
+
+document.querySelectorAll("[data-contact-form]").forEach((form) => {
   const status = form.querySelector("[data-form-status]");
   const setStatus = (msg, ok) => {
     status.textContent = msg;
@@ -378,31 +403,37 @@ if (form) {
     e.preventDefault();
     if (form.web_hp.value) return; // bot
 
-    const invalid = [...form.querySelectorAll("[required]")].find((el) =>
-      el.type === "checkbox" ? !el.checked : !el.value.trim() || (el.type === "email" && !el.checkValidity())
-    );
+    const invalid = [...form.querySelectorAll("[required]")].find((el) => {
+      if (el.disabled) return false;
+      if (el.type === "radio") return !form.querySelector(`input[name="${el.name}"]:checked`);
+      if (el.type === "checkbox") return !el.checked;
+      return !el.value.trim() || (el.type === "email" && !el.checkValidity());
+    });
     if (invalid) {
       invalid.focus();
-      setStatus(invalid.type === "checkbox"
-        ? "Necesitamos que aceptes la política de privacidad."
+      setStatus(
+        invalid.type === "radio" ? "Elige el servicio que quieres contratar."
+        : invalid.type === "checkbox" ? "Necesitamos que aceptes la política de privacidad."
         : "Revisa los campos marcados: nombre, negocio y un email válido.", false);
       return;
     }
 
+    // Texto legible con todas las respuestas, agrupadas por pregunta
+    const answers = new Map();
+    form.querySelectorAll("input, select, textarea").forEach((el) => {
+      if (!el.name || el.disabled || ["web_hp", "privacidad"].includes(el.name)) return;
+      if ((el.type === "checkbox" || el.type === "radio") && !el.checked) return;
+      if (!el.value.trim()) return;
+      const key = fieldLabel(el);
+      answers.set(key, [...(answers.get(key) || []), el.value.trim()]);
+    });
+    const body = [...answers].map(([k, v]) => `${k}: ${v.join(", ")}`).join("\n");
+
     const data = new FormData(form);
-    const intereses = data.getAll("interes").join(", ") || "—";
-    const body = [
-      `Nombre: ${data.get("nombre")}`,
-      `Negocio: ${data.get("negocio")}`,
-      `Email: ${data.get("email")}`,
-      `Sector: ${data.get("sector") || "—"}`,
-      `Interés: ${intereses}`,
-      "",
-      data.get("mensaje") || "",
-    ].join("\n");
+    const servicio = data.get("servicio");
+    const subject = `${form.dataset.subject || "Contacto"}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
 
     if (!SITE.formEndpoint) {
-      const subject = `Café virtual · ${data.get("negocio")}`;
       window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       setStatus("Abriendo tu correo con el mensaje listo para enviar…", true);
       return;
@@ -412,17 +443,19 @@ if (form) {
     btn.disabled = true;
     try {
       data.delete("web_hp");
+      data.set("_subject", subject);
+      data.set("resumen", body);
       const res = await fetch(SITE.formEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(res.statusText);
       form.reset();
-      setStatus("¡Recibido! Te escribimos en menos de 24 h laborables para ese café. ☕", true);
+      setStatus("¡Recibido! Te escribimos en menos de 24 h laborables. ☕", true);
     } catch {
       setStatus(`No hemos podido enviarlo. Escríbenos a ${SITE.email} y te respondemos enseguida.`, false);
     } finally {
       btn.disabled = false;
     }
   });
-}
+});
 
 /* Año del pie */
 document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });

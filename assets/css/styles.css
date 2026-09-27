@@ -116,7 +116,7 @@ ul, ol.steps { margin: 0; padding: 0; }
   100% { transform: scale(1) rotate(0); }
 }
 
-.btn--yellow { background: var(--yellow); color: var(--blue-deep); box-shadow: 0 4px 4px rgba(0,0,0,.2); }
+.btn--yellow { background: var(--yellow); color: var(--blue-deep); }
 .btn--yellow .icon { color: var(--crimson); }
 .btn--yellow:hover .icon { fill: var(--crimson); transform: rotate(-18deg) scale(1.15); }
 .btn--retro {
@@ -226,7 +226,9 @@ ul, ol.steps { margin: 0; padding: 0; }
    Caja de referencia: 1546 × 576 px del frame original
    ========================================================================== */
 .alogo { position: relative; aspect-ratio: 1546 / 576; }
-.alogo__text     { position: absolute; inset: 0; transform-origin: 45% 60%; }
+.alogo__text, .alogo__beat { position: absolute; inset: 0; }
+.alogo__beat--a { transform-origin: 38% 53%; }  /* centro de "Agencia" */
+.alogo__beat--s { transform-origin: 59% 83%; }  /* centro de "SINGULAR." */
 .alogo img { position: absolute; height: auto; max-width: none; }
 .alogo__leap { position: absolute; inset: 0; pointer-events: none; transform-origin: 78% 50%; }
 .alogo__swing    { position: absolute; inset: 0; transform-origin: 67.01% 45.31%; } /* base de la cola */
@@ -246,9 +248,13 @@ ul, ol.steps { margin: 0; padding: 0; }
 .alogo__singular { animation: alogo-drop .75s 1s cubic-bezier(.3, 1.5, .5, 1) both; }
 .alogo__swing    { animation: alogo-swing 3.4s 1.6s ease-in-out infinite; }
 
-/* Al pasar el ratón solo reacciona el texto: un latido. El jaguar sigue con su balanceo */
-.alogo:hover .alogo__text,
-.nav__logo:focus-visible .alogo__text { animation: alogo-pulse .65s ease-out; }
+/* Al pasar el ratón solo reacciona el texto: late primero "Agencia" y después "SINGULAR." */
+.alogo:hover .alogo__beat--a { animation: alogo-pulse .6s ease-out; }
+.alogo:hover .alogo__beat--s { animation: alogo-pulse .6s .3s ease-out; }
+
+/* Logo de la cabecera: solo se mueve la cola */
+.alogo--nav :is(.alogo__rstar, .alogo__agencia, .alogo__singular, .alogo__leap, .alogo__beat) { animation: none !important; }
+.alogo--nav .alogo__swing { animation-delay: 0s; }
 
 @keyframes alogo-rstar-in {
   0%   { clip-path: circle(0% at 99% 99%); transform: scale(.25) rotate(28deg); }
@@ -473,6 +479,9 @@ ul, ol.steps { margin: 0; padding: 0; }
 }
 .trastienda .icon { width: 20px; height: 20px; color: var(--crimson); }
 .trastienda__text strong { font-weight: 400; }
+a.trastienda { text-decoration: none; transition: transform .2s, box-shadow .2s; }
+a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--crimson); }
+.trastienda__text .trastienda__cta { display: inline-block; margin-left: 6px; font-family: var(--font-display); font-weight: 400; color: var(--crimson); white-space: nowrap; }
 .trastienda__text span { font-family: var(--font-body); font-weight: 700; }
 
 @media (max-width: 1180px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -728,3 +737,23 @@ ul, ol.steps { margin: 0; padding: 0; }
 .notfound { text-align: center; padding: clamp(64px, 10vw, 120px) 0; }
 .notfound h1 { font-size: clamp(40px, 8vw, 96px); color: var(--cream); }
 .notfound p { font-size: 18px; margin: 16px auto 28px; max-width: 520px; }
+
+/* ==========================================================================
+   Página de contratación (formulario adaptado a cada servicio)
+   ========================================================================== */
+.chips--services { gap: 10px; }
+.chip--service span { gap: 8px; align-items: center; padding: 10px 16px; }
+.chip--service .icon { width: 16px; height: 16px; }
+.service-fields { border: 3px solid var(--blue); border-radius: var(--radius); padding: 22px 22px 24px; margin: 0; display: grid; gap: 20px; background: var(--cream-soft); }
+.service-fields[hidden] { display: none; }
+.service-fields__title { display: flex; align-items: center; gap: 10px; padding: 0 8px; font-family: var(--font-display); font-size: 16px; text-transform: uppercase; color: var(--blue); }
+.service-fields__title .icon { color: var(--crimson); }
+.field label small { font-family: var(--font-body); font-weight: 600; text-transform: none; letter-spacing: 0; opacity: .7; }
+.service-info .icon-tile { background: var(--yellow); margin-bottom: 14px; }
+.service-info .icon-tile .icon { color: var(--blue-deep); }
+.service-info h3 { margin-bottom: 8px; }
+.service-info p { font-size: 15px; }
+.service-info h4 { font-family: var(--font-body); font-weight: 800; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin: 18px 0 10px; }
+.service-info__time { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--yellow); }
+.service-info__time .icon { color: var(--yellow); }
+
