@@ -468,17 +468,18 @@ ul, ol.steps { margin: 0; padding: 0; }
   background: var(--cream); color: var(--blue); border: 3px solid var(--cream); border-radius: var(--radius);
   padding: 26px; display: flex; flex-direction: column; gap: 18px; transition: transform .2s, box-shadow .2s;
 }
-.service:hover { transform: translateY(-4px); box-shadow: 0 8px 0 var(--yellow); }
+a.service { color: var(--blue); text-decoration: none; cursor: pointer; }
+.service:hover, .service:focus-visible { transform: translate(-4px, -8px) rotate(-.6deg); box-shadow: 6px 8px 0 var(--crimson); }
+.service:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 .service__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .service h3 { font-size: 21px; line-height: 1.2; }
 .service p { font-size: 15px; line-height: 1.6; }
-.btn--service {
-  margin-top: 4px; width: 100%; background: var(--blue); color: var(--cream); border-radius: var(--radius-sm);
-  font-size: 13px; padding: 11px 16px; box-shadow: 3px 3px 0 var(--crimson);
-}
-.btn--service:hover { background: var(--yellow); color: var(--blue-deep); box-shadow: 5px 5px 0 var(--crimson); }
-.btn--service:hover .icon { transform: translateX(4px); }
-.service__tag { margin-top: auto; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--crimson); }
+/* Pie de la tarjeta: etiqueta + flecha (indica que toda la tarjeta lleva al formulario) */
+.service__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.service__go { width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--crimson); color: var(--white); transition: transform .45s cubic-bezier(.34, 1.8, .5, 1), background-color .2s; }
+.service__go .icon { width: 18px; height: 18px; }
+.service:hover .service__go, .service:focus-visible .service__go { transform: translateX(5px); background: var(--blue); }
+.service__tag { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--crimson); }
 
 .trastienda {
   margin-top: 32px; background: var(--yellow); color: var(--blue-deep); border: 3px solid var(--cream);
