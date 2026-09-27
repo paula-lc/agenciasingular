@@ -421,7 +421,7 @@ if (quiz) {
     quizSummary = `Resultado del test de visibilidad: ${score}/100 (${title}). Recomendación: ${reco.pack.name}.`;
     const cta = $("[data-quiz-cta]");
     cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
-    cta.textContent = `Pedir propuesta: ${reco.pack.short}`;
+    cta.innerHTML = `Pedir propuesta<span class="cta-pack">: ${reco.pack.short}</span>`;
 
     qWrap.hidden = true;
     resultWrap.classList.add("is-visible");
