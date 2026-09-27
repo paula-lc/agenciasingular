@@ -485,7 +485,17 @@ if (hireForm) {
       if (updateUrl) history.replaceState(null, "", `?servicio=${slug}`);
     }
   };
-  radios.forEach((r) => r.addEventListener("change", () => showService(r, true)));
+  // Ajusta el tamaño del nombre para que quepa en una línea sin cambiar la altura del título
+  const fitTitle = () => {
+    const box = title.parentElement;
+    title.style.fontSize = "";
+    if (title.scrollWidth > box.clientWidth) {
+      title.style.fontSize = `${Math.floor((box.clientWidth / title.scrollWidth) * 100)}%`;
+    }
+  };
+  radios.forEach((r) => r.addEventListener("change", () => { showService(r, true); fitTitle(); }));
+  window.addEventListener("resize", fitTitle);
+  document.fonts?.ready.then(fitTitle);
   const wanted = new URLSearchParams(location.search).get("servicio");
   const initial = radios.find((r) => r.dataset.slug === wanted);
   if (initial) initial.checked = true;
@@ -495,6 +505,7 @@ if (hireForm) {
     msg.value = `Vengo del test de visibilidad: mi nota es ${testScore}/100.`;
   }
   showService(initial, false);
+  fitTitle();
 
   // En móvil, si ya viene un servicio elegido, se recoge el selector y se muestra solo ese
   const picker = hireForm.querySelector(".chips--services");

@@ -305,6 +305,9 @@ ul, ol.steps { margin: 0; padding: 0; }
   0%, 82%, 100% { filter: none; }
   90% { filter: brightness(1.25) drop-shadow(0 0 6px rgba(255, 214, 120, .55)); }
 }
+/* Al pasar el ratón por el logo grande, la estrella rosa brilla mientras dure el hover */
+.alogo__rstar { transition: filter .35s ease; }
+.hero__logo:hover .alogo__rstar { animation: none; filter: brightness(1.25) drop-shadow(0 0 8px rgba(255, 214, 120, .6)); }
 /* Zarpazo de la pata cada pocos segundos (solo en el logo grande) */
 .hero__logo .alogo__paw { animation: alogo-paw 6s 2.6s ease-in-out infinite; }
 @keyframes alogo-paw {
@@ -978,14 +981,16 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
 
 /* Contratar: título en dos líneas fijas (no salta al cambiar de servicio) */
 .hire-title { display: flex; flex-direction: column; }
-.hire-title [data-hire-title] { font-size: min(1em, calc((100vw - 2 * var(--gutter)) / 18.5)); white-space: nowrap; }
+/* El nombre ocupa siempre una línea de la misma altura; si no cabe, main.js reduce su tamaño */
+.hire-title__name { display: flex; align-items: flex-end; height: 1.2em; white-space: nowrap; }
+.hire-title__name > span { line-height: 1.1; }
 .hire-title__kicker { font-size: .45em; letter-spacing: .12em; color: var(--cream); text-shadow: none; margin-bottom: .2em; }
 .service-info { transition: opacity .25s; }
 .service-info:not([hidden]) { animation: panel-in .35s cubic-bezier(.3, 1.2, .5, 1); }
 
 /* Contratar en móvil: primero el selector, justo debajo la información del servicio y después el resto */
 @media (max-width: 900px) {
-  .contact:has(#hire-form) { display: flex; flex-direction: column; gap: 22px; }
+  .contact:has(#hire-form) { display: flex; flex-direction: column; align-items: stretch; gap: 22px; }
   .contact:has(#hire-form) > #hire-form { display: contents; }
   #hire-form > * { order: 3; }
   #hire-form > .chips--services { order: 1; }
