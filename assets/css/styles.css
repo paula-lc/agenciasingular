@@ -120,6 +120,10 @@ ul, ol.steps { margin: 0; padding: 0; }
 .btn--yellow { background: var(--yellow); color: var(--blue-deep); }
 .btn--yellow .icon { color: var(--crimson); }
 .btn--yellow:hover .icon { fill: var(--crimson); transform: rotate(-18deg) scale(1.15); }
+/* Botón de diagnóstico en la cabecera: crema, para no confundirse con la sección marcada en amarillo */
+.btn--cream { background: var(--cream); color: var(--blue-deep); }
+.btn--cream .icon { color: var(--crimson); }
+.btn--cream:hover .icon { transform: rotate(-18deg) scale(1.15); }
 /* Iconos de línea (estetoscopio): se giran pero no se rellenan */
 .btn:hover .icon--line { fill: none; }
 .btn--retro .icon { color: var(--crimson); }
@@ -248,7 +252,6 @@ ul, ol.steps { margin: 0; padding: 0; }
 .alogo__singular { left: 31.113%; top: 71.181%; width: 55.821%; }
 .alogo__agencia  { left: 3.881%;  top: 18.75%;  width: 67.982%; }
 .alogo__feet     { left: 60.802%; top: 70.312%; width: 34.217%; }
-.alogo__tail     { left: 56.404%; top: 19.965%; width: 5.369%; }
 
 /* Entrada: la estrella rosa se despliega desde su cola → "Agencia" se escribe → salta el jaguar
    → cae "SINGULAR." → la cola (con la estrella negra) empieza a balancearse */
