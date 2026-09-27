@@ -71,3 +71,8 @@ muestran los negocios que tienen foto. Para activar uno:
 
 1. `python3 scripts/foto-hero.py foto.jpg taller` (crea `assets/img/hero/taller.webp` y `.jpg`).
 2. En `index.html`, en la lista de negocios del hero, cambia `photo: null` por `photo: "taller"`.
+
+Si la conversación con la IA tapa lo importante de la foto, recórtala para subir el sujeto:
+`python3 scripts/foto-hero.py foto.jpg ceramica --recorte 0.22,0.49,0.62` (izquierda, arriba y ancho, en
+fracciones de la foto original). Al cambiar una foto, sube el número `v` del script del hero en
+`index.html` para que los navegadores la recarguen.
