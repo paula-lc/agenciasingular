@@ -13,6 +13,8 @@ aviso-legal.html · privacidad.html      Plantillas legales (completar datos)
 assets/css/styles.css                   Estilos (tokens de marca en :root)
 assets/js/main.js                       Menú, test de visibilidad, pestañas, formulario
 assets/img/                             Logo, fotos e iconos exportados del Figma
+assets/img/hero/                        Fotos de los negocios que rotan en la portada
+scripts/foto-hero.py                    Prepara una foto para la portada (tamaño y tono azul)
 robots.txt · sitemap.xml · llms.txt     SEO y visibilidad en IA
 site.webmanifest · favicon.svg
 ```
@@ -60,3 +62,12 @@ python3 -m http.server 8000
 ```
 
 Se puede publicar tal cual en GitHub Pages, Netlify, Vercel o cualquier hosting estático.
+
+## Negocio de ejemplo de la portada (rota en cada visita)
+
+La foto, la ficha de Maps y la conversación con la IA de la portada cambian en cada visita
+entre floristería, taller, peluquería, estudio de uñas, cafetería y tienda de ropa. Solo se
+muestran los negocios que tienen foto. Para activar uno:
+
+1. `python3 scripts/foto-hero.py foto.jpg taller` (crea `assets/img/hero/taller.webp` y `.jpg`).
+2. En `index.html`, en la lista de negocios del hero, cambia `photo: null` por `photo: "taller"`.
