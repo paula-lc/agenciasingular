@@ -902,15 +902,15 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 /* Con el menú móvil abierto, la barra fija de diagnóstico sobra (ya está en el menú) */
 body:has(.nav__links.is-open) .sticky-cta { display: none; }
 
-/* Botón de diagnóstico (cabecera y barra fija del móvil): late dos veces cada 3,5 s */
-.nav__cta, .sticky-cta .btn { animation: cta-heartbeat 3.5s 2.5s ease-in-out infinite; }
-.nav__cta:hover, .nav__cta:focus-visible, .sticky-cta .btn:hover { animation-play-state: paused; }
-@keyframes cta-heartbeat {
-  0%, 20%, 100% { scale: 1; }
-  5%  { scale: 1.07; }
-  10% { scale: 1; }
-  15% { scale: 1.07; }
+/* Botón de diagnóstico (cabecera y barra fija del móvil): un destello discreto cada 8 s */
+.nav__cta, .sticky-cta .btn { position: relative; overflow: hidden; isolation: isolate; }
+.nav__cta::after, .sticky-cta .btn::after {
+  content: ""; position: absolute; top: -20%; bottom: -20%; left: -40%; width: 30%; z-index: -1; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.75), transparent);
+  transform: skewX(-20deg); animation: cta-shine 8s 3s ease-in-out infinite;
 }
+.nav__cta:hover::after, .sticky-cta .btn:hover::after { animation-play-state: paused; }
+@keyframes cta-shine { 0% { left: -40%; } 12%, 100% { left: 130%; } }
 /* Contratar en móvil: si ya viene un servicio elegido, se muestra solo ese con opción de cambiarlo */
 .chips__change { font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--crimson); background: none; border: 0; cursor: pointer; padding: 8px 4px; }
 .chips--services.is-collapsed .chips__group,
