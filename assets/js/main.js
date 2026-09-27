@@ -71,14 +71,16 @@ function currentOf(sections) {
 
 function setActive(id) {
   markLinks(railLinks, id);
-  markLinks(navLinks, mobileNav.matches ? id : (mainSections.some((s) => s.id === id) ? id : currentOf(mainSections)));
+  markLinks(navLinks, id);
 }
 
 let navLock = null;
 function updateActiveNav() {
   if (navLock || (!navLinks.length && !railLinks.length)) return;
   markLinks(railLinks, currentOf(allSections));
-  markLinks(navLinks, mobileNav.matches ? currentOf(allSections) : currentOf(mainSections));
+  const here = currentOf(allSections);
+  // Escritorio: solo se marca el botón de la sección en la que estás; las secciones sin botón no marcan ninguno
+  markLinks(navLinks, mobileNav.matches || mainSections.some((s) => s.id === here) ? here : null);
 }
 
 // Al hacer clic se marca al momento y se ignora el scroll suave hasta que termina
