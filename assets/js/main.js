@@ -145,14 +145,15 @@ document.addEventListener("animationend", (e) => {
 });
 
 /* Tarjetas de servicios: rebotan al hacer clic y después abren el formulario */
-document.querySelectorAll("a.service").forEach((card) => {
-  card.addEventListener("click", (e) => {
+document.querySelectorAll(".service__link").forEach((link) => {
+  const card = link.closest(".service");
+  link.addEventListener("click", (e) => {
     if (reduceMotion || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
     card.classList.remove("is-bouncing");
     void card.offsetWidth;
     card.classList.add("is-bouncing");
-    setTimeout(() => { window.location.href = card.href; }, 380);
+    setTimeout(() => { window.location.href = link.href; }, 380);
   });
 });
 
@@ -465,26 +466,113 @@ if (SITE.whatsapp && waItem) {
     `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio.")}`;
 }
 
-/* Página de contratación: muestra las preguntas y la información del servicio elegido */
+/* ------------------------------------------------------------------
+   Mi propuesta (cesta): packs y servicios elegidos, guardados en este navegador.
+   Se puede combinar un pack con servicios a la carta, pero no dos packs.
+   ------------------------------------------------------------------ */
+const CART_KEY = "mi-propuesta";
+// Servicios a la carta que ya van dentro de cada pack
+const PACK_INCLUDES = {
+  "pack-encuentren": ["google-maps"],
+  "pack-escaparate": ["diseno-web", "seo-local", "fotografia", "google-maps"],
+  "pack-singular": ["rebranding", "diseno-web", "seo-local", "fotografia", "google-maps", "trastienda"],
+  "pack-visible": [],
+};
+const isPack = (slug) => slug.startsWith("pack-");
+const pop = (el) => { el.classList.remove("is-popping"); void el.offsetWidth; el.classList.add("is-popping"); };
+document.addEventListener("animationend", (e) => {
+  if (e.animationName === "add-pop") e.target.classList?.remove("is-popping");
+});
+
+const cart = {
+  get() {
+    try {
+      const v = JSON.parse(localStorage.getItem(CART_KEY));
+      return Array.isArray(v) ? v.filter((x) => typeof x === "string") : [];
+    } catch { return []; }
+  },
+  set(list) {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(list)); } catch { /* sin almacenamiento */ }
+    renderCartPill();
+  },
+  add(slug) {
+    let list = this.get().filter((s) => s !== slug);
+    if (isPack(slug)) {
+      const inc = PACK_INCLUDES[slug] || [];
+      list = [slug, ...list.filter((s) => !isPack(s) && !inc.includes(s))];
+    } else list.push(slug);
+    this.set(list);
+  },
+  remove(slug) { this.set(this.get().filter((s) => s !== slug)); },
+};
+
+// Contador en el menú (en contratar no hace falta: allí está el resumen)
+function renderCartPill() {
+  const actions = document.querySelector(".nav__actions");
+  if (!actions || document.getElementById("hire-form")) return;
+  const n = cart.get().length;
+  let pill = actions.querySelector(".cart-pill");
+  if (!n) { pill?.remove(); return; }
+  const isNew = !pill;
+  if (isNew) {
+    pill = document.createElement("a");
+    pill.className = "cart-pill";
+    pill.href = "contratar.html";
+    pill.title = "Ver mi propuesta";
+    pill.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span class="cart-pill__count"></span>';
+    actions.prepend(pill);
+  }
+  const count = pill.querySelector(".cart-pill__count");
+  if (count.textContent !== String(n)) {
+    count.textContent = n;
+    if (!isNew) pop(pill);
+  }
+  pill.setAttribute("aria-label", `Mi propuesta: ${n} ${n === 1 ? "servicio elegido" : "servicios elegidos"}`);
+}
+
+// Botones "Añadir" de la portada
+const syncAddButtons = () => {
+  const list = cart.get();
+  document.querySelectorAll("[data-add]").forEach((b) => {
+    const on = list.includes(b.dataset.add);
+    const isPackBtn = b.classList.contains("add-btn--pack");
+    b.setAttribute("aria-pressed", String(on));
+    b.querySelector("use")?.setAttribute("href", on ? "#i-check" : "#i-plus");
+    const label = b.querySelector("[data-add-label]");
+    if (label) label.textContent = on ? (isPackBtn ? "En tu propuesta" : "Añadido") : (isPackBtn ? "Añadir a mi propuesta" : "Añadir");
+  });
+};
+document.querySelectorAll("[data-add]").forEach((b) => {
+  b.addEventListener("click", () => {
+    const slug = b.dataset.add;
+    if (cart.get().includes(slug)) cart.remove(slug); else cart.add(slug);
+    syncAddButtons();
+    pop(b);
+  });
+});
+syncAddButtons();
+renderCartPill();
+window.addEventListener("storage", (e) => {
+  if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
+});
+
+/* Página de contratación: packs y servicios elegidos, sus preguntas y el resumen */
 const hireForm = document.getElementById("hire-form");
 if (hireForm) {
-  const radios = [...hireForm.querySelectorAll('input[name="servicio"]')];
+  const picker = hireForm.querySelector(".chips--services");
+  const inputs = [...picker.querySelectorAll("input[data-slug]")];
+  const bySlug = (slug) => inputs.find((i) => i.dataset.slug === slug);
   const title = document.querySelector("[data-hire-title]");
-  const showService = (radio, updateUrl) => {
-    const slug = radio?.dataset.slug || "";
-    hireForm.querySelectorAll("[data-fields]").forEach((fs) => {
-      const on = fs.dataset.fields === slug;
-      fs.hidden = !on;
-      fs.disabled = !on; // los campos ocultos no se envían
-    });
-    document.querySelectorAll("[data-info]").forEach((card) => { card.hidden = card.dataset.info !== slug; });
-    if (radio) {
-      title.textContent = radio.value;
-      document.querySelector("[data-hire-kicker]").textContent = "Contratar";
-      document.title = `Contratar ${radio.value} · Agencia Singular`;
-      if (updateUrl) history.replaceState(null, "", `?servicio=${slug}`);
-    }
-  };
+  const kicker = document.querySelector("[data-hire-kicker]");
+  const cartBox = document.querySelector("[data-cart]");
+  const cartList = cartBox.querySelector("[data-cart-list]");
+  const tipBox = cartBox.querySelector("[data-cart-tip]");
+  const toggles = [...picker.querySelectorAll("[data-group-toggle]")];
+  let lastTouched = null;
+
+  const selected = () => inputs.filter((i) => i.checked).map((i) => i.dataset.slug);
+  const currentPack = () => inputs.find((i) => i.name === "pack" && i.checked);
+
   // Ajusta el tamaño del nombre para que quepa en una línea sin cambiar la altura del título
   const fitTitle = () => {
     const box = title.parentElement;
@@ -493,50 +581,168 @@ if (hireForm) {
       title.style.fontSize = `${Math.floor((box.clientWidth / title.scrollWidth) * 100)}%`;
     }
   };
-  radios.forEach((r) => r.addEventListener("change", () => { showService(r, true); fitTitle(); }));
+
+  // Grupos plegables: plegado solo se ve lo elegido de ese grupo
+  const isFolded = (group) => toggles.find((t) => t.dataset.groupToggle === group)?.getAttribute("aria-expanded") === "false";
+  const applyFold = () => {
+    picker.querySelectorAll(".chip[data-group]").forEach((chip) => {
+      const hide = isFolded(chip.dataset.group) && !chip.querySelector("input").checked;
+      if (chip.hidden !== hide) {
+        chip.hidden = hide;
+        chip.classList.toggle("is-unfolding", !hide);
+      }
+    });
+  };
+  const fold = (group, folded) => {
+    toggles.find((t) => t.dataset.groupToggle === group)?.setAttribute("aria-expanded", String(!folded));
+  };
+  toggles.forEach((t) => t.addEventListener("click", () => {
+    fold(t.dataset.groupToggle, !isFolded(t.dataset.groupToggle));
+    applyFold();
+  }));
+
+  const cartItem = (input) => {
+    const li = document.createElement("li");
+    li.className = "cart__item";
+    li.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#${input.dataset.icon}"/></svg><span class="cart__name"></span><button type="button" class="cart__remove">×</button>`;
+    const name = li.querySelector(".cart__name");
+    name.textContent = input.value;
+    const small = document.createElement("small");
+    small.textContent = input.dataset.price || "Precio a medida en tu propuesta";
+    name.append(small);
+    const remove = li.querySelector(".cart__remove");
+    remove.setAttribute("aria-label", `Quitar ${input.value}`);
+    remove.addEventListener("click", () => { input.checked = false; update(); });
+    return li;
+  };
+
+  // Si varios servicios sueltos ya forman un pack, se sugiere el pack
+  const packTip = (slugs) => {
+    let best = null;
+    Object.entries(PACK_INCLUDES).forEach(([pack, inc]) => {
+      const hits = slugs.filter((s) => inc.includes(s));
+      if (hits.length >= 2 && (!best || hits.length > best.hits.length)) best = { pack, inc, hits };
+    });
+    if (!best) return null;
+    const packInput = bySlug(best.pack);
+    const list = (arr) => arr.map((s) => bySlug(s).dataset.short).join(", ").replace(/, ([^,]*)$/, " y $1");
+    const rest = best.inc.filter((s) => !best.hits.includes(s));
+    const tip = document.createElement("div");
+    tip.innerHTML = `<p><strong></strong> ya van incluidos en el <strong></strong> (${packInput.dataset.price})${rest.length ? ", junto con " + list(rest) : ""}. Suele salir más a cuenta.</p><button type="button" class="btn btn--crimson">Cambiar al pack</button>`;
+    const [a, b] = tip.querySelectorAll("strong");
+    a.textContent = list(best.hits);
+    b.textContent = packInput.value;
+    tip.querySelector("button").addEventListener("click", () => {
+      packInput.checked = true;
+      lastTouched = best.pack;
+      update();
+    });
+    return tip;
+  };
+
+  const update = () => {
+    const pack = currentPack();
+    const included = pack ? PACK_INCLUDES[pack.dataset.slug] || [] : [];
+    inputs.filter((i) => i.name === "servicio").forEach((i) => {
+      const inc = included.includes(i.dataset.slug);
+      if (inc) i.checked = false;
+      i.disabled = inc;
+      i.closest(".chip").classList.toggle("is-included", inc);
+      i.closest(".chip").title = inc ? `Ya va incluido en el ${pack.value}` : "";
+    });
+    const slugs = selected();
+
+    // Preguntas de cada elegido, sin repetir las que ya se han hecho
+    const seen = new Set();
+    hireForm.querySelectorAll("[data-fields]").forEach((fs) => {
+      const on = slugs.includes(fs.dataset.fields);
+      let visible = 0;
+      fs.querySelectorAll(":scope > .field").forEach((field) => {
+        const names = [...new Set([...field.querySelectorAll("[name]")].map((el) => el.name))];
+        const dup = on && names.some((n) => seen.has(n));
+        field.hidden = dup;
+        field.querySelectorAll("[name]").forEach((el) => { el.disabled = dup; });
+        if (on && !dup) { names.forEach((n) => seen.add(n)); visible++; }
+      });
+      fs.hidden = !on || !visible;
+      fs.disabled = fs.hidden; // los campos ocultos no se envían
+    });
+
+    // Información del último elegido (o "¿Cómo funciona?" si no hay nada)
+    const infoSlug = slugs.includes(lastTouched) ? lastTouched : slugs[0] || "";
+    document.querySelectorAll("[data-info]").forEach((card) => { card.hidden = card.dataset.info !== infoSlug; });
+
+    // Resumen
+    cartBox.hidden = !slugs.length;
+    cartList.replaceChildren(...slugs.map((s) => cartItem(bySlug(s))));
+    const tip = pack ? null : packTip(slugs);
+    tipBox.hidden = !tip;
+    tipBox.replaceChildren(...(tip ? [tip] : []));
+
+    // Título
+    const names = slugs.map((s) => bySlug(s).dataset.short);
+    if (!slugs.length) {
+      kicker.textContent = "Cuéntanos";
+      title.textContent = "Qué necesitas";
+      document.title = "Contratar un servicio · Agencia Singular";
+    } else {
+      kicker.textContent = slugs.length === 1 ? "Contratar" : "Tu propuesta";
+      title.textContent = slugs.length === 1 ? bySlug(slugs[0]).value : slugs.length === 2 ? names.join(" + ") : `${names[0]} + ${slugs.length - 1} más`;
+      document.title = `Contratar ${slugs.map((s) => bySlug(s).value).join(" + ")} · Agencia Singular`;
+    }
+    fitTitle();
+
+    if (!slugs.length) toggles.forEach((t) => fold(t.dataset.groupToggle, false));
+    applyFold();
+    cart.set(slugs);
+    history.replaceState(null, "", slugs.length ? `?servicio=${slugs.join(",")}` : location.pathname);
+  };
+
+  // Un pack elegido se puede quitar volviendo a pulsarlo
+  inputs.filter((i) => i.type === "radio").forEach((r) => {
+    let was = false;
+    r.closest("label").addEventListener("pointerdown", () => { was = r.checked; });
+    r.addEventListener("click", () => {
+      if (was) { r.checked = false; lastTouched = null; update(); }
+      was = false;
+    });
+  });
+  // Al elegir un pack se pliegan los servicios a la carta, y al revés
+  inputs.forEach((i) => i.addEventListener("change", () => {
+    if (i.checked) {
+      lastTouched = i.dataset.slug;
+      const group = i.closest(".chip").dataset.group;
+      fold(group, false);
+      fold(group === "packs" ? "carta" : "packs", true);
+    }
+    update();
+  }));
   window.addEventListener("resize", fitTitle);
   document.fonts?.ready.then(fitTitle);
-  const wanted = new URLSearchParams(location.search).get("servicio");
-  const initial = radios.find((r) => r.dataset.slug === wanted);
-  if (initial) initial.checked = true;
-  const testScore = new URLSearchParams(location.search).get("test");
+
+  // Selección inicial: lo guardado en el navegador + lo que venga en el enlace
+  const params = new URLSearchParams(location.search);
+  const wanted = (params.get("servicio") || "").split(",").filter((s) => bySlug(s));
+  let start = cart.get().filter((s) => bySlug(s));
+  wanted.forEach((s) => {
+    if (isPack(s)) start = start.filter((x) => !isPack(x));
+    if (!start.includes(s)) start.push(s);
+  });
+  const firstPack = start.find(isPack);
+  start.filter((s) => !isPack(s) || s === firstPack).forEach((s) => { bySlug(s).checked = true; });
+  lastTouched = wanted.at(-1) || start.at(-1) || null;
+  if (lastTouched) {
+    const group = bySlug(lastTouched).closest(".chip").dataset.group;
+    fold(group === "packs" ? "carta" : "packs", true);
+  }
+  const testScore = params.get("test");
   const msg = hireForm.querySelector('textarea[name="mensaje"]');
   if (testScore && /^\d{1,3}$/.test(testScore) && msg && !msg.value) {
     msg.value = `Vengo del test de visibilidad: mi nota es ${testScore}/100.`;
   }
-  showService(initial, false);
-  fitTitle();
-
-  // En móvil, si ya viene un servicio elegido, se recoge el selector y se muestra solo ese
-  const picker = hireForm.querySelector(".chips--services");
-  const change = hireForm.querySelector("[data-change-service]");
-  const small = window.matchMedia("(max-width: 900px)");
-  const collapse = (on) => {
-    picker.classList.toggle("is-collapsed", on);
-    change.hidden = !on;
-  };
-  if (initial && small.matches) collapse(true);
-  change?.addEventListener("click", () => collapse(false));
-  radios.forEach((r) => r.addEventListener("change", () => { if (small.matches) collapse(true); }));
-
-  // Packs y servicios a la carta: al elegir uno, el otro grupo se pliega (y se puede volver a abrir)
-  const toggles = [...picker.querySelectorAll("[data-group-toggle]")];
-  const fold = (group, folded) => {
-    const btn = toggles.find((t) => t.dataset.groupToggle === group);
-    if (!btn || (btn.getAttribute("aria-expanded") === "false") === folded) return;
-    btn.setAttribute("aria-expanded", String(!folded));
-    picker.querySelectorAll(`.chip[data-group="${group}"]`).forEach((chip) => {
-      chip.hidden = folded;
-      chip.classList.toggle("is-unfolding", !folded);
-    });
-  };
-  const foldOthers = (radio) => {
-    const mine = radio?.closest(".chip")?.dataset.group;
-    if (mine) toggles.forEach((t) => fold(t.dataset.groupToggle, t.dataset.groupToggle !== mine));
-  };
-  toggles.forEach((t) => t.addEventListener("click", () => fold(t.dataset.groupToggle, t.getAttribute("aria-expanded") === "true")));
-  radios.forEach((r) => r.addEventListener("change", () => foldOthers(r)));
-  foldOthers(initial);
+  update();
+  // Tras enviar la solicitud, la propuesta se vacía
+  hireForm.addEventListener("reset", () => setTimeout(() => { lastTouched = null; update(); }));
 }
 
 /* Envío de cualquier formulario de contacto de la web */
@@ -558,6 +764,12 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     e.preventDefault();
     if (form.web_hp.value) return; // bot
 
+    const choice = form.querySelector("[data-need-choice]");
+    if (choice && !choice.querySelector("input:checked")) {
+      choice.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+      setStatus("Elige al menos un pack o un servicio.", false);
+      return;
+    }
     const invalid = [...form.querySelectorAll("[required]")].find((el) => {
       if (el.disabled) return false;
       if (el.type === "radio") return !form.querySelector(`input[name="${el.name}"]:checked`);
@@ -585,7 +797,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const body = [...answers].map(([k, v]) => `${k}: ${v.join(", ")}`).join("\n");
 
     const data = new FormData(form);
-    const servicio = data.get("servicio");
+    const servicio = [...data.getAll("pack"), ...data.getAll("servicio")].join(" + ");
     const subject = `${form.dataset.subject || "Contacto"}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
 
     if (!SITE.formEndpoint) {

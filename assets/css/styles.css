@@ -214,9 +214,24 @@ ul, ol.steps { margin: 0; padding: 0; }
   border: 1px solid var(--yellow); color: var(--yellow); transition: background-color .15s;
 }
 .nav__ig:hover { background: rgba(250,180,25,.14); }
+/* Contador de "Mi propuesta" (aparece cuando hay algo añadido) */
+.cart-pill {
+  position: relative; width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%;
+  border: 1px solid var(--yellow); color: var(--yellow); transition: background-color .15s;
+}
+.cart-pill:hover { background: rgba(250,180,25,.14); }
+.cart-pill svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cart-pill__count {
+  position: absolute; top: -5px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px;
+  display: grid; place-items: center; background: var(--crimson); color: var(--white); font-size: 11px; font-weight: 800; line-height: 1;
+}
+.cart-pill.is-popping { animation: add-pop .45s cubic-bezier(.3, 1.6, .5, 1); }
 /* Misma altura que los botones del menú (41 px) para que queden alineados */
 .nav__cta { padding: 9px 18px; font-size: 13px; border: 1.5px solid transparent; }
+.nav__cta { white-space: nowrap; }
 .nav__cta .icon { width: 18px; height: 18px; }
+/* Con el contador de la propuesta visible, Instagram se queda solo en el pie (en escritorio) */
+@media (min-width: 1241px) { .nav__actions:has(.cart-pill) .nav__ig { display: none; } }
 .nav__toggle {
   display: none; background: none; border: 1.5px solid var(--yellow); color: var(--yellow);
   width: 44px; height: 44px; border-radius: 50%; cursor: pointer; place-items: center;
@@ -511,6 +526,24 @@ ul, ol.steps { margin: 0; padding: 0; }
 .pack--featured li .icon { color: var(--yellow); }
 .pack .btn { margin-top: 8px; width: 100%; padding: 13px 18px; font-size: 13.5px; }
 .pack--featured .btn--ghost { border-color: var(--yellow); color: var(--yellow); }
+/* Botón "Añadir a mi propuesta" (cesta) */
+.add-btn {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font: inherit; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;
+  color: var(--blue); background: var(--cream-soft); border: 2px solid var(--blue); border-radius: 999px; padding: 6px 12px 6px 10px; cursor: pointer;
+  transition: transform .35s cubic-bezier(.34, 1.8, .5, 1), box-shadow .2s, background-color .2s, color .2s;
+}
+.add-btn .icon { width: 14px; height: 14px; stroke-width: 3; }
+.add-btn:hover { transform: translate(-1px, -2px); box-shadow: 2px 3px 0 var(--crimson); }
+.add-btn:active { transform: scale(.95); }
+.add-btn[aria-pressed="true"] { background: var(--blue); color: var(--yellow); }
+.add-btn.is-popping { animation: add-pop .4s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes add-pop { 40% { transform: scale(1.12); } }
+.add-btn--pack { width: 100%; margin-top: -6px; padding: 8px 12px; border-color: transparent; background: transparent; color: var(--crimson); }
+.add-btn--pack:hover { box-shadow: none; transform: none; text-decoration: underline; text-underline-offset: 3px; }
+.add-btn--pack[aria-pressed="true"] { background: transparent; color: var(--blue); }
+.pack--featured .add-btn--pack { color: var(--yellow); }
+.pack--featured .add-btn--pack[aria-pressed="true"] { color: var(--cream); }
 .btn--ghost { background: transparent; border: 2px solid var(--blue); color: var(--blue); border-radius: var(--radius-sm); }
 .btn--ghost:hover { background: var(--blue); color: var(--cream); }
 .packs-note { margin-top: 28px; font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
@@ -529,6 +562,16 @@ ul, ol.steps { margin: 0; padding: 0; }
   padding: 26px; display: flex; flex-direction: column; gap: 18px; transition: transform .2s, box-shadow .2s;
 }
 a.service { color: var(--blue); text-decoration: none; cursor: pointer; }
+/* Toda la tarjeta abre contratar (enlace estirado); el botón "Añadir" queda por encima */
+.service { position: relative; }
+.service__link { color: inherit; text-decoration: none; }
+.service__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: 0; }
+.service__link:focus-visible { outline: none; }
+.service:has(.service__link:focus-visible) { transform: translate(-4px, -8px) rotate(-.6deg); box-shadow: 6px 8px 0 var(--crimson); outline: 3px solid var(--yellow); outline-offset: 3px; }
+.service:has(.service__link:focus-visible) .service__go { transform: translateX(5px); background: var(--crimson); }
+.service__actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.service__foot:has(.service__actions) { flex-wrap: wrap; }
+.service__foot:has(.service__actions) .service__tag { flex: 1 1 100%; }
 .service:hover, .service:focus-visible { transform: translate(-4px, -8px) rotate(-.6deg); box-shadow: 6px 8px 0 var(--crimson); }
 .service:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 .service__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
@@ -875,11 +918,35 @@ a.trastienda:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var
 .chips__group[data-group-toggle="packs"] { margin-top: 0; }
 .chips__group:hover { color: var(--blue); }
 .chips__arrow { display: inline-block; transition: transform .25s ease; }
+.chips__group small { font-size: 11px; font-weight: 700; letter-spacing: .02em; text-transform: none; opacity: .75; }
+.chips__group[aria-expanded="false"] small { display: none; }
+.chips__group[data-group-toggle="carta"][aria-expanded="false"]::after { content: "+ añadir extras"; margin-left: 4px; padding: 3px 9px; border-radius: 999px; border: 1.5px solid currentColor; font-size: 10.5px; letter-spacing: .06em; }
+.chips__group[data-group-toggle="packs"][aria-expanded="false"]::after { content: "ver packs"; margin-left: 4px; padding: 3px 9px; border-radius: 999px; border: 1.5px solid currentColor; font-size: 10.5px; letter-spacing: .06em; }
+.service-fields .field[hidden] { display: none; }
 .chips__group[aria-expanded="false"] .chips__arrow { transform: rotate(-90deg); }
 .chip--service[hidden] { display: none; }
 .chip--service.is-unfolding { animation: chip-unfold .3s ease both; }
 @keyframes chip-unfold { from { opacity: 0; translate: 0 -6px; } }
 .service-info__price { font-family: var(--font-display); font-size: 26px; color: var(--yellow); margin: -2px 0 10px; }
+/* Resumen "Tu propuesta" en contratar */
+.cart h3 { display: flex; align-items: center; gap: 10px; }
+.cart__list { list-style: none; display: grid; gap: 8px; margin: 14px 0 0; }
+.cart__item { display: flex; align-items: center; gap: 10px; padding: 9px 10px 9px 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,.08); border: 1.5px solid rgba(250,180,25,.35); }
+.cart__item .icon { width: 18px; height: 18px; color: var(--yellow); flex: none; }
+.cart__name { flex: 1; font-weight: 700; line-height: 1.3; }
+.cart__name small { display: block; font-weight: 600; font-size: 12.5px; opacity: .8; }
+.cart__remove { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 0; background: none; color: var(--cream); font-size: 20px; line-height: 1; cursor: pointer; transition: background-color .15s, color .15s; }
+.cart__remove:hover { background: var(--crimson); color: var(--white); }
+.cart__total { margin-top: 14px; font-weight: 700; }
+.cart__total strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; color: var(--yellow); }
+.cart__tip { margin-top: 14px; padding: 14px; border-radius: var(--radius-sm); background: var(--yellow); color: var(--blue-deep); font-size: 14.5px; line-height: 1.5; box-shadow: 3px 3px 0 var(--crimson); }
+.cart__tip[hidden] { display: none; }
+.cart__tip .btn { margin-top: 10px; padding: 9px 14px; font-size: 12.5px; }
+.cart__note { margin-top: 14px; font-size: 13.5px; opacity: .85; }
+.chip__inc { display: none; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+.chip--service.is-included { cursor: default; }
+.chip--service.is-included span, .chip--service.is-included:hover span { opacity: .55; border-style: dashed; box-shadow: none; transform: none; background: transparent; }
+.chip--service.is-included .chip__inc { display: inline; }
 
 /* ==========================================================================
    Ajustes para móvil
@@ -952,9 +1019,6 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
 .nav__cta:hover::after, .sticky-cta .btn:hover::after { animation-play-state: paused; }
 @keyframes cta-shine { 0% { left: -40%; } 12%, 100% { left: 130%; } }
 /* Contratar en móvil: si ya viene un servicio elegido, se muestra solo ese con opción de cambiarlo */
-.chips__change { order: 99; font: inherit; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--crimson); background: none; border: 0; cursor: pointer; padding: 8px 4px; }
-.chips--services.is-collapsed .chips__group,
-.chips--services.is-collapsed .chip:not(:has(input:checked)) { display: none; }
 /* Logo del pie: quieto; al pasar el ratón el jaguar mueve la cola */
 .alogo--footer { width: 170px; }
 .alogo--footer :is(.alogo__rstar, .alogo__agencia, .alogo__singular, .alogo__leap, .alogo__beat, .alogo__swing, .alogo__paw) { animation: none !important; }

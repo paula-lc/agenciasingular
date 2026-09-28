@@ -7,7 +7,7 @@ Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singul
 ```
 index.html                              Landing principal
 guia-aparecer-en-ia-y-google-maps.html  Guía gratuita (contenido SEO y captación)
-contratar.html                          Formulario de contratación adaptado a cada servicio (?servicio=seo-local…)
+contratar.html                          Formulario de contratación: un pack + los servicios que quieran (?servicio=pack-escaparate,sem)
 aviso-legal.html · privacidad.html      Plantillas legales (completar datos)
 404.html
 assets/css/styles.css                   Estilos (tokens de marca en :root)
@@ -76,3 +76,11 @@ Si la conversación con la IA tapa lo importante de la foto, recórtala para sub
 `python3 scripts/foto-hero.py foto.jpg ceramica --recorte 0.22,0.49,0.62` (izquierda, arriba y ancho, en
 fracciones de la foto original). Al cambiar una foto, sube el número `v` del script del hero en
 `index.html` para que los navegadores la recarguen.
+
+## Mi propuesta (cesta)
+
+En la portada, cada servicio y cada pack tiene un botón **Añadir**; lo elegido se guarda en el navegador
+del visitante y aparece un contador en el menú que lleva a `contratar.html`. Allí se combinan un pack
+(solo uno) con los servicios a la carta que quieran: los que ya incluye el pack salen como "incluido", las
+preguntas comunes no se repiten y, si varios servicios sueltos forman un pack, se sugiere cambiar al pack.
+Qué incluye cada pack está en `assets/js/main.js` → `PACK_INCLUDES`.
