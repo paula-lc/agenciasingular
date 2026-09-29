@@ -45,7 +45,9 @@ function doPost(e) {
   const libro = SpreadsheetApp.getActiveSpreadsheet();
   let hoja = libro.getSheetByName(HOJA);
   if (!hoja) {
-    hoja = libro.insertSheet(HOJA);
+    // Si la primera pestaña está vacía (la "Hoja 1" de una hoja nueva) se usa esa, para no dejarla en blanco
+    const primera = libro.getSheets()[0];
+    hoja = primera.getLastRow() === 0 ? primera.setName(HOJA) : libro.insertSheet(HOJA);
     hoja.appendRow(COLUMNAS);
     hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight("bold").setBackground("#3e6083").setFontColor("#ffffff");
     hoja.setFrozenRows(1);
