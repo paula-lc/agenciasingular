@@ -569,10 +569,9 @@ a.service { color: var(--blue); text-decoration: none; cursor: pointer; }
 .service__link:focus-visible { outline: none; }
 .service:has(.service__link:focus-visible) { transform: translate(-4px, -8px) rotate(-.6deg); box-shadow: 6px 8px 0 var(--crimson); outline: 3px solid var(--yellow); outline-offset: 3px; }
 .service:has(.service__link:focus-visible) .service__go { transform: translateX(5px); background: var(--crimson); }
-.service__actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-.service__more { position: relative; z-index: 1; align-self: flex-start; margin-top: -6px; padding: 2px 0; background: none; border: 0; cursor: pointer; font: inherit; font-size: 13.5px; font-weight: 800; color: var(--crimson); text-align: left; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.service__more span { display: inline-block; transition: transform .3s cubic-bezier(.34, 1.8, .5, 1); }
-.service__more:hover span { transform: translateX(4px); }
+/* Dos botones iguales, uno al lado del otro */
+.service__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; flex: 1 1 100%; }
+.service__actions .add-btn { width: 100%; padding: 7px 8px; font-size: 11.5px; letter-spacing: .04em; }
 .service__foot:has(.service__actions) { flex-wrap: wrap; }
 .service__foot:has(.service__actions) .service__tag { flex: 1 1 100%; }
 .service:hover, .service:focus-visible { transform: translate(-4px, -8px) rotate(-.6deg); box-shadow: 6px 8px 0 var(--crimson); }
@@ -1085,12 +1084,14 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
    Packs: "Ver detalles" y ventana con la información completa
    ========================================================================== */
 .pack__more {
-  position: relative; z-index: 1; align-self: flex-start; margin-top: -4px; padding: 2px 0; background: none; border: 0; cursor: pointer;
-  font: inherit; font-size: 13.5px; font-weight: 800; color: var(--crimson); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;
+  position: relative; z-index: 1; align-self: center; margin-top: -4px; padding: 2px 0; background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: 13.5px; font-weight: 800; color: var(--blue); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;
 }
 .pack__more span { display: inline-block; transition: transform .3s cubic-bezier(.34, 1.8, .5, 1); }
+.pack__more:hover { color: var(--crimson); }
 .pack__more:hover span { transform: translateX(4px); }
-.pack--featured .pack__more { color: var(--yellow); }
+.pack--featured .pack__more { color: var(--cream); }
+.pack--featured .pack__more:hover { color: var(--yellow); }
 
 html:has(.pmodal[open]) { overflow: hidden; }
 .pmodal {

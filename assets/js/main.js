@@ -479,7 +479,10 @@ const PACK_INCLUDES = {
   "pack-singular": ["rebranding", "diseno-web", "seo-local", "fotografia", "google-maps", "trastienda"],
   "pack-visible": [],
 };
+// Servicios a la carta que existen (lo guardado de servicios retirados se ignora)
+const SERVICE_SLUGS = ["rebranding", "diseno-web", "seo-local", "google-maps", "ia", "fotografia", "redes-sociales", "trastienda"];
 const isPack = (slug) => slug.startsWith("pack-");
+const knownSlug = (slug) => slug in PACK_INCLUDES || SERVICE_SLUGS.includes(slug);
 const pop = (el) => { el.classList.remove("is-popping"); void el.offsetWidth; el.classList.add("is-popping"); };
 document.addEventListener("animationend", (e) => {
   if (e.animationName === "add-pop") e.target.classList?.remove("is-popping");
@@ -489,7 +492,7 @@ const cart = {
   get() {
     try {
       const v = JSON.parse(localStorage.getItem(CART_KEY));
-      return Array.isArray(v) ? v.filter((x) => typeof x === "string") : [];
+      return Array.isArray(v) ? v.filter((x) => typeof x === "string" && knownSlug(x)) : [];
     } catch { return []; }
   },
   set(list) {
