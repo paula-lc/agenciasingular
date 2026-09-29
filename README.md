@@ -8,6 +8,8 @@ Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singul
 index.html                              Landing principal
 guia-aparecer-en-ia-y-google-maps.html  Guía gratuita (contenido SEO y captación)
 contratar.html                          Formulario de contratación: un pack + los servicios que quieran (?servicio=pack-escaparate,redes-sociales)
+ca/ · en/                               Versiones en catalán e inglés (generadas, no se editan a mano)
+scripts/build/                          Generador de la web: ventanas de detalle, contratar, idiomas y sitemap
 aviso-legal.html · privacidad.html      Plantillas legales (completar datos)
 404.html
 assets/css/styles.css                   Estilos (tokens de marca en :root)
@@ -101,3 +103,23 @@ informe (en el cuerpo del email y en PDF adjunto) y se guarda como una fila en u
 
 Si cambias el script, vuelve a implementarlo (Gestionar implementaciones → editar → Nueva versión)
 para que la URL siga siendo la misma.
+
+## Idiomas (castellano, catalán e inglés) y cómo regenerar la web
+
+El castellano es el original (`index.html`, `contratar.html`, la guía). Las versiones en catalán (`/ca/`) e
+inglés (`/en/`) se **generan** con las traducciones de `scripts/build/i18n/`:
+
+- `ca.json` y `en.json`: texto en castellano → traducción (textos de las páginas).
+- `js.ca.json` y `js.en.json`: textos del JavaScript (test, cesta, avisos del formulario). Se vuelcan en `assets/js/i18n.js`.
+
+Después de cambiar algo en castellano (o el contenido de las ventanas en `scripts/build/services_data.py` y `modals.py`, o
+el formulario en `contratar.py`), ejecuta:
+
+```bash
+python3 scripts/build/build.py
+```
+
+Regenera las ventanas de detalle, `contratar.html`, el selector de idioma, las páginas `/ca/` y `/en/` y el `sitemap.xml`.
+Si hay textos nuevos sin traducir, el script los lista: añádelos a `ca.json` y `en.json` y vuelve a ejecutarlo
+(mientras tanto se quedan en castellano). Cada página enlaza sus otras versiones con `hreflang`, y el selector de idioma
+de la cabecera lleva a la misma página en el otro idioma.

@@ -1163,3 +1163,32 @@ html:has(.pmodal[open]) { overflow: hidden; }
 /* Textos pequeños en amarillo sobre azul: tono más claro para cumplir el contraste AA */
 .pack--featured .pack__price small, .service-info h4, .service-info__price, .service-info__time, .service-info__time .icon,
 .section--blue .callout h3, .callout--blue h3 { color: var(--yellow-light); }
+
+/* ==========================================================================
+   Selector de idioma (cabecera) y enlaces de idioma (pie)
+   ========================================================================== */
+.lang-switch { position: relative; flex: none; }
+.lang-switch__btn {
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--yellow); background: none; color: var(--yellow-light);
+  font: inherit; font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: background-color .15s;
+}
+.lang-switch__btn:hover, .lang-switch__btn[aria-expanded="true"] { background: rgba(250,180,25,.14); }
+.lang-switch__menu {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 60; min-width: 150px; list-style: none; margin: 0; padding: 6px;
+  background: var(--cream-soft); border: 2px solid var(--blue); border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--crimson);
+}
+.lang-switch__menu[hidden] { display: none; }
+.lang-switch__menu a { display: block; padding: 8px 12px; border-radius: 6px; color: var(--blue); font-weight: 700; font-size: 14px; text-decoration: none; }
+.lang-switch__menu a:hover { background: var(--yellow); color: var(--blue-deep); }
+.lang-switch__menu a[aria-current="true"] { color: var(--crimson); }
+.lang-switch__menu a[aria-current="true"]::after { content: " ★"; }
+.footer-langs { display: flex; flex-wrap: wrap; gap: 6px; font-size: 13px; }
+.footer-langs a[aria-current="true"] { font-weight: 800; text-decoration: none; }
+/* Con el contador de la propuesta, en móvil Instagram se queda solo en el pie para que quepa todo */
+@media (max-width: 480px) { .nav__actions:has(.cart-pill) .nav__ig { display: none; } .nav__actions { gap: 8px; } }
+
+/* Textos generados por CSS en otros idiomas */
+:lang(ca) .chips__group[data-group-toggle="carta"][aria-expanded="false"]::after { content: "+ afegeix extres"; }
+:lang(ca) .chips__group[data-group-toggle="packs"][aria-expanded="false"]::after { content: "veure packs"; }
+:lang(en) .chips__group[data-group-toggle="carta"][aria-expanded="false"]::after { content: "+ add extras"; }
+:lang(en) .chips__group[data-group-toggle="packs"][aria-expanded="false"]::after { content: "see packs"; }

@@ -15,6 +15,14 @@ const SITE = {
 
 document.documentElement.classList.remove("no-js");
 
+/* Idioma de la página: los textos del JavaScript se traducen con assets/js/i18n.js (catalán e inglés) */
+const LANG = (document.documentElement.lang || "es").slice(0, 2);
+const t = (s, vars) => {
+  let out = window.I18N?.[LANG]?.[s] ?? s;
+  if (vars) out = out.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+  return out;
+};
+
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ------------------------------------------------------------------
@@ -28,7 +36,7 @@ if (toggle && menu) {
   toggle.addEventListener("click", () => {
     const open = menu.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    toggle.setAttribute("aria-label", open ? t("Cerrar menú") : t("Abrir menú"));
   });
   menu.addEventListener("click", (e) => {
     if (e.target.closest("a")) {
@@ -253,57 +261,57 @@ if (tablist) {
    Test de visibilidad
    ------------------------------------------------------------------ */
 const QUESTIONS = [
-  { svc: "google-maps", area: "Google Maps", q: "¿Tu negocio aparece en Google Maps con la ficha verificada?", hint: "Busca el nombre de tu negocio en Google Maps desde el móvil.",
-    opts: [["Sí, y está completa", 2], ["Sí, pero a medias", 1], ["No / no lo sé", 0]],
-    tip: "<strong>Reclama y completa tu Perfil de Empresa de Google</strong>: categoría principal exacta, horario, servicios y al menos 10 fotos reales." },
-  { svc: "google-maps", area: "Reseñas", q: "¿Cuántas reseñas tienes en Google?", hint: "Las reseñas pesan en Maps y en lo que recomienda la IA.",
-    opts: [["Más de 50", 2], ["Entre 10 y 50", 1], ["Menos de 10", 0]],
-    tip: "<strong>Pide reseñas de forma sistemática</strong>: un QR en el mostrador y un mensaje tras cada visita. Y responde a todas, también a las malas." },
-  { svc: "diseno-web", area: "Web", q: "¿Tienes web propia (no solo Instagram)?", hint: "Una web es la fuente oficial que leen Google y las IA.",
-    opts: [["Sí, y es reciente", 2], ["Sí, pero antigua o lenta", 1], ["No tengo", 0]],
-    tip: "<strong>Una web sencilla y rápida</strong> con tus servicios, precios orientativos, zona y contacto es la base de todo lo demás." },
-  { svc: "diseno-web", area: "Web", q: "¿Tu web tiene una página para cada servicio importante?", hint: "Ej.: “manicura semipermanente”, “ramos de novia”, “cambio de neumáticos”.",
-    opts: [["Sí", 2], ["Todo está en una sola página", 1], ["No tengo web", 0]],
-    tip: "<strong>Crea una página por servicio clave</strong> que responda: qué es, precio, duración, para quién y dónde. Así Google y la IA saben por qué recomendarte." },
-  { svc: "ia", area: "IA", q: "Si preguntas a ChatGPT o Gemini por tu servicio en tu zona, ¿te nombra?", hint: "Pruébalo: “¿qué [tu servicio] me recomiendas en [tu barrio]?”.",
-    opts: [["Sí, aparezco", 2], ["Aparece mi competencia", 0], ["No lo he probado", 0]],
-    tip: "<strong>Hazte visible para la IA</strong>: mismos datos (nombre, dirección, teléfono) en todas partes, preguntas frecuentes en tu web y menciones en medios o blogs locales." },
-  { svc: "google-maps", area: "Coherencia", q: "¿Tu nombre, dirección, teléfono y horario son iguales en todas partes?", hint: "Web, Google, redes, directorios, TripAdvisor, Páginas Amarillas…",
-    opts: [["Sí, lo he revisado", 2], ["Creo que sí", 1], ["Seguro que hay diferencias", 0]],
-    tip: "<strong>Unifica tus datos</strong> en todas las plataformas. Las incoherencias hacen que Google y la IA desconfíen de tu información." },
-  { svc: "fotografia", area: "Imagen", q: "¿Tienes fotos profesionales de tu local, equipo y productos?", hint: "Las fotos reales generan más clics y visitas que las de stock.",
-    opts: [["Sí", 2], ["Algunas hechas con el móvil", 1], ["No / uso fotos de internet", 0]],
-    tip: "<strong>Invierte en una sesión de fotos real</strong>: fachada, interior, equipo y tus 5 productos o servicios estrella. Súbelas a Maps, web y redes." },
-  { svc: "redes-sociales", area: "Constancia", q: "¿Publicas novedades en Google o redes al menos una vez por semana?", hint: "La actividad reciente es una señal de negocio vivo.",
-    opts: [["Sí", 2], ["De vez en cuando", 1], ["Casi nunca", 0]],
-    tip: "<strong>Programa una publicación semanal</strong> en tu ficha de Google (ofertas, novedades, eventos). 15 minutos que marcan la diferencia." },
+  { svc: "google-maps", area: t("Google Maps"), q: t("¿Tu negocio aparece en Google Maps con la ficha verificada?"), hint: t("Busca el nombre de tu negocio en Google Maps desde el móvil."),
+    opts: [[t("Sí, y está completa"), 2], [t("Sí, pero a medias"), 1], [t("No / no lo sé"), 0]],
+    tip: t("<strong>Reclama y completa tu Perfil de Empresa de Google</strong>: categoría principal exacta, horario, servicios y al menos 10 fotos reales.") },
+  { svc: "google-maps", area: t("Reseñas"), q: t("¿Cuántas reseñas tienes en Google?"), hint: t("Las reseñas pesan en Maps y en lo que recomienda la IA."),
+    opts: [[t("Más de 50"), 2], [t("Entre 10 y 50"), 1], [t("Menos de 10"), 0]],
+    tip: t("<strong>Pide reseñas de forma sistemática</strong>: un QR en el mostrador y un mensaje tras cada visita. Y responde a todas, también a las malas.") },
+  { svc: "diseno-web", area: t("Web"), q: t("¿Tienes web propia (no solo Instagram)?"), hint: t("Una web es la fuente oficial que leen Google y las IA."),
+    opts: [[t("Sí, y es reciente"), 2], [t("Sí, pero antigua o lenta"), 1], [t("No tengo"), 0]],
+    tip: t("<strong>Una web sencilla y rápida</strong> con tus servicios, precios orientativos, zona y contacto es la base de todo lo demás.") },
+  { svc: "diseno-web", area: t("Web"), q: t("¿Tu web tiene una página para cada servicio importante?"), hint: t("Ej.: “manicura semipermanente”, “ramos de novia”, “cambio de neumáticos”."),
+    opts: [[t("Sí"), 2], [t("Todo está en una sola página"), 1], [t("No tengo web"), 0]],
+    tip: t("<strong>Crea una página por servicio clave</strong> que responda: qué es, precio, duración, para quién y dónde. Así Google y la IA saben por qué recomendarte.") },
+  { svc: "ia", area: t("IA"), q: t("Si preguntas a ChatGPT o Gemini por tu servicio en tu zona, ¿te nombra?"), hint: t("Pruébalo: “¿qué [tu servicio] me recomiendas en [tu barrio]?”."),
+    opts: [[t("Sí, aparezco"), 2], [t("Aparece mi competencia"), 0], [t("No lo he probado"), 0]],
+    tip: t("<strong>Hazte visible para la IA</strong>: mismos datos (nombre, dirección, teléfono) en todas partes, preguntas frecuentes en tu web y menciones en medios o blogs locales.") },
+  { svc: "google-maps", area: t("Coherencia"), q: t("¿Tu nombre, dirección, teléfono y horario son iguales en todas partes?"), hint: t("Web, Google, redes, directorios, TripAdvisor, Páginas Amarillas…"),
+    opts: [[t("Sí, lo he revisado"), 2], [t("Creo que sí"), 1], [t("Seguro que hay diferencias"), 0]],
+    tip: t("<strong>Unifica tus datos</strong> en todas las plataformas. Las incoherencias hacen que Google y la IA desconfíen de tu información.") },
+  { svc: "fotografia", area: t("Imagen"), q: t("¿Tienes fotos profesionales de tu local, equipo y productos?"), hint: t("Las fotos reales generan más clics y visitas que las de stock."),
+    opts: [[t("Sí"), 2], [t("Algunas hechas con el móvil"), 1], [t("No / uso fotos de internet"), 0]],
+    tip: t("<strong>Invierte en una sesión de fotos real</strong>: fachada, interior, equipo y tus 5 productos o servicios estrella. Súbelas a Maps, web y redes.") },
+  { svc: "redes-sociales", area: t("Constancia"), q: t("¿Publicas novedades en Google o redes al menos una vez por semana?"), hint: t("La actividad reciente es una señal de negocio vivo."),
+    opts: [[t("Sí"), 2], [t("De vez en cuando"), 1], [t("Casi nunca"), 0]],
+    tip: t("<strong>Programa una publicación semanal</strong> en tu ficha de Google (ofertas, novedades, eventos). 15 minutos que marcan la diferencia.") },
 ];
 
 const SERVICE_NAMES = {
-  "google-maps": "Google Maps y reseñas", "diseno-web": "Diseño web", "ia": "Posicionamiento en IA",
-  "fotografia": "Fotografía local", "redes-sociales": "Redes sociales",
+  "google-maps": t("Google Maps y reseñas"), "diseno-web": t("Diseño web"), "ia": t("Posicionamiento en IA"),
+  "fotografia": t("Fotografía local"), "redes-sociales": t("Redes sociales"),
 };
 const PACKS = {
-  encuentren: { slug: "pack-encuentren", name: "Pack Que te encuentren", short: "Que te encuentren" },
-  escaparate: { slug: "pack-escaparate", name: "Pack Escaparate", short: "Escaparate" },
-  visible: { slug: "pack-visible", name: "Plan Siempre visible", short: "Siempre visible" },
+  encuentren: { slug: "pack-encuentren", name: t("Pack Que te encuentren"), short: t("Que te encuentren") },
+  escaparate: { slug: "pack-escaparate", name: t("Pack Escaparate"), short: t("Escaparate") },
+  visible: { slug: "pack-visible", name: t("Plan Siempre visible"), short: t("Siempre visible") },
 };
 
 /* Elige el pack según qué ha fallado (g(servicio) = puntos perdidos) */
 function recommend(g, score) {
   if (g("diseno-web") >= 2) {
     return { pack: PACKS.escaparate, why: g("fotografia") >= 1
-      ? "Tu web no está a la altura y te faltan fotos reales: el Escaparate te da web nueva, sesión de fotos y Google Maps en un solo paso."
-      : "Tu web es el punto débil, y es la fuente que leen Google y las IA. El Escaparate incluye web nueva, SEO local y Google Maps." };
+      ? t("Tu web no está a la altura y te faltan fotos reales: el Escaparate te da web nueva, sesión de fotos y Google Maps en un solo paso.")
+      : t("Tu web es el punto débil, y es la fuente que leen Google y las IA. El Escaparate incluye web nueva, SEO local y Google Maps.") };
   }
   if (score >= 75) {
-    return { pack: PACKS.visible, why: "Tienes buena base. Con el plan mensual mantienes la ficha activa, las reseñas al día y vigilas qué dicen las IA de ti." };
+    return { pack: PACKS.visible, why: t("Tienes buena base. Con el plan mensual mantienes la ficha activa, las reseñas al día y vigilas qué dicen las IA de ti.") };
   }
   if (g("google-maps") + g("ia") >= 3) {
-    return { pack: PACKS.encuentren, why: "Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Este pack ataca justo eso, rápido y por menos." };
+    return { pack: PACKS.encuentren, why: t("Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Este pack ataca justo eso, rápido y por menos.") };
   }
   return { pack: g("redes-sociales") + g("fotografia") >= 2 ? PACKS.visible : PACKS.encuentren,
-    why: "Te falta constancia más que una gran reforma: pequeñas mejoras cada mes para seguir subiendo en Google, Maps y las IA." };
+    why: t("Te falta constancia más que una gran reforma: pequeñas mejoras cada mes para seguir subiendo en Google, Maps y las IA.") };
 }
 
 const quiz = document.querySelector("[data-quiz]");
@@ -319,7 +327,7 @@ if (quiz) {
   const render = () => {
     const item = QUESTIONS[current];
     $("[data-quiz-bar]").style.width = `${(current / QUESTIONS.length) * 100}%`;
-    $("[data-quiz-count]").textContent = `Pregunta ${current + 1} de ${QUESTIONS.length}`;
+    $("[data-quiz-count]").textContent = t("Pregunta {n} de {total}", { n: current + 1, total: QUESTIONS.length });
     $("[data-quiz-area]").textContent = item.area;
     $("[data-quiz-q]").textContent = item.q;
     $("[data-quiz-hint]").textContent = item.hint;
@@ -353,16 +361,16 @@ if (quiz) {
     const score = Math.round((total / (QUESTIONS.length * 2)) * 100);
     let title, text, color;
     if (score < 40) {
-      title = "Eres casi invisible";
-      text = "Tus clientes potenciales no te están encontrando. La buena noticia: hay mucho margen y los primeros cambios se notan rápido.";
+      title = t("Eres casi invisible");
+      text = t("Tus clientes potenciales no te están encontrando. La buena noticia: hay mucho margen y los primeros cambios se notan rápido.");
       color = "var(--crimson)";
     } else if (score < 75) {
-      title = "Vas por buen camino";
-      text = "Tienes una base, pero hay huecos que están regalando clientes a tu competencia. Con unos ajustes puedes dar el salto.";
+      title = t("Vas por buen camino");
+      text = t("Tienes una base, pero hay huecos que están regalando clientes a tu competencia. Con unos ajustes puedes dar el salto.");
       color = "var(--orange)";
     } else {
-      title = "¡Eres bastante visible!";
-      text = "Lo estás haciendo bien. El siguiente paso es mantenerte arriba y asegurarte de que la IA te recomienda a ti.";
+      title = t("¡Eres bastante visible!");
+      text = t("Lo estás haciendo bien. El siguiente paso es mantenerte arriba y asegurarte de que la IA te recomienda a ti.");
       color = "var(--mustard)";
     }
 
@@ -399,7 +407,7 @@ if (quiz) {
       .sort((a, b) => a.pts - b.pts)
       .filter((x) => x.pts < 2)
       .slice(0, 3);
-    (weak.length ? weak : [{ q: { tip: "<strong>Revisa cada mes qué dicen las IA de ti</strong> y mantén tu ficha activa con novedades y fotos nuevas." } }])
+    (weak.length ? weak : [{ q: { tip: t("<strong>Revisa cada mes qué dicen las IA de ti</strong> y mantén tu ficha activa con novedades y fotos nuevas.") } }])
       .forEach(({ q }) => {
         const li = document.createElement("li");
         li.innerHTML = q.tip;
@@ -420,10 +428,10 @@ if (quiz) {
       requestAnimationFrame(step);
     }
 
-    quizSummary = `Resultado del test de visibilidad: ${score}/100 (${title}). Recomendación: ${reco.pack.name}.`;
+    quizSummary = t("Resultado del test de visibilidad: {score}/100 ({title}). Recomendación: {pack}.", { score, title, pack: reco.pack.name });
     const cta = $("[data-quiz-cta]");
     cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
-    cta.innerHTML = `Pedir propuesta<span class="cta-pack">: ${reco.pack.short}</span>`;
+    cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
 
     qWrap.hidden = true;
     resultWrap.classList.add("is-visible");
@@ -452,7 +460,7 @@ document.addEventListener("click", (e) => {
     if (cb.value === pack) cb.checked = true;
   });
   const msg = document.getElementById("f-msg");
-  if (msg && quizSummary && !msg.value.includes("test de visibilidad")) {
+  if (msg && quizSummary && !msg.value.includes(t("test de visibilidad"))) {
     msg.value = (msg.value ? msg.value + "\n\n" : "") + quizSummary;
   }
 });
@@ -464,7 +472,7 @@ const waItem = document.querySelector("[data-whatsapp]");
 if (SITE.whatsapp && waItem) {
   waItem.hidden = false;
   waItem.querySelector("[data-whatsapp-link]").href =
-    `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio.")}`;
+    `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(t("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio."))}`;
 }
 
 /* ------------------------------------------------------------------
@@ -522,7 +530,7 @@ function renderCartPill() {
     pill = document.createElement("a");
     pill.className = "cart-pill";
     pill.href = "contratar.html";
-    pill.title = "Ver mi propuesta";
+    pill.title = t("Ver mi propuesta");
     pill.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span class="cart-pill__count"></span>';
     actions.prepend(pill);
   }
@@ -531,7 +539,7 @@ function renderCartPill() {
     count.textContent = n;
     if (!isNew) pop(pill);
   }
-  pill.setAttribute("aria-label", `Mi propuesta: ${n} ${n === 1 ? "servicio elegido" : "servicios elegidos"}`);
+  pill.setAttribute("aria-label", t(n === 1 ? "Mi propuesta: {n} servicio elegido" : "Mi propuesta: {n} servicios elegidos", { n }));
 }
 
 // Botones "Añadir" de la portada
@@ -543,7 +551,7 @@ const syncAddButtons = () => {
     b.setAttribute("aria-pressed", String(on));
     b.querySelector("use")?.setAttribute("href", on ? "#i-check" : "#i-plus");
     const label = b.querySelector("[data-add-label]");
-    if (label) label.textContent = on ? (isPackBtn ? "En tu propuesta" : "Añadido") : (isPackBtn ? "Añadir a mi propuesta" : "Añadir");
+    if (label) label.textContent = t(on ? (isPackBtn ? "En tu propuesta" : "Añadido") : (isPackBtn ? "Añadir a mi propuesta" : "Añadir"));
   });
 };
 document.querySelectorAll("[data-add]").forEach((b) => {
@@ -558,6 +566,16 @@ syncAddButtons();
 renderCartPill();
 window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
+});
+
+/* Selector de idioma */
+document.querySelectorAll("[data-lang-switch]").forEach((box) => {
+  const btn = box.querySelector("button");
+  const menu = box.querySelector("ul");
+  const set = (open) => { menu.hidden = !open; btn.setAttribute("aria-expanded", String(open)); };
+  btn.addEventListener("click", () => set(menu.hidden));
+  document.addEventListener("click", (e) => { if (!box.contains(e.target)) set(false); });
+  box.addEventListener("keydown", (e) => { if (e.key === "Escape") { set(false); btn.focus(); } });
 });
 
 /* Packs y servicios: ventana con el detalle (también se abre con #detalle-… en la URL) */
@@ -638,10 +656,10 @@ if (hireForm) {
     const name = li.querySelector(".cart__name");
     name.textContent = input.value;
     const small = document.createElement("small");
-    small.textContent = input.dataset.price || "Precio a medida en tu propuesta";
+    small.textContent = input.dataset.price || t("Precio a medida en tu propuesta");
     name.append(small);
     const remove = li.querySelector(".cart__remove");
-    remove.setAttribute("aria-label", `Quitar ${input.value}`);
+    remove.setAttribute("aria-label", t("Quitar {name}", { name: input.value }));
     remove.addEventListener("click", () => { input.checked = false; update(); });
     return li;
   };
@@ -655,10 +673,10 @@ if (hireForm) {
     });
     if (!best) return null;
     const packInput = bySlug(best.pack);
-    const list = (arr) => arr.map((s) => bySlug(s).dataset.short).join(", ").replace(/, ([^,]*)$/, " y $1");
+    const list = (arr) => arr.map((s) => bySlug(s).dataset.short).join(", ").replace(/, ([^,]*)$/, `${t(" y ")}$1`);
     const rest = best.inc.filter((s) => !best.hits.includes(s));
     const tip = document.createElement("div");
-    tip.innerHTML = `<p><strong></strong> ya van incluidos en el <strong></strong> (${packInput.dataset.price})${rest.length ? ", junto con " + list(rest) : ""}. Suele salir más a cuenta.</p><button type="button" class="btn btn--crimson">Cambiar al pack</button>`;
+    tip.innerHTML = `<p>${t("<strong></strong> ya van incluidos en el <strong></strong> ({price}){rest}. Suele salir más a cuenta.", { price: packInput.dataset.price, rest: rest.length ? t(", junto con {list}", { list: list(rest) }) : "" })}</p><button type="button" class="btn btn--crimson">${t("Cambiar al pack")}</button>`;
     const [a, b] = tip.querySelectorAll("strong");
     a.textContent = list(best.hits);
     b.textContent = packInput.value;
@@ -678,7 +696,7 @@ if (hireForm) {
       if (inc) i.checked = false;
       i.disabled = inc;
       i.closest(".chip").classList.toggle("is-included", inc);
-      i.closest(".chip").title = inc ? `Ya va incluido en el ${pack.value}` : "";
+      i.closest(".chip").title = inc ? t("Ya va incluido en el {pack}", { pack: pack.value }) : "";
     });
     const slugs = selected();
 
@@ -712,13 +730,13 @@ if (hireForm) {
     // Título
     const names = slugs.map((s) => bySlug(s).dataset.short);
     if (!slugs.length) {
-      kicker.textContent = "Cuéntanos";
-      title.textContent = "Qué necesitas";
-      document.title = "Contratar un servicio · Agencia Singular";
+      kicker.textContent = t("Cuéntanos");
+      title.textContent = t("Qué necesitas");
+      document.title = t("Contratar un servicio · Agencia Singular");
     } else {
-      kicker.textContent = slugs.length === 1 ? "Contratar" : "Tu propuesta";
-      title.textContent = slugs.length === 1 ? bySlug(slugs[0]).value : slugs.length === 2 ? names.join(" + ") : `${names[0]} + ${slugs.length - 1} más`;
-      document.title = `Contratar ${slugs.map((s) => bySlug(s).value).join(" + ")} · Agencia Singular`;
+      kicker.textContent = t(slugs.length === 1 ? "Contratar" : "Tu propuesta");
+      title.textContent = slugs.length === 1 ? bySlug(slugs[0]).value : slugs.length === 2 ? names.join(" + ") : t("{first} + {n} más", { first: names[0], n: slugs.length - 1 });
+      document.title = t("Contratar {names} · Agencia Singular", { names: slugs.map((s) => bySlug(s).value).join(" + ") });
     }
     fitTitle();
 
@@ -768,7 +786,7 @@ if (hireForm) {
   const testScore = params.get("test");
   const msg = hireForm.querySelector('textarea[name="mensaje"]');
   if (testScore && /^\d{1,3}$/.test(testScore) && msg && !msg.value) {
-    msg.value = `Vengo del test de visibilidad: mi nota es ${testScore}/100.`;
+    msg.value = t("Vengo del test de visibilidad: mi nota es {score}/100.", { score: testScore });
   }
   update();
   // Tras enviar la solicitud, la propuesta se vacía
@@ -797,7 +815,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const choice = form.querySelector("[data-need-choice]");
     if (choice && !choice.querySelector("input:checked")) {
       choice.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-      setStatus("Elige al menos un pack o un servicio.", false);
+      setStatus(t("Elige al menos un pack o un servicio."), false);
       return;
     }
     const invalid = [...form.querySelectorAll("[required]")].find((el) => {
@@ -809,9 +827,9 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     if (invalid) {
       invalid.focus();
       setStatus(
-        invalid.type === "radio" ? "Elige el servicio que quieres contratar."
+        t(invalid.type === "radio" ? "Elige el servicio que quieres contratar."
         : invalid.type === "checkbox" ? "Necesitamos que aceptes la política de privacidad."
-        : "Revisa los campos marcados: nombre, negocio y un email válido.", false);
+        : "Revisa los campos marcados: nombre, negocio y un email válido."), false);
       return;
     }
 
@@ -834,11 +852,11 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
 
     const data = new FormData(form);
     const servicio = [...data.getAll("pack"), ...data.getAll("servicio")].join(" + ");
-    const subject = `${form.dataset.subject || "Contacto"}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
+    const subject = `${form.dataset.subject || "Contacto"}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
 
     if (!SITE.formEndpoint) {
       window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      setStatus("Abriendo tu correo con el mensaje listo para enviar…", true);
+      setStatus(t("Abriendo tu correo con el mensaje listo para enviar…"), true);
       return;
     }
 
@@ -874,9 +892,9 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         if (!res.ok) throw new Error(res.statusText);
       }
       form.reset();
-      setStatus("¡Recibido! Te escribimos en menos de 24 h laborables. ☕", true);
+      setStatus(t("¡Recibido! Te escribimos en menos de 24 h laborables. ☕"), true);
     } catch {
-      setStatus(`No hemos podido enviarlo. Escríbenos a ${SITE.email} y te respondemos enseguida.`, false);
+      setStatus(t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }), false);
     } finally {
       btn.disabled = false;
     }
