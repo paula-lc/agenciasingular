@@ -557,7 +557,7 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
-/* Packs: ventana con el detalle de cada pack (también se abre con #detalle-pack-… en la URL) */
+/* Packs y servicios: ventana con el detalle (también se abre con #detalle-… en la URL) */
 document.querySelectorAll("dialog.pmodal").forEach((dlg) => {
   const close = () => dlg.close();
   dlg.addEventListener("close", () => {
@@ -577,7 +577,7 @@ document.querySelectorAll("[data-pmodal]").forEach((btn) => {
   });
 });
 const openLinkedPack = () => {
-  const dlg = location.hash.startsWith("#detalle-pack-") && document.getElementById(location.hash.slice(1));
+  const dlg = location.hash.startsWith("#detalle-") && document.getElementById(location.hash.slice(1));
   if (dlg?.showModal && !dlg.open) dlg.showModal();
 };
 openLinkedPack();
