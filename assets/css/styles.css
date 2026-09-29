@@ -1073,3 +1073,70 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
   .contact:has(#hire-form) .service-info h4 { margin-top: 12px; }
 }
 
+
+/* ==========================================================================
+   Packs: "Ver detalles" y ventana con la información completa
+   ========================================================================== */
+.pack__more {
+  position: relative; z-index: 1; align-self: flex-start; margin-top: -4px; padding: 2px 0; background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: 13.5px; font-weight: 800; color: var(--crimson); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;
+}
+.pack__more span { display: inline-block; transition: transform .3s cubic-bezier(.34, 1.8, .5, 1); }
+.pack__more:hover span { transform: translateX(4px); }
+.pack--featured .pack__more { color: var(--yellow); }
+
+html:has(.pmodal[open]) { overflow: hidden; }
+.pmodal {
+  width: min(760px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); padding: 0; border: 3px solid var(--blue); border-radius: var(--radius-lg);
+  background: var(--cream-soft); color: var(--blue-ink); box-shadow: 10px 10px 0 var(--crimson); overflow: hidden;
+}
+.pmodal[open] { display: flex; animation: pmodal-in .45s cubic-bezier(.3, 1.35, .5, 1); }
+.pmodal::backdrop { background: rgba(31, 51, 73, .72); }
+.pmodal[open]::backdrop { animation: pmodal-fade .3s ease; }
+@keyframes pmodal-in { from { opacity: 0; transform: translateY(24px) scale(.96); } }
+@keyframes pmodal-fade { from { opacity: 0; } }
+.pmodal__inner { display: flex; flex-direction: column; width: 100%; max-height: calc(100dvh - 54px); }
+.pmodal__head { position: relative; padding: 26px 64px 22px 28px; background: var(--blue); color: var(--cream); border-bottom: 4px solid var(--yellow); }
+.pmodal__head h3 { font-size: clamp(24px, 4vw, 32px); text-transform: uppercase; color: var(--yellow); text-shadow: 3px 3px 0 var(--crimson); margin: 4px 0 12px; }
+.pmodal__close {
+  position: absolute; top: 14px; right: 14px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--cream); background: var(--blue);
+  color: var(--cream); font-size: 26px; line-height: 1; cursor: pointer; transition: transform .3s cubic-bezier(.34, 1.8, .5, 1), background-color .15s;
+}
+.pmodal__close:hover { background: var(--crimson); transform: rotate(90deg); }
+.pmodal__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; }
+.pmodal__price { font-family: var(--font-display); font-size: 28px; color: var(--cream); display: inline-flex; align-items: baseline; gap: 6px; }
+.pmodal__price small { font-family: var(--font-body); font-weight: 600; font-size: 13px; }
+.pmodal__time { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; font-size: 14px; }
+.pmodal__time .icon { color: var(--yellow); }
+.pmodal__body { overflow-y: auto; overscroll-behavior: contain; padding: 24px 28px 28px; display: grid; gap: 24px; font-size: 15px; line-height: 1.6; }
+.pmodal__h { font-family: var(--font-display); font-size: 15px; text-transform: uppercase; color: var(--crimson); margin-bottom: 10px; letter-spacing: .02em; }
+.pmodal__groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.pmodal__group { background: var(--white); border: 2px solid var(--blue); border-radius: var(--radius); padding: 14px 16px; }
+.pmodal__group h4 { font-family: var(--font-body); font-weight: 800; font-size: 14px; color: var(--blue); margin-bottom: 8px; }
+.pmodal ul { list-style: none; display: grid; gap: 7px; }
+.pmodal li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.45; font-size: 14px; }
+.pmodal li .icon { width: 16px; height: 16px; margin-top: 2px; color: var(--crimson); flex: none; }
+.pmodal__steps { list-style: none; counter-reset: paso; display: grid; gap: 0; border-left: 3px dashed var(--yellow); margin-left: 12px; }
+.pmodal__steps li { counter-increment: paso; position: relative; display: grid; grid-template-columns: 120px 1fr; gap: 4px 14px; padding: 6px 0 12px 26px; font-size: 14.5px; }
+.pmodal__steps li::before {
+  content: counter(paso); position: absolute; left: -14px; top: 4px; width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--blue); color: var(--yellow); font-family: var(--font-display); font-size: 12px;
+}
+.pmodal__when { font-weight: 800; color: var(--blue); }
+.pmodal__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.pmodal__expect { background: var(--yellow); color: var(--blue-deep); border-radius: var(--radius); padding: 16px 18px; box-shadow: 4px 4px 0 var(--blue); }
+.pmodal__expect .pmodal__h { color: var(--blue-deep); }
+.pmodal__not { font-size: 13.5px; opacity: .85; }
+.pmodal__foot { display: flex; align-items: center; gap: 12px; padding: 14px 28px; border-top: 3px solid var(--blue); background: var(--cream); }
+.pmodal__foot .btn { padding: 12px 22px; font-size: 13.5px; }
+@media (max-width: 640px) {
+  .pmodal { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; margin: 0; border-radius: 0; border: 0; box-shadow: none; }
+  .pmodal__inner { max-height: 100dvh; height: 100%; }
+  .pmodal__head { padding: 20px 60px 18px 20px; }
+  .pmodal__body { padding: 20px; flex: 1; }
+  .pmodal__groups, .pmodal__cols { grid-template-columns: minmax(0, 1fr); }
+  .pmodal__steps li { grid-template-columns: minmax(0, 1fr); }
+  .pmodal__foot { padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); }
+  .pmodal__foot .btn { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .pmodal[open], .pmodal[open]::backdrop { animation: none; } }

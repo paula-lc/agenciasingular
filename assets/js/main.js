@@ -557,6 +557,32 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
+/* Packs: ventana con el detalle de cada pack (también se abre con #detalle-pack-… en la URL) */
+document.querySelectorAll("dialog.pmodal").forEach((dlg) => {
+  const close = () => dlg.close();
+  dlg.addEventListener("close", () => {
+    if (location.hash === `#${dlg.id}`) history.replaceState(null, "", location.pathname + location.search);
+  });
+  dlg.querySelector("[data-pmodal-close]")?.addEventListener("click", close);
+  // Clic fuera de la ventana (en el fondo oscuro) = cerrar
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
+});
+document.querySelectorAll("[data-pmodal]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const dlg = document.getElementById(btn.dataset.pmodal);
+    if (!dlg) return;
+    dlg.showModal();
+    dlg.querySelector(".pmodal__body").scrollTop = 0;
+    history.replaceState(null, "", `#${dlg.id}`);
+  });
+});
+const openLinkedPack = () => {
+  const dlg = location.hash.startsWith("#detalle-pack-") && document.getElementById(location.hash.slice(1));
+  if (dlg?.showModal && !dlg.open) dlg.showModal();
+};
+openLinkedPack();
+window.addEventListener("hashchange", openLinkedPack);
+
 /* Página de contratación: packs y servicios elegidos, sus preguntas y el resumen */
 const hireForm = document.getElementById("hire-form");
 if (hireForm) {
