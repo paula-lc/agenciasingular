@@ -48,7 +48,7 @@ site.webmanifest · favicon.svg
 | **Dominio** (ahora `https://www.agenciasingular.es`) | `index.html`, la guía, las páginas legales, `sitemap.xml`, `robots.txt`, `llms.txt` |
 | **Email** (`hola@agenciasingular.es`) | `assets/js/main.js` (`SITE.email`), HTML, `llms.txt` |
 | **WhatsApp** (se oculta si está vacío) | `assets/js/main.js` → `SITE.whatsapp` |
-| **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Formspree, Web3Forms o Netlify Forms | `assets/js/main.js` → `SITE.formEndpoint` |
+| **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/js/main.js` → `SITE.formEndpoint` |
 | **Precios de los packs** (propuestos: 290 € / 1.290 € / 2.490 € / 149 €/mes) | `index.html` (tarjetas, FAQ y JSON-LD), `llms.txt` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
@@ -84,3 +84,20 @@ del visitante y aparece un contador en el menú que lleva a `contratar.html`. Al
 (solo uno) con los servicios a la carta que quieran: los que ya incluye el pack salen como "incluido", las
 preguntas comunes no se repiten y, si varios servicios sueltos forman un pack, se sugiere cambiar al pack.
 Qué incluye cada pack está en `assets/js/main.js` → `PACK_INCLUDES`.
+
+## Recibir los formularios por email (informe en PDF + hoja de cálculo)
+
+Con `scripts/formularios-google-apps-script.gs` cada solicitud llega a `hola@agenciasingular.es` como un
+informe (en el cuerpo del email y en PDF adjunto) y se guarda como una fila en una hoja de Google
+(Archivo → Descargar → Microsoft Excel para tenerla en Excel). Es gratis (hasta 100 emails al día).
+
+1. En Google Drive, crea una hoja de cálculo nueva, por ejemplo "Solicitudes web".
+2. En la hoja: **Extensiones → Apps Script**. Borra lo que haya y pega el contenido de
+   `scripts/formularios-google-apps-script.gs`. Guarda.
+3. **Implementar → Nueva implementación** → tipo **Aplicación web**. Ejecutar como: **Yo**.
+   Quién tiene acceso: **Cualquier usuario**. Pulsa Implementar y acepta los permisos
+   (Google avisará de que la app no está verificada: *Configuración avanzada → Ir a…*).
+4. Copia la URL que termina en `/exec` y ponla en `assets/js/main.js` → `SITE.formEndpoint`.
+
+Si cambias el script, vuelve a implementarlo (Gestionar implementaciones → editar → Nueva versión)
+para que la URL siga siendo la misma.

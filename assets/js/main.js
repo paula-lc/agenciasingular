@@ -7,7 +7,8 @@ const SITE = {
   email: "hola@agenciasingular.es",
   // Número con prefijo de país y sin espacios, p. ej. "34600111222". Vacío = se oculta.
   whatsapp: "",
-  // Endpoint de un servicio de formularios (Formspree, Getform, Web3Forms…).
+  // Dirección que recibe los formularios: la URL de la aplicación web de Google Apps Script
+  // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
   formEndpoint: "",
 };
@@ -785,16 +786,22 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       return;
     }
 
-    // Texto legible con todas las respuestas, agrupadas por pregunta
-    const answers = new Map();
+    // Respuestas agrupadas por sección (qué contrata, cada servicio, datos de contacto) y por pregunta
+    const sections = new Map();
     form.querySelectorAll("input, select, textarea").forEach((el) => {
       if (!el.name || el.disabled || ["web_hp", "privacidad"].includes(el.name)) return;
       if ((el.type === "checkbox" || el.type === "radio") && !el.checked) return;
       if (!el.value.trim()) return;
+      const block = el.closest("[data-fields]");
+      const title = block ? block.querySelector("legend").textContent.trim()
+        : el.closest("[data-need-choice]") ? "Qué quiere contratar" : "Datos de contacto";
+      if (!sections.has(title)) sections.set(title, new Map());
+      const rows = sections.get(title);
       const key = fieldLabel(el);
-      answers.set(key, [...(answers.get(key) || []), el.value.trim()]);
+      rows.set(key, [...(rows.get(key) || []), el.value.trim()]);
     });
-    const body = [...answers].map(([k, v]) => `${k}: ${v.join(", ")}`).join("\n");
+    const report = [...sections].map(([titulo, rows]) => ({ titulo, filas: [...rows].map(([k, v]) => [k, v.join(", ")]) }));
+    const body = report.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n");
 
     const data = new FormData(form);
     const servicio = [...data.getAll("pack"), ...data.getAll("servicio")].join(" + ");
@@ -809,11 +816,34 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     try {
-      data.delete("web_hp");
-      data.set("_subject", subject);
-      data.set("resumen", body);
-      const res = await fetch(SITE.formEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
-      if (!res.ok) throw new Error(res.statusText);
+      if (SITE.formEndpoint.includes("script.google.com")) {
+        // Google Apps Script (scripts/formularios-google-apps-script.gs): guarda la solicitud en la hoja
+        // y envía el informe en PDF. No devuelve cabeceras CORS, así que se envía sin leer la respuesta.
+        const get = (n) => (data.get(n) || "").toString();
+        // En el informe no se repite lo que ya va en el resumen (servicios y datos de contacto)
+        const summary = ["Qué quiere contratar"];
+        const contactKeys = ["nombre", "negocio", "email", "telefono", "sector", "ciudad", "interes"].map((n) => {
+          const el = form.querySelector(`[name="${n}"]`);
+          return el ? fieldLabel(el) : n;
+        });
+        const detail = report
+          .filter((s) => !summary.includes(s.titulo))
+          .map((s) => (s.titulo === "Datos de contacto"
+            ? { titulo: "Más información", filas: s.filas.filter(([k]) => !contactKeys.includes(k)) } : s))
+          .filter((s) => s.filas.length);
+        const payload = new URLSearchParams({
+          formulario: form.dataset.subject || "Contacto", asunto: subject, servicios: servicio || data.getAll("interes").join(", "),
+          nombre: get("nombre"), negocio: get("negocio"), email: get("email"), telefono: get("telefono"),
+          sector: get("sector"), ciudad: get("ciudad"), pagina: location.href, secciones: JSON.stringify(detail),
+        });
+        await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
+      } else {
+        data.delete("web_hp");
+        data.set("_subject", subject);
+        data.set("resumen", body);
+        const res = await fetch(SITE.formEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
+        if (!res.ok) throw new Error(res.statusText);
+      }
       form.reset();
       setStatus("¡Recibido! Te escribimos en menos de 24 h laborables. ☕", true);
     } catch {
