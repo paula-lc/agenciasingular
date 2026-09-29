@@ -10,7 +10,7 @@ const SITE = {
   // Dirección que recibe los formularios: la URL de la aplicación web de Google Apps Script
   // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
-  formEndpoint: "",
+  formEndpoint: "https://script.google.com/macros/s/AKfycbyK_Dqwi7gZ_pNRRHdVpg8wU9NDWJo0u3jWUuWLwA2bBgMqSTlYpmZll9o6SfKQrvYo/exec",
 };
 
 document.documentElement.classList.remove("no-js");
