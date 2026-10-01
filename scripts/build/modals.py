@@ -110,7 +110,7 @@ s=open(ROOT+'index.html').read()
 # limpiar una ejecución anterior
 s=re.sub(r'\n\s*<button type="button" class="(?:pack__more|service__more|trastienda__more)"[^\n]*?</button>','',s)
 s=re.sub(r'<button type="button" class="(?:add-btn )?service__more"[^>]*>.*?</button>','',s)
-s=re.sub(r'\n          <dialog class="pmodal".*?</dialog>','',s,flags=re.S)
+s=re.sub(r'\s*<dialog class="pmodal".*?</dialog>','',s,flags=re.S)
 # Packs: botón y ventanas
 for p in PACKS:
     pat=re.compile(r'(</ul>\n)(\s*)(<a class="btn btn--(?:ghost|yellow)" href="contratar\.html\?servicio='+p['slug']+'">)')
