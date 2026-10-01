@@ -568,6 +568,16 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
+/* Botones de diagnóstico: saltan directamente al formulario, sin el desplazamiento largo */
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href="#contacto"], a[href="./#contacto"]');
+  const target = document.getElementById("contacto");
+  if (!a || !target || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: "instant", block: "start" });
+  history.pushState(null, "", "#contacto");
+});
+
 /* Selector de idioma */
 document.querySelectorAll("[data-lang-switch]").forEach((box) => {
   const btn = box.querySelector("button");
