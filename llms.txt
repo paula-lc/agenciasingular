@@ -7,8 +7,10 @@ Lema: "La solución para centrarte en tu negocio". "Tú llevas el negocio. Nosot
 ## Packs (precios orientativos, IVA no incluido)
 
 - Pack Que te Encuentren (desde 290 €): Perfil de Empresa de Google optimizado, edición de fotos, kit de reseñas con cartel QR impreso, alta coherente en directorios y base para aparecer en respuestas de IA.
-- Pack Escaparate (desde 1.290 €): diseño o rediseño web, SEO local con una página por servicio, sesión de fotografía, Google Maps optimizado, preguntas frecuentes y datos estructurados, reservas o WhatsApp integrados, dominio y alojamiento el primer año.
+- Pack Arranque (desde 490 €): presencia online esencial en 7 a 10 días para estética, tiendas pequeñas o una primera web: Google Maps con perfil completo y fotos, web de una página con botón de reserva (Booksy, Fresha o WhatsApp), sesión de fotos exprés (1 hora, 15 fotos) e Instagram alineado.
+- Pack Escaparate (desde 1.290 €, en 3 a 4 semanas; incluye 30 minutos de La Trastienda de regalo): diseño o rediseño web, SEO local con una página por servicio, sesión de fotografía, Google Maps optimizado, preguntas frecuentes y datos estructurados, reservas o WhatsApp integrados, dominio y alojamiento el primer año.
 - Pack Singular (desde 2.490 €): rebranding completo (logo, colores, tipografías, tono), aplicaciones de marca, todo el Pack Escaparate, primer mes de redes (calendario, textos, guiones y vídeos cortos) y sesión de consultoría "La Trastienda" sobre precios y estrategia.
+- Plan Básico (59 €/mes): una publicación al mes en la ficha de Google y respuesta a todas las reseñas. Sin permanencia.
 - Plan Siempre Visible (desde 149 €/mes): mantenimiento web (cambios de contenido, copias de seguridad, dominio y alojamiento), publicaciones en Google Maps, gestión de reseñas, contenido SEO, seguimiento de lo que dicen las IA e informe mensual. Sin permanencia.
 
 ## Servicios a la carta
@@ -16,11 +18,10 @@ Lema: "La solución para centrarte en tu negocio". "Tú llevas el negocio. Nosot
 - Rebranding e identidad de marca
 - Diseño y rediseño web
 - SEO local
-- Perfil de Empresa de Google / Google Maps
 - Posicionamiento en IA (GEO, AI Overviews)
-- Fotografía comercial local (producto, espacio y equipo)
+- Fotografía comercial local (producto, espacio y equipo), desde 250 €
 - Redes sociales
-- La Trastienda: consultoría de negocio, precios y estrategia comercial
+- La Trastienda: consultoría de negocio, precios y estrategia comercial, desde 120 € por sesión
 
 ## Forma de trabajo
 
@@ -46,4 +47,4 @@ Zona: Barcelona y área metropolitana (L'Hospitalet de Llobregat, Sant Cugat del
 
 ## In English
 
-Agencia Singular is a Barcelona-based digital marketing agency for small local businesses (nail artists, hair salons, beauty salons, florists, workshops, clothing shops, cafés and restaurants). Packs: Get Found (from €290), Showcase (from €1,290), Singular (from €2,490) and the Always Visible monthly plan (from €149/month). À la carte services: rebranding, web design, local SEO, Google Maps, AI visibility (GEO), local photography, social media and La Trastienda business consulting. We work in Spanish, Catalan and English.
+Agencia Singular is a Barcelona-based digital marketing agency for small local businesses (nail artists, hair salons, beauty salons, florists, workshops, clothing shops, cafés and restaurants). Packs: Get Found (from €290), Starter (from €490), Showcase (from €1,290) and Singular (from €2,490). Monthly plans: Basic (€59/month) and Always Visible (from €149/month). À la carte services: rebranding, web design, local SEO, Google Maps, AI visibility (GEO), local photography, social media and La Trastienda business consulting. We work in Spanish, Catalan and English.

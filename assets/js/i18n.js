@@ -112,7 +112,10 @@ window.I18N = {
   "Revisa los campos marcados: nombre, negocio y un email válido.": "Revisa els camps marcats: nom, negoci i un correu electrònic vàlid.",
   "Abriendo tu correo con el mensaje listo para enviar…": "S'està obrint el teu correu amb el missatge a punt per enviar…",
   "¡Recibido! Te escribimos en menos de 24 h laborables. ☕": "Rebut! T'escrivim en menys de 24 h laborables. ☕",
-  "No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.": "No l'hem pogut enviar. Escriu-nos a {email} i et responem de seguida."
+  "No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.": "No l'hem pogut enviar. Escriu-nos a {email} i et responem de seguida.",
+  "Pack Arranque": "Pack Arrencada",
+  "Arranque": "Arrencada",
+  "Partes casi de cero: el Arranque te da en 7 a 10 días lo esencial (web con reservas, Google Maps, fotos e Instagram) por un precio de entrada.": "Comences gairebé de zero: l'Arrencada et dona en 7 a 10 dies l'essencial (web amb reserves, Google Maps, fotos i Instagram) per un preu d'entrada."
  },
  "en": {
   "Cerrar menú": "Close menu",
@@ -226,6 +229,9 @@ window.I18N = {
   "Revisa los campos marcados: nombre, negocio y un email válido.": "Please check the highlighted fields: name, business and a valid email.",
   "Abriendo tu correo con el mensaje listo para enviar…": "Opening your email with the message ready to send…",
   "¡Recibido! Te escribimos en menos de 24 h laborables. ☕": "Received! We'll write back within 24 working hours. ☕",
-  "No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.": "We couldn't send it. Write to us at {email} and we'll reply right away."
+  "No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.": "We couldn't send it. Write to us at {email} and we'll reply right away.",
+  "Pack Arranque": "Starter pack",
+  "Arranque": "Starter",
+  "Partes casi de cero: el Arranque te da en 7 a 10 días lo esencial (web con reservas, Google Maps, fotos e Instagram) por un precio de entrada.": "You're starting almost from scratch: the Starter pack gives you the essentials in 7 to 10 days (a website with bookings, Google Maps, photos and Instagram) at an entry-level price."
  }
 };

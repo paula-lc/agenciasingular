@@ -13,8 +13,21 @@ PACKS=[
   necesitamos=['Acceso a tu ficha de Google (o te ayudamos a recuperarlo)','Tus servicios, precios orientativos y horarios','Unas 10 fotos reales hechas con el móvil (te decimos cuáles y nosotros las editamos)'],
   llevas=['Ficha completa y optimizada, a tu nombre','Tus fotos editadas, listas para Maps, web y redes','Cartel impreso con QR y mensajes para conseguir reseñas','Informe antes/después y guía de mantenimiento'],
   esperar='Una ficha que convence y aparece en más búsquedas de tu zona. Las visitas y llamadas desde Maps suelen notarse en las semanas siguientes; las reseñas dependen de que las pidas, y para eso te damos todo hecho.',
-  noincluye='Web ni sesión de fotos profesional (están en el Pack Escaparate). La gestión mensual de la ficha es el Plan Siempre visible.'),
- dict(slug='pack-escaparate', kicker='Web + Google', name='Escaparate', price='1.290 €', unit='', plazo='4 a 6 semanas', icon='i-monitor', btn='btn--yellow',
+  noincluye='Web ni sesión de fotos (las tienes en versión esencial en el Pack Arranque y completas en el Escaparate). La gestión mensual de la ficha es el Plan Básico o el Siempre visible.'),
+ dict(slug='pack-arranque', kicker='Tu primera web', name='Arranque', price='490 €', unit='', plazo='7 a 10 días', icon='i-store', btn='btn--crimson',
+  para='Necesitas una presencia online cuidada pero sencilla: un estudio de uñas o de estética, una tienda pequeña o tu primera web. Lo esencial bien hecho, rápido y sin complicarte.',
+  incluye=[
+   ('Google Maps esencial', ['Perfil de Empresa completo: categorías, servicios, horarios y descripción','Tus mejores fotos de la sesión, subidas y ordenadas']),
+   ('Web de una página', ['Diseñada a partir de nuestra plantilla, adaptada a tu marca y pensada para el móvil','Tus servicios, precios orientativos, horario, mapa y contacto','Botón de reserva conectado a Booksy, Fresha o WhatsApp','Dominio y alojamiento el primer año, a tu nombre']),
+   ('Sesión de fotos exprés', ['1 hora en tu local','15 fotos editadas para Maps, web e Instagram']),
+   ('Instagram alineado', ['Biografía clara con lo que haces y dónde','Portadas de destacadas con tu marca','Enlace a tu web o a tu sistema de reservas']),
+  ],
+  pasos=[('Día 1','Llamada de 30 minutos y elección de tu plantilla.'),('Días 2-4','Sesión de fotos exprés y textos.'),('Días 5-8','Web, ficha de Google e Instagram listos para revisar.'),('Días 9-10','Ajustes contigo (una ronda de cambios) y publicación.')],
+  necesitamos=['Tu logo y colores (si no tienes, elegimos una tipografía y un color que te representen)','Tus servicios, precios y horario','Acceso a tu ficha de Google, a tu Instagram y a tu sistema de reservas','Una hora en tu local para las fotos'],
+  llevas=['Web de una página publicada, a tu nombre','Ficha de Google completa y con fotos','15 fotos profesionales tuyas para siempre','Instagram coherente con tu web'],
+  esperar='Una presencia online profesional en menos de dos semanas, con todo listo para recibir reservas. Cuando quieras crecer, el siguiente paso natural es el Plan Básico cada mes o el Pack Escaparate.',
+  noincluye='El kit de reseñas con cartel impreso y el alta en directorios (están en el Pack Que te encuentren), páginas por servicio ni SEO local a fondo (Pack Escaparate), ni la gestión mensual (Plan Básico o Siempre visible).'),
+ dict(slug='pack-escaparate', kicker='Web + Google', name='Escaparate', price='1.290 €', unit='', plazo='3 a 4 semanas', icon='i-monitor', btn='btn--yellow',
   para='Tu web no existe, está anticuada o no te trae clientes. Quieres una casa digital a la altura de tu negocio, que funcione en el móvil y que Google y las IA entiendan.',
   incluye=[
    ('Web nueva o rediseñada', ['Diseño a medida con tu marca, pensado primero para el móvil','Rápida, segura y fácil de actualizar por ti','Hasta 6 páginas: inicio, servicios, sobre ti, contacto…','Reservas, WhatsApp, pedidos o carta integrados según tu negocio','Textos escritos contigo, claros y sin relleno']),
@@ -22,10 +35,11 @@ PACKS=[
    ('Fotografía', ['Sesión de fotos en tu local: espacio, equipo y tus productos o trabajos estrella','Fotos editadas y optimizadas para web, Maps y redes']),
    ('Todo el Pack Que te encuentren', ['Perfil de Empresa de Google optimizado de arriba abajo: categorías, servicios, horarios y descripción','Tus fotos en la ficha, ordenadas y etiquetadas','Kit de reseñas: QR, cartel impreso y mensajes para pedirlas y responderlas','Alta coherente en Apple Maps, Bing y directorios clave']),
    ('Dominio, alojamiento e IA', ['Dominio (tunegocio.es) y alojamiento incluidos durante el primer año, a tu nombre','Preguntas frecuentes y datos estructurados para que las IA te entiendan']),
+   ('De regalo', ['30 minutos de La Trastienda: repasamos tus precios y qué servicios destacar en la web']),
   ],
-  pasos=[('Semana 1','Llamada de arranque, estructura de la web y búsquedas clave.'),('Semanas 2-3','Sesión de fotos, textos y diseño. Te enseñamos una primera versión.'),('Semanas 4-5','Ajustes contigo (dos rondas de cambios), SEO local y Google Maps.'),('Semana 6','Publicación, pruebas y una sesión para que sepas actualizarla.')],
+  pasos=[('Semana 1','Llamada de arranque, 30 minutos de La Trastienda, estructura de la web y búsquedas clave.'),('Semana 2','Sesión de fotos, textos y diseño. Te enseñamos una primera versión.'),('Semana 3','Ajustes contigo (dos rondas de cambios), SEO local y Google Maps.'),('Semana 4','Publicación, pruebas y una sesión para que sepas actualizarla.')],
   necesitamos=['Tu logo y colores (si no tienes, mira el Pack Singular)','Una mañana o tarde para la sesión de fotos','Tus servicios, precios y lo que te hace diferente','Si ya tienes dominio, el acceso; si no, lo registramos a tu nombre'],
-  llevas=['Web publicada con dominio y alojamiento el primer año, a tu nombre y sin permanencia','Fotos profesionales para usar donde quieras','Ficha de Google optimizada y kit de reseñas','Guía sencilla para que puedas actualizarla'],
+  llevas=['Web publicada, a tu nombre y sin permanencia','Fotos profesionales para usar donde quieras','Ficha de Google optimizada y kit de reseñas','Guía sencilla para que puedas actualizarla'],
   esperar='Una web que da confianza, se ve bien en el móvil y convierte visitas en llamadas, reservas o mensajes. El SEO empieza a dar frutos en semanas y crece con los meses; no prometemos el número 1 en Google, sino hacerlo bien para tener opciones reales.',
   noincluye='A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre), que va incluida si contratas el Plan Siempre visible. Una tienda online con muchos productos se presupuesta aparte. El mantenimiento de la web y la gestión mensual de tu ficha y tus reseñas son el Plan Siempre visible.'),
  dict(slug='pack-singular', kicker='Cambio de imagen total', name='Singular', price='2.490 €', unit='', plazo='6 a 10 semanas', icon='i-palette', btn='btn--crimson',
@@ -42,6 +56,17 @@ PACKS=[
   llevas=['Marca completa con manual y todos los archivos','Diseños de rótulo, tarjetas o carta listos para imprenta','Web, fotos y ficha de Google con la nueva imagen','Primer mes de redes listo para publicar, con vídeos','Plan de acción de precios y estrategia'],
   esperar='Una imagen que se recuerda y que justifica lo que cobras, aplicada igual en todos sitios. Es el pack con más impacto, y el que más tiempo pide: cuanto antes empecemos respecto a tu fecha clave, mejor.',
   noincluye='El coste de impresión y producción (rótulo, tarjetas…), que se paga a la imprenta; si quieres, lo gestionamos nosotros y lo incluimos en el presupuesto. Tampoco la publicación y gestión de redes a partir del segundo mes (servicio de Redes Sociales a la carta), ni el mantenimiento mensual de web y Google (Plan Siempre visible).'),
+ dict(slug='plan-basico', kicker='Cada mes', name='Básico', price='59 €', unit='/mes', plazo='Mes a mes, sin permanencia', icon='i-pin', btn='btn--crimson',
+  para='Tienes un negocio pequeño, ya tienes ficha en Google (por ejemplo, después del Pack Arranque) y quieres que no se quede parada, sin pagar un mantenimiento completo.',
+  incluye=[
+   ('Google Maps activo', ['Una publicación al mes en tu ficha: novedades, ofertas o temporada','Respuesta a todas tus reseñas, en tu tono']),
+   ('Sin ataduras', ['Sin permanencia: te das de baja cuando quieras','Pasas al Plan Siempre visible cuando lo necesites']),
+  ],
+  pasos=[('Mes 1','Revisamos tu ficha y acordamos el tono de las respuestas.'),('Cada mes','Una publicación y respuesta a las reseñas nuevas.')],
+  necesitamos=['Acceso a tu ficha de Google','Un aviso cuando tengas novedades u ofertas','Alguna foto nueva de vez en cuando'],
+  llevas=['Tu ficha de Google activa cada mes','Todas tus reseñas respondidas'],
+  esperar='Una ficha que se ve viva y cuidada: Google valora la actividad reciente y tus clientes ven que respondes. Es el mínimo para no perder lo conseguido.',
+  noincluye='Mantenimiento web, revisión de lo que dicen las IA ni informe mensual (están en el Plan Siempre visible).'),
  dict(slug='pack-visible', kicker='Cada mes', name='Siempre visible', price='149 €', unit='/mes', plazo='Mes a mes, sin permanencia', icon='i-chart', btn='btn--crimson',
   para='Ya tienes la base (ficha de Google y, a ser posible, web) y quieres que alguien la cuide y la haga crecer: sin acordarte de actualizar la web, publicar, responder reseñas ni revisar qué dicen de ti.',
   incluye=[
@@ -55,14 +80,14 @@ PACKS=[
   necesitamos=['Acceso a tu ficha de Google y a tu web (si la hicimos nosotros, ya lo tenemos)','Un aviso cuando haya novedades (ofertas, cierres, productos nuevos)','Fotos nuevas de vez en cuando (te decimos cuáles)'],
   llevas=['Tu web siempre al día y funcionando','Tu presencia en Google y la IA cuidada cada mes','Informe mensual y cero permanencia: te quedas cuando te funciona'],
   esperar='Crecimiento constante: más reseñas, más visibilidad y más llamadas mes a mes. Funciona mejor con la base bien hecha; si aún no la tienes, empieza por el Pack Que te encuentren o Escaparate.',
-  noincluye='Gestión completa de redes sociales (se puede añadir como servicio a la carta).'),
+  noincluye='Gestión completa de redes sociales (se puede añadir como servicio a la carta). Si solo necesitas una publicación al mes y respuesta a reseñas, mira el Plan Básico.'),
 ]
 
 import sys
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
 from services_data import SERVICES
 for p in PACKS:
-    p['title'] = ('Plan ' if p['slug']=='pack-visible' else 'Pack ') + p['name']
+    p['title'] = ('Plan ' if p['slug'] in ('pack-visible','plan-basico') else 'Pack ') + p['name']
 
 def esc(s): return s.replace('&','&amp;').replace('<','&lt;')
 check='<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>'
@@ -76,6 +101,9 @@ def modal(p, is_pack):
         unit=f'<small>{p["unit"]}</small>' if p['unit'] else ''
         price=f'<span class="pmodal__price"><small>desde</small>{p["price"]}{unit}</span>'
         btn=p['btn']
+    elif p.get('price'):
+        price=f'<span class="pmodal__price"><small>desde</small>{p["price"]}<small>{p.get("unit","")}</small></span>'
+        btn='btn--crimson'
     else:
         price='<span class="pmodal__price pmodal__price--quote">Presupuesto a medida en 48 h</span>'
         btn='btn--crimson'
@@ -123,6 +151,11 @@ for sv in SERVICES:
     pat=re.compile(r'(<article class="service reveal" data-slug="'+sv['slug']+r'">.*?<span class="service__actions">)', re.S)
     s,n=pat.subn(lambda m: m.group(1)+f'<button type="button" class="add-btn service__more" data-pmodal="detalle-{sv["slug"]}" aria-label="Ver detalles de {sv["title"]}">Detalles</button>', s)
     assert n==1, sv['slug']
+# Tarjetas que llevan a un pack (Google Maps → Pack Que te encuentren)
+for card, pk in (('google-maps','pack-encuentren'),):
+    pat=re.compile(r'(<article class="service reveal" data-slug="'+card+r'">.*?<span class="service__actions">)', re.S)
+    s,n=pat.subn(lambda m: m.group(1)+f'<button type="button" class="add-btn service__more" data-pmodal="detalle-{pk}" aria-label="Ver detalles del Pack Que te encuentren">Detalles</button>', s)
+    assert n==1, card
 # Ventanas de los servicios, justo después de la cuadrícula de servicios
 grid=s.index('<div class="services">')
 grid_end=s.index('          </div>\n', grid)+len('          </div>\n')

@@ -1192,3 +1192,18 @@ html:has(.pmodal[open]) { overflow: hidden; }
 :lang(ca) .chips__group[data-group-toggle="packs"][aria-expanded="false"]::after { content: "veure packs"; }
 :lang(en) .chips__group[data-group-toggle="carta"][aria-expanded="false"]::after { content: "+ add extras"; }
 :lang(en) .chips__group[data-group-toggle="packs"][aria-expanded="false"]::after { content: "see packs"; }
+
+/* Precio orientativo en las tarjetas de servicio */
+.service__price { margin-top: -8px; font-size: 14px; font-weight: 600; color: var(--blue); }
+.service__price strong { font-family: var(--font-display); font-weight: 400; font-size: 20px; color: var(--crimson); }
+
+/* Planes mensuales: fila aparte bajo los packs */
+.plans-head { margin: 48px 0 20px; }
+.plans-title { font-size: clamp(20px, 2.4vw, 26px); text-transform: uppercase; color: var(--blue); }
+.plans-head p { margin-top: 6px; font-size: 15px; }
+.packs--plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .packs--plans .pack ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; } }
+@media (max-width: 640px) { .packs--plans { grid-template-columns: minmax(0, 1fr); } }
+.chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "ver planes"; margin-left: 4px; padding: 3px 9px; border-radius: 999px; border: 1.5px solid currentColor; font-size: 10.5px; letter-spacing: .06em; }
+:lang(ca) .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "veure plans"; }
+:lang(en) .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "see plans"; }

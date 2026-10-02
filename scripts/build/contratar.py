@@ -30,10 +30,18 @@ P=[
   fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
           select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50']),
           text('direccion','Dirección del local','Calle, número y ciudad')]),
+ dict(slug='pack-arranque',name='Pack Arranque',short='Arranque',icon='i-store',price='desde 490 €',
+  intro='Lo esencial bien hecho en 7 a 10 días: Google Maps, web de una página con reservas, fotos exprés e Instagram alineado.',
+  inc=['Google Maps esencial: perfil completo y fotos','Web de una página con botón de reserva (Booksy, Fresha o WhatsApp)','Sesión de fotos exprés (1 hora, 15 fotos) e Instagram alineado'],
+  plazo='7 a 10 días',
+  fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
+          chips('reservas','¿Cómo te reservan ahora?',['Booksy','Fresha','Treatwell','WhatsApp','Teléfono','Nada todavía'],'radio'),
+          text('instagram','Tu usuario de Instagram','@tunegocio'),
+          text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
  dict(slug='pack-escaparate',name='Pack Escaparate',short='Escaparate',icon='i-monitor',price='desde 1.290 €',
   intro='Web nueva o rediseñada, SEO local, sesión de fotos y Google Maps: tu casa digital a la altura de tu negocio.',
-  inc=['Diseño o rediseño web rápida y fácil de actualizar, con dominio y alojamiento el primer año','SEO local con una página por servicio clave','Sesión de fotografía y todo el Pack Que te encuentren'],
-  plazo='4 a 6 semanas',
+  inc=['Diseño o rediseño web rápida y fácil de actualizar, con dominio y alojamiento el primer año','SEO local, sesión de fotografía y todo el Pack Que te encuentren','De regalo: 30 minutos de La Trastienda'],
+  plazo='3 a 4 semanas',
   fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
           text('url','Dirección de tu web actual','https://…'),
           chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú']),
@@ -46,6 +54,12 @@ P=[
           chips('logo_actual','¿Tienes logo ahora?',['Sí, y quiero renovarlo','Sí, pero no me representa','No tengo'],'radio'),
           chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, y me sirve'],'radio'),
           text('fecha','¿Tienes una fecha clave?','Ej.: reapertura en marzo')]),
+ dict(slug='plan-basico',name='Plan Básico',short='Básico',icon='i-pin',price='desde 59 €/mes',
+  intro='Lo justo para que tu ficha de Google no se quede parada, sin pagar un mantenimiento completo.',
+  inc=['Una publicación al mes en tu ficha de Google','Respuesta a todas tus reseñas','Sin permanencia'],
+  plazo='Mes a mes, sin permanencia',
+  fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
+          select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50'])]),
  dict(slug='pack-visible',name='Plan Siempre visible',short='Siempre visible',icon='i-chart',price='desde 149 €/mes',
   intro='Mantenimiento mensual de tu web y tu presencia en Google, Maps y las IA, para seguir subiendo sin tener que pensar en ello.',
   inc=['Mantenimiento web: cambios, copias de seguridad, dominio y alojamiento','Publicaciones en Google Maps y gestión de reseñas','Contenido SEO, ajustes para IA e informe mensual, sin permanencia'],
@@ -79,13 +93,6 @@ S=[
   fields=[text('url','Dirección de tu web','https://…'),
           text('busquedas','¿Por qué búsquedas te gustaría aparecer?','Ej.: manicura semipermanente en Sant Antoni'),
           text('competencia','¿Qué negocios de tu zona salen ahora por delante?','Nombres o webs')]),
- dict(slug='google-maps',name='Google Maps',icon='i-pin',
-  intro='Tu Perfil de Empresa de Google completo, cuidado y con una estrategia de reseñas que trabaja por ti.',
-  inc=['Revisión y optimización completa de tu ficha','Kit de reseñas: QR, mensajes y respuestas','Alta coherente en Apple Maps, Bing y directorios'],
-  plazo='1 a 2 semanas',
-  fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
-          select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50']),
-          text('direccion','Dirección del local','Calle, número y ciudad')]),
  dict(slug='ia',name='Posicionamiento en IA',icon='i-sparkles',
   intro='Preparamos tu información para que Gemini, ChatGPT y la IA de Google te entiendan, se fíen de ti y te recomienden.',
   inc=['Auditoría de lo que dicen hoy las IA de tu negocio','Datos coherentes en web, Maps y directorios','Contenido y datos estructurados que las IA pueden citar'],
@@ -93,7 +100,7 @@ S=[
   fields=[chips('prueba','Si preguntas a una IA por tu servicio en tu zona…',['Me recomienda','Recomienda a mi competencia','No lo he probado'],'radio'),
           text('pregunta','¿Qué pregunta te gustaría que te trajera clientes?','Ej.: ¿dónde compro un ramo bonito en Gràcia?'),
           text('url','Dirección de tu web','https://…')]),
- dict(slug='fotografia',name='Fotografía Local',icon='i-aperture',
+ dict(slug='fotografia',name='Fotografía Local',icon='i-aperture',price='desde 250 €',
   intro='Fotos reales y profesionales de tu negocio, tu equipo y tus productos estrella. Nada de bancos de imágenes.',
   inc=['Sesión en tu local con dirección de arte','Fotos editadas para web, Google Maps y redes','Derechos de uso para siempre'],
   plazo='Entrega en 1 a 2 semanas',
@@ -107,7 +114,7 @@ S=[
   fields=[chips('redes','¿Qué redes usas?',['Instagram','TikTok','Facebook','Google (publicaciones)','Ninguna aún']),
           chips('ayuda','¿Qué tipo de ayuda buscas?',['Plantillas para hacerlo yo','Calendario e ideas','Gestión completa','Formación'],'checkbox'),
           text('usuario','Tu usuario principal','@tunegocio')]),
- dict(slug='trastienda',name='La Trastienda',icon='i-chart',
+ dict(slug='trastienda',name='La Trastienda',icon='i-chart',price='desde 120 € por sesión',
   intro='Consultoría de negocio retro-directa: precios, márgenes y estrategia comercial para vender mejor.',
   inc=['Sesión de diagnóstico de tu negocio','Revisión de precios, márgenes y oferta','Plan de acción claro y priorizado'],
   plazo='Sesiones de 90 minutos',
@@ -115,15 +122,19 @@ S=[
           select('antiguedad','¿Cuánto tiempo lleva abierto tu negocio?',['Aún no he abierto','Menos de 1 año','1 a 3 años','Más de 3 años'])]),
 ]
 
+PLANS=('plan-basico','pack-visible')
 def chip_(s, g):
-    pack = g == 'packs'
-    kind, name = ('radio', 'pack') if pack else ('checkbox', 'servicio')
-    extra = f' data-price="{s["price"]}"' if pack else ''
+    radio = g in ('packs','planes')
+    kind, name = ('radio', 'pack' if g=='packs' else 'plan') if radio else ('checkbox', 'servicio')
+    extra = f' data-price="{s["price"]}"' if s.get('price') else ''
     return (f'<label class="chip chip--service" data-group="{g}"><input type="{kind}" name="{name}" value="{s["name"]}" data-slug="{s["slug"]}"'
             f' data-short="{s.get("short", s["name"])}" data-icon="{s["icon"]}"{extra}><span><svg class="icon icon--sm" aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
-            f'{s.get("short", s["name"])}{"" if pack else "<small class=chip__inc>· incluido</small>"}</span></label>')
+            f'{s.get("short", s["name"])}{"" if radio else "<small class=chip__inc>· incluido</small>"}</span></label>')
 head_=lambda g, t: f'<button type="button" class="chips__group" data-group-toggle="{g}" aria-expanded="true">{t} <span class="chips__arrow" aria-hidden="true">▾</span></button>'
-picker=(head_('packs','Packs <small>(elige uno)</small>')+''.join(chip_(x,'packs') for x in P)+head_('carta','Servicios a la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
+PK=[x for x in P if x['slug'] not in PLANS]; PL=[x for x in P if x['slug'] in PLANS]
+picker=(head_('packs','Packs <small>(elige uno)</small>')+''.join(chip_(x,'packs') for x in PK)
+        +head_('planes','Planes mensuales <small>(elige uno)</small>')+''.join(chip_(x,'planes') for x in PL)
+        +head_('carta','Servicios a la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
 ALL=P+S
 
 fieldsets=''
@@ -176,7 +187,7 @@ page=f'''<!doctype html>
             <ol><li><a href="./">Inicio</a></li><li><a href="./#servicios">Servicios</a></li><li aria-current="page">Contratar</li></ol>
           </nav>
           <h1 class="hire-title"><span class="hire-title__kicker" data-hire-kicker>Cuéntanos</span><span class="hire-title__name"><span data-hire-title>Qué necesitas</span></span></h1>
-          <p data-hire-lead>Elige un pack, añade los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
+          <p data-hire-lead>Elige un pack, un plan mensual o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
         </div>
       </section>
 
@@ -223,7 +234,7 @@ page=f'''<!doctype html>
             <div class="contact-card service-info" data-info="" >
               <h3>¿Cómo funciona?</h3>
               <ul>
-                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Eliges un pack, servicios sueltos o ambos</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Combinas un pack, un plan mensual y servicios sueltos</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Te enviamos una propuesta cerrada en 48 h</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia y todo a tu nombre</li>
               </ul>

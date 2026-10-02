@@ -27,7 +27,7 @@ site.webmanifest · favicon.svg
 2. **Cinta de sectores**.
 3. **Problema/empatía** (del Figma) + 3 datos de dolor.
 4. **Tres sitios donde te buscan**: Google, Google Maps y las IA (GEO).
-5. **Packs** con precio “desde”: Que te encuentren · Escaparate · Singular · Siempre visible.
+5. **Packs** con precio “desde”: Que te encuentren · Arranque · Escaparate · Singular, y **planes mensuales**: Básico · Siempre visible.
 6. **Servicios a la carta** (tarjetas del Figma) + banner de La Trastienda.
 7. **Test de visibilidad** interactivo (8 preguntas → nota, consejos y pack recomendado).
 8. **Sectores** en pestañas, con búsquedas reales de cada tipo de negocio.
@@ -51,7 +51,7 @@ site.webmanifest · favicon.svg
 | **Email** (`hola@agenciasingular.es`) | `assets/js/main.js` (`SITE.email`), HTML, `llms.txt` |
 | **WhatsApp** (se oculta si está vacío) | `assets/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/js/main.js` → `SITE.formEndpoint` |
-| **Precios de los packs** (propuestos: 290 € / 1.290 € / 2.490 € / 149 €/mes) | `index.html` (tarjetas, FAQ y JSON-LD), `llms.txt` |
+| **Precios** (packs: 290 € Que te encuentren / 490 € Arranque / 1.290 € Escaparate / 2.490 € Singular; planes: 59 €/mes Básico / 149 €/mes Siempre visible; fotografía desde 250 €, La Trastienda desde 120 €) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
 | **Ciudad o zona**: si trabajáis en una ciudad concreta, añadidla al JSON-LD (`address`, `areaServed`) y a los textos para reforzar el SEO local | `index.html` |

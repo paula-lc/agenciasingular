@@ -37,18 +37,6 @@ SERVICES=[
   llevas=['Tu web preparada para las búsquedas de tu zona','Páginas nuevas por servicio','Informes claros de cómo evolucionas'],
   esperar='El SEO es una carrera de fondo: los primeros movimientos se ven en semanas y los resultados sólidos, entre 3 y 6 meses. No prometemos el número 1, sino hacerlo bien para tener opciones reales de aparecer.',
   noincluye='Una web nueva (si la tuya no se puede mejorar, te lo diremos). Para mantenerlo mes a mes está el Plan Siempre visible.'),
- dict(slug='google-maps', kicker='Perfil de Empresa', title='Google Maps', icon='i-pin', plazo='1 a 2 semanas',
-  para='En Google Maps apareces a medias, con pocas fotos o sin reseñas recientes, o ni siquiera tienes acceso a tu ficha.',
-  incluye=[
-   ('Perfil de Empresa de Google', ['Reclamamos o recuperamos el acceso a tu ficha','Categorías exactas, servicios, horarios, festivos y zona','Descripción escrita para tus clientes y para Google','Editamos las fotos que nos envíes y las ordenamos en la ficha']),
-   ('Kit de reseñas', ['Código QR que lleva directo a dejar la reseña','Cartel para el mostrador o el escaparate: diseño e impresión incluidos','Mensajes para pedirlas y plantillas para responderlas']),
-   ('Directorios', ['Mismos datos en Apple Maps, Bing y directorios clave']),
-  ],
-  pasos=[('Día 1','Llamada de 30 minutos sobre tu negocio y tus clientes.'),('Semana 1','Revisión de tu ficha y de tu competencia, y optimización.'),('Semana 2','Kit de reseñas, directorios y guía de mantenimiento.')],
-  necesitamos=['Acceso a tu ficha de Google (o te ayudamos a recuperarlo)','Tus servicios, precios orientativos y horarios','Unas 10 fotos hechas con el móvil (te decimos cuáles)'],
-  llevas=['Ficha completa y optimizada, a tu nombre','Cartel impreso con QR y mensajes para reseñas','Informe antes/después'],
-  esperar='Una ficha que convence y aparece en más búsquedas de tu zona. Es exactamente lo que incluye el Pack Que te encuentren, que además suma la base para aparecer en las IA.',
-  noincluye='La gestión mensual de publicaciones y reseñas (Plan Siempre visible) ni una sesión de fotos profesional (Fotografía Local).'),
  dict(slug='ia', kicker='GEO / AI Overviews', title='Posicionamiento en IA', icon='i-sparkles', plazo='Primeros cambios en 4 a 8 semanas',
   para='Cada vez más clientes preguntan a ChatGPT, Gemini o a Google “¿dónde hay un buen… cerca de mí?”, y la IA recomienda a otros.',
   incluye=[
@@ -61,7 +49,7 @@ SERVICES=[
   llevas=['Informe de qué dicen las IA de ti, antes y después','Tu web y tu ficha preparadas para que te entiendan'],
   esperar='Las IA tardan en actualizarse y nadie controla sus respuestas, así que no prometemos que te nombren siempre. Sí que les ponemos fácil entenderte y fiarse de ti, que es lo que hace que te recomienden.',
   noincluye='Una web nueva ni la gestión de reseñas. La revisión mensual de lo que dicen las IA está incluida en el Plan Siempre visible.'),
- dict(slug='fotografia', kicker='Producto y espacio', title='Fotografía Local', icon='i-aperture', plazo='Entrega en 1 a 2 semanas',
+ dict(slug='fotografia', kicker='Producto y espacio', title='Fotografía Local', icon='i-aperture', price='250 €', plazo='Entrega en 1 a 2 semanas',
   para='Tus fotos son oscuras, antiguas o de banco de imágenes, y no muestran lo bonito que es tu negocio ni lo bien que trabajas.',
   incluye=[
    ('Antes de la sesión', ['Lista de tomas pensada para tu web, Google Maps y redes','Consejos para preparar el local, el producto y al equipo']),
@@ -86,7 +74,7 @@ SERVICES=[
   llevas=['Redes con una imagen coherente y un plan claro','Plantillas y guiones para publicar sin bloquearte'],
   esperar='Constancia y una imagen que se reconoce, que es lo que hace crecer las redes de un negocio local. Los resultados llegan con los meses, no con una publicación viral.',
   noincluye='Anuncios de pago ni sesión de fotos profesional (Fotografía Local).'),
- dict(slug='trastienda', kicker='Consultoría de negocio', title='La Trastienda', icon='i-chart', plazo='Sesiones de 90 minutos',
+ dict(slug='trastienda', kicker='Consultoría de negocio', title='La Trastienda', icon='i-chart', price='120 €', unit=' por sesión', plazo='Sesiones de 90 minutos',
   para='Trabajas mucho pero no te salen las cuentas, no sabes si tus precios son los correctos o quieres dar un paso (abrir, ampliar, cambiar tu oferta) con cabeza.',
   incluye=[
    ('Antes de la sesión', ['Un cuestionario corto sobre tu negocio, tus precios y tus números']),
