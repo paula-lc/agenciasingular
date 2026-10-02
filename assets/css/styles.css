@@ -422,7 +422,7 @@ ul, ol.steps { margin: 0; padding: 0; }
 .hero__divider { width: min(717px, 60%); height: 2px; background: var(--yellow); margin: clamp(40px, 5vw, 56px) auto 0; opacity: .7; }
 
 @media (max-width: 960px) {
-  .hero__grid { grid-template-columns: 1fr; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__visual { min-height: 440px; max-width: 520px; width: 100%; margin: 0 auto; }
   .hero__photo { inset: 0 0 0 0; }
   .ai-card { left: -8px; }
@@ -1207,3 +1207,9 @@ html:has(.pmodal[open]) { overflow: hidden; }
 .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "ver planes"; margin-left: 4px; padding: 3px 9px; border-radius: 999px; border: 1.5px solid currentColor; font-size: 10.5px; letter-spacing: .06em; }
 :lang(ca) .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "veure plans"; }
 :lang(en) .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "see plans"; }
+/* Nombre del Pack Arranque para estética */
+.pack__alias { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; margin-top: -6px; padding: 4px 10px; border-radius: 999px; background: var(--yellow); color: var(--blue-deep); font-size: 12.5px; font-weight: 600; }
+.pack__alias .icon { width: 13px; height: 13px; color: var(--crimson); flex: none; }
+.pack__alias strong { font-weight: 800; }
+/* Botones de la cabecera: en móvil pueden partir línea (en inglés y catalán los textos son más largos) */
+@media (max-width: 600px) { .hero__ctas .btn { white-space: normal; text-align: center; line-height: 1.3; } }

@@ -15,7 +15,7 @@ PACKS=[
   esperar='Una ficha que convence y aparece en más búsquedas de tu zona. Las visitas y llamadas desde Maps suelen notarse en las semanas siguientes; las reseñas dependen de que las pidas, y para eso te damos todo hecho.',
   noincluye='Web ni sesión de fotos (las tienes en versión esencial en el Pack Arranque y completas en el Escaparate). La gestión mensual de la ficha es el Plan Básico o el Siempre visible.'),
  dict(slug='pack-arranque', kicker='Tu primera web', name='Arranque', price='490 €', unit='', plazo='7 a 10 días', icon='i-store', btn='btn--crimson',
-  para='Necesitas una presencia online cuidada pero sencilla: un estudio de uñas o de estética, una tienda pequeña o tu primera web. Lo esencial bien hecho, rápido y sin complicarte.',
+  para='Necesitas una presencia online cuidada pero sencilla: un estudio de uñas o de estética, una tienda pequeña o tu primera web. Lo esencial bien hecho, rápido y sin complicarte. Para estudios de uñas y centros de estética lo llamamos Pack Tocador.',
   incluye=[
    ('Google Maps esencial', ['Perfil de Empresa completo: categorías, servicios, horarios y descripción','Tus mejores fotos de la sesión, subidas y ordenadas']),
    ('Web de una página', ['Diseñada a partir de nuestra plantilla, adaptada a tu marca y pensada para el móvil','Tus servicios, precios orientativos, horario, mapa y contacto','Botón de reserva conectado a Booksy, Fresha o WhatsApp','Dominio y alojamiento el primer año, a tu nombre']),
