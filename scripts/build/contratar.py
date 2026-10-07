@@ -163,7 +163,7 @@ page=f'''<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contratar un servicio · Agencia Singular</title>
   <meta name="description" content="Cuéntanos qué servicio quieres contratar (rebranding, web, SEO local, Google Maps, IA, fotografía, redes o consultoría) y te enviamos una propuesta cerrada en 48 horas.">
-  <link rel="canonical" href="https://www.agenciasingular.es/contratar.html">
+  <link rel="canonical" href="https://agenciasingular.es/contratar.html">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#3e6083">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
