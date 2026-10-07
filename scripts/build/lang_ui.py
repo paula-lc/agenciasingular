@@ -22,7 +22,7 @@ def apply(html, lang, page):
     html=re.sub(r'(<div class="footer-bottom"[^>]*>)', lambda m: m.group(1)+'\n        '+footer_langs(lang,page), html, count=1)
     # hreflang en la cabecera
     html=re.sub(r'\n\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*">','',html)
-    alts=''.join(f'\n  <link rel="alternate" hreflang="{c}" href="https://www.agenciasingular.es{url(c,page)}">' for c,_,_ in LANGS)
-    alts+=f'\n  <link rel="alternate" hreflang="x-default" href="https://www.agenciasingular.es{url("es",page)}">'
+    alts=''.join(f'\n  <link rel="alternate" hreflang="{c}" href="https://agenciasingular.es{url(c,page)}">' for c,_,_ in LANGS)
+    alts+=f'\n  <link rel="alternate" hreflang="x-default" href="https://agenciasingular.es{url("es",page)}">'
     html=re.sub(r'(\n  <link rel="canonical" href="[^"]*">)', lambda m: m.group(1)+alts, html, count=1)
     return html

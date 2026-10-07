@@ -47,7 +47,7 @@ site.webmanifest · favicon.svg
 
 | Qué | Dónde |
 | --- | --- |
-| **Dominio** (ahora `https://www.agenciasingular.es`) | `index.html`, la guía, las páginas legales, `sitemap.xml`, `robots.txt`, `llms.txt` |
+| **Dominio** (ahora `https://agenciasingular.es`) | `index.html`, la guía, las páginas legales, `sitemap.xml`, `robots.txt`, `llms.txt` |
 | **Email** (`hola@agenciasingular.es`) | `assets/js/main.js` (`SITE.email`), HTML, `llms.txt` |
 | **WhatsApp** (se oculta si está vacío) | `assets/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/js/main.js` → `SITE.formEndpoint` |

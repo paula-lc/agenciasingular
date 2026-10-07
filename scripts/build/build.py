@@ -18,7 +18,7 @@ miss=translate.missing()
 subprocess.run([sys.executable, os.path.join(HERE,'translate.py')], check=True)
 # sitemap
 today=datetime.date.today().isoformat()
-SITE='https://www.agenciasingular.es'
+SITE='https://agenciasingular.es'
 rows=[]
 for page,prio in (('index.html','1.0'),('guia-aparecer-en-ia-y-google-maps.html','0.8')):
     alts=''.join(f'\n    <xhtml:link rel="alternate" hreflang="{c}" href="{SITE}{url(c,page)}"/>' for c,_,_ in LANGS)+f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{url("es",page)}"/>'

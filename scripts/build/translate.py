@@ -12,7 +12,7 @@ from lang_ui import switcher, footer_langs, url, LANGS
 HERE=os.path.dirname(os.path.abspath(__file__))
 ROOT=str(__import__('pathlib').Path(__file__).resolve().parents[2])+'/'
 PAGES=['index.html','contratar.html','guia-aparecer-en-ia-y-google-maps.html']
-SITE='https://www.agenciasingular.es'
+SITE='https://agenciasingular.es'
 ATTRS=['alt','title','aria-label','placeholder','data-typing','data-short','data-price']
 LOCALE={'ca':'ca_ES','en':'en_GB','es':'es_ES'}
 ROOT_FILES=('favicon.svg','site.webmanifest','llms.txt','aviso-legal.html','privacidad.html')

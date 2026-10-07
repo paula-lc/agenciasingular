@@ -26,4 +26,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://www.agenciasingular.es/sitemap.xml
+Sitemap: https://agenciasingular.es/sitemap.xml
