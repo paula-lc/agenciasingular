@@ -108,7 +108,7 @@ def build(page, lang, m, ver):
     open(ROOT+lang+'/'+page,'w').write(out)
 def write_js():
     data={l: json.load(open(os.path.join(HERE,'i18n',f'js.{l}.json'))) for l in ('ca','en')}
-    js='/* Traducciones de los textos del JavaScript. Se genera con scripts/build/build.py a partir de scripts/build/i18n/js.*.json */\nwindow.I18N = '+json.dumps(data,ensure_ascii=False,indent=1)+';\n'
+    js='window.I18N='+json.dumps(data,ensure_ascii=False,separators=(',',':'))+';\n'  # ya minificado; se genera, no se edita
     open(ROOT+'assets/js/i18n.js','w').write(js)
 def missing():
     """Textos en castellano de las páginas que aún no tienen traducción"""
