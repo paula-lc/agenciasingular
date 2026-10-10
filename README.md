@@ -12,8 +12,9 @@ ca/ · en/                               Versiones en catalán e inglés (genera
 scripts/build/                          Generador de la web: ventanas de detalle, contratar, idiomas y sitemap
 aviso-legal.html · privacidad.html      Plantillas legales (completar datos)
 404.html
-assets/css/styles.css                   Estilos (tokens de marca en :root)
-assets/js/main.js                       Menú, test de visibilidad, pestañas, formulario
+assets/src/css/styles.css               Estilos: FUENTE (tokens de marca en :root). Se edita aquí
+assets/src/js/main.js                   Menú, test de visibilidad, pestañas, formulario: FUENTE. Se edita aquí
+assets/css/ · assets/js/                Salida minificada que carga la web (generada, no se edita)
 assets/img/                             Logo, fotos e iconos exportados del Figma
 assets/img/hero/                        Fotos de los negocios que rotan en la portada
 scripts/foto-hero.py                    Prepara una foto para la portada (tamaño y tono azul)
@@ -48,9 +49,9 @@ site.webmanifest · favicon.svg
 | Qué | Dónde |
 | --- | --- |
 | **Dominio** (ahora `https://agenciasingular.es`) | `index.html`, la guía, las páginas legales, `sitemap.xml`, `robots.txt`, `llms.txt` |
-| **Email** (`hola@agenciasingular.es`) | `assets/js/main.js` (`SITE.email`), HTML, `llms.txt` |
-| **WhatsApp** (se oculta si está vacío) | `assets/js/main.js` → `SITE.whatsapp` |
-| **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/js/main.js` → `SITE.formEndpoint` |
+| **Email** (`hola@agenciasingular.es`) | `assets/src/js/main.js` (`SITE.email`), HTML, `llms.txt` |
+| **WhatsApp** (se oculta si está vacío) | `assets/src/js/main.js` → `SITE.whatsapp` |
+| **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/src/js/main.js` → `SITE.formEndpoint` |
 | **Precios** (packs: 290 € Que te encuentren / 490 € Arranque / 1.290 € Escaparate / 2.490 € Singular; planes: 59 €/mes Básico / 149 €/mes Siempre visible; fotografía desde 250 €, La Trastienda desde 120 €) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
@@ -85,7 +86,7 @@ En la portada, cada servicio y cada pack tiene un botón **Añadir**; lo elegido
 del visitante y aparece un contador en el menú que lleva a `contratar.html`. Allí se combinan un pack
 (solo uno) con los servicios a la carta que quieran: los que ya incluye el pack salen como "incluido", las
 preguntas comunes no se repiten y, si varios servicios sueltos forman un pack, se sugiere cambiar al pack.
-Qué incluye cada pack está en `assets/js/main.js` → `PACK_INCLUDES`.
+Qué incluye cada pack está en `assets/src/js/main.js` → `PACK_INCLUDES`.
 
 ## Recibir los formularios por email (informe en PDF + hoja de cálculo)
 
@@ -99,7 +100,7 @@ informe (en el cuerpo del email y en PDF adjunto) y se guarda como una fila en u
 3. **Implementar → Nueva implementación** → tipo **Aplicación web**. Ejecutar como: **Yo**.
    Quién tiene acceso: **Cualquier usuario**. Pulsa Implementar y acepta los permisos
    (Google avisará de que la app no está verificada: *Configuración avanzada → Ir a…*).
-4. Copia la URL que termina en `/exec` y ponla en `assets/js/main.js` → `SITE.formEndpoint`.
+4. Copia la URL que termina en `/exec` y ponla en `assets/src/js/main.js` → `SITE.formEndpoint`.
 
 Si cambias el script, vuelve a implementarlo (Gestionar implementaciones → editar → Nueva versión)
 para que la URL siga siendo la misma.
@@ -110,7 +111,7 @@ El castellano es el original (`index.html`, `contratar.html`, la guía). Las ver
 inglés (`/en/`) se **generan** con las traducciones de `scripts/build/i18n/`:
 
 - `ca.json` y `en.json`: texto en castellano → traducción (textos de las páginas).
-- `js.ca.json` y `js.en.json`: textos del JavaScript (test, cesta, avisos del formulario). Se vuelcan en `assets/js/i18n.js`.
+- `js.ca.json` y `js.en.json`: textos del JavaScript (test, cesta, avisos del formulario). Se vuelcan en `assets/js/i18n.js` (generado).
 
 Después de cambiar algo en castellano (o el contenido de las ventanas en `scripts/build/services_data.py` y `modals.py`, o
 el formulario en `contratar.py`), ejecuta:

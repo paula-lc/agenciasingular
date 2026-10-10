@@ -4,6 +4,7 @@
 #   3. Selector de idioma y enlaces hreflang en las páginas en castellano (lang_ui.py)
 #   4. Versiones en catalán (/ca/) e inglés (/en/) con las traducciones de i18n/*.json (translate.py)
 #   5. sitemap.xml con las tres versiones
+#   6. CSS y JS minificados (minify.py): fuentes en assets/src/, salida en assets/css y assets/js
 # Uso: python3 scripts/build/build.py
 import subprocess, sys, os, datetime
 HERE=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -29,4 +30,5 @@ for lang,m in miss.items():
     if m:
         print(f'\n⚠ {len(m)} textos sin traducir al {lang} (se quedan en castellano). Añádelos a scripts/build/i18n/{lang}.json:')
         for s in m: print('   ', s[:110])
+import minify; print('Minificando CSS y JS...'); minify.run()
 print('\nListo.')
