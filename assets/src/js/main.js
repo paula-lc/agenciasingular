@@ -325,6 +325,11 @@ if (quiz) {
   const $ = (sel) => quiz.querySelector(sel);
   const qWrap = $("[data-quiz-questions]");
   const resultWrap = $("[data-quiz-result]");
+  const gate = $("[data-quiz-gate]");
+  const gateForm = $("[data-quiz-gate-form]");
+  const gateStatus = $("[data-gate-status]");
+  let leadAsked = false; // solo se pide el email una vez por visita
+  let report = null;     // datos del resultado para enviar junto al email
   const answers = [];
   let current = 0;
 
@@ -437,15 +442,80 @@ if (quiz) {
     cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
     cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
 
+    report = {
+      score, title, pack: reco.pack.name,
+      weak: weak.map((x) => x.q.area).join(", "),
+      answers: QUESTIONS.map((q, i) => [q.q, answers[i].label]),
+    };
     qWrap.hidden = true;
+    if (leadAsked || !SITE.formEndpoint) { revealResult(); return; }
+    gate.hidden = false;
+    gate.setAttribute("tabindex", "-1");
+    gate.focus({ preventScroll: true });
+  };
+
+  const revealResult = () => {
+    leadAsked = true;
+    gate.hidden = true;
     resultWrap.classList.add("is-visible");
     resultWrap.setAttribute("tabindex", "-1");
     resultWrap.focus({ preventScroll: true });
   };
 
+  // Envía el email + el resultado al mismo receptor que el formulario de contacto (Google Apps Script)
+  const sendLead = async (data) => {
+    const servicio = report.pack;
+    const sections = [
+      { titulo: "Resultado del test", filas: [["Nota", `${report.score}/100 (${report.title})`], ["Pack recomendado", servicio], ["Áreas más flojas", report.weak || "—"]] },
+      { titulo: "Respuestas del test", filas: report.answers },
+    ];
+    const subject = `${t("Test de visibilidad")}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""} · ${report.score}/100 · ${data.negocio || data.email}`;
+    if (SITE.formEndpoint.includes("script.google.com")) {
+      const payload = new URLSearchParams({
+        formulario: "Test de visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
+        telefono: "", sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
+      });
+      await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
+    } else {
+      const body = new FormData();
+      body.set("email", data.email); body.set("negocio", data.negocio); body.set("_subject", subject);
+      body.set("resumen", sections.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n"));
+      const res = await fetch(SITE.formEndpoint, { method: "POST", body, headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error(res.statusText);
+    }
+  };
+
+  gateForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (gateForm.web_hp.value) return revealResult(); // bot
+    const email = gateForm.email.value.trim();
+    if (!email || !gateForm.email.checkValidity()) {
+      gateForm.email.focus();
+      gateStatus.textContent = t("Escribe un email válido para enviarte el diagnóstico.");
+      gateStatus.className = "form__status is-error";
+      return;
+    }
+    if (!gateForm.privacidad.checked) {
+      gateForm.privacidad.focus();
+      gateStatus.textContent = t("Necesitamos que aceptes la política de privacidad.");
+      gateStatus.className = "form__status is-error";
+      return;
+    }
+    const btn = gateForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    try {
+      await sendLead({ email, negocio: gateForm.negocio.value.trim() });
+      document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = email; });
+    } catch { /* si falla el envío no se bloquea el resultado */ }
+    btn.disabled = false;
+    revealResult();
+  });
+  $("[data-quiz-gate-skip]").addEventListener("click", revealResult);
+
   $("[data-quiz-back]").addEventListener("click", () => { if (current > 0) { current--; render(); } });
   $("[data-quiz-restart]").addEventListener("click", () => {
     answers.length = 0; current = 0; quizSummary = "";
+    gate.hidden = true;
     resultWrap.classList.remove("is-visible");
     qWrap.hidden = false;
     render();
