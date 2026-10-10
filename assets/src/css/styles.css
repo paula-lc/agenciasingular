@@ -761,6 +761,7 @@ a.service { color: var(--blue); text-decoration: none; cursor: pointer; }
 .invite__aside { margin-top: 6px !important; font-size: 15px !important; font-style: italic; color: var(--crimson); font-weight: 600; }
 .invite h2 + .invite__aside + p { max-width: 640px; margin-left: auto; margin-right: auto; }
 .invite p { margin-top: 16px; font-size: 17px; }
+@media (max-width: 700px) { .invite h2 { white-space: normal; text-wrap: balance; } }  /* el título en inglés es más largo y desbordaba en móvil */
 .contact { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
 .form { display: grid; gap: 22px; }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
