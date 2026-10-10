@@ -6,7 +6,7 @@
 const SITE = {
   email: "hola@agenciasingular.es",
   // Número con prefijo de país y sin espacios, p. ej. "34600111222". Vacío = se oculta.
-  whatsapp: "",
+  whatsapp: "34684747795",
   // Dirección que recibe los formularios: la URL de la aplicación web de Google Apps Script
   // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
