@@ -11,6 +11,9 @@ const SITE = {
   // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
   formEndpoint: "https://script.google.com/macros/s/AKfycbyK_Dqwi7gZ_pNRRHdVpg8wU9NDWJo0u3jWUuWLwA2bBgMqSTlYpmZll9o6SfKQrvYo/exec",
+  // Analítica sin cookies (GoatCounter). Pon aquí el código de tu cuenta: si tu panel es
+  // https://paula.goatcounter.com, el código es "paula". Vacío = no se mide nada.
+  goatcounter: "",
 };
 
 document.documentElement.classList.remove("no-js");
@@ -22,6 +25,30 @@ const t = (s, vars) => {
   if (vars) out = out.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
   return out;
 };
+
+/* ------------------------------------------------------------------
+   Analítica sin cookies (GoatCounter): visitas y eventos. No guarda nada en el navegador.
+   track("whatsapp", "hola") cuenta el evento "whatsapp/hola" en el panel.
+   ------------------------------------------------------------------ */
+if (SITE.goatcounter) {
+  const gc = document.createElement("script");
+  gc.async = true;
+  gc.src = "https://gc.zgo.at/count.js";
+  gc.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
+  document.head.appendChild(gc);
+}
+const track = (event, detail) => {
+  if (!SITE.goatcounter) return;
+  const send = () => window.goatcounter?.count?.({
+    event: true,
+    path: detail ? `${event}/${detail}` : event,
+    title: detail ? `${event} · ${detail}` : event,
+  });
+  // count.js se carga de forma asíncrona: si aún no está, se espera a que termine
+  if (window.goatcounter?.count) send();
+  else document.querySelector("script[data-goatcounter]")?.addEventListener("load", send, { once: true });
+};
+window.AS = { SITE, track, t };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -328,8 +355,9 @@ if (quiz) {
   const gate = $("[data-quiz-gate]");
   const gateForm = $("[data-quiz-gate-form]");
   const gateStatus = $("[data-gate-status]");
-  let leadAsked = false; // solo se pide el email una vez por visita
-  let report = null;     // datos del resultado para enviar junto al email
+  const gateText = gate.querySelector(".quiz__gate-text");
+  const gateIntro = gateText.textContent;
+  let report = null;     // datos del resultado para enviar junto al contacto
   const answers = [];
   let current = 0;
 
@@ -356,6 +384,7 @@ if (quiz) {
 
   const answer = (pts, label) => {
     answers[current] = { pts, label };
+    if (current === 0 && !quiz.dataset.started) { quiz.dataset.started = "1"; track("test-iniciado"); }
     if (current < QUESTIONS.length - 1) {
       current++;
       render();
@@ -366,6 +395,7 @@ if (quiz) {
   };
 
   const showResult = () => {
+    track("test-terminado");
     const total = answers.reduce((s, a) => s + a.pts, 0);
     const score = Math.round((total / (QUESTIONS.length * 2)) * 100);
     let title, text, color;
@@ -448,74 +478,72 @@ if (quiz) {
       answers: QUESTIONS.map((q, i) => [q.q, answers[i].label]),
     };
     qWrap.hidden = true;
-    if (leadAsked || !SITE.formEndpoint) { revealResult(); return; }
-    gate.hidden = false;
-    gate.setAttribute("tabindex", "-1");
-    gate.focus({ preventScroll: true });
-  };
-
-  const revealResult = () => {
-    leadAsked = true;
-    gate.hidden = true;
+    gateForm.hidden = false;
+    gateForm.reset();
+    gateStatus.textContent = "";
+    gateText.textContent = gateIntro;
     resultWrap.classList.add("is-visible");
     resultWrap.setAttribute("tabindex", "-1");
     resultWrap.focus({ preventScroll: true });
   };
 
-  // Envía el email + el resultado al mismo receptor que el formulario de contacto (Google Apps Script)
+  // Envía el contacto + el resultado al mismo receptor que el formulario de contacto (Google Apps Script)
   const sendLead = async (data) => {
     const servicio = report.pack;
     const sections = [
       { titulo: "Resultado del test", filas: [["Nota", `${report.score}/100 (${report.title})`], ["Pack recomendado", servicio], ["Áreas más flojas", report.weak || "—"]] },
       { titulo: "Respuestas del test", filas: report.answers },
     ];
-    const subject = `${t("Test de visibilidad")}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""} · ${report.score}/100 · ${data.negocio || data.email}`;
+    const subject = `[Test] ${data.negocio || data.contacto} · ${report.score}/100${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}`;
     if (SITE.formEndpoint.includes("script.google.com")) {
       const payload = new URLSearchParams({
-        formulario: "Test de visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
-        telefono: "", sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
+        formulario: "Test visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
+        telefono: data.telefono, sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
       });
       await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
     } else {
       const body = new FormData();
-      body.set("email", data.email); body.set("negocio", data.negocio); body.set("_subject", subject);
+      body.set("contacto", data.contacto); body.set("negocio", data.negocio); body.set("_subject", subject);
       body.set("resumen", sections.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n"));
       const res = await fetch(SITE.formEndpoint, { method: "POST", body, headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(res.statusText);
     }
   };
 
+  const gateError = (el, msg) => {
+    el.focus();
+    gateStatus.textContent = msg;
+    gateStatus.className = "form__status is-error";
+  };
+
   gateForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (gateForm.web_hp.value) return revealResult(); // bot
-    const email = gateForm.email.value.trim();
-    if (!email || !gateForm.email.checkValidity()) {
-      gateForm.email.focus();
-      gateStatus.textContent = t("Escribe un email válido para enviarte el diagnóstico.");
-      gateStatus.className = "form__status is-error";
-      return;
-    }
-    if (!gateForm.privacidad.checked) {
-      gateForm.privacidad.focus();
-      gateStatus.textContent = t("Necesitamos que aceptes la política de privacidad.");
-      gateStatus.className = "form__status is-error";
-      return;
-    }
+    if (gateForm.web_hp.value) return; // bot
+    const contacto = gateForm.contacto.value.trim();
+    const esEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto);
+    const esTelefono = /^[+\d][\d\s.-]{7,}$/.test(contacto);
+    if (!esEmail && !esTelefono) return gateError(gateForm.contacto, t("Escribe un WhatsApp o un email válido para poder escribirte."));
+    if (!gateForm.privacidad.checked) return gateError(gateForm.privacidad, t("Necesitamos que aceptes la política de privacidad."));
     const btn = gateForm.querySelector('button[type="submit"]');
     btn.disabled = true;
     try {
-      await sendLead({ email, negocio: gateForm.negocio.value.trim() });
-      document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = email; });
-    } catch { /* si falla el envío no se bloquea el resultado */ }
+      await sendLead({
+        contacto, negocio: gateForm.negocio.value.trim(),
+        email: esEmail ? contacto : "", telefono: esEmail ? "" : contacto,
+      });
+      track("test-contacto");
+      if (esEmail) document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = contacto; });
+      gateText.textContent = t("¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos. ☕");
+      gateForm.hidden = true;
+    } catch {
+      gateError(gateForm.contacto, t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }));
+    }
     btn.disabled = false;
-    revealResult();
   });
-  $("[data-quiz-gate-skip]").addEventListener("click", revealResult);
 
   $("[data-quiz-back]").addEventListener("click", () => { if (current > 0) { current--; render(); } });
   $("[data-quiz-restart]").addEventListener("click", () => {
     answers.length = 0; current = 0; quizSummary = "";
-    gate.hidden = true;
     resultWrap.classList.remove("is-visible");
     qWrap.hidden = false;
     render();
@@ -542,12 +570,19 @@ document.addEventListener("click", (e) => {
 /* ------------------------------------------------------------------
    Formulario de contacto
    ------------------------------------------------------------------ */
-const waItem = document.querySelector("[data-whatsapp]");
-if (SITE.whatsapp && waItem) {
-  waItem.hidden = false;
-  waItem.querySelector("[data-whatsapp-link]").href =
-    `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(t("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio."))}`;
-}
+const waText = t("Hola Paula, te escribo desde la web de Agencia Singular");
+document.querySelectorAll("[data-whatsapp]").forEach((item) => {
+  if (!SITE.whatsapp) return;
+  item.hidden = false;
+  const link = item.matches("a") ? item : item.querySelector("[data-whatsapp-link]");
+  if (link) link.href = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(waText)}`;
+});
+document.addEventListener("click", (e) => {
+  const link = e.target.closest("[data-whatsapp-link]");
+  if (!link) return;
+  const page = location.pathname.replace(/^\/(ca|en)\//, "/").replace(/^\/|\/$/g, "").replace(/\.html$/, "") || "inicio";
+  track("whatsapp", link.dataset.trackDetail || page);
+});
 
 /* ------------------------------------------------------------------
    Mi propuesta (cesta): packs y servicios elegidos, guardados en este navegador.
@@ -984,6 +1019,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         const res = await fetch(SITE.formEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
         if (!res.ok) throw new Error(res.statusText);
       }
+      track("formulario", (form.dataset.subject || "contacto").toLowerCase().replace(/\s+/g, "-"));
       form.reset();
       setStatus(t("¡Recibido! Te escribimos en menos de 24 h laborables. ☕"), true);
     } catch {

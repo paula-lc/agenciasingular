@@ -17,6 +17,9 @@ assets/src/js/main.js                   Menú, test de visibilidad, pestañas, f
 assets/css/ · assets/js/                Salida minificada que carga la web (generada, no se edita)
 assets/img/                             Logo, fotos e iconos exportados del Figma
 assets/img/hero/                        Fotos de los negocios que rotan en la portada
+hola/                                   Página de destino de los QR impresos (noindex, solo castellano)
+d/<slug>/                               Diagnósticos personalizados (generados, noindex)
+diagnosticos/ · scripts/diagnostico/    Datos de cada diagnóstico y el generador de página, PDF y QR
 scripts/foto-hero.py                    Prepara una foto para la portada (tamaño y tono azul)
 robots.txt · sitemap.xml · llms.txt     SEO y visibilidad en IA
 site.webmanifest · favicon.svg
@@ -124,3 +127,21 @@ Regenera las ventanas de detalle, `contratar.html`, el selector de idioma, las p
 Si hay textos nuevos sin traducir, el script los lista: añádelos a `ca.json` y `en.json` y vuelve a ejecutarlo
 (mientras tanto se quedan en castellano). Cada página enlaza sus otras versiones con `hreflang`, y el selector de idioma
 de la cabecera lleva a la misma página en el otro idioma.
+
+## Captación presencial: /hola/, diagnósticos y medición
+
+**Flujo (menos de 15 minutos por visita):**
+
+1. Mira la ficha de Google Maps del negocio y copia `diagnosticos/_plantilla.json` a `diagnosticos/<slug>.json` (el archivo se llama como el slug). Rellénalo.
+2. Una vez: `pip install -r scripts/diagnostico/requirements.txt && playwright install chromium`.
+3. `python3 scripts/diagnostico/build.py diagnosticos/<slug>.json` genera `d/<slug>/` (página), `salida/<slug>.pdf` (A4 para imprimir) y `salida/<slug>-qr.png`.
+4. Imprime el PDF. Sube `d/<slug>/` a la web **solo si el negocio ya ha dado permiso** (en la tarjeta, el QR lleva a `/hola/?n=<slug>&src=visita`, que enseña el diagnóstico si existe; sin él, muestra la versión genérica).
+5. `"dorso": true` en el JSON añade una segunda cara con la oferta. Para los QR de la tarjeta y los flyers usa `/hola/?src=tarjeta` y `/hola/?src=flyer`.
+
+La nota usa los mismos cortes que el test de la web (los lee de `assets/src/js/main.js`) pero solo sobre lo que se ve en la ficha: no puntúa IA ni páginas por servicio. `/hola/` y `/d/` llevan `noindex, nofollow` y no están en el sitemap, pero **cualquiera con el enlace puede verlos**.
+
+**Medición sin cookies (GoatCounter):** crea una cuenta gratis en goatcounter.com y escribe el código de tu panel en `assets/src/js/main.js` → `SITE.goatcounter`; luego `python3 scripts/build/build.py`. Mientras esté vacío no se mide nada. Eventos (pestaña *Events*): `hola/<src>/<slug>`, `whatsapp/<página>`, `formulario/<tipo>`, `test-iniciado`, `test-terminado`, `test-contacto`. Cloudflare Web Analytics no cuenta eventos, por eso no se ha implementado.
+
+**Foto y opiniones de `/hola/`:** guarda tu foto como `assets/img/paula.webp` y pon `fotoPaula: true` en `assets/src/js/hola.js`. El bloque de opiniones sigue oculto hasta que añadas opiniones reales a `OPINIONES` en ese archivo.
+
+**Apps Script:** el script añade las columnas `Origen` y `Slug` (también a una hoja que ya exista). Hay que **volver a implementarlo a mano** (Gestionar implementaciones → editar → Nueva versión).

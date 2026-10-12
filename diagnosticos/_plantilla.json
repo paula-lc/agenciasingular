@@ -1,0 +1,45 @@
+{
+  "_ayuda": {
+    "slug": "En minúsculas y con guiones. El archivo debe llamarse igual: diagnosticos/<slug>.json",
+    "busquedas": "Posición en Google Maps (1 = el primero). null si no sale. Verde 1-3, ámbar 4-10, rojo más.",
+    "ficha": "Lo que ves en la ficha de Google Maps del negocio. Solo datos públicos.",
+    "arreglos_top3": "De 1 a 3 frases cortas, en infinitivo.",
+    "dorso": "true = segunda cara con la oferta del Pack Que te encuentren",
+    "cierre": "Opcional: sustituye la frase final por defecto"
+  },
+  "slug": "plantilla",
+  "negocio": "Negocio de ejemplo",
+  "sector": "Uñas y estética",
+  "barrio": "Horta-Guinardó",
+  "fecha": "2026-10-13",
+  "busquedas": [
+    {
+      "consulta": "manicura Horta Guinardó",
+      "posicion": 7
+    },
+    {
+      "consulta": "uñas cerca de mí (desde la puerta)",
+      "posicion": 4
+    }
+  ],
+  "ficha": {
+    "valoracion": 4.9,
+    "resenas": 57,
+    "resenas_sin_responder_pct": 80,
+    "fotos": 6,
+    "foto_principal_ok": false,
+    "horario_completo": true,
+    "servicios_con_precio": false,
+    "web_o_reservas_enlazado": false,
+    "publicaciones_ultimo_mes": false,
+    "categoria_principal": "Salón de manicura y pedicura",
+    "categorias_secundarias": 0
+  },
+  "arreglos_top3": [
+    "Enlazar Booksy en el botón de reservar",
+    "Subir 15 fotos de trabajos (ahora 6)",
+    "Responder las 45 reseñas pendientes"
+  ],
+  "nota_personal": "Una frase tuya, de cuando pasaste por el local (opcional).",
+  "dorso": false
+}

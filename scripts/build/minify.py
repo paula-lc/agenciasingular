@@ -6,6 +6,7 @@ ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JOBS=[
   (['npx','--yes','csso-cli@4.0.2','-i','assets/src/css/styles.css','-o','assets/css/styles.css'],'assets/css/styles.css'),
   (['npx','--yes','terser@5.36.0','assets/src/js/main.js','--compress','--mangle','-o','assets/js/main.js'],'assets/js/main.js'),
+  (['npx','--yes','terser@5.36.0','assets/src/js/hola.js','--compress','--mangle','-o','assets/js/hola.js'],'assets/js/hola.js'),
 ]
 def run():
     if not shutil.which('npx'):
