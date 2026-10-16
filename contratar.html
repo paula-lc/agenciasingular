@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/css/styles.css?v=72">
+  <link rel="stylesheet" href="assets/css/styles.css?v=73">
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -85,10 +85,10 @@
         <li><a class="btn btn--outline" href="./#proceso"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Cómo trabajamos</a></li>
         <li><a class="btn btn--outline" href="./#test"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Test gratis</a></li>
         <li><a class="btn btn--outline" href="guia-aparecer-en-ia-y-google-maps.html"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Guía</a></li>
-        <li class="nav__mcta"><a class="btn btn--yellow" href="./#contacto"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a></li>
+        <li class="nav__mcta"><a class="btn btn--yellow" href="./?interes=diagnostico#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a></li>
       </ul>
       <div class="nav__actions">
-        <a class="btn btn--cream nav__cta" href="./#contacto"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
+        <a class="btn btn--cream nav__cta" href="./?interes=diagnostico#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
 
         <div class="lang-switch" data-lang-switch><button type="button" class="lang-switch__btn" aria-expanded="false" aria-controls="lang-menu" aria-label="Idioma: Español">ES</button><ul class="lang-switch__menu" id="lang-menu" hidden><li><a href="/contratar.html" lang="es" hreflang="es" aria-current="true">Español</a></li><li><a href="/ca/contratar.html" lang="ca" hreflang="ca">Català</a></li><li><a href="/en/contratar.html" lang="en" hreflang="en">English</a></li></ul></div>
         <a class="nav__ig" href="https://www.instagram.com/agenciasingular.es/" target="_blank" rel="noopener" aria-label="Instagram de Agencia Singular"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a>
@@ -105,7 +105,7 @@
             <ol><li><a href="./">Inicio</a></li><li><a href="./#servicios">Servicios</a></li><li aria-current="page">Contratar</li></ol>
           </nav>
           <h1 class="hire-title"><span class="hire-title__kicker" data-hire-kicker>Cuéntanos</span><span class="hire-title__name"><span data-hire-title>Qué necesitas</span></span></h1>
-          <p data-hire-lead>Elige un pack, un plan mensual o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
+          <p data-hire-lead>Elige un pack o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
         </div>
       </section>
 
@@ -115,7 +115,7 @@
           <form class="form" id="hire-form" data-contact-form data-subject="Contratar" novalidate>
             <fieldset class="field chips chips--services" data-need-choice>
               <legend>¿Qué quieres contratar?</legend>
-              <button type="button" class="chips__group" data-group-toggle="packs" aria-expanded="true">Packs <small>(elige uno)</small> <span class="chips__arrow" aria-hidden="true">▾</span></button><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Que te encuentren" data-slug="pack-encuentren" data-short="Que te encuentren" data-icon="i-pin" data-price="desde 290 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-pin"/></svg>Que te encuentren</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Arranque" data-slug="pack-arranque" data-short="Arranque" data-icon="i-store" data-price="desde 490 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-store"/></svg>Arranque</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Escaparate" data-slug="pack-escaparate" data-short="Escaparate" data-icon="i-monitor" data-price="desde 1.290 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-monitor"/></svg>Escaparate</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Singular" data-slug="pack-singular" data-short="Singular" data-icon="i-palette" data-price="desde 2.490 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-palette"/></svg>Singular</span></label><button type="button" class="chips__group" data-group-toggle="planes" aria-expanded="true">Planes mensuales <small>(elige uno)</small> <span class="chips__arrow" aria-hidden="true">▾</span></button><label class="chip chip--service" data-group="planes"><input type="radio" name="plan" value="Plan Básico" data-slug="plan-basico" data-short="Básico" data-icon="i-pin" data-price="desde 59 €/mes"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-pin"/></svg>Básico</span></label><label class="chip chip--service" data-group="planes"><input type="radio" name="plan" value="Plan Siempre visible" data-slug="pack-visible" data-short="Siempre visible" data-icon="i-chart" data-price="desde 149 €/mes"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chart"/></svg>Siempre visible</span></label><button type="button" class="chips__group" data-group-toggle="carta" aria-expanded="true">Servicios a la carta <small>(los que quieras)</small> <span class="chips__arrow" aria-hidden="true">▾</span></button><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Rebranding" data-slug="rebranding" data-short="Rebranding" data-icon="i-palette"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-palette"/></svg>Rebranding<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Diseño Web" data-slug="diseno-web" data-short="Diseño Web" data-icon="i-monitor"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-monitor"/></svg>Diseño Web<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="SEO Local" data-slug="seo-local" data-short="SEO Local" data-icon="i-search"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-search"/></svg>SEO Local<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Posicionamiento en IA" data-slug="ia" data-short="Posicionamiento en IA" data-icon="i-sparkles"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-sparkles"/></svg>Posicionamiento en IA<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Fotografía Local" data-slug="fotografia" data-short="Fotografía Local" data-icon="i-aperture" data-price="desde 250 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-aperture"/></svg>Fotografía Local<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Redes Sociales" data-slug="redes-sociales" data-short="Redes Sociales" data-icon="i-share"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-share"/></svg>Redes Sociales<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="La Trastienda" data-slug="trastienda" data-short="La Trastienda" data-icon="i-chart" data-price="desde 120 € por sesión"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chart"/></svg>La Trastienda<small class=chip__inc>· incluido</small></span></label>
+              <button type="button" class="chips__group" data-group-toggle="packs" aria-expanded="true">Packs <small>(elige uno)</small> <span class="chips__arrow" aria-hidden="true">▾</span></button><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Que te encuentren" data-slug="pack-encuentren" data-short="Que te encuentren" data-icon="i-pin" data-price="desde 290 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-pin"/></svg>Que te encuentren</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Arranque" data-slug="pack-arranque" data-short="Arranque" data-icon="i-store" data-price="desde 490 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-store"/></svg>Arranque</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Escaparate" data-slug="pack-escaparate" data-short="Escaparate" data-icon="i-monitor" data-price="desde 1.290 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-monitor"/></svg>Escaparate</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Escaparate remoto" data-slug="pack-escaparate-remoto" data-short="Escaparate remoto" data-icon="i-monitor" data-price="desde 990 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-monitor"/></svg>Escaparate remoto</span></label><label class="chip chip--service" data-group="packs"><input type="radio" name="pack" value="Pack Singular" data-slug="pack-singular" data-short="Singular" data-icon="i-palette" data-price="desde 2.490 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-palette"/></svg>Singular</span></label><button type="button" class="chips__group" data-group-toggle="carta" aria-expanded="true">Servicios a la carta <small>(los que quieras)</small> <span class="chips__arrow" aria-hidden="true">▾</span></button><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Rebranding" data-slug="rebranding" data-short="Rebranding" data-icon="i-palette"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-palette"/></svg>Rebranding<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Diseño Web" data-slug="diseno-web" data-short="Diseño Web" data-icon="i-monitor"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-monitor"/></svg>Diseño Web<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="SEO Local" data-slug="seo-local" data-short="SEO Local" data-icon="i-search"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-search"/></svg>SEO Local<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Posicionamiento en IA" data-slug="ia" data-short="Posicionamiento en IA" data-icon="i-sparkles"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-sparkles"/></svg>Posicionamiento en IA<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Fotografía Local" data-slug="fotografia" data-short="Fotografía Local" data-icon="i-aperture" data-price="desde 250 €"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-aperture"/></svg>Fotografía Local<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="Redes Sociales" data-slug="redes-sociales" data-short="Redes Sociales" data-icon="i-share"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-share"/></svg>Redes Sociales<small class=chip__inc>· incluido</small></span></label><label class="chip chip--service" data-group="carta"><input type="checkbox" name="servicio" value="La Trastienda" data-slug="trastienda" data-short="La Trastienda" data-icon="i-chart" data-price="desde 120 € por sesión"><span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-chart"/></svg>La Trastienda<small class=chip__inc>· incluido</small></span></label>
             </fieldset>
 
               <fieldset class="service-fields" data-fields="pack-encuentren" hidden disabled>
@@ -130,17 +130,13 @@
                 <legend class="service-fields__title"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Sobre tu proyecto: Escaparate</legend>
                 <fieldset class="field chips"><legend>¿Tienes web ahora?</legend><label class="chip"><input type="radio" name="web_actual" value="No tengo"><span>No tengo</span></label><label class="chip"><input type="radio" name="web_actual" value="Sí, pero está anticuada"><span>Sí, pero está anticuada</span></label><label class="chip"><input type="radio" name="web_actual" value="Sí, pero no me trae clientes"><span>Sí, pero no me trae clientes</span></label></fieldset><div class="field"><label for="f-pack-escaparate-url">Dirección de tu web actual <small>(opcional)</small></label><input id="f-pack-escaparate-url" name="url" type="text" placeholder="https://…"></div><fieldset class="field chips"><legend>¿Qué debe poder hacer tu web?</legend><label class="chip"><input type="checkbox" name="funciones" value="Mostrar servicios y precios"><span>Mostrar servicios y precios</span></label><label class="chip"><input type="checkbox" name="funciones" value="Reservas o citas"><span>Reservas o citas</span></label><label class="chip"><input type="checkbox" name="funciones" value="Pedidos por WhatsApp"><span>Pedidos por WhatsApp</span></label><label class="chip"><input type="checkbox" name="funciones" value="Tienda online"><span>Tienda online</span></label><label class="chip"><input type="checkbox" name="funciones" value="Carta o menú"><span>Carta o menú</span></label></fieldset><div class="field"><label for="f-pack-escaparate-fotos">¿Cuándo te vendría bien la sesión de fotos? <small>(opcional)</small></label><input id="f-pack-escaparate-fotos" name="fotos" type="text" placeholder="Ej.: mañanas entre semana"></div>
               </fieldset>
+              <fieldset class="service-fields" data-fields="pack-escaparate-remoto" hidden disabled>
+                <legend class="service-fields__title"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg>Sobre tu proyecto: Escaparate remoto</legend>
+                <fieldset class="field chips"><legend>¿Tienes web ahora?</legend><label class="chip"><input type="radio" name="web_actual" value="No tengo"><span>No tengo</span></label><label class="chip"><input type="radio" name="web_actual" value="Sí, pero está anticuada"><span>Sí, pero está anticuada</span></label><label class="chip"><input type="radio" name="web_actual" value="Sí, pero no me trae clientes"><span>Sí, pero no me trae clientes</span></label></fieldset><div class="field"><label for="f-pack-escaparate-remoto-url">Dirección de tu web actual <small>(opcional)</small></label><input id="f-pack-escaparate-remoto-url" name="url" type="text" placeholder="https://…"></div><fieldset class="field chips"><legend>¿Qué debe poder hacer tu web?</legend><label class="chip"><input type="checkbox" name="funciones" value="Mostrar servicios y precios"><span>Mostrar servicios y precios</span></label><label class="chip"><input type="checkbox" name="funciones" value="Reservas o citas"><span>Reservas o citas</span></label><label class="chip"><input type="checkbox" name="funciones" value="Pedidos por WhatsApp"><span>Pedidos por WhatsApp</span></label><label class="chip"><input type="checkbox" name="funciones" value="Tienda online"><span>Tienda online</span></label><label class="chip"><input type="checkbox" name="funciones" value="Carta o menú"><span>Carta o menú</span></label></fieldset><fieldset class="field chips"><legend>¿Cómo harás las fotos?</legend><label class="chip"><input type="radio" name="fotos_como" value="Con el móvil, siguiendo vuestra guía"><span>Con el móvil, siguiendo vuestra guía</span></label><label class="chip"><input type="radio" name="fotos_como" value="Tengo fotógrafo"><span>Tengo fotógrafo</span></label><label class="chip"><input type="radio" name="fotos_como" value="Aún no lo sé"><span>Aún no lo sé</span></label></fieldset>
+              </fieldset>
               <fieldset class="service-fields" data-fields="pack-singular" hidden disabled>
                 <legend class="service-fields__title"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg>Sobre tu proyecto: Singular</legend>
                 <fieldset class="field chips"><legend>¿Qué te trae?</legend><label class="chip"><input type="radio" name="motivo" value="Voy a abrir"><span>Voy a abrir</span></label><label class="chip"><input type="radio" name="motivo" value="Voy a reabrir o reformar"><span>Voy a reabrir o reformar</span></label><label class="chip"><input type="radio" name="motivo" value="Mi marca ya no me representa"><span>Mi marca ya no me representa</span></label><label class="chip"><input type="radio" name="motivo" value="Quiero subir precios o de categoría"><span>Quiero subir precios o de categoría</span></label></fieldset><fieldset class="field chips"><legend>¿Tienes logo ahora?</legend><label class="chip"><input type="radio" name="logo_actual" value="Sí, y quiero renovarlo"><span>Sí, y quiero renovarlo</span></label><label class="chip"><input type="radio" name="logo_actual" value="Sí, pero no me representa"><span>Sí, pero no me representa</span></label><label class="chip"><input type="radio" name="logo_actual" value="No tengo"><span>No tengo</span></label></fieldset><fieldset class="field chips"><legend>¿Tienes web ahora?</legend><label class="chip"><input type="radio" name="web_actual" value="No tengo"><span>No tengo</span></label><label class="chip"><input type="radio" name="web_actual" value="Sí, pero está anticuada"><span>Sí, pero está anticuada</span></label><label class="chip"><input type="radio" name="web_actual" value="Sí, y me sirve"><span>Sí, y me sirve</span></label></fieldset><div class="field"><label for="f-pack-singular-fecha">¿Tienes una fecha clave? <small>(opcional)</small></label><input id="f-pack-singular-fecha" name="fecha" type="text" placeholder="Ej.: reapertura en marzo"></div>
-              </fieldset>
-              <fieldset class="service-fields" data-fields="plan-basico" hidden disabled>
-                <legend class="service-fields__title"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Sobre tu proyecto: Básico</legend>
-                <fieldset class="field chips"><legend>¿Tienes ficha en Google Maps?</legend><label class="chip"><input type="radio" name="ficha" value="Sí, y tengo acceso"><span>Sí, y tengo acceso</span></label><label class="chip"><input type="radio" name="ficha" value="Sí, pero no tengo acceso"><span>Sí, pero no tengo acceso</span></label><label class="chip"><input type="radio" name="ficha" value="No tengo"><span>No tengo</span></label><label class="chip"><input type="radio" name="ficha" value="No lo sé"><span>No lo sé</span></label></fieldset><div class="field"><label for="f-plan-basico-resenas">¿Cuántas reseñas tienes?</label><select id="f-plan-basico-resenas" name="resenas"><option value="">Elige una opción…</option><option>Ninguna</option><option>Menos de 10</option><option>Entre 10 y 50</option><option>Más de 50</option></select></div>
-              </fieldset>
-              <fieldset class="service-fields" data-fields="pack-visible" hidden disabled>
-                <legend class="service-fields__title"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>Sobre tu proyecto: Siempre visible</legend>
-                <fieldset class="field chips"><legend>¿Qué tienes ya en marcha?</legend><label class="chip"><input type="checkbox" name="base" value="Web"><span>Web</span></label><label class="chip"><input type="checkbox" name="base" value="Ficha de Google Maps"><span>Ficha de Google Maps</span></label><label class="chip"><input type="checkbox" name="base" value="Redes sociales"><span>Redes sociales</span></label><label class="chip"><input type="checkbox" name="base" value="Nada todavía"><span>Nada todavía</span></label></fieldset><div class="field"><label for="f-pack-visible-url">Dirección de tu web <small>(opcional)</small></label><input id="f-pack-visible-url" name="url" type="text" placeholder="https://…"></div><fieldset class="field chips"><legend>¿Qué es lo más importante para ti?</legend><label class="chip"><input type="checkbox" name="objetivo" value="Más llamadas y reservas"><span>Más llamadas y reservas</span></label><label class="chip"><input type="checkbox" name="objetivo" value="Más reseñas"><span>Más reseñas</span></label><label class="chip"><input type="checkbox" name="objetivo" value="Salir en las IA"><span>Salir en las IA</span></label><label class="chip"><input type="checkbox" name="objetivo" value="Que no se me olvide publicar"><span>Que no se me olvide publicar</span></label></fieldset>
               </fieldset>
               <fieldset class="service-fields" data-fields="rebranding" hidden disabled>
                 <legend class="service-fields__title"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg>Sobre tu proyecto: Rebranding</legend>
@@ -204,14 +200,14 @@
             <div class="contact-card service-info" data-info="" >
               <h3>¿Cómo funciona?</h3>
               <ul>
-                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Combinas un pack, un plan mensual y servicios sueltos</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Combinas un pack y servicios sueltos</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Te enviamos una propuesta cerrada en 48 h</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia y todo a tu nombre</li>
               </ul>
             </div>
               <div class="contact-card service-info" data-info="pack-encuentren" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
-                <h3>Pack Que te encuentren</h3><p class="service-info__price">desde 290 €</p>
+                <h3>Pack Que te encuentren</h3><p class="service-info__price">desde 290 €<small class="service-info__vat">+ IVA · 350,90 € en total</small></p>
                 <p>Para negocios con clientes fieles que en Google Maps son invisibles o están a medias.</p>
                 <h4>Qué incluye</h4>
                 <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Perfil de Empresa de Google optimizado de arriba abajo</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Kit de reseñas: QR, cartel impreso y plantillas</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Alta coherente en directorios y base para la IA</li></ul>
@@ -219,7 +215,7 @@
               </div>
               <div class="contact-card service-info" data-info="pack-arranque" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-store"/></svg></span>
-                <h3>Pack Arranque</h3><p class="service-info__price">desde 490 €</p>
+                <h3>Pack Arranque</h3><p class="service-info__price">desde 490 €<small class="service-info__vat">+ IVA · 592,90 € en total</small></p>
                 <p>Lo esencial bien hecho en 7 a 10 días: Google Maps, web de una página con reservas, fotos exprés e Instagram alineado.</p>
                 <h4>Qué incluye</h4>
                 <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Google Maps esencial: perfil completo y fotos</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Web de una página con botón de reserva (Booksy, Fresha o WhatsApp)</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sesión de fotos exprés (1 hora, 15 fotos) e Instagram alineado</li></ul>
@@ -227,35 +223,27 @@
               </div>
               <div class="contact-card service-info" data-info="pack-escaparate" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg></span>
-                <h3>Pack Escaparate</h3><p class="service-info__price">desde 1.290 €</p>
+                <h3>Pack Escaparate</h3><p class="service-info__price">desde 1.290 €<small class="service-info__vat">+ IVA · 1.560,90 € en total</small></p>
                 <p>Web nueva o rediseñada, SEO local, sesión de fotos y Google Maps: tu casa digital a la altura de tu negocio.</p>
                 <h4>Qué incluye</h4>
                 <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Diseño o rediseño web rápida y fácil de actualizar, con dominio y alojamiento el primer año</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>SEO local, sesión de fotografía y todo el Pack Que te encuentren</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>De regalo: 30 minutos de La Trastienda</li></ul>
                 <p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>3 a 4 semanas</p>
               </div>
+              <div class="contact-card service-info" data-info="pack-escaparate-remoto" hidden>
+                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg></span>
+                <h3>Escaparate remoto</h3><p class="service-info__price">desde 990 €<small class="service-info__vat">+ IVA · 1.197,90 € en total</small></p>
+                <p>Web, SEO local y todo el Pack Que te encuentren para negocios de fuera de Barcelona, sin sesión de fotos: trabajamos con tus fotos y te damos una guía para hacerlas con el móvil.</p>
+                <h4>Qué incluye</h4>
+                <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Web nueva o rediseñada, con dominio y alojamiento el primer año</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>SEO local y todo el Pack Que te encuentren (cartel en PDF listo para imprimir)</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Guía para hacer buenas fotos con el móvil, sin sesión de fotos en tu local</li></ul>
+                <p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>3 a 4 semanas, todo por videollamada</p>
+              </div>
               <div class="contact-card service-info" data-info="pack-singular" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span>
-                <h3>Pack Singular</h3><p class="service-info__price">desde 2.490 €</p>
+                <h3>Pack Singular</h3><p class="service-info__price">desde 2.490 €<small class="service-info__vat">+ IVA · 3.012,90 € en total</small></p>
                 <p>Cambio de imagen total: nueva marca, web, fotos, SEO y lanzamiento en redes.</p>
                 <h4>Qué incluye</h4>
                 <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Rebranding completo y aplicaciones (rótulo, tarjetas, carta…)</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Todo el Pack Escaparate</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Primer mes de redes con vídeos y sesión de La Trastienda</li></ul>
                 <p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>6 a 10 semanas</p>
-              </div>
-              <div class="contact-card service-info" data-info="plan-basico" hidden>
-                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
-                <h3>Plan Básico</h3><p class="service-info__price">desde 59 €/mes</p>
-                <p>Lo justo para que tu ficha de Google no se quede parada, sin pagar un mantenimiento completo.</p>
-                <h4>Qué incluye</h4>
-                <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Una publicación al mes en tu ficha de Google</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Respuesta a todas tus reseñas</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li></ul>
-                <p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</p>
-              </div>
-              <div class="contact-card service-info" data-info="pack-visible" hidden>
-                <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
-                <h3>Plan Siempre visible</h3><p class="service-info__price">desde 149 €/mes</p>
-                <p>Mantenimiento mensual de tu web y tu presencia en Google, Maps y las IA, para seguir subiendo sin tener que pensar en ello.</p>
-                <h4>Qué incluye</h4>
-                <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Mantenimiento web: cambios, copias de seguridad, dominio y alojamiento</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Publicaciones en Google Maps y gestión de reseñas</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Contenido SEO, ajustes para IA e informe mensual, sin permanencia</li></ul>
-                <p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</p>
               </div>
               <div class="contact-card service-info" data-info="rebranding" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span>
@@ -291,7 +279,7 @@
               </div>
               <div class="contact-card service-info" data-info="fotografia" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-aperture"/></svg></span>
-                <h3>Fotografía Local</h3><p class="service-info__price">desde 250 €</p>
+                <h3>Fotografía Local</h3><p class="service-info__price">desde 250 €<small class="service-info__vat">+ IVA · 302,50 € en total</small></p>
                 <p>Fotos reales y profesionales de tu negocio, tu equipo y tus productos estrella. Nada de bancos de imágenes.</p>
                 <h4>Qué incluye</h4>
                 <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sesión en tu local con dirección de arte</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Fotos editadas para web, Google Maps y redes</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Derechos de uso para siempre</li></ul>
@@ -307,7 +295,7 @@
               </div>
               <div class="contact-card service-info" data-info="trastienda" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
-                <h3>La Trastienda</h3><p class="service-info__price">desde 120 € por sesión</p>
+                <h3>La Trastienda</h3><p class="service-info__price">desde 120 € por sesión<small class="service-info__vat">+ IVA · 145,20 € en total</small></p>
                 <p>Consultoría de negocio retro-directa: precios, márgenes y estrategia comercial para vender mejor.</p>
                 <h4>Qué incluye</h4>
                 <ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sesión de diagnóstico de tu negocio</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Revisión de precios, márgenes y oferta</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Plan de acción claro y priorizado</li></ul>
@@ -315,8 +303,9 @@
               </div>
             <div class="contact-card contact-card--yellow">
               <h3>¿No sabes qué necesitas?</h3>
-              <p>Haz el test de visibilidad o pide un diagnóstico gratis de 30 minutos y te orientamos.</p>
+              <p>Haz el test de visibilidad o pide un diagnóstico gratis por escrito (en 48 h laborables) y te orientamos.</p>
               <a class="btn btn--crimson" href="./#test">Hacer el test</a>
+              <a class="btn btn--ghost" href="./?interes=diagnostico#contacto" data-track="cta-diagnostico">Diagnóstico gratis</a>
             </div>
           </aside>
         </div>
@@ -329,11 +318,11 @@
       <div class="footer-bottom" style="margin-top:0;border-top:0;padding-top:0">
         <p class="footer-langs"><a href="/contratar.html" lang="es" hreflang="es" aria-current="true">Español</a> · <a href="/ca/contratar.html" lang="ca" hreflang="ca">Català</a> · <a href="/en/contratar.html" lang="en" hreflang="en">English</a></p>
         <p>© <span data-year>2026</span> Agencia Singular · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a></p>
-        <p class="nanny">Tu business nanny digital <img src="assets/img/icon-192.png" alt="" width="36" height="36" loading="lazy"></p>
+        <p class="nanny">Tu niñera digital <img src="assets/img/icon-192.png" alt="" width="36" height="36" loading="lazy"></p>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=72" defer></script>
+  <script src="assets/js/main.js?v=73" defer></script>
 </body>
 </html>

@@ -10,7 +10,8 @@ JOBS=[
 def run():
     if not shutil.which('npx'):
         sys.exit('⚠ Falta Node.js (npx): instálalo para minificar CSS y JS.')
+    npx=shutil.which('npx')  # en Windows es npx.cmd: hay que dar la ruta completa
     for cmd,out in JOBS:
-        subprocess.run(cmd,cwd=ROOT,check=True,stdout=subprocess.DEVNULL)
+        subprocess.run([npx]+cmd[1:],cwd=ROOT,check=True,stdout=subprocess.DEVNULL)
         print(f'  {out}: {os.path.getsize(ROOT+out)//1024} KB')
 if __name__=='__main__': run()
