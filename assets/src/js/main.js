@@ -13,7 +13,7 @@ const SITE = {
   formEndpoint: "https://script.google.com/macros/s/AKfycbyK_Dqwi7gZ_pNRRHdVpg8wU9NDWJo0u3jWUuWLwA2bBgMqSTlYpmZll9o6SfKQrvYo/exec",
   // Código de tu sitio en goatcounter.com (analítica sin cookies): "micodigo" → https://micodigo.goatcounter.com.
   // Vacío = no se carga nada.
-  goatcounter: "",
+  goatcounter: "agenciasingular",
 };
 
 document.documentElement.classList.remove("no-js");
