@@ -1223,3 +1223,19 @@ html:has(.pmodal[open]) { overflow: hidden; }
 .pack__alias strong { font-weight: 800; }
 /* Botones de la cabecera: en móvil pueden partir línea (en inglés y catalán los textos son más largos) */
 @media (max-width: 600px) { .hero__ctas .btn { white-space: normal; text-align: center; line-height: 1.3; } }
+
+/* Precios con IVA, planes «Próximamente» y Escaparate remoto */
+.pack__vat { margin-top: -8px; font-size: 13px; font-weight: 700; color: var(--blue); }
+.pack--featured .pack__vat { color: var(--cream); }
+.pack__ribbon--soon { background: var(--yellow); color: var(--blue-deep); }
+.pack__ribbon--soon .icon { color: var(--crimson); }
+.pack--soon { border-style: dashed; }
+.pack__remote { margin-top: 2px; padding-top: 12px; border-top: 2px dashed currentColor; font-size: 13.5px; line-height: 1.45; }
+.pack__remote-link { display: inline; padding: 0; border: 0; background: none; font: inherit; font-weight: 800; text-align: left; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.pack__remote-link:hover, .pack__remote-link:focus-visible { color: var(--crimson); }
+.pack--featured .pack__remote-link:hover, .pack--featured .pack__remote-link:focus-visible { color: var(--yellow); }
+.service__vat { margin-top: -8px; font-size: 12.5px; font-weight: 600; color: var(--blue); }
+.service-info__vat { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; }
+.pmodal__vat { font-size: 13px; font-weight: 700; color: var(--cream); }
+.pmodal__soon { align-self: center; padding: 4px 10px; border-radius: 6px; background: var(--yellow); color: var(--blue-deep); font-family: var(--font-display); font-size: 12px; text-transform: uppercase; }
+.pmodal__note { margin-top: 12px; padding: 10px 14px; border-left: 4px solid var(--yellow); background: var(--white); border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; font-weight: 600; }

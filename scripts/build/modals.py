@@ -1,6 +1,11 @@
 # Inserta en index.html el botón "Ver detalles" de cada pack y su ventana con la información completa
 import re
 ROOT=str(__import__('pathlib').Path(__file__).resolve().parents[2])+'/'
+# Total con IVA (21 %) de cada precio publicado
+VAT={'290 €':'350,90 €','490 €':'592,90 €','990 €':'1.197,90 €','1.290 €':'1.560,90 €','2.490 €':'3.012,90 €','59 €':'71,39 €','149 €':'180,29 €','250 €':'302,50 €','120 €':'145,20 €'}
+def vat(p):
+    return '+ IVA · '+VAT[p['price']]+('/mes' if p.get('unit')=='/mes' else '')+' en total'
+NOTA_FOTOS='La sesión de fotos es presencial en Barcelona y área metropolitana. Fuera de esa zona, consúltanos.'
 PACKS=[
  dict(slug='pack-encuentren', kicker='Para empezar ya', name='Que te encuentren', price='290 €', unit='', plazo='1 a 2 semanas', icon='i-pin', btn='btn--crimson',
   para='Tienes un negocio con clientes fieles, pero cuando alguien busca tu servicio en Google Maps apareces a medias, con pocas fotos, sin reseñas recientes o directamente no apareces.',
@@ -12,8 +17,9 @@ PACKS=[
   pasos=[('Día 1','Llamada de 30 minutos: tu negocio, tus clientes y qué te buscan.'),('Semana 1','Revisamos tu ficha y la de tu competencia, y la dejamos a punto.'),('Semana 2','Kit de reseñas, directorios y una guía corta para mantenerlo tú.')],
   necesitamos=['Acceso a tu ficha de Google (o te ayudamos a recuperarlo)','Tus servicios, precios orientativos y horarios','Unas 10 fotos reales hechas con el móvil (te decimos cuáles y nosotros las editamos)'],
   llevas=['Ficha completa y optimizada, a tu nombre','Tus fotos editadas, listas para Maps, web y redes','Cartel impreso con QR y mensajes para conseguir reseñas','Informe antes/después y guía de mantenimiento'],
+  nota='Fuera del área de Barcelona, el cartel se entrega en PDF listo para imprimir y el seguimiento es por videollamada.',
   esperar='Una ficha que convence y aparece en más búsquedas de tu zona. Las visitas y llamadas desde Maps suelen notarse en las semanas siguientes; las reseñas dependen de que las pidas, y para eso te damos todo hecho.',
-  noincluye='Web ni sesión de fotos (las tienes en versión esencial en el Pack Arranque y completas en el Escaparate). La gestión mensual de la ficha es el Plan Básico o el Siempre visible.'),
+  noincluye='Web ni sesión de fotos (las tienes en versión esencial en el Pack Arranque y completas en el Escaparate). La gestión mensual de la ficha es el Plan Básico (próximamente) o el Siempre visible (próximamente).'),
  dict(slug='pack-arranque', kicker='Tu primera web', name='Arranque', price='490 €', unit='', plazo='7 a 10 días', icon='i-store', btn='btn--crimson',
   para='Necesitas una presencia online cuidada pero sencilla: un estudio de uñas o de estética, una tienda pequeña o tu primera web. Lo esencial bien hecho, rápido y sin complicarte. Para estudios de uñas y centros de estética lo llamamos Pack Tocador.',
   incluye=[
@@ -25,8 +31,9 @@ PACKS=[
   pasos=[('Día 1','Llamada de 30 minutos y elección de tu plantilla.'),('Días 2-4','Sesión de fotos exprés y textos.'),('Días 5-8','Web, ficha de Google e Instagram listos para revisar.'),('Días 9-10','Ajustes contigo (una ronda de cambios) y publicación.')],
   necesitamos=['Tu logo y colores (si no tienes, elegimos una tipografía y un color que te representen)','Tus servicios, precios y horario','Acceso a tu ficha de Google, a tu Instagram y a tu sistema de reservas','Una hora en tu local para las fotos'],
   llevas=['Web de una página publicada, a tu nombre','Ficha de Google completa y con fotos','15 fotos profesionales tuyas para siempre','Instagram coherente con tu web'],
-  esperar='Una presencia online profesional en menos de dos semanas, con todo listo para recibir reservas. Cuando quieras crecer, el siguiente paso natural es el Plan Básico cada mes o el Pack Escaparate.',
-  noincluye='El kit de reseñas con cartel impreso y el alta en directorios (están en el Pack Que te encuentren), páginas por servicio ni SEO local a fondo (Pack Escaparate), ni la gestión mensual (Plan Básico o Siempre visible).'),
+  nota=NOTA_FOTOS,
+  esperar='Una presencia online profesional en menos de dos semanas, con todo listo para recibir reservas. Cuando quieras crecer, el siguiente paso natural es el Pack Escaparate o, más adelante, el Plan Básico mensual (próximamente).',
+  noincluye='El kit de reseñas con cartel impreso y el alta en directorios (están en el Pack Que te encuentren), páginas por servicio ni SEO local a fondo (Pack Escaparate), ni la gestión mensual (Plan Básico (próximamente) o Siempre visible (próximamente)).'),
  dict(slug='pack-escaparate', kicker='Web + Google', name='Escaparate', price='1.290 €', unit='', plazo='3 a 4 semanas', icon='i-monitor', btn='btn--yellow',
   para='Tu web no existe, está anticuada o no te trae clientes. Quieres una casa digital a la altura de tu negocio, que funcione en el móvil y que Google y las IA entiendan.',
   incluye=[
@@ -40,8 +47,23 @@ PACKS=[
   pasos=[('Semana 1','Llamada de arranque, 30 minutos de La Trastienda, estructura de la web y búsquedas clave.'),('Semana 2','Sesión de fotos, textos y diseño. Te enseñamos una primera versión.'),('Semana 3','Ajustes contigo (dos rondas de cambios), SEO local y Google Maps.'),('Semana 4','Publicación, pruebas y una sesión para que sepas actualizarla.')],
   necesitamos=['Tu logo y colores (si no tienes, mira el Pack Singular)','Una mañana o tarde para la sesión de fotos','Tus servicios, precios y lo que te hace diferente','Si ya tienes dominio, el acceso; si no, lo registramos a tu nombre'],
   llevas=['Web publicada, a tu nombre y sin permanencia','Fotos profesionales para usar donde quieras','Ficha de Google optimizada y kit de reseñas','Guía sencilla para que puedas actualizarla'],
+  nota='La sesión de fotos es presencial en Barcelona y área metropolitana. Fuera de esa zona, consúltanos o mira el Escaparate remoto, sin sesión de fotos.',
   esperar='Una web que da confianza, se ve bien en el móvil y convierte visitas en llamadas, reservas o mensajes. El SEO empieza a dar frutos en semanas y crece con los meses; no prometemos el número 1 en Google, sino hacerlo bien para tener opciones reales.',
-  noincluye='A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre), que va incluida si contratas el Plan Siempre visible. Una tienda online con muchos productos se presupuesta aparte. El mantenimiento de la web y la gestión mensual de tu ficha y tus reseñas son el Plan Siempre visible.'),
+  noincluye='A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre), que irá incluida en el Plan Siempre visible (próximamente). Una tienda online con muchos productos se presupuesta aparte. El mantenimiento de la web y la gestión mensual de tu ficha y tus reseñas serán el Plan Siempre visible (próximamente).'),
+ dict(slug='pack-escaparate-remoto', card=False, kicker='Web + Google, sin salir de casa', name='Escaparate remoto', price='990 €', unit='', plazo='3 a 4 semanas', icon='i-monitor', btn='btn--yellow',
+  para='Tu negocio está fuera de Barcelona, o prefieres trabajar a distancia, y quieres una web a la altura con tu ficha de Google a punto. Es el Pack Escaparate sin la sesión de fotos en tu local: trabajamos con tus fotos y te damos una guía para hacerlas con el móvil.',
+  incluye=[
+   ('Web nueva o rediseñada', ['Diseño a medida con tu marca, pensado primero para el móvil','Rápida, segura y fácil de actualizar por ti','Hasta 6 páginas: inicio, servicios, sobre ti, contacto…','Reservas, WhatsApp, pedidos o carta integrados según tu negocio','Textos escritos contigo, claros y sin relleno']),
+   ('SEO local', ['Una página por cada servicio clave (lo que la gente busca de verdad)','Títulos, descripciones y enlaces pensados para tu barrio y tu ciudad','Alta en Google Search Console y analítica sencilla']),
+   ('Tus fotos, bien aprovechadas', ['Guía paso a paso para hacer buenas fotos con el móvil: qué fotografiar, con qué luz y desde dónde','Editamos las fotos que nos envíes para web, Maps y redes','Si prefieres un fotógrafo local, se presupuesta aparte']),
+   ('Todo el Pack Que te encuentren', ['Perfil de Empresa de Google optimizado de arriba abajo: categorías, servicios, horarios y descripción','Tus fotos en la ficha, ordenadas y etiquetadas','Kit de reseñas: QR, cartel en PDF listo para imprimir y mensajes para pedirlas y responderlas','Alta coherente en Apple Maps, Bing y directorios clave']),
+   ('Dominio, alojamiento e IA', ['Dominio (tunegocio.es) y alojamiento incluidos durante el primer año, a tu nombre','Preguntas frecuentes y datos estructurados para que las IA te entiendan']),
+  ],
+  pasos=[('Semana 1','Videollamada de arranque, estructura de la web, búsquedas clave y guía de fotos.'),('Semana 2','Recibimos tus fotos, escribimos los textos y diseñamos. Te enseñamos una primera versión.'),('Semana 3','Ajustes contigo (dos rondas de cambios), SEO local y Google Maps.'),('Semana 4','Publicación, pruebas y una videollamada para que sepas actualizarla.')],
+  necesitamos=['Tu logo y colores (si no tienes, mira el Pack Singular)','Las fotos de tu negocio hechas con el móvil, siguiendo nuestra guía','Tus servicios, precios y lo que te hace diferente','Si ya tienes dominio, el acceso; si no, lo registramos a tu nombre'],
+  llevas=['Web publicada, a tu nombre y sin permanencia','Tus fotos editadas, listas para web, Maps y redes','Ficha de Google optimizada y kit de reseñas (cartel en PDF)','Guía de fotos con el móvil y guía para actualizar la web'],
+  esperar='Una web que da confianza, se ve bien en el móvil y convierte visitas en llamadas, reservas o mensajes, sin que tengamos que ir a tu local. El SEO empieza a dar frutos en semanas y crece con los meses; no prometemos el número 1 en Google, sino hacerlo bien para tener opciones reales.',
+  noincluye='La sesión de fotos profesional (si quieres fotógrafo, se presupuesta aparte) ni el cartel impreso: se entrega en PDF listo para imprimir. A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre). Una tienda online con muchos productos se presupuesta aparte.'),
  dict(slug='pack-singular', kicker='Cambio de imagen total', name='Singular', price='2.490 €', unit='', plazo='6 a 10 semanas', icon='i-palette', btn='btn--crimson',
   para='Vas a abrir, reabrir o reformar, o sientes que tu marca ya no cuenta quién eres ni lo que cobras. Quieres un cambio completo, coherente de la fachada al Instagram.',
   incluye=[
@@ -54,20 +76,21 @@ PACKS=[
   pasos=[('Semanas 1-2','Entrevista de marca, referencias y competencia. Propuesta de identidad.'),('Semanas 3-4','Desarrollo de la marca y aplicaciones, con dos rondas de cambios.'),('Semanas 5-8','Fotos, web, SEO local y Google Maps con la nueva imagen.'),('Semanas 9-10','Sesión de La Trastienda, contenido del primer mes listo y entrega de todo.')],
   necesitamos=['Tiempo para una buena entrevista de marca (una hora y media)','Referencias de lo que te gusta y lo que no','Una fecha clave si la hay (apertura, reforma…) para planificar hacia atrás','Ganas de salir en algún vídeo (o de que salga tu equipo o tus manos trabajando)'],
   llevas=['Marca completa con manual y todos los archivos','Diseños de rótulo, tarjetas o carta listos para imprenta','Web, fotos y ficha de Google con la nueva imagen','Primer mes de redes listo para publicar, con vídeos','Plan de acción de precios y estrategia'],
+  nota=NOTA_FOTOS,
   esperar='Una imagen que se recuerda y que justifica lo que cobras, aplicada igual en todos sitios. Es el pack con más impacto, y el que más tiempo pide: cuanto antes empecemos respecto a tu fecha clave, mejor.',
-  noincluye='El coste de impresión y producción (rótulo, tarjetas…), que se paga a la imprenta; si quieres, lo gestionamos nosotros y lo incluimos en el presupuesto. Tampoco la publicación y gestión de redes a partir del segundo mes (servicio de Redes Sociales a la carta), ni el mantenimiento mensual de web y Google (Plan Siempre visible).'),
- dict(slug='plan-basico', kicker='Cada mes', name='Básico', price='59 €', unit='/mes', plazo='Mes a mes, sin permanencia', icon='i-pin', btn='btn--crimson',
+  noincluye='El coste de impresión y producción (rótulo, tarjetas…), que se paga a la imprenta; si quieres, lo gestionamos nosotros y lo incluimos en el presupuesto. Tampoco la publicación y gestión de redes a partir del segundo mes (servicio de Redes Sociales a la carta), ni el mantenimiento mensual de web y Google (Plan Siempre visible, próximamente).'),
+ dict(slug='plan-basico', soon=True, kicker='Cada mes', name='Básico', price='59 €', unit='/mes', plazo='Mes a mes, sin permanencia', icon='i-pin', btn='btn--crimson',
   para='Tienes un negocio pequeño, ya tienes ficha en Google (por ejemplo, después del Pack Arranque) y quieres que no se quede parada, sin pagar un mantenimiento completo.',
   incluye=[
    ('Google Maps activo', ['Una publicación al mes en tu ficha: novedades, ofertas o temporada','Respuesta a todas tus reseñas, en tu tono']),
-   ('Sin ataduras', ['Sin permanencia: te das de baja cuando quieras','Pasas al Plan Siempre visible cuando lo necesites']),
+   ('Sin ataduras', ['Sin permanencia: te das de baja cuando quieras','Pasarás al Plan Siempre visible cuando lo necesites']),
   ],
   pasos=[('Mes 1','Revisamos tu ficha y acordamos el tono de las respuestas.'),('Cada mes','Una publicación y respuesta a las reseñas nuevas.')],
   necesitamos=['Acceso a tu ficha de Google','Un aviso cuando tengas novedades u ofertas','Alguna foto nueva de vez en cuando'],
   llevas=['Tu ficha de Google activa cada mes','Todas tus reseñas respondidas'],
   esperar='Una ficha que se ve viva y cuidada: Google valora la actividad reciente y tus clientes ven que respondes. Es el mínimo para no perder lo conseguido.',
-  noincluye='Mantenimiento web, revisión de lo que dicen las IA ni informe mensual (están en el Plan Siempre visible).'),
- dict(slug='pack-visible', kicker='Cada mes', name='Siempre visible', price='149 €', unit='/mes', plazo='Mes a mes, sin permanencia', icon='i-chart', btn='btn--crimson',
+  noincluye='Mantenimiento web, revisión de lo que dicen las IA ni informe mensual (estarán en el Plan Siempre visible, próximamente).'),
+ dict(slug='pack-visible', soon=True, kicker='Cada mes', name='Siempre visible', price='149 €', unit='/mes', plazo='Mes a mes, sin permanencia', icon='i-chart', btn='btn--crimson',
   para='Ya tienes la base (ficha de Google y, a ser posible, web) y quieres que alguien la cuide y la haga crecer: sin acordarte de actualizar la web, publicar, responder reseñas ni revisar qué dicen de ti.',
   incluye=[
    ('Google Maps al día', ['Publicaciones y novedades en tu ficha cada mes','Respuesta a todas tus reseñas en tu tono','Fotos y datos siempre actualizados (horarios de festivos, servicios nuevos…)']),
@@ -80,7 +103,7 @@ PACKS=[
   necesitamos=['Acceso a tu ficha de Google y a tu web (si la hicimos nosotros, ya lo tenemos)','Un aviso cuando haya novedades (ofertas, cierres, productos nuevos)','Fotos nuevas de vez en cuando (te decimos cuáles)'],
   llevas=['Tu web siempre al día y funcionando','Tu presencia en Google y la IA cuidada cada mes','Informe mensual y cero permanencia: te quedas cuando te funciona'],
   esperar='Crecimiento constante: más reseñas, más visibilidad y más llamadas mes a mes. Funciona mejor con la base bien hecha; si aún no la tienes, empieza por el Pack Que te encuentren o Escaparate.',
-  noincluye='Gestión completa de redes sociales (se puede añadir como servicio a la carta). Si solo necesitas una publicación al mes y respuesta a reseñas, mira el Plan Básico.'),
+  noincluye='Gestión completa de redes sociales (se puede añadir como servicio a la carta). Si solo necesitas una publicación al mes y respuesta a reseñas, mira el Plan Básico (próximamente).'),
 ]
 
 import sys
@@ -99,14 +122,21 @@ def modal(p, is_pack):
     llev=''.join(f'<li>{check}<span>{esc(x)}</span></li>' for x in p['llevas'])
     if is_pack:
         unit=f'<small>{p["unit"]}</small>' if p['unit'] else ''
-        price=f'<span class="pmodal__price"><small>desde</small>{p["price"]}{unit}</span>'
+        price=f'<span class="pmodal__price"><small>desde</small>{p["price"]}{unit}</span><span class="pmodal__vat">{vat(p)}</span>'
+        if p.get('soon'): price+='<span class="pmodal__soon">Próximamente</span>'
         btn=p['btn']
     elif p.get('price'):
-        price=f'<span class="pmodal__price"><small>desde</small>{p["price"]}<small>{p.get("unit","")}</small></span>'
+        price=f'<span class="pmodal__price"><small>desde</small>{p["price"]}<small>{p.get("unit","")}</small></span><span class="pmodal__vat">{vat(p)}</span>'
         btn='btn--crimson'
     else:
         price='<span class="pmodal__price pmodal__price--quote">Presupuesto a medida en 48 h</span>'
         btn='btn--crimson'
+    nota=f'<p class="pmodal__note">{esc(p["nota"])}</p>' if p.get('nota') else ''
+    if p.get('soon'):
+        foot='<a class="btn btn--crimson" href="#contacto" data-interes="plan" data-track="plan-avisame">Avísame</a>'
+    else:
+        foot=(f'<a class="btn {btn}" href="contratar.html?servicio={p["slug"]}" data-track="{p["slug"]}-lo-quiero">{"Lo quiero" if is_pack else "Pedir propuesta"}</a>\n'
+              f'                <button type="button" class="add-btn" data-add="{p["slug"]}" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>')
     return f"""
           <dialog class="pmodal" id="detalle-{p["slug"]}" aria-labelledby="detalle-{p["slug"]}-title">
             <div class="pmodal__inner">
@@ -118,7 +148,7 @@ def modal(p, is_pack):
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>{esc(p["para"])}</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups">{inc}</div></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups">{inc}</div>{nota}</section>
                 <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps">{pasos}</ol></section>
                 <div class="pmodal__cols">
                   <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list">{nec}</ul></section>
@@ -128,8 +158,7 @@ def modal(p, is_pack):
                 <p class="pmodal__not"><strong>No incluye:</strong> {esc(p["noincluye"])}</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn {btn}" href="contratar.html?servicio={p["slug"]}">{"Lo quiero" if is_pack else "Pedir propuesta"}</a>
-                <button type="button" class="add-btn" data-add="{p["slug"]}" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+                {foot}
               </footer>
             </div>
           </dialog>"""
@@ -140,8 +169,11 @@ s=re.sub(r'\n\s*<button type="button" class="(?:pack__more|service__more|trastie
 s=re.sub(r'<button type="button" class="(?:add-btn )?service__more"[^>]*>.*?</button>','',s)
 s=re.sub(r'\s*<dialog class="pmodal".*?</dialog>','',s,flags=re.S)
 # Packs: botón y ventanas
-for p in PACKS:
-    pat=re.compile(r'(</ul>\n)(\s*)(<a class="btn btn--(?:ghost|yellow)" href="contratar\.html\?servicio='+p['slug']+'">)')
+for p in [x for x in PACKS if x.get('card', True)]:
+    if p.get('soon'):  # plan «Próximamente»: el botón es «Avísame» (data-plan marca de qué plan es)
+        pat=re.compile(r'(</ul>\n)(\s*)(<a class="btn btn--ghost" href="#contacto"[^>]*data-plan="'+p['slug']+'"[^>]*>)')
+    else:
+        pat=re.compile(r'(</ul>\n)(\s*)(<a class="btn btn--(?:ghost|yellow)" href="contratar\.html\?servicio='+p['slug']+'"[^>]*>)')
     s,n=pat.subn(lambda m: m.group(1)+m.group(2)+f'<button type="button" class="pack__more" data-pmodal="detalle-{p["slug"]}">Ver detalles <span aria-hidden="true">→</span></button>\n'+m.group(2)+m.group(3), s)
     assert n==1, p['slug']
 end='          <p class="packs-note">'

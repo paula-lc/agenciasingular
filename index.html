@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/css/styles.css?v=72">
+  <link rel="stylesheet" href="assets/css/styles.css?v=73">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -122,7 +122,17 @@
                 "minPrice": 290,
                 "priceCurrency": "EUR",
                 "valueAddedTaxIncluded": false
-              }
+              },
+              "areaServed": [
+                {
+                  "@type": "City",
+                  "name": "Barcelona"
+                },
+                {
+                  "@type": "Country",
+                  "name": "España"
+                }
+              ]
             },
             {
               "@type": "Offer",
@@ -148,36 +158,28 @@
             },
             {
               "@type": "Offer",
-              "name": "Pack Singular",
-              "description": "Rebranding completo y aplicaciones de marca, web con dominio y alojamiento el primer año, fotografía, SEO local, Google Maps, primer mes de redes con vídeos y sesión de consultoría La Trastienda.",
+              "name": "Pack Escaparate remoto",
+              "url": "https://agenciasingular.es/#detalle-pack-escaparate-remoto",
+              "description": "Pack Escaparate sin sesión de fotos, para negocios de toda España y en remoto: web nueva o rediseñada con dominio y alojamiento el primer año, SEO local y todo el Pack Que te encuentren (cartel en PDF listo para imprimir), con una guía para hacer las fotos con el móvil.",
+              "areaServed": {
+                "@type": "Country",
+                "name": "España"
+              },
               "priceSpecification": {
                 "@type": "PriceSpecification",
-                "minPrice": 2490,
+                "minPrice": 990,
                 "priceCurrency": "EUR",
                 "valueAddedTaxIncluded": false
               }
             },
             {
               "@type": "Offer",
-              "name": "Plan Básico",
-              "description": "Una publicación al mes en la ficha de Google y respuesta a todas las reseñas. Sin permanencia.",
+              "name": "Pack Singular",
+              "description": "Rebranding completo y aplicaciones de marca, web con dominio y alojamiento el primer año, fotografía, SEO local, Google Maps, primer mes de redes con vídeos y sesión de consultoría La Trastienda.",
               "priceSpecification": {
-                "@type": "UnitPriceSpecification",
+                "@type": "PriceSpecification",
+                "minPrice": 2490,
                 "priceCurrency": "EUR",
-                "unitText": "MONTH",
-                "valueAddedTaxIncluded": false,
-                "price": 59
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Plan Siempre visible",
-              "description": "Mantenimiento mensual de la web (cambios, copias de seguridad, dominio y alojamiento), Google Maps, reseñas, contenido SEO y revisión de lo que dicen las IA, con informe claro cada mes. Sin permanencia.",
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": 149,
-                "priceCurrency": "EUR",
-                "unitText": "MONTH",
                 "valueAddedTaxIncluded": false
               }
             },
@@ -204,7 +206,16 @@
                 "provider": {
                   "@id": "https://agenciasingular.es/#agencia"
                 },
-                "areaServed": "Barcelona"
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Barcelona"
+                  },
+                  {
+                    "@type": "Country",
+                    "name": "España"
+                  }
+                ]
               }
             },
             {
@@ -217,7 +228,16 @@
                 "provider": {
                   "@id": "https://agenciasingular.es/#agencia"
                 },
-                "areaServed": "Barcelona"
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Barcelona"
+                  },
+                  {
+                    "@type": "Country",
+                    "name": "España"
+                  }
+                ]
               }
             },
             {
@@ -230,7 +250,16 @@
                 "provider": {
                   "@id": "https://agenciasingular.es/#agencia"
                 },
-                "areaServed": "Barcelona"
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Barcelona"
+                  },
+                  {
+                    "@type": "Country",
+                    "name": "España"
+                  }
+                ]
               }
             },
             {
@@ -261,7 +290,16 @@
                 "provider": {
                   "@id": "https://agenciasingular.es/#agencia"
                 },
-                "areaServed": "Barcelona"
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Barcelona"
+                  },
+                  {
+                    "@type": "Country",
+                    "name": "España"
+                  }
+                ]
               }
             },
             {
@@ -274,7 +312,16 @@
                 "provider": {
                   "@id": "https://agenciasingular.es/#agencia"
                 },
-                "areaServed": "Barcelona"
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Barcelona"
+                  },
+                  {
+                    "@type": "Country",
+                    "name": "España"
+                  }
+                ]
               },
               "priceSpecification": {
                 "@type": "PriceSpecification",
@@ -347,7 +394,15 @@
             "name": "¿Cuánto cuestan los packs?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "El Pack Que te encuentren parte de 290 €, el Pack Arranque de 490 €, el Pack Escaparate de 1.290 € y el Pack Singular de 2.490 €. Los planes mensuales cuestan desde 59 € (Plan Básico) y 149 € (Plan Siempre visible). Son precios orientativos, IVA no incluido. Tras el diagnóstico gratuito te damos un presupuesto cerrado, sin sorpresas."
+              "text": "El Pack Que te encuentren parte de 290 €, el Pack Arranque de 490 €, el Pack Escaparate de 1.290 € (990 € en su versión remota, sin sesión de fotos) y el Pack Singular de 2.490 €. Los planes mensuales llegarán pronto, desde 59 €/mes. Son precios orientativos, más IVA: por ejemplo, 290 € + IVA son 350,90 € en total. Tras el diagnóstico gratuito te damos un presupuesto cerrado, sin sorpresas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo se paga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pago: 50 % al empezar y 50 % a la entrega, por transferencia y con factura de cada pago."
             }
           },
           {
@@ -355,7 +410,7 @@
             "name": "¿Hay permanencia?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Los packs son proyectos cerrados y el plan mensual se puede cancelar cuando quieras. La web, el dominio, las fotos y los accesos son siempre tuyos."
+              "text": "No. Los packs son proyectos cerrados, sin permanencia. Los planes mensuales, cuando estén disponibles, tampoco la tendrán: se podrán cancelar cuando quieras. La web, el dominio, las fotos y los accesos son siempre tuyos."
             }
           },
           {
@@ -363,7 +418,7 @@
             "name": "¿Dónde trabajáis?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Estamos en Barcelona y trabajamos en persona con negocios de Barcelona y su área metropolitana: L'Hospitalet, Sant Cugat, Sabadell y alrededores. Ahí podemos ir a tu local, hacer la sesión de fotos o tomarnos ese café. La estrategia, la web y el posicionamiento también los hacemos en remoto para negocios de toda España."
+              "text": "Estamos en Barcelona y trabajamos en persona con negocios de Barcelona y su área metropolitana: L'Hospitalet, Sant Cugat, Sabadell y alrededores. Ahí podemos ir a tu local, hacer la sesión de fotos o tomarnos ese café. Para negocios de toda España trabajamos en remoto, por videollamada, WhatsApp y email: el Pack Que te encuentren, el Escaparate remoto (web, SEO local y Google Maps, sin sesión de fotos; te damos una guía para hacerlas con el móvil), el SEO local, la IA y las redes. La sesión de fotos presencial solo la hacemos en Barcelona y su área metropolitana; fuera de esa zona, consúltanos."
             }
           },
           {
@@ -446,10 +501,10 @@
         <li><a class="btn btn--outline" href="#proceso"><svg class="icon" aria-hidden="true"><use href="#i-star-o"/></svg>Cómo trabajamos</a></li>
         <li><a class="btn btn--outline" href="#test"><svg class="icon" aria-hidden="true"><use href="#i-star-o"/></svg>Test gratis</a></li>
         <li><a class="btn btn--outline" href="guia-aparecer-en-ia-y-google-maps.html"><svg class="icon" aria-hidden="true"><use href="#i-star-o"/></svg>Guía</a></li>
-        <li class="nav__mcta"><a class="btn btn--yellow" href="#contacto"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a></li>
+        <li class="nav__mcta"><a class="btn btn--yellow" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a></li>
       </ul>
       <div class="nav__actions">
-        <a class="btn btn--cream nav__cta" href="#contacto"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
+        <a class="btn btn--cream nav__cta" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
 
         <div class="lang-switch" data-lang-switch><button type="button" class="lang-switch__btn" aria-expanded="false" aria-controls="lang-menu" aria-label="Idioma: Español">ES</button><ul class="lang-switch__menu" id="lang-menu" hidden><li><a href="/" lang="es" hreflang="es" aria-current="true">Español</a></li><li><a href="/ca/" lang="ca" hreflang="ca">Català</a></li><li><a href="/en/" lang="en" hreflang="en">English</a></li></ul></div>
         <a class="nav__ig" href="https://www.instagram.com/agenciasingular.es/" target="_blank" rel="noopener" aria-label="Instagram de Agencia Singular">
@@ -670,8 +725,8 @@
           </div>
 
           <div class="cta-row">
-            <a class="btn btn--retro" href="#contacto"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Pide tu diagnóstico gratis</a>
-            <p>30 minutos · Te decimos qué falla y qué harías tú mismo.</p>
+            <a class="btn btn--retro" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Pide tu diagnóstico gratis</a>
+            <p>Te digo en 48 h laborables qué falla en tu ficha de Google y cómo arreglarlo. Si quieres, lo comentamos en 15 minutos.</p>
           </div>
         </div>
       </section>
@@ -748,6 +803,7 @@
               <h3>Que te encuentren</h3>
               <p class="pack__for">Tienes clientes fieles pero en Google Maps eres invisible o estás a medias.</p>
               <p class="pack__price"><small>desde</small>290 €</p>
+              <p class="pack__vat">+ IVA · 350,90 € en total</p>
               <ul>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Perfil de Empresa de Google optimizado de arriba abajo</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Categorías, servicios, horarios y fotos que convencen</li>
@@ -756,7 +812,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Base para aparecer en respuestas de IA</li>
               </ul>
               <button type="button" class="pack__more" data-pmodal="detalle-pack-encuentren">Ver detalles <span aria-hidden="true">→</span></button>
-              <a class="btn btn--ghost" href="contratar.html?servicio=pack-encuentren">Lo quiero</a>
+              <a class="btn btn--ghost" href="contratar.html?servicio=pack-encuentren" data-track="pack-encuentren-lo-quiero">Lo quiero</a>
               <button type="button" class="add-btn add-btn--pack" data-add="pack-encuentren" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
             </article>
 
@@ -766,6 +822,7 @@
               <p class="pack__for">Estrenas tu presencia online o te basta con lo esencial: estética, tiendas pequeñas, tu primera web.</p>
               <p class="pack__alias"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg><span>En estética lo llamamos <strong>Pack Tocador</strong></span></p>
               <p class="pack__price"><small>desde</small>490 €</p>
+              <p class="pack__vat">+ IVA · 592,90 € en total</p>
               <ul>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Google Maps esencial: perfil completo y fotos</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Web de una página con botón de reserva (Booksy, Fresha o WhatsApp)</li>
@@ -774,7 +831,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Lista en 7 a 10 días</li>
               </ul>
               <button type="button" class="pack__more" data-pmodal="detalle-pack-arranque">Ver detalles <span aria-hidden="true">→</span></button>
-              <a class="btn btn--ghost" href="contratar.html?servicio=pack-arranque">Lo quiero</a>
+              <a class="btn btn--ghost" href="contratar.html?servicio=pack-arranque" data-track="pack-arranque-lo-quiero">Lo quiero</a>
               <button type="button" class="add-btn add-btn--pack" data-add="pack-arranque" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
             </article>
 
@@ -784,6 +841,7 @@
               <h3>Escaparate</h3>
               <p class="pack__for">Tu web no existe, es antigua o no te trae clientes. Quieres una casa digital a tu altura.</p>
               <p class="pack__price"><small>desde</small>1.290 €</p>
+              <p class="pack__vat">+ IVA · 1.560,90 € en total</p>
               <ul>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Diseño o rediseño web rápida y fácil de actualizar</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>SEO local: una página por servicio clave</li>
@@ -795,8 +853,9 @@
                 <li><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>De regalo: 30 minutos de La Trastienda</li>
               </ul>
               <button type="button" class="pack__more" data-pmodal="detalle-pack-escaparate">Ver detalles <span aria-hidden="true">→</span></button>
-              <a class="btn btn--yellow" href="contratar.html?servicio=pack-escaparate">Lo quiero</a>
+              <a class="btn btn--yellow" href="contratar.html?servicio=pack-escaparate" data-track="pack-escaparate-lo-quiero">Lo quiero</a>
               <button type="button" class="add-btn add-btn--pack" data-add="pack-escaparate" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+              <p class="pack__remote">¿Fuera de Barcelona? <button type="button" class="pack__remote-link" data-pmodal="detalle-pack-escaparate-remoto">Escaparate remoto, sin sesión de fotos: desde 990 € + IVA</button></p>
             </article>
 
             <article class="pack reveal">
@@ -804,6 +863,7 @@
               <h3>Singular</h3>
               <p class="pack__for">Abres, reabres o sientes que tu marca ya no cuenta quién eres. Toca brillar.</p>
               <p class="pack__price"><small>desde</small>2.490 €</p>
+              <p class="pack__vat">+ IVA · 3.012,90 € en total</p>
               <ul>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Rebranding: logo, colores, tipografías y tono</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Aplicaciones: rótulo, tarjetas, carta o packaging</li>
@@ -812,7 +872,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sesión de La Trastienda (precios y estrategia)</li>
               </ul>
               <button type="button" class="pack__more" data-pmodal="detalle-pack-singular">Ver detalles <span aria-hidden="true">→</span></button>
-              <a class="btn btn--ghost" href="contratar.html?servicio=pack-singular">Lo quiero</a>
+              <a class="btn btn--ghost" href="contratar.html?servicio=pack-singular" data-track="pack-singular-lo-quiero">Lo quiero</a>
               <button type="button" class="add-btn add-btn--pack" data-add="pack-singular" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
             </article>
 
@@ -820,29 +880,32 @@
 
           <div class="plans-head reveal">
             <h3 class="plans-title">Y después, cada mes</h3>
-            <p>Planes mensuales sin permanencia para que tu negocio siga visible. Combínalos con cualquier pack.</p>
+            <p>Próximamente: planes mensuales sin permanencia para que tu negocio siga visible. Pulsa «Avísame» y te escribimos cuando estén disponibles.</p>
           </div>
           <div class="packs packs--plans">
-            <article class="pack reveal">
+            <article class="pack pack--soon reveal">
+              <span class="pack__ribbon pack__ribbon--soon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Próximamente</span>
               <span class="pack__kicker">Cada mes</span>
               <h3>Básico</h3>
               <p class="pack__for">Lo justo para que tu ficha de Google no se quede parada. El siguiente paso natural después del Arranque.</p>
               <p class="pack__price"><small>desde</small>59 €<small>/mes</small></p>
+              <p class="pack__vat">+ IVA · 71,39 €/mes en total</p>
               <ul>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Una publicación al mes en tu ficha de Google</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Respuesta a todas tus reseñas</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia</li>
               </ul>
               <button type="button" class="pack__more" data-pmodal="detalle-plan-basico">Ver detalles <span aria-hidden="true">→</span></button>
-              <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico">Lo quiero</a>
-              <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+              <a class="btn btn--ghost" href="#contacto" data-interes="plan" data-track="plan-avisame" data-plan="plan-basico">Avísame</a>
             </article>
 
-            <article class="pack reveal">
+            <article class="pack pack--soon reveal">
+              <span class="pack__ribbon pack__ribbon--soon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Próximamente</span>
               <span class="pack__kicker">Cada mes</span>
               <h3>Siempre visible</h3>
               <p class="pack__for">Ya tienes la base y quieres seguir subiendo sin tener que pensar en ello.</p>
               <p class="pack__price"><small>desde</small>149 €<small>/mes</small></p>
+              <p class="pack__vat">+ IVA · 180,29 €/mes en total</p>
               <ul>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Mantenimiento web: cambios, copias y dominio</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Publicaciones y novedades en Google Maps</li>
@@ -852,8 +915,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Informe mensual en cristiano, sin jerga</li>
               </ul>
               <button type="button" class="pack__more" data-pmodal="detalle-pack-visible">Ver detalles <span aria-hidden="true">→</span></button>
-              <a class="btn btn--ghost" href="contratar.html?servicio=pack-visible">Lo quiero</a>
-              <button type="button" class="add-btn add-btn--pack" data-add="pack-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+              <a class="btn btn--ghost" href="#contacto" data-interes="plan" data-track="plan-avisame" data-plan="pack-visible">Avísame</a>
             </article>
           </div>
 
@@ -863,21 +925,21 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Para empezar ya</span>
                 <h3 id="detalle-pack-encuentren-title">Pack Que te encuentren</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>290 €</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>1 a 2 semanas</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>290 €</span><span class="pmodal__vat">+ IVA · 350,90 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>1 a 2 semanas</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tienes un negocio con clientes fieles, pero cuando alguien busca tu servicio en Google Maps apareces a medias, con pocas fotos, sin reseñas recientes o directamente no apareces.</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Perfil de Empresa de Google, de arriba abajo</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Reclamamos o recuperamos el acceso a tu ficha si no lo tienes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Categoría principal y secundarias exactas (la decisión que más pesa en Maps)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Servicios o productos con descripción y precio orientativo, horarios, festivos y zona</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Descripción del negocio escrita para tus clientes y para Google, sin relleno</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Editamos las fotos que nos envíes (luz, color y encuadre) para que se vean profesionales</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Fotos ordenadas y etiquetadas: fachada, interior, equipo y trabajos</span></li></ul></div><div class="pmodal__group"><h4>Kit de reseñas</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Código QR con tu marca que lleva directo a dejar la reseña</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel para el mostrador o el escaparate que invita a escanearlo: diseño e impresión incluidos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mensajes listos para pedir reseñas por WhatsApp sin sonar pesado</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Plantillas para responder reseñas buenas y no tan buenas</span></li></ul></div><div class="pmodal__group"><h4>Directorios y base para la IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mismos datos (nombre, dirección, teléfono) en Apple Maps, Bing y directorios clave</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Datos coherentes para que las IA te identifiquen y puedan recomendarte</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Perfil de Empresa de Google, de arriba abajo</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Reclamamos o recuperamos el acceso a tu ficha si no lo tienes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Categoría principal y secundarias exactas (la decisión que más pesa en Maps)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Servicios o productos con descripción y precio orientativo, horarios, festivos y zona</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Descripción del negocio escrita para tus clientes y para Google, sin relleno</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Editamos las fotos que nos envíes (luz, color y encuadre) para que se vean profesionales</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Fotos ordenadas y etiquetadas: fachada, interior, equipo y trabajos</span></li></ul></div><div class="pmodal__group"><h4>Kit de reseñas</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Código QR con tu marca que lleva directo a dejar la reseña</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel para el mostrador o el escaparate que invita a escanearlo: diseño e impresión incluidos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mensajes listos para pedir reseñas por WhatsApp sin sonar pesado</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Plantillas para responder reseñas buenas y no tan buenas</span></li></ul></div><div class="pmodal__group"><h4>Directorios y base para la IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mismos datos (nombre, dirección, teléfono) en Apple Maps, Bing y directorios clave</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Datos coherentes para que las IA te identifiquen y puedan recomendarte</span></li></ul></div></div><p class="pmodal__note">Fuera del área de Barcelona, el cartel se entrega en PDF listo para imprimir y el seguimiento es por videollamada.</p></section>
                 <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Día 1</span><span>Llamada de 30 minutos: tu negocio, tus clientes y qué te buscan.</span></li><li><span class="pmodal__when">Semana 1</span><span>Revisamos tu ficha y la de tu competencia, y la dejamos a punto.</span></li><li><span class="pmodal__when">Semana 2</span><span>Kit de reseñas, directorios y una guía corta para mantenerlo tú.</span></li></ol></section>
                 <div class="pmodal__cols">
                   <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google (o te ayudamos a recuperarlo)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios orientativos y horarios</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Unas 10 fotos reales hechas con el móvil (te decimos cuáles y nosotros las editamos)</span></li></ul></section>
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ficha completa y optimizada, a tu nombre</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos editadas, listas para Maps, web y redes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel impreso con QR y mensajes para conseguir reseñas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe antes/después y guía de mantenimiento</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una ficha que convence y aparece en más búsquedas de tu zona. Las visitas y llamadas desde Maps suelen notarse en las semanas siguientes; las reseñas dependen de que las pidas, y para eso te damos todo hecho.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> Web ni sesión de fotos (las tienes en versión esencial en el Pack Arranque y completas en el Escaparate). La gestión mensual de la ficha es el Plan Básico o el Siempre visible.</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> Web ni sesión de fotos (las tienes en versión esencial en el Pack Arranque y completas en el Escaparate). La gestión mensual de la ficha es el Plan Básico (próximamente) o el Siempre visible (próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=pack-encuentren">Lo quiero</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=pack-encuentren" data-track="pack-encuentren-lo-quiero">Lo quiero</a>
                 <button type="button" class="add-btn" data-add="pack-encuentren" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -888,21 +950,21 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Tu primera web</span>
                 <h3 id="detalle-pack-arranque-title">Pack Arranque</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>490 €</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>7 a 10 días</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>490 €</span><span class="pmodal__vat">+ IVA · 592,90 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>7 a 10 días</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Necesitas una presencia online cuidada pero sencilla: un estudio de uñas o de estética, una tienda pequeña o tu primera web. Lo esencial bien hecho, rápido y sin complicarte. Para estudios de uñas y centros de estética lo llamamos Pack Tocador.</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Google Maps esencial</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Perfil de Empresa completo: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus mejores fotos de la sesión, subidas y ordenadas</span></li></ul></div><div class="pmodal__group"><h4>Web de una página</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Diseñada a partir de nuestra plantilla, adaptada a tu marca y pensada para el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios orientativos, horario, mapa y contacto</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de reserva conectado a Booksy, Fresha o WhatsApp</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio y alojamiento el primer año, a tu nombre</span></li></ul></div><div class="pmodal__group"><h4>Sesión de fotos exprés</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>1 hora en tu local</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>15 fotos editadas para Maps, web e Instagram</span></li></ul></div><div class="pmodal__group"><h4>Instagram alineado</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Biografía clara con lo que haces y dónde</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Portadas de destacadas con tu marca</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Enlace a tu web o a tu sistema de reservas</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Google Maps esencial</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Perfil de Empresa completo: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus mejores fotos de la sesión, subidas y ordenadas</span></li></ul></div><div class="pmodal__group"><h4>Web de una página</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Diseñada a partir de nuestra plantilla, adaptada a tu marca y pensada para el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios orientativos, horario, mapa y contacto</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de reserva conectado a Booksy, Fresha o WhatsApp</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio y alojamiento el primer año, a tu nombre</span></li></ul></div><div class="pmodal__group"><h4>Sesión de fotos exprés</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>1 hora en tu local</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>15 fotos editadas para Maps, web e Instagram</span></li></ul></div><div class="pmodal__group"><h4>Instagram alineado</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Biografía clara con lo que haces y dónde</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Portadas de destacadas con tu marca</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Enlace a tu web o a tu sistema de reservas</span></li></ul></div></div><p class="pmodal__note">La sesión de fotos es presencial en Barcelona y área metropolitana. Fuera de esa zona, consúltanos.</p></section>
                 <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Día 1</span><span>Llamada de 30 minutos y elección de tu plantilla.</span></li><li><span class="pmodal__when">Días 2-4</span><span>Sesión de fotos exprés y textos.</span></li><li><span class="pmodal__when">Días 5-8</span><span>Web, ficha de Google e Instagram listos para revisar.</span></li><li><span class="pmodal__when">Días 9-10</span><span>Ajustes contigo (una ronda de cambios) y publicación.</span></li></ol></section>
                 <div class="pmodal__cols">
                   <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu logo y colores (si no tienes, elegimos una tipografía y un color que te representen)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios y horario</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google, a tu Instagram y a tu sistema de reservas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una hora en tu local para las fotos</span></li></ul></section>
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web de una página publicada, a tu nombre</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ficha de Google completa y con fotos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>15 fotos profesionales tuyas para siempre</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Instagram coherente con tu web</span></li></ul></section>
                 </div>
-                <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una presencia online profesional en menos de dos semanas, con todo listo para recibir reservas. Cuando quieras crecer, el siguiente paso natural es el Plan Básico cada mes o el Pack Escaparate.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> El kit de reseñas con cartel impreso y el alta en directorios (están en el Pack Que te encuentren), páginas por servicio ni SEO local a fondo (Pack Escaparate), ni la gestión mensual (Plan Básico o Siempre visible).</p>
+                <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una presencia online profesional en menos de dos semanas, con todo listo para recibir reservas. Cuando quieras crecer, el siguiente paso natural es el Pack Escaparate o, más adelante, el Plan Básico mensual (próximamente).</p></section>
+                <p class="pmodal__not"><strong>No incluye:</strong> El kit de reseñas con cartel impreso y el alta en directorios (están en el Pack Que te encuentren), páginas por servicio ni SEO local a fondo (Pack Escaparate), ni la gestión mensual (Plan Básico (próximamente) o Siempre visible (próximamente)).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=pack-arranque">Lo quiero</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=pack-arranque" data-track="pack-arranque-lo-quiero">Lo quiero</a>
                 <button type="button" class="add-btn" data-add="pack-arranque" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -913,22 +975,47 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Web + Google</span>
                 <h3 id="detalle-pack-escaparate-title">Pack Escaparate</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>1.290 €</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>3 a 4 semanas</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>1.290 €</span><span class="pmodal__vat">+ IVA · 1.560,90 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>3 a 4 semanas</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tu web no existe, está anticuada o no te trae clientes. Quieres una casa digital a la altura de tu negocio, que funcione en el móvil y que Google y las IA entiendan.</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Web nueva o rediseñada</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Diseño a medida con tu marca, pensado primero para el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Rápida, segura y fácil de actualizar por ti</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Hasta 6 páginas: inicio, servicios, sobre ti, contacto…</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Reservas, WhatsApp, pedidos o carta integrados según tu negocio</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Textos escritos contigo, claros y sin relleno</span></li></ul></div><div class="pmodal__group"><h4>SEO local</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una página por cada servicio clave (lo que la gente busca de verdad)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Títulos, descripciones y enlaces pensados para tu barrio y tu ciudad</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta en Google Search Console y analítica sencilla</span></li></ul></div><div class="pmodal__group"><h4>Fotografía</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sesión de fotos en tu local: espacio, equipo y tus productos o trabajos estrella</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Fotos editadas y optimizadas para web, Maps y redes</span></li></ul></div><div class="pmodal__group"><h4>Todo el Pack Que te encuentren</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Perfil de Empresa de Google optimizado de arriba abajo: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos en la ficha, ordenadas y etiquetadas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Kit de reseñas: QR, cartel impreso y mensajes para pedirlas y responderlas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta coherente en Apple Maps, Bing y directorios clave</span></li></ul></div><div class="pmodal__group"><h4>Dominio, alojamiento e IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio (tunegocio.es) y alojamiento incluidos durante el primer año, a tu nombre</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Preguntas frecuentes y datos estructurados para que las IA te entiendan</span></li></ul></div><div class="pmodal__group"><h4>De regalo</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>30 minutos de La Trastienda: repasamos tus precios y qué servicios destacar en la web</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Web nueva o rediseñada</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Diseño a medida con tu marca, pensado primero para el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Rápida, segura y fácil de actualizar por ti</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Hasta 6 páginas: inicio, servicios, sobre ti, contacto…</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Reservas, WhatsApp, pedidos o carta integrados según tu negocio</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Textos escritos contigo, claros y sin relleno</span></li></ul></div><div class="pmodal__group"><h4>SEO local</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una página por cada servicio clave (lo que la gente busca de verdad)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Títulos, descripciones y enlaces pensados para tu barrio y tu ciudad</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta en Google Search Console y analítica sencilla</span></li></ul></div><div class="pmodal__group"><h4>Fotografía</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sesión de fotos en tu local: espacio, equipo y tus productos o trabajos estrella</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Fotos editadas y optimizadas para web, Maps y redes</span></li></ul></div><div class="pmodal__group"><h4>Todo el Pack Que te encuentren</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Perfil de Empresa de Google optimizado de arriba abajo: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos en la ficha, ordenadas y etiquetadas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Kit de reseñas: QR, cartel impreso y mensajes para pedirlas y responderlas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta coherente en Apple Maps, Bing y directorios clave</span></li></ul></div><div class="pmodal__group"><h4>Dominio, alojamiento e IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio (tunegocio.es) y alojamiento incluidos durante el primer año, a tu nombre</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Preguntas frecuentes y datos estructurados para que las IA te entiendan</span></li></ul></div><div class="pmodal__group"><h4>De regalo</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>30 minutos de La Trastienda: repasamos tus precios y qué servicios destacar en la web</span></li></ul></div></div><p class="pmodal__note">La sesión de fotos es presencial en Barcelona y área metropolitana. Fuera de esa zona, consúltanos o mira el Escaparate remoto, sin sesión de fotos.</p></section>
                 <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Semana 1</span><span>Llamada de arranque, 30 minutos de La Trastienda, estructura de la web y búsquedas clave.</span></li><li><span class="pmodal__when">Semana 2</span><span>Sesión de fotos, textos y diseño. Te enseñamos una primera versión.</span></li><li><span class="pmodal__when">Semana 3</span><span>Ajustes contigo (dos rondas de cambios), SEO local y Google Maps.</span></li><li><span class="pmodal__when">Semana 4</span><span>Publicación, pruebas y una sesión para que sepas actualizarla.</span></li></ol></section>
                 <div class="pmodal__cols">
                   <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu logo y colores (si no tienes, mira el Pack Singular)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una mañana o tarde para la sesión de fotos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios y lo que te hace diferente</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Si ya tienes dominio, el acceso; si no, lo registramos a tu nombre</span></li></ul></section>
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web publicada, a tu nombre y sin permanencia</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Fotos profesionales para usar donde quieras</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ficha de Google optimizada y kit de reseñas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guía sencilla para que puedas actualizarla</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una web que da confianza, se ve bien en el móvil y convierte visitas en llamadas, reservas o mensajes. El SEO empieza a dar frutos en semanas y crece con los meses; no prometemos el número 1 en Google, sino hacerlo bien para tener opciones reales.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre), que va incluida si contratas el Plan Siempre visible. Una tienda online con muchos productos se presupuesta aparte. El mantenimiento de la web y la gestión mensual de tu ficha y tus reseñas son el Plan Siempre visible.</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre), que irá incluida en el Plan Siempre visible (próximamente). Una tienda online con muchos productos se presupuesta aparte. El mantenimiento de la web y la gestión mensual de tu ficha y tus reseñas serán el Plan Siempre visible (próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--yellow" href="contratar.html?servicio=pack-escaparate">Lo quiero</a>
+                <a class="btn btn--yellow" href="contratar.html?servicio=pack-escaparate" data-track="pack-escaparate-lo-quiero">Lo quiero</a>
                 <button type="button" class="add-btn" data-add="pack-escaparate" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
+          <dialog class="pmodal" id="detalle-pack-escaparate-remoto" aria-labelledby="detalle-pack-escaparate-remoto-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Web + Google, sin salir de casa</span>
+                <h3 id="detalle-pack-escaparate-remoto-title">Pack Escaparate remoto</h3>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>990 €</span><span class="pmodal__vat">+ IVA · 1.197,90 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>3 a 4 semanas</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tu negocio está fuera de Barcelona, o prefieres trabajar a distancia, y quieres una web a la altura con tu ficha de Google a punto. Es el Pack Escaparate sin la sesión de fotos en tu local: trabajamos con tus fotos y te damos una guía para hacerlas con el móvil.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Web nueva o rediseñada</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Diseño a medida con tu marca, pensado primero para el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Rápida, segura y fácil de actualizar por ti</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Hasta 6 páginas: inicio, servicios, sobre ti, contacto…</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Reservas, WhatsApp, pedidos o carta integrados según tu negocio</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Textos escritos contigo, claros y sin relleno</span></li></ul></div><div class="pmodal__group"><h4>SEO local</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una página por cada servicio clave (lo que la gente busca de verdad)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Títulos, descripciones y enlaces pensados para tu barrio y tu ciudad</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta en Google Search Console y analítica sencilla</span></li></ul></div><div class="pmodal__group"><h4>Tus fotos, bien aprovechadas</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guía paso a paso para hacer buenas fotos con el móvil: qué fotografiar, con qué luz y desde dónde</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Editamos las fotos que nos envíes para web, Maps y redes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Si prefieres un fotógrafo local, se presupuesta aparte</span></li></ul></div><div class="pmodal__group"><h4>Todo el Pack Que te encuentren</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Perfil de Empresa de Google optimizado de arriba abajo: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos en la ficha, ordenadas y etiquetadas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Kit de reseñas: QR, cartel en PDF listo para imprimir y mensajes para pedirlas y responderlas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta coherente en Apple Maps, Bing y directorios clave</span></li></ul></div><div class="pmodal__group"><h4>Dominio, alojamiento e IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio (tunegocio.es) y alojamiento incluidos durante el primer año, a tu nombre</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Preguntas frecuentes y datos estructurados para que las IA te entiendan</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Semana 1</span><span>Videollamada de arranque, estructura de la web, búsquedas clave y guía de fotos.</span></li><li><span class="pmodal__when">Semana 2</span><span>Recibimos tus fotos, escribimos los textos y diseñamos. Te enseñamos una primera versión.</span></li><li><span class="pmodal__when">Semana 3</span><span>Ajustes contigo (dos rondas de cambios), SEO local y Google Maps.</span></li><li><span class="pmodal__when">Semana 4</span><span>Publicación, pruebas y una videollamada para que sepas actualizarla.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu logo y colores (si no tienes, mira el Pack Singular)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Las fotos de tu negocio hechas con el móvil, siguiendo nuestra guía</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios y lo que te hace diferente</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Si ya tienes dominio, el acceso; si no, lo registramos a tu nombre</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web publicada, a tu nombre y sin permanencia</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos editadas, listas para web, Maps y redes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ficha de Google optimizada y kit de reseñas (cartel en PDF)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guía de fotos con el móvil y guía para actualizar la web</span></li></ul></section>
+                </div>
+                <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una web que da confianza, se ve bien en el móvil y convierte visitas en llamadas, reservas o mensajes, sin que tengamos que ir a tu local. El SEO empieza a dar frutos en semanas y crece con los meses; no prometemos el número 1 en Google, sino hacerlo bien para tener opciones reales.</p></section>
+                <p class="pmodal__not"><strong>No incluye:</strong> La sesión de fotos profesional (si quieres fotógrafo, se presupuesta aparte) ni el cartel impreso: se entrega en PDF listo para imprimir. A partir del segundo año, la renovación del dominio y el alojamiento (a tu nombre). Una tienda online con muchos productos se presupuesta aparte.</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--yellow" href="contratar.html?servicio=pack-escaparate-remoto" data-track="pack-escaparate-remoto-lo-quiero">Lo quiero</a>
+                <button type="button" class="add-btn" data-add="pack-escaparate-remoto" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
           </dialog>
@@ -938,21 +1025,21 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Cambio de imagen total</span>
                 <h3 id="detalle-pack-singular-title">Pack Singular</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>2.490 €</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>6 a 10 semanas</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>2.490 €</span><span class="pmodal__vat">+ IVA · 3.012,90 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>6 a 10 semanas</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Vas a abrir, reabrir o reformar, o sientes que tu marca ya no cuenta quién eres ni lo que cobras. Quieres un cambio completo, coherente de la fachada al Instagram.</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Rebranding</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Logo principal y versiones (horizontal, icono, blanco y negro)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Paleta de colores y tipografías</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tono de voz: cómo habla tu marca</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Manual de marca sencillo para que todo sea coherente</span></li></ul></div><div class="pmodal__group"><h4>Aplicaciones de marca</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Hasta 3 piezas a elegir: rótulo o fachada, tarjetas, carta o menú, packaging, bolsas…</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Archivos listos para imprenta</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Si prefieres que nos encarguemos de la impresión y de hablar con la imprenta, lo acordamos en tu presupuesto</span></li></ul></div><div class="pmodal__group"><h4>Todo el Pack Escaparate</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web nueva con tu nueva imagen, con dominio y alojamiento el primer año</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>SEO local con una página por servicio clave</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sesión de fotos profesional en tu local</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Google Maps optimizado y kit de reseñas con cartel QR impreso</span></li></ul></div><div class="pmodal__group"><h4>Lanzamiento en redes: tu primer mes</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Estrategia y calendario del primer mes: 12 publicaciones para anunciar el cambio</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Textos de todas las publicaciones, escritos con tu tono</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guiones para 4 vídeos cortos (reels o TikTok), pensados para grabar con el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Grabación de clips en tu local el mismo día de la sesión de fotos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>2 vídeos cortos editados y listos para publicar</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Plantillas editables con tu nueva imagen para seguir publicando tú</span></li></ul></div><div class="pmodal__group"><h4>Sesión de La Trastienda</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>90 minutos, en tu local o por videollamada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Revisamos tus precios y márgenes: qué te deja dinero y qué no</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Miramos a tu competencia de la zona y dónde encajas con tu nueva imagen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Qué servicios o productos potenciar y cómo presentarlos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Te llevas un plan de acción por escrito, en una página</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Rebranding</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Logo principal y versiones (horizontal, icono, blanco y negro)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Paleta de colores y tipografías</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tono de voz: cómo habla tu marca</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Manual de marca sencillo para que todo sea coherente</span></li></ul></div><div class="pmodal__group"><h4>Aplicaciones de marca</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Hasta 3 piezas a elegir: rótulo o fachada, tarjetas, carta o menú, packaging, bolsas…</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Archivos listos para imprenta</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Si prefieres que nos encarguemos de la impresión y de hablar con la imprenta, lo acordamos en tu presupuesto</span></li></ul></div><div class="pmodal__group"><h4>Todo el Pack Escaparate</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web nueva con tu nueva imagen, con dominio y alojamiento el primer año</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>SEO local con una página por servicio clave</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sesión de fotos profesional en tu local</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Google Maps optimizado y kit de reseñas con cartel QR impreso</span></li></ul></div><div class="pmodal__group"><h4>Lanzamiento en redes: tu primer mes</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Estrategia y calendario del primer mes: 12 publicaciones para anunciar el cambio</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Textos de todas las publicaciones, escritos con tu tono</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guiones para 4 vídeos cortos (reels o TikTok), pensados para grabar con el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Grabación de clips en tu local el mismo día de la sesión de fotos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>2 vídeos cortos editados y listos para publicar</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Plantillas editables con tu nueva imagen para seguir publicando tú</span></li></ul></div><div class="pmodal__group"><h4>Sesión de La Trastienda</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>90 minutos, en tu local o por videollamada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Revisamos tus precios y márgenes: qué te deja dinero y qué no</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Miramos a tu competencia de la zona y dónde encajas con tu nueva imagen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Qué servicios o productos potenciar y cómo presentarlos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Te llevas un plan de acción por escrito, en una página</span></li></ul></div></div><p class="pmodal__note">La sesión de fotos es presencial en Barcelona y área metropolitana. Fuera de esa zona, consúltanos.</p></section>
                 <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Semanas 1-2</span><span>Entrevista de marca, referencias y competencia. Propuesta de identidad.</span></li><li><span class="pmodal__when">Semanas 3-4</span><span>Desarrollo de la marca y aplicaciones, con dos rondas de cambios.</span></li><li><span class="pmodal__when">Semanas 5-8</span><span>Fotos, web, SEO local y Google Maps con la nueva imagen.</span></li><li><span class="pmodal__when">Semanas 9-10</span><span>Sesión de La Trastienda, contenido del primer mes listo y entrega de todo.</span></li></ol></section>
                 <div class="pmodal__cols">
                   <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tiempo para una buena entrevista de marca (una hora y media)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Referencias de lo que te gusta y lo que no</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una fecha clave si la hay (apertura, reforma…) para planificar hacia atrás</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ganas de salir en algún vídeo (o de que salga tu equipo o tus manos trabajando)</span></li></ul></section>
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Marca completa con manual y todos los archivos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Diseños de rótulo, tarjetas o carta listos para imprenta</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web, fotos y ficha de Google con la nueva imagen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Primer mes de redes listo para publicar, con vídeos</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Plan de acción de precios y estrategia</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una imagen que se recuerda y que justifica lo que cobras, aplicada igual en todos sitios. Es el pack con más impacto, y el que más tiempo pide: cuanto antes empecemos respecto a tu fecha clave, mejor.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> El coste de impresión y producción (rótulo, tarjetas…), que se paga a la imprenta; si quieres, lo gestionamos nosotros y lo incluimos en el presupuesto. Tampoco la publicación y gestión de redes a partir del segundo mes (servicio de Redes Sociales a la carta), ni el mantenimiento mensual de web y Google (Plan Siempre visible).</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> El coste de impresión y producción (rótulo, tarjetas…), que se paga a la imprenta; si quieres, lo gestionamos nosotros y lo incluimos en el presupuesto. Tampoco la publicación y gestión de redes a partir del segundo mes (servicio de Redes Sociales a la carta), ni el mantenimiento mensual de web y Google (Plan Siempre visible, próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=pack-singular">Lo quiero</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=pack-singular" data-track="pack-singular-lo-quiero">Lo quiero</a>
                 <button type="button" class="add-btn" data-add="pack-singular" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -963,22 +1050,21 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Cada mes</span>
                 <h3 id="detalle-plan-basico-title">Plan Básico</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>59 €<small>/mes</small></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>59 €<small>/mes</small></span><span class="pmodal__vat">+ IVA · 71,39 €/mes en total</span><span class="pmodal__soon">Próximamente</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tienes un negocio pequeño, ya tienes ficha en Google (por ejemplo, después del Pack Arranque) y quieres que no se quede parada, sin pagar un mantenimiento completo.</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Google Maps activo</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una publicación al mes en tu ficha: novedades, ofertas o temporada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Respuesta a todas tus reseñas, en tu tono</span></li></ul></div><div class="pmodal__group"><h4>Sin ataduras</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sin permanencia: te das de baja cuando quieras</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Pasas al Plan Siempre visible cuando lo necesites</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Google Maps activo</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una publicación al mes en tu ficha: novedades, ofertas o temporada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Respuesta a todas tus reseñas, en tu tono</span></li></ul></div><div class="pmodal__group"><h4>Sin ataduras</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sin permanencia: te das de baja cuando quieras</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Pasarás al Plan Siempre visible cuando lo necesites</span></li></ul></div></div></section>
                 <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Mes 1</span><span>Revisamos tu ficha y acordamos el tono de las respuestas.</span></li><li><span class="pmodal__when">Cada mes</span><span>Una publicación y respuesta a las reseñas nuevas.</span></li></ol></section>
                 <div class="pmodal__cols">
                   <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Un aviso cuando tengas novedades u ofertas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alguna foto nueva de vez en cuando</span></li></ul></section>
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu ficha de Google activa cada mes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Todas tus reseñas respondidas</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una ficha que se ve viva y cuidada: Google valora la actividad reciente y tus clientes ven que respondes. Es el mínimo para no perder lo conseguido.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> Mantenimiento web, revisión de lo que dicen las IA ni informe mensual (están en el Plan Siempre visible).</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> Mantenimiento web, revisión de lo que dicen las IA ni informe mensual (estarán en el Plan Siempre visible, próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=plan-basico">Lo quiero</a>
-                <button type="button" class="add-btn" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+                <a class="btn btn--crimson" href="#contacto" data-interes="plan" data-track="plan-avisame">Avísame</a>
               </footer>
             </div>
           </dialog>
@@ -988,7 +1074,7 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Cada mes</span>
                 <h3 id="detalle-pack-visible-title">Plan Siempre visible</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>149 €<small>/mes</small></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>149 €<small>/mes</small></span><span class="pmodal__vat">+ IVA · 180,29 €/mes en total</span><span class="pmodal__soon">Próximamente</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Ya tienes la base (ficha de Google y, a ser posible, web) y quieres que alguien la cuide y la haga crecer: sin acordarte de actualizar la web, publicar, responder reseñas ni revisar qué dicen de ti.</p></section>
@@ -999,11 +1085,10 @@
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu web siempre al día y funcionando</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu presencia en Google y la IA cuidada cada mes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe mensual y cero permanencia: te quedas cuando te funciona</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Crecimiento constante: más reseñas, más visibilidad y más llamadas mes a mes. Funciona mejor con la base bien hecha; si aún no la tienes, empieza por el Pack Que te encuentren o Escaparate.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> Gestión completa de redes sociales (se puede añadir como servicio a la carta). Si solo necesitas una publicación al mes y respuesta a reseñas, mira el Plan Básico.</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> Gestión completa de redes sociales (se puede añadir como servicio a la carta). Si solo necesitas una publicación al mes y respuesta a reseñas, mira el Plan Básico (próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=pack-visible">Lo quiero</a>
-                <button type="button" class="add-btn" data-add="pack-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+                <a class="btn btn--crimson" href="#contacto" data-interes="plan" data-track="plan-avisame">Avísame</a>
               </footer>
             </div>
           </dialog>
@@ -1011,7 +1096,7 @@
           <p class="packs-note">
             <span><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Precios orientativos, IVA no incluido</span>
             <span><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Presupuesto cerrado tras el diagnóstico</span>
-            <span><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Pago fraccionado disponible</span>
+            <span><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Pago: 50 % al empezar y 50 % a la entrega</span>
           </p>
         </div>
       </section>
@@ -1047,6 +1132,7 @@
               <div class="service__head"><h3><a class="service__link" href="contratar.html?servicio=pack-encuentren">Google Maps</a></h3><span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span></div>
               <p>Perfil de Empresa de Google completo y una estrategia de reseñas que trabaja por ti. Lo tienes todo en el Pack Que te encuentren.</p>
               <p class="service__price">desde <strong>290 €</strong></p>
+              <p class="service__vat">+ IVA · 350,90 € en total</p>
               <span class="service__foot"><span class="service__tag">Pack Que te encuentren</span><span class="service__actions"><button type="button" class="add-btn service__more" data-pmodal="detalle-pack-encuentren" aria-label="Ver detalles del Pack Que te encuentren">Detalles</button><button type="button" class="add-btn" data-add="pack-encuentren" aria-pressed="false" aria-label="Añadir el Pack Que te encuentren a mi propuesta"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button></span></span>
             </article>
             <article class="service reveal" data-slug="ia">
@@ -1058,6 +1144,7 @@
               <div class="service__head"><h3><a class="service__link" href="contratar.html?servicio=fotografia">Fotografía Local</a></h3><span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-aperture"/></svg></span></div>
               <p>Fotos reales y profesionales de tu negocio, tu equipo y tus productos estrella. Nada de bancos de imágenes genéricos e impersonales.</p>
               <p class="service__price">desde <strong>250 €</strong></p>
+              <p class="service__vat">+ IVA · 302,50 € en total</p>
               <span class="service__foot"><span class="service__tag">Producto y espacio</span><span class="service__actions"><button type="button" class="add-btn service__more" data-pmodal="detalle-fotografia" aria-label="Ver detalles de Fotografía Local">Detalles</button><button type="button" class="add-btn" data-add="fotografia" aria-pressed="false" aria-label="Añadir Fotografía Local a mi propuesta"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button></span></span>
             </article>
             <article class="service reveal" data-slug="redes-sociales">
@@ -1069,6 +1156,7 @@
               <div class="service__head"><h3><a class="service__link" href="contratar.html?servicio=trastienda">La Trastienda</a></h3><span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span></div>
               <p>Consultoría de negocio retro-directa: revisamos tus precios, márgenes y oferta para que vendas mejor y te salgan las cuentas.</p>
               <p class="service__price">desde <strong>120 €</strong> por sesión</p>
+              <p class="service__vat">+ IVA · 145,20 € en total</p>
               <span class="service__foot"><span class="service__tag">Precios y estrategia</span><span class="service__actions"><button type="button" class="add-btn service__more" data-pmodal="detalle-trastienda" aria-label="Ver detalles de La Trastienda">Detalles</button><button type="button" class="add-btn" data-add="trastienda" aria-pressed="false" aria-label="Añadir La Trastienda a mi propuesta"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button></span></span>
             </article>
           </div>
@@ -1092,7 +1180,7 @@
                 <p class="pmodal__not"><strong>No incluye:</strong> El coste de impresión (se paga a la imprenta; si quieres, lo gestionamos nosotros y lo incluimos en el presupuesto) ni la web.</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=rebranding">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=rebranding" data-track="rebranding-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="rebranding" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1114,10 +1202,10 @@
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Web publicada, a tu nombre y sin permanencia</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio y alojamiento el primer año</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guía sencilla para actualizarla</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Una web que da confianza y convierte visitas en llamadas, reservas o mensajes. Para que además te encuentren en Google, combínala con SEO Local o elige el Pack Escaparate, que lo incluye todo.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> SEO local a fondo, sesión de fotos ni tienda online con muchos productos (se presupuestan aparte). A partir del segundo año, la renovación del dominio y el alojamiento; el mantenimiento mensual es el Plan Siempre visible.</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> SEO local a fondo, sesión de fotos ni tienda online con muchos productos (se presupuestan aparte). A partir del segundo año, la renovación del dominio y el alojamiento; el mantenimiento mensual es el Plan Siempre visible (próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=diseno-web">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=diseno-web" data-track="diseno-web-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="diseno-web" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1139,10 +1227,10 @@
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu web preparada para las búsquedas de tu zona</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Páginas nuevas por servicio</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informes claros de cómo evolucionas</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>El SEO es una carrera de fondo: los primeros movimientos se ven en semanas y los resultados sólidos, entre 3 y 6 meses. No prometemos el número 1, sino hacerlo bien para tener opciones reales de aparecer.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> Una web nueva (si la tuya no se puede mejorar, te lo diremos). Para mantenerlo mes a mes está el Plan Siempre visible.</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> Una web nueva (si la tuya no se puede mejorar, te lo diremos). Para mantenerlo mes a mes está el Plan Siempre visible (próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=seo-local">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=seo-local" data-track="seo-local-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="seo-local" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1164,10 +1252,10 @@
                   <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe de qué dicen las IA de ti, antes y después</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu web y tu ficha preparadas para que te entiendan</span></li></ul></section>
                 </div>
                 <section class="pmodal__expect"><h4 class="pmodal__h">Qué puedes esperar</h4><p>Las IA tardan en actualizarse y nadie controla sus respuestas, así que no prometemos que te nombren siempre. Sí que les ponemos fácil entenderte y fiarse de ti, que es lo que hace que te recomienden.</p></section>
-                <p class="pmodal__not"><strong>No incluye:</strong> Una web nueva ni la gestión de reseñas. La revisión mensual de lo que dicen las IA está incluida en el Plan Siempre visible.</p>
+                <p class="pmodal__not"><strong>No incluye:</strong> Una web nueva ni la gestión de reseñas. La revisión mensual de lo que dicen las IA está incluida en el Plan Siempre visible (próximamente).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=ia">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=ia" data-track="ia-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="ia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1178,7 +1266,7 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Producto y espacio</span>
                 <h3 id="detalle-fotografia-title">Fotografía Local</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>250 €<small></small></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Entrega en 1 a 2 semanas</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>250 €<small></small></span><span class="pmodal__vat">+ IVA · 302,50 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Entrega en 1 a 2 semanas</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tus fotos son oscuras, antiguas o de banco de imágenes, y no muestran lo bonito que es tu negocio ni lo bien que trabajas.</p></section>
@@ -1192,7 +1280,7 @@
                 <p class="pmodal__not"><strong>No incluye:</strong> Vídeo, modelos, alquiler de material especial ni desplazamientos fuera del área de Barcelona (se presupuestan aparte).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=fotografia">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=fotografia" data-track="fotografia-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="fotografia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1217,7 +1305,7 @@
                 <p class="pmodal__not"><strong>No incluye:</strong> Anuncios de pago ni sesión de fotos profesional (Fotografía Local).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=redes-sociales">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=redes-sociales" data-track="redes-sociales-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="redes-sociales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1228,7 +1316,7 @@
                 <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
                 <span class="pmodal__kicker">Consultoría de negocio</span>
                 <h3 id="detalle-trastienda-title">La Trastienda</h3>
-                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>120 €<small> por sesión</small></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Sesiones de 90 minutos</span></p>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>120 €<small> por sesión</small></span><span class="pmodal__vat">+ IVA · 145,20 € en total</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Sesiones de 90 minutos</span></p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
                 <section><h4 class="pmodal__h">Es para ti si…</h4><p>Trabajas mucho pero no te salen las cuentas, no sabes si tus precios son los correctos o quieres dar un paso (abrir, ampliar, cambiar tu oferta) con cabeza.</p></section>
@@ -1242,7 +1330,7 @@
                 <p class="pmodal__not"><strong>No incluye:</strong> Contabilidad, asesoría fiscal ni la ejecución del plan (aunque podemos ayudarte con el marketing).</p>
               </div>
               <footer class="pmodal__foot">
-                <a class="btn btn--crimson" href="contratar.html?servicio=trastienda">Pedir propuesta</a>
+                <a class="btn btn--crimson" href="contratar.html?servicio=trastienda" data-track="trastienda-lo-quiero">Pedir propuesta</a>
                 <button type="button" class="add-btn" data-add="trastienda" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
               </footer>
             </div>
@@ -1362,7 +1450,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>centro de estética abierto sábado</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>“recomiéndame una manicurista con buenas reseñas”</li>
               </ul>
-              <p class="pack-suggest">Pack recomendado: <a class="pack-link" href="contratar.html?servicio=pack-arranque">Tocador <span aria-hidden="true">→</span></a> + <a class="pack-link" href="contratar.html?servicio=plan-basico">Plan Básico <span aria-hidden="true">→</span></a></p>
+              <p class="pack-suggest">Pack recomendado: <a class="pack-link" href="contratar.html?servicio=pack-arranque">Tocador <span aria-hidden="true">→</span></a> + <a class="pack-link" href="#contacto" data-interes="plan" data-track="plan-avisame">Plan Básico (próximamente) <span aria-hidden="true">→</span></a></p>
             </aside>
           </div>
 
@@ -1404,7 +1492,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>ramo de novia + tu ciudad</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>“¿dónde compro flores bonitas cerca?”</li>
               </ul>
-              <p class="pack-suggest">Pack recomendado: <a class="pack-link" href="contratar.html?servicio=pack-encuentren">Que te encuentren <span aria-hidden="true">→</span></a> + <a class="pack-link" href="contratar.html?servicio=pack-visible">Siempre visible <span aria-hidden="true">→</span></a></p>
+              <p class="pack-suggest">Pack recomendado: <a class="pack-link" href="contratar.html?servicio=pack-encuentren">Que te encuentren <span aria-hidden="true">→</span></a> + <a class="pack-link" href="#contacto" data-interes="plan" data-track="plan-avisame">Siempre visible (próximamente) <span aria-hidden="true">→</span></a></p>
             </aside>
           </div>
 
@@ -1467,7 +1555,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>restaurante sin gluten con terraza</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-bot"/></svg>“una cafetería tranquila para trabajar”</li>
               </ul>
-              <p class="pack-suggest">Pack recomendado: <a class="pack-link" href="contratar.html?servicio=pack-escaparate">Escaparate <span aria-hidden="true">→</span></a> + <a class="pack-link" href="contratar.html?servicio=pack-visible">Siempre visible <span aria-hidden="true">→</span></a></p>
+              <p class="pack-suggest">Pack recomendado: <a class="pack-link" href="contratar.html?servicio=pack-escaparate">Escaparate <span aria-hidden="true">→</span></a> + <a class="pack-link" href="#contacto" data-interes="plan" data-track="plan-avisame">Siempre visible (próximamente) <span aria-hidden="true">→</span></a></p>
             </aside>
           </div>
 
@@ -1507,8 +1595,8 @@
 
           <ol class="steps">
             <li class="step reveal">
-              <h3>Café y diagnóstico</h3>
-              <p>30 minutos para conocerte. Revisamos cómo te ven hoy Google, Maps y las IA, y qué hace tu competencia.</p>
+              <h3>Diagnóstico por escrito</h3>
+              <p>En 48 h laborables te mando tu nota y los 3 arreglos que más te van a ayudar. Si quieres, lo vemos en 15 minutos por videollamada o en tu local.</p>
               <span class="step__time">Gratis</span>
             </li>
             <li class="step reveal">
@@ -1573,15 +1661,19 @@
             </details>
             <details>
               <summary>¿Cuánto cuestan los packs?</summary>
-              <div class="answer"><p>El Pack Que te encuentren parte de 290 €, el Pack Arranque de 490 €, el Pack Escaparate de 1.290 € y el Pack Singular de 2.490 €. Los planes mensuales cuestan desde 59 € (Plan Básico) y 149 € (Plan Siempre visible). Son precios orientativos, IVA no incluido. Tras el diagnóstico gratuito te damos un presupuesto cerrado, sin sorpresas.</p></div>
+              <div class="answer"><p>El Pack Que te encuentren parte de 290 €, el Pack Arranque de 490 €, el Pack Escaparate de 1.290 € (990 € en su versión remota, sin sesión de fotos) y el Pack Singular de 2.490 €. Los planes mensuales llegarán pronto, desde 59 €/mes. Son precios orientativos, más IVA: por ejemplo, 290 € + IVA son 350,90 € en total. Tras el diagnóstico gratuito te damos un presupuesto cerrado, sin sorpresas.</p></div>
+            </details>
+            <details>
+              <summary>¿Cómo se paga?</summary>
+              <div class="answer"><p>Pago: 50 % al empezar y 50 % a la entrega, por transferencia y con factura de cada pago.</p></div>
             </details>
             <details>
               <summary>¿Hay permanencia?</summary>
-              <div class="answer"><p>No. Los packs son proyectos cerrados y el plan mensual se puede cancelar cuando quieras. La web, el dominio, las fotos y los accesos son siempre tuyos.</p></div>
+              <div class="answer"><p>No. Los packs son proyectos cerrados, sin permanencia. Los planes mensuales, cuando estén disponibles, tampoco la tendrán: se podrán cancelar cuando quieras. La web, el dominio, las fotos y los accesos son siempre tuyos.</p></div>
             </details>
             <details>
               <summary>¿Dónde trabajáis?</summary>
-              <div class="answer"><p>Estamos en Barcelona y trabajamos en persona con negocios de Barcelona y su área metropolitana: L'Hospitalet, Sant Cugat, Sabadell y alrededores. Ahí podemos ir a tu local, hacer la sesión de fotos o tomarnos ese café. La estrategia, la web y el posicionamiento también los hacemos en remoto para negocios de toda España.</p></div>
+              <div class="answer"><p>Estamos en Barcelona y trabajamos en persona con negocios de Barcelona y su área metropolitana: L'Hospitalet, Sant Cugat, Sabadell y alrededores. Ahí podemos ir a tu local, hacer la sesión de fotos o tomarnos ese café. Para negocios de toda España trabajamos en remoto, por videollamada, WhatsApp y email: el Pack Que te encuentren, el Escaparate remoto (web, SEO local y Google Maps, sin sesión de fotos; te damos una guía para hacerlas con el móvil), el SEO local, la IA y las redes. La sesión de fotos presencial solo la hacemos en Barcelona y su área metropolitana; fuera de esa zona, consúltanos.</p></div>
             </details>
             <details>
               <summary>¿Qué tengo que aportar yo?</summary>
@@ -1614,9 +1706,15 @@
               </div>
               <div class="form__row">
                 <div class="field">
-                  <label for="f-email">Dirección de email</label>
-                  <input id="f-email" name="email" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+                  <label for="f-email">Dirección de email <small>(o WhatsApp)</small></label>
+                  <input id="f-email" name="email" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com">
                 </div>
+                <div class="field">
+                  <label for="f-whatsapp">WhatsApp <small>(o email)</small></label>
+                  <input id="f-whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="600 000 000">
+                </div>
+              </div>
+              <div class="form__row">
                 <div class="field">
                   <label for="f-sector">Sector</label>
                   <select id="f-sector" name="sector">
@@ -1631,13 +1729,22 @@
                     <option>Otro</option>
                   </select>
                 </div>
+                <div class="field">
+                  <label for="f-ciudad">Ciudad o barrio <small>(para el diagnóstico)</small></label>
+                  <input id="f-ciudad" name="ciudad" type="text" autocomplete="address-level2" placeholder="Ej.: Barcelona, Gràcia">
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-ficha">Enlace a tu ficha de Google <small>(opcional)</small></label>
+                <input id="f-ficha" name="ficha" type="text" inputmode="url" autocomplete="off" placeholder="https://maps.app.goo.gl/…">
               </div>
               <fieldset class="field chips">
                 <legend>¿Qué te interesa?</legend>
+                <label class="chip"><input type="checkbox" name="interes" value="Diagnóstico gratis de mi ficha" data-interes="diagnostico"><span>Diagnóstico gratis de mi ficha</span></label>
                 <label class="chip"><input type="checkbox" name="interes" value="Que te encuentren"><span>Que te encuentren</span></label>
                 <label class="chip"><input type="checkbox" name="interes" value="Escaparate"><span>Escaparate</span></label>
                 <label class="chip"><input type="checkbox" name="interes" value="Singular"><span>Singular</span></label>
-                <label class="chip"><input type="checkbox" name="interes" value="Siempre visible"><span>Siempre visible</span></label>
+                <label class="chip"><input type="checkbox" name="interes" value="Plan mensual (avísame)" data-interes="plan"><span>Plan mensual (avísame)</span></label>
                 <label class="chip"><input type="checkbox" name="interes" value="No lo sé aún"><span>No lo sé aún</span></label>
               </fieldset>
               <div class="field">
@@ -1706,7 +1813,7 @@
             <li><a href="#packs">Que te encuentren</a></li>
             <li><a href="#packs">Escaparate</a></li>
             <li><a href="#packs">Singular</a></li>
-            <li><a href="#packs">Siempre visible</a></li>
+            <li><a href="#packs">Siempre visible (próximamente)</a></li>
           </ul>
         </div>
         <div>
@@ -1736,9 +1843,9 @@
   </footer>
 
   <aside class="sticky-cta" data-sticky-cta aria-label="Diagnóstico gratis">
-    <a class="btn btn--yellow" href="#contacto"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
+    <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
   </aside>
 
-  <script src="assets/js/main.js?v=72" defer></script>
+  <script src="assets/js/main.js?v=73" defer></script>
 </body>
 </html>

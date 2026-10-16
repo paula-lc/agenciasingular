@@ -1,17 +1,21 @@
 /**
  * Agencia Singular · Receptor de los formularios de la web
  *
- * Cada vez que alguien envía un formulario (contratar o café virtual):
+ * Cada vez que alguien envía un formulario (contratar, café virtual, diagnóstico gratis o test):
  *   1. Guarda una fila en la pestaña "Solicitudes" de esta hoja de cálculo (se puede descargar como Excel).
  *   2. Envía un email a DESTINO con el informe y el mismo informe en PDF adjunto.
  *      Al pulsar "Responder" en el email se contesta directamente al cliente.
+ *      Los diagnósticos gratis (formulario "Diagnóstico") llevan el prefijo [Diagnóstico] en el asunto, para filtrarlos en Gmail.
  *
  * Instalación (5 minutos): ver README.md → "Recibir los formularios por email".
  */
 
 const DESTINO = "hola@agenciasingular.es";
 const HOJA = "Solicitudes";
-const COLUMNAS = ["Fecha", "Formulario", "Nombre", "Negocio", "Email", "Teléfono", "Servicios", "Sector", "Ciudad o barrio", "Respuestas"];
+// "Ciudad o barrio" recoge el campo «Ciudad o barrio» de los formularios (obligatorio en el diagnóstico).
+// Las columnas nuevas van al final para no descolocar las filas que ya tengas en la hoja.
+const COLUMNAS = ["Fecha", "Formulario", "Nombre", "Negocio", "Email", "Teléfono", "Servicios", "Sector", "Ciudad o barrio", "Respuestas", "Ficha Google", "WhatsApp"];
+const PREFIJO_DIAGNOSTICO = "[Diagnóstico]";
 
 function doPost(e) {
   const p = (e && e.parameter) || {};
@@ -25,6 +29,8 @@ function doPost(e) {
     negocio: limpio(p.negocio, 160),
     email: limpio(p.email, 160),
     telefono: limpio(p.telefono, 40),
+    whatsapp: limpio(p.whatsapp, 40),
+    ficha: limpio(p.ficha, 300),
     servicios: limpio(p.servicios, 400),
     sector: limpio(p.sector, 80),
     ciudad: limpio(p.ciudad, 120),
@@ -39,6 +45,10 @@ function doPost(e) {
         filas: (s.filas || []).slice(0, 40).map((f) => [limpio(f[0], 200), limpio(f[1], 3000)]),
       }));
   } catch (err) { /* sin detalle */ }
+  // Los diagnósticos gratis se distinguen en el asunto del email
+  if (datos.formulario === "Diagnóstico" && datos.asunto.indexOf(PREFIJO_DIAGNOSTICO) !== 0) {
+    datos.asunto = PREFIJO_DIAGNOSTICO + " " + datos.asunto;
+  }
   const fecha = new Date();
 
   // 1. Hoja de cálculo
@@ -52,11 +62,12 @@ function doPost(e) {
     hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight("bold").setBackground("#3e6083").setFontColor("#ffffff");
     hoja.setFrozenRows(1);
   }
+  asegurarColumnas_(hoja);
   const texto = secciones.map((s) => s.titulo + "\n" + s.filas.map((f) => "· " + f[0] + ": " + f[1]).join("\n")).join("\n\n");
   // Evita que un texto que empiece por = + - @ se interprete como fórmula
   const celda = (v) => (/^[=+\-@]/.test(v) ? "'" + v : v);
   hoja.appendRow([fecha, datos.formulario, datos.nombre, datos.negocio, datos.email, datos.telefono,
-    datos.servicios, datos.sector, datos.ciudad, texto].map((v) => (v instanceof Date ? v : celda(v))));
+    datos.servicios, datos.sector, datos.ciudad, texto, datos.ficha, datos.whatsapp].map((v) => (v instanceof Date ? v : celda(v))));
 
   // 2. Informe por email + PDF
   const html = informe_(datos, secciones, fecha, libro.getUrl());
@@ -68,6 +79,17 @@ function doPost(e) {
   MailApp.sendEmail(opciones);
 
   return respuesta_();
+}
+
+// Si la hoja ya existía con menos columnas, añade al final los encabezados que falten (Ficha Google, WhatsApp…)
+function asegurarColumnas_(hoja) {
+  const actuales = hoja.getLastColumn() ? hoja.getRange(1, 1, 1, hoja.getLastColumn()).getValues()[0] : [];
+  COLUMNAS.forEach((nombre) => {
+    if (actuales.indexOf(nombre) === -1) {
+      const col = hoja.getLastColumn() + 1;
+      hoja.getRange(1, col).setValue(nombre).setFontWeight("bold").setBackground("#3e6083").setFontColor("#ffffff");
+    }
+  });
 }
 
 // Para comprobar que la implementación funciona: abre la URL en el navegador
@@ -99,7 +121,8 @@ function informe_(d, secciones, fecha, urlHoja) {
         <div style="font-size:13px;margin-top:6px">${esc_(cuando)}</div>
       </div>
       ${bloque("Resumen", fila("Servicios", d.servicios) + fila("Nombre", d.nombre) + fila("Negocio", d.negocio) +
-        fila("Email", d.email) + fila("Teléfono", d.telefono) + fila("Sector", d.sector) + fila("Ciudad o barrio", d.ciudad))}
+        fila("Email", d.email) + fila("Teléfono", d.telefono) + fila("WhatsApp", d.whatsapp) + fila("Sector", d.sector) +
+        fila("Ciudad o barrio", d.ciudad) + fila("Ficha de Google", d.ficha))}
       ${secciones.map((s) => bloque(s.titulo, s.filas.map((f) => fila(f[0], f[1])).join(""))).join("")}
       <p style="margin-top:28px;font-size:12px;color:#5b6b7c">Enviado desde ${esc_(d.pagina || "la web")}. Responde a este email para contestar al cliente.
       ${urlHoja ? `<br>Todas las solicitudes: <a href="${esc_(urlHoja)}" style="color:${azul}">hoja de solicitudes</a>.` : ""}</p>
