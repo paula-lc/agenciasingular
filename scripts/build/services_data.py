@@ -59,7 +59,7 @@ SERVICES=[
   pasos=[('Antes','Llamada corta y lista de tomas.'),('Día de la sesión','Hasta 2 horas en tu local, en el momento de mejor luz.'),('1-2 semanas después','Entrega de las fotos editadas.')],
   necesitamos=['El local preparado y ordenado','Productos o trabajos a punto para fotografiar','Permiso de quien salga en las fotos'],
   llevas=['Unas 30 fotos profesionales tuyas para siempre','Selección recomendada para Maps, web y redes'],
-  esperar='Fotos reales que dan confianza y hacen que te elijan: en Google Maps, las fichas con buenas fotos reciben muchas más visitas y llamadas.',
+  esperar='Fotos reales que dan confianza y hacen que te elijan en Google Maps, en tu web y en tus redes.',
   noincluye='Vídeo, modelos, alquiler de material especial ni desplazamientos fuera del área de Barcelona (se presupuestan aparte).'),
  dict(slug='redes-sociales', kicker='Instagram, TikTok, Facebook', title='Redes Sociales', icon='i-share', plazo='Arranque en 2 semanas',
   para='Sabes que deberías publicar, pero no tienes tiempo, ideas ni una imagen coherente, y tus redes están paradas o improvisadas.',
