@@ -22,7 +22,7 @@ const setWhatsapp = () => {
     ? ht("Hola Paula, soy de {negocio}, me dejaste el diagnóstico.", { negocio })
     : ht("Hola Paula, me diste tu QR y quiero que me digas cómo salgo en Google Maps.");
   waLink.href = `https://wa.me/${HSITE.whatsapp}?text=${encodeURIComponent(msg)}`;
-  waLink.dataset.trackDetail = `hola-${src}/${slug || "generico"}`;
+  waLink.dataset.track = `whatsapp/hola-${src}/${slug || "generico"}`;
   waLink.hidden = false;
 };
 

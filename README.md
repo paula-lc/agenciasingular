@@ -31,13 +31,13 @@ site.webmanifest · favicon.svg
 2. **Cinta de sectores**.
 3. **Problema/empatía** (del Figma) + 3 datos de dolor.
 4. **Tres sitios donde te buscan**: Google, Google Maps y las IA (GEO).
-5. **Packs** con precio “desde”: Que te encuentren · Arranque · Escaparate · Singular, y **planes mensuales**: Básico · Siempre visible.
+5. **Packs** con precio “desde” y el total con IVA debajo: Que te encuentren · Arranque · Escaparate (con la línea «¿Fuera de Barcelona?» que abre el **Escaparate remoto**, sin sesión de fotos) · Singular, y los **planes mensuales** Básico · Siempre visible, que están en **«Próximamente»** (botón «Avísame», no se pueden contratar).
 6. **Servicios a la carta** (tarjetas del Figma) + banner de La Trastienda.
 7. **Test de visibilidad** interactivo (8 preguntas → nota, consejos y pack recomendado).
 8. **Sectores** en pestañas, con búsquedas reales de cada tipo de negocio.
 9. **Proceso** en 4 pasos + compromisos.
 10. **FAQ** (también en datos estructurados FAQPage).
-11. **Contacto** “¿Tomamos un café virtual?” (del Figma), ampliado con sector e interés.
+11. **Contacto** “¿Tomamos un café virtual?” (del Figma), ampliado con sector, ciudad, enlace a la ficha de Google, WhatsApp e interés. Los botones «Diagnóstico gratis» y «Avísame» lo abren con la opción ya marcada (`data-interes="diagnostico"` o `"plan"`; también `?interes=diagnostico#contacto`). Con el diagnóstico elegido se envía como formulario «Diagnóstico».
 
 ## SEO y posicionamiento en IA incluidos
 
@@ -55,7 +55,8 @@ site.webmanifest · favicon.svg
 | **Email** (`hola@agenciasingular.es`) | `assets/src/js/main.js` (`SITE.email`), HTML, `llms.txt` |
 | **WhatsApp** (se oculta si está vacío) | `assets/src/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/src/js/main.js` → `SITE.formEndpoint` |
-| **Precios** (packs: 290 € Que te encuentren / 490 € Arranque / 1.290 € Escaparate / 2.490 € Singular; planes: 59 €/mes Básico / 149 €/mes Siempre visible; fotografía desde 250 €, La Trastienda desde 120 €) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
+| **Precios** (packs: 290 € Que te encuentren / 490 € Arranque / 1.290 € Escaparate / 990 € Escaparate remoto / 2.490 € Singular; planes «Próximamente»: 59 €/mes Básico / 149 €/mes Siempre visible; fotografía desde 250 €, La Trastienda desde 120 €). Todos con el total con IVA al 21 % (tabla `VAT` en `modals.py` y `contratar.py`, y las tarjetas de `index.html`) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
+| **Analítica sin cookies** (GoatCounter): código de tu sitio en goatcounter.com; vacío = no se carga nada | `assets/src/js/main.js` → `SITE.goatcounter` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
 | **Ciudad o zona**: si trabajáis en una ciudad concreta, añadidla al JSON-LD (`address`, `areaServed`) y a los textos para reforzar el SEO local | `index.html` |
@@ -89,7 +90,7 @@ En la portada, cada servicio y cada pack tiene un botón **Añadir**; lo elegido
 del visitante y aparece un contador en el menú que lleva a `contratar.html`. Allí se combinan un pack
 (solo uno) con los servicios a la carta que quieran: los que ya incluye el pack salen como "incluido", las
 preguntas comunes no se repiten y, si varios servicios sueltos forman un pack, se sugiere cambiar al pack.
-Qué incluye cada pack está en `assets/src/js/main.js` → `PACK_INCLUDES`.
+Qué incluye cada pack está en `assets/src/js/main.js` → `PACK_INCLUDES`. Los planes mensuales no están en la cesta ni en `contratar.html` mientras sean «Próximamente».
 
 ## Recibir los formularios por email (informe en PDF + hoja de cálculo)
 
@@ -108,6 +109,19 @@ informe (en el cuerpo del email y en PDF adjunto) y se guarda como una fila en u
 Si cambias el script, vuelve a implementarlo (Gestionar implementaciones → editar → Nueva versión)
 para que la URL siga siendo la misma.
 
+Los diagnósticos gratis llegan con el asunto `[Diagnóstico] …` y las columnas `Ficha Google` y `WhatsApp`
+(al final de la hoja; el script añade los encabezados que falten).
+
+## Analítica sin cookies (GoatCounter)
+
+1. Crea tu sitio gratis en goatcounter.com y copia el código (`micodigo` en `micodigo.goatcounter.com`).
+2. Ponlo en `assets/src/js/main.js` → `SITE.goatcounter` y ejecuta `python3 scripts/build/build.py`.
+3. `main.js` carga `count.js` en todas las páginas públicas (también `ca/` y `en/`). Los eventos se anotan con
+   `track("nombre")` o con `data-track="nombre"` en un enlace o botón: `whatsapp`, `cta-diagnostico`,
+   `pack-<id>-lo-quiero`, `plan-avisame`, `test-iniciado`, `test-terminado` y `form-<formulario>-enviado`.
+
+Sin cookies no hace falta banner. `/propuestas/` y `/d/` no cargan `main.js`, así que no llevan analítica.
+
 ## Idiomas (castellano, catalán e inglés) y cómo regenerar la web
 
 El castellano es el original (`index.html`, `contratar.html`, la guía). Las versiones en catalán (`/ca/`) e
@@ -122,6 +136,8 @@ el formulario en `contratar.py`), ejecuta:
 ```bash
 python3 scripts/build/build.py
 ```
+
+(En Windows: `python` en vez de `python3`, y `set PYTHONUTF8=1` antes. Hace falta `pip install beautifulsoup4` y Node.js.)
 
 Regenera las ventanas de detalle, `contratar.html`, el selector de idioma, las páginas `/ca/` y `/en/` y el `sitemap.xml`.
 Si hay textos nuevos sin traducir, el script los lista: añádelos a `ca.json` y `en.json` y vuelve a ejecutarlo

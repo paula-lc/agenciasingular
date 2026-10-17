@@ -24,7 +24,7 @@ SERVICES=[
   necesitamos=['Tu logo y colores','Tus servicios, precios y lo que te hace diferente','Fotos de tu negocio (o añade la sesión de fotografía)'],
   llevas=['Web publicada, a tu nombre y sin permanencia','Dominio y alojamiento el primer año','Guía sencilla para actualizarla'],
   esperar='Una web que da confianza y convierte visitas en llamadas, reservas o mensajes. Para que además te encuentren en Google, combínala con SEO Local o elige el Pack Escaparate, que lo incluye todo.',
-  noincluye='SEO local a fondo, sesión de fotos ni tienda online con muchos productos (se presupuestan aparte). A partir del segundo año, la renovación del dominio y el alojamiento; el mantenimiento mensual es el Plan Siempre visible.'),
+  noincluye='SEO local a fondo, sesión de fotos ni tienda online con muchos productos (se presupuestan aparte). A partir del segundo año, la renovación del dominio y el alojamiento; el mantenimiento mensual es el Plan Siempre visible (próximamente).'),
  dict(slug='seo-local', kicker='Google orgánico', title='SEO Local', icon='i-search', plazo='Resultados en 3 a 6 meses',
   para='Tienes web, pero cuando alguien busca “tu servicio + tu barrio” en Google aparece tu competencia y tú no.',
   incluye=[
@@ -36,7 +36,7 @@ SERVICES=[
   necesitamos=['Acceso a tu web y a Google Search Console (o te ayudamos a crearlo)','Tus servicios estrella y las zonas donde trabajas','Un rato para revisar los textos nuevos'],
   llevas=['Tu web preparada para las búsquedas de tu zona','Páginas nuevas por servicio','Informes claros de cómo evolucionas'],
   esperar='El SEO es una carrera de fondo: los primeros movimientos se ven en semanas y los resultados sólidos, entre 3 y 6 meses. No prometemos el número 1, sino hacerlo bien para tener opciones reales de aparecer.',
-  noincluye='Una web nueva (si la tuya no se puede mejorar, te lo diremos). Para mantenerlo mes a mes está el Plan Siempre visible.'),
+  noincluye='Una web nueva (si la tuya no se puede mejorar, te lo diremos). Para mantenerlo mes a mes está el Plan Siempre visible (próximamente).'),
  dict(slug='ia', kicker='GEO / AI Overviews', title='Posicionamiento en IA', icon='i-sparkles', plazo='Primeros cambios en 4 a 8 semanas',
   para='Cada vez más clientes preguntan a ChatGPT, Gemini o a Google “¿dónde hay un buen… cerca de mí?”, y la IA recomienda a otros.',
   incluye=[
@@ -48,7 +48,7 @@ SERVICES=[
   necesitamos=['Acceso a tu web y a tu ficha de Google','Las preguntas que te hacen tus clientes','Qué te hace diferente de verdad'],
   llevas=['Informe de qué dicen las IA de ti, antes y después','Tu web y tu ficha preparadas para que te entiendan'],
   esperar='Las IA tardan en actualizarse y nadie controla sus respuestas, así que no prometemos que te nombren siempre. Sí que les ponemos fácil entenderte y fiarse de ti, que es lo que hace que te recomienden.',
-  noincluye='Una web nueva ni la gestión de reseñas. La revisión mensual de lo que dicen las IA está incluida en el Plan Siempre visible.'),
+  noincluye='Una web nueva ni la gestión de reseñas. La revisión mensual de lo que dicen las IA está incluida en el Plan Siempre visible (próximamente).'),
  dict(slug='fotografia', kicker='Producto y espacio', title='Fotografía Local', icon='i-aperture', price='250 €', plazo='Entrega en 1 a 2 semanas',
   para='Tus fotos son oscuras, antiguas o de banco de imágenes, y no muestran lo bonito que es tu negocio ni lo bien que trabajas.',
   incluye=[
@@ -59,7 +59,7 @@ SERVICES=[
   pasos=[('Antes','Llamada corta y lista de tomas.'),('Día de la sesión','Hasta 2 horas en tu local, en el momento de mejor luz.'),('1-2 semanas después','Entrega de las fotos editadas.')],
   necesitamos=['El local preparado y ordenado','Productos o trabajos a punto para fotografiar','Permiso de quien salga en las fotos'],
   llevas=['Unas 30 fotos profesionales tuyas para siempre','Selección recomendada para Maps, web y redes'],
-  esperar='Fotos reales que dan confianza y hacen que te elijan: en Google Maps, las fichas con buenas fotos reciben muchas más visitas y llamadas.',
+  esperar='Fotos reales que dan confianza y hacen que te elijan en Google Maps, en tu web y en tus redes.',
   noincluye='Vídeo, modelos, alquiler de material especial ni desplazamientos fuera del área de Barcelona (se presupuestan aparte).'),
  dict(slug='redes-sociales', kicker='Instagram, TikTok, Facebook', title='Redes Sociales', icon='i-share', plazo='Arranque en 2 semanas',
   para='Sabes que deberías publicar, pero no tienes tiempo, ideas ni una imagen coherente, y tus redes están paradas o improvisadas.',

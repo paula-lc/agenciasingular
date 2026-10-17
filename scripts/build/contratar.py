@@ -46,6 +46,14 @@ P=[
           text('url','Dirección de tu web actual','https://…'),
           chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú']),
           text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
+ dict(slug='pack-escaparate-remoto',name='Escaparate remoto',short='Escaparate remoto',icon='i-monitor',price='desde 990 €',
+  intro='Web, SEO local y todo el Pack Que te encuentren para negocios de fuera de Barcelona, sin sesión de fotos: trabajamos con tus fotos y te damos una guía para hacerlas con el móvil.',
+  inc=['Web nueva o rediseñada, con dominio y alojamiento el primer año','SEO local y todo el Pack Que te encuentren (cartel en PDF listo para imprimir)','Guía para hacer buenas fotos con el móvil, sin sesión de fotos en tu local'],
+  plazo='3 a 4 semanas, todo por videollamada',
+  fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
+          text('url','Dirección de tu web actual','https://…'),
+          chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú']),
+          chips('fotos_como','¿Cómo harás las fotos?',['Con el móvil, siguiendo vuestra guía','Tengo fotógrafo','Aún no lo sé'],'radio')]),
  dict(slug='pack-singular',name='Pack Singular',short='Singular',icon='i-palette',price='desde 2.490 €',
   intro='Cambio de imagen total: nueva marca, web, fotos, SEO y lanzamiento en redes.',
   inc=['Rebranding completo y aplicaciones (rótulo, tarjetas, carta…)','Todo el Pack Escaparate','Primer mes de redes con vídeos y sesión de La Trastienda'],
@@ -54,19 +62,6 @@ P=[
           chips('logo_actual','¿Tienes logo ahora?',['Sí, y quiero renovarlo','Sí, pero no me representa','No tengo'],'radio'),
           chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, y me sirve'],'radio'),
           text('fecha','¿Tienes una fecha clave?','Ej.: reapertura en marzo')]),
- dict(slug='plan-basico',name='Plan Básico',short='Básico',icon='i-pin',price='desde 59 €/mes',
-  intro='Lo justo para que tu ficha de Google no se quede parada, sin pagar un mantenimiento completo.',
-  inc=['Una publicación al mes en tu ficha de Google','Respuesta a todas tus reseñas','Sin permanencia'],
-  plazo='Mes a mes, sin permanencia',
-  fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
-          select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50'])]),
- dict(slug='pack-visible',name='Plan Siempre visible',short='Siempre visible',icon='i-chart',price='desde 149 €/mes',
-  intro='Mantenimiento mensual de tu web y tu presencia en Google, Maps y las IA, para seguir subiendo sin tener que pensar en ello.',
-  inc=['Mantenimiento web: cambios, copias de seguridad, dominio y alojamiento','Publicaciones en Google Maps y gestión de reseñas','Contenido SEO, ajustes para IA e informe mensual, sin permanencia'],
-  plazo='Mes a mes, sin permanencia',
-  fields=[chips('base','¿Qué tienes ya en marcha?',['Web','Ficha de Google Maps','Redes sociales','Nada todavía']),
-          text('url','Dirección de tu web','https://…'),
-          chips('objetivo','¿Qué es lo más importante para ti?',['Más llamadas y reservas','Más reseñas','Salir en las IA','Que no se me olvide publicar'])]),
 ]
 
 S=[
@@ -122,10 +117,11 @@ S=[
           select('antiguedad','¿Cuánto tiempo lleva abierto tu negocio?',['Aún no he abierto','Menos de 1 año','1 a 3 años','Más de 3 años'])]),
 ]
 
-PLANS=('plan-basico','pack-visible')
+PLANS=()  # los planes mensuales están en «Próximamente»: no se pueden contratar
+VAT={'desde 290 €':'350,90 €','desde 490 €':'592,90 €','desde 990 €':'1.197,90 €','desde 1.290 €':'1.560,90 €','desde 2.490 €':'3.012,90 €','desde 250 €':'302,50 €','desde 120 € por sesión':'145,20 €'}
 def chip_(s, g):
-    radio = g in ('packs','planes')
-    kind, name = ('radio', 'pack' if g=='packs' else 'plan') if radio else ('checkbox', 'servicio')
+    radio = g == 'packs'
+    kind, name = ('radio', 'pack') if radio else ('checkbox', 'servicio')
     extra = f' data-price="{s["price"]}"' if s.get('price') else ''
     return (f'<label class="chip chip--service" data-group="{g}"><input type="{kind}" name="{name}" value="{s["name"]}" data-slug="{s["slug"]}"'
             f' data-short="{s.get("short", s["name"])}" data-icon="{s["icon"]}"{extra}><span><svg class="icon icon--sm" aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
@@ -133,8 +129,8 @@ def chip_(s, g):
 head_=lambda g, t: f'<button type="button" class="chips__group" data-group-toggle="{g}" aria-expanded="true">{t} <span class="chips__arrow" aria-hidden="true">▾</span></button>'
 PK=[x for x in P if x['slug'] not in PLANS]; PL=[x for x in P if x['slug'] in PLANS]
 picker=(head_('packs','Packs <small>(elige uno)</small>')+''.join(chip_(x,'packs') for x in PK)
-        +head_('planes','Planes mensuales <small>(elige uno)</small>')+''.join(chip_(x,'planes') for x in PL)
-        +head_('carta','Servicios a la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
+
+                +head_('carta','Servicios a la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
 ALL=P+S
 
 fieldsets=''
@@ -149,7 +145,7 @@ for s in ALL:
     aside+=f'''
               <div class="contact-card service-info" data-info="{s["slug"]}" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#{s["icon"]}"/></svg></span>
-                <h3>{s["name"]}</h3>{f'<p class="service-info__price">{s["price"]}</p>' if s.get("price") else ""}
+                <h3>{s["name"]}</h3>{f'<p class="service-info__price">{s["price"]}<small class="service-info__vat">+ IVA · {VAT[s["price"]]} en total</small></p>' if s.get("price") else ""}
                 <p>{s["intro"]}</p>
                 <h4>Qué incluye</h4>
                 <ul>{lis}</ul>
@@ -187,7 +183,7 @@ page=f'''<!doctype html>
             <ol><li><a href="./">Inicio</a></li><li><a href="./#servicios">Servicios</a></li><li aria-current="page">Contratar</li></ol>
           </nav>
           <h1 class="hire-title"><span class="hire-title__kicker" data-hire-kicker>Cuéntanos</span><span class="hire-title__name"><span data-hire-title>Qué necesitas</span></span></h1>
-          <p data-hire-lead>Elige un pack, un plan mensual o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
+          <p data-hire-lead>Elige un pack o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
           <p class="hire-wa"><a class="btn btn--yellow" href="#" data-whatsapp data-whatsapp-link target="_blank" rel="noopener" hidden><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Prefiero escribir por WhatsApp</a></p>
         </div>
       </section>
@@ -235,15 +231,16 @@ page=f'''<!doctype html>
             <div class="contact-card service-info" data-info="" >
               <h3>¿Cómo funciona?</h3>
               <ul>
-                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Combinas un pack, un plan mensual y servicios sueltos</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Combinas un pack y servicios sueltos</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Te enviamos una propuesta cerrada en 48 h</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia y todo a tu nombre</li>
               </ul>
             </div>{aside}
             <div class="contact-card contact-card--yellow">
               <h3>¿No sabes qué necesitas?</h3>
-              <p>Haz el test de visibilidad o pide un diagnóstico gratis de 30 minutos y te orientamos.</p>
+              <p>Haz el test de visibilidad o pide un diagnóstico gratis por escrito (en 48 h laborables) y te orientamos.</p>
               <a class="btn btn--crimson" href="./#test">Hacer el test</a>
+              <a class="btn btn--ghost" href="./?interes=diagnostico#contacto" data-track="cta-diagnostico">Diagnóstico gratis</a>
             </div>
           </aside>
         </div>

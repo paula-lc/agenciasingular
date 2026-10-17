@@ -118,5 +118,14 @@
  "Escribe un email válido para enviarte el diagnóstico.": "Enter a valid email so we can send you the diagnosis.",
  "Hola Paula, te escribo desde la web de Agencia Singular": "Hi Paula, I'm writing to you from the Agencia Singular website",
  "Escribe un WhatsApp o un email válido para poder escribirte.": "Enter a valid WhatsApp number or email so I can write to you.",
- "¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos. ☕": "Received! I'll write to you within 24 business hours with your 3 fixes. ☕"
+ "¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos. ☕": "Received! I'll write to you within 24 business hours with your 3 fixes. ☕",
+ "Plan Siempre visible (próximamente)": "Always Visible plan (coming soon)",
+ "Siempre visible (próximamente)": "Always Visible (coming soon)",
+ "Tienes buena base. El plan mensual (próximamente) mantendrá tu ficha activa, tus reseñas al día y vigilará qué dicen las IA de ti.": "You have a good base. The monthly plan (coming soon) will keep your listing active, your reviews up to date and keep an eye on what AI says about you.",
+ "Avísame": "Let me know",
+ "Indica tu ciudad o barrio para preparar el diagnóstico.": "Enter your city or neighbourhood so we can prepare the audit.",
+ "Déjanos tu email o tu WhatsApp para poder contestarte.": "Leave us your email or your WhatsApp so we can reply.",
+ "Revisa tu email: no parece válido.": "Check your email: it doesn't look valid.",
+ "¡Recibido! En 48 h laborables te mando tu diagnóstico. Si prefieres WhatsApp, escríbeme al {phone}.": "Received! I'll send you your audit within 48 working hours. If you prefer WhatsApp, message me on {phone}.",
+ "¡Recibido! En 48 h laborables te mando tu diagnóstico.": "Received! I'll send you your audit within 48 working hours."
 }

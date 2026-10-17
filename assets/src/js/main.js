@@ -11,9 +11,9 @@ const SITE = {
   // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
   formEndpoint: "https://script.google.com/macros/s/AKfycbyK_Dqwi7gZ_pNRRHdVpg8wU9NDWJo0u3jWUuWLwA2bBgMqSTlYpmZll9o6SfKQrvYo/exec",
-  // Analítica sin cookies (GoatCounter). Pon aquí el código de tu cuenta: si tu panel es
-  // https://paula.goatcounter.com, el código es "paula". Vacío = no se mide nada.
-  goatcounter: "",
+  // Código de tu sitio en goatcounter.com (analítica sin cookies): "micodigo" → https://micodigo.goatcounter.com.
+  // Vacío = no se carga nada.
+  goatcounter: "agenciasingular",
 };
 
 document.documentElement.classList.remove("no-js");
@@ -26,9 +26,11 @@ const t = (s, vars) => {
   return out;
 };
 
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /* ------------------------------------------------------------------
-   Analítica sin cookies (GoatCounter): visitas y eventos. No guarda nada en el navegador.
-   track("whatsapp", "hola") cuenta el evento "whatsapp/hola" en el panel.
+   Analítica sin cookies (GoatCounter): solo se carga si SITE.goatcounter tiene valor.
+   Los eventos se anotan con track("nombre"); si no hay analítica, no hacen nada.
    ------------------------------------------------------------------ */
 if (SITE.goatcounter) {
   const gc = document.createElement("script");
@@ -37,20 +39,29 @@ if (SITE.goatcounter) {
   gc.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
   document.head.appendChild(gc);
 }
-const track = (event, detail) => {
-  if (!SITE.goatcounter) return;
-  const send = () => window.goatcounter?.count?.({
-    event: true,
-    path: detail ? `${event}/${detail}` : event,
-    title: detail ? `${event} · ${detail}` : event,
-  });
+const track = (name, detail) => {
   // count.js se carga de forma asíncrona: si aún no está, se espera a que termine
+  const send = () => {
+    try { window.goatcounter?.count?.({ path: detail ? `${name}/${detail}` : name, title: detail ? `${name} · ${detail}` : name, event: true }); } catch { /* sin analítica */ }
+  };
+  if (!SITE.goatcounter) return;
   if (window.goatcounter?.count) send();
   else document.querySelector("script[data-goatcounter]")?.addEventListener("load", send, { once: true });
 };
-window.AS = { SITE, track, t };
-
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+window.AS = { SITE, track, t }; // lo usa /hola/ (assets/src/js/hola.js)
+const slugify = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+// Clic en cualquier elemento con data-track="evento" (o en un botón de diagnóstico gratis)
+document.addEventListener("click", (e) => {
+  const el = e.target.closest("[data-track], [data-interes]");
+  if (!el || el.matches("input")) return;
+  const name = el.dataset.track || (el.dataset.interes === "diagnostico" ? "cta-diagnostico" : "");
+  if (name) track(name);
+});
+// 34684747795 → +34 684 74 77 95
+const prettyPhone = (n) => {
+  const m = /^34(\d{3})(\d{2})(\d{2})(\d{2})$/.exec(n);
+  return m ? `+34 ${m[1]} ${m[2]} ${m[3]} ${m[4]}` : `+${n}`;
+};
 
 /* ------------------------------------------------------------------
    Cabecera: sombra al hacer scroll + menú móvil
@@ -322,7 +333,7 @@ const PACKS = {
   encuentren: { slug: "pack-encuentren", name: t("Pack Que te encuentren"), short: t("Que te encuentren") },
   arranque: { slug: "pack-arranque", name: t("Pack Arranque"), short: t("Arranque") },
   escaparate: { slug: "pack-escaparate", name: t("Pack Escaparate"), short: t("Escaparate") },
-  visible: { slug: "pack-visible", name: t("Plan Siempre visible"), short: t("Siempre visible") },
+  visible: { slug: "pack-visible", name: t("Plan Siempre visible (próximamente)"), short: t("Siempre visible (próximamente)"), soon: true },
 };
 
 /* Elige el pack según qué ha fallado (g(servicio) = puntos perdidos) */
@@ -336,7 +347,7 @@ function recommend(g, score) {
       : t("Tu web es el punto débil, y es la fuente que leen Google y las IA. El Escaparate incluye web nueva, SEO local y Google Maps.") };
   }
   if (score >= 75) {
-    return { pack: PACKS.visible, why: t("Tienes buena base. Con el plan mensual mantienes la ficha activa, las reseñas al día y vigilas qué dicen las IA de ti.") };
+    return { pack: PACKS.visible, why: t("Tienes buena base. El plan mensual (próximamente) mantendrá tu ficha activa, tus reseñas al día y vigilará qué dicen las IA de ti.") };
   }
   if (g("google-maps") + g("ia") >= 3) {
     return { pack: PACKS.encuentren, why: t("Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Este pack ataca justo eso, rápido y por menos.") };
@@ -357,6 +368,7 @@ if (quiz) {
   const gateStatus = $("[data-gate-status]");
   const gateText = gate.querySelector(".quiz__gate-text");
   const gateIntro = gateText.textContent;
+  let started = false;   // el evento «test iniciado» se anota una vez por intento
   let report = null;     // datos del resultado para enviar junto al contacto
   const answers = [];
   let current = 0;
@@ -383,8 +395,8 @@ if (quiz) {
   };
 
   const answer = (pts, label) => {
+    if (!started) { started = true; track("test-iniciado"); }
     answers[current] = { pts, label };
-    if (current === 0 && !quiz.dataset.started) { quiz.dataset.started = "1"; track("test-iniciado"); }
     if (current < QUESTIONS.length - 1) {
       current++;
       render();
@@ -469,8 +481,18 @@ if (quiz) {
 
     quizSummary = t("Resultado del test de visibilidad: {score}/100 ({title}). Recomendación: {pack}.", { score, title, pack: reco.pack.name });
     const cta = $("[data-quiz-cta]");
-    cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
-    cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
+    if (reco.pack.soon) {
+      // Plan mensual aún no disponible: el botón lleva al formulario para que le avisemos
+      cta.href = "#contacto";
+      cta.dataset.interes = "plan";
+      cta.dataset.track = "plan-avisame";
+      cta.innerHTML = `${t("Avísame")}<span class="cta-pack">: ${reco.pack.short}</span>`;
+    } else {
+      cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
+      delete cta.dataset.interes;
+      delete cta.dataset.track;
+      cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
+    }
 
     report = {
       score, title, pack: reco.pack.name,
@@ -487,7 +509,7 @@ if (quiz) {
     resultWrap.focus({ preventScroll: true });
   };
 
-  // Envía el contacto + el resultado al mismo receptor que el formulario de contacto (Google Apps Script)
+  // Envía el email + el resultado al mismo receptor que el formulario de contacto (Google Apps Script)
   const sendLead = async (data) => {
     const servicio = report.pack;
     const sections = [
@@ -498,7 +520,7 @@ if (quiz) {
     if (SITE.formEndpoint.includes("script.google.com")) {
       const payload = new URLSearchParams({
         formulario: "Test visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
-        telefono: data.telefono, sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
+        telefono: data.telefono, whatsapp: "", ficha: "", sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
       });
       await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
     } else {
@@ -531,7 +553,7 @@ if (quiz) {
         contacto, negocio: gateForm.negocio.value.trim(),
         email: esEmail ? contacto : "", telefono: esEmail ? "" : contacto,
       });
-      track("test-contacto");
+      track("form-test-de-visibilidad-enviado");
       if (esEmail) document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = contacto; });
       gateText.textContent = t("¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos. ☕");
       gateForm.hidden = true;
@@ -543,7 +565,7 @@ if (quiz) {
 
   $("[data-quiz-back]").addEventListener("click", () => { if (current > 0) { current--; render(); } });
   $("[data-quiz-restart]").addEventListener("click", () => {
-    answers.length = 0; current = 0; quizSummary = "";
+    answers.length = 0; current = 0; quizSummary = ""; started = false;
     resultWrap.classList.remove("is-visible");
     qWrap.hidden = false;
     render();
@@ -570,18 +592,12 @@ document.addEventListener("click", (e) => {
 /* ------------------------------------------------------------------
    Formulario de contacto
    ------------------------------------------------------------------ */
-const waText = t("Hola Paula, te escribo desde la web de Agencia Singular");
 document.querySelectorAll("[data-whatsapp]").forEach((item) => {
   if (!SITE.whatsapp) return;
   item.hidden = false;
-  const link = item.matches("a") ? item : item.querySelector("[data-whatsapp-link]");
-  if (link) link.href = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(waText)}`;
-});
-document.addEventListener("click", (e) => {
-  const link = e.target.closest("[data-whatsapp-link]");
-  if (!link) return;
-  const page = location.pathname.replace(/^\/(ca|en)\//, "/").replace(/^\/|\/$/g, "").replace(/\.html$/, "") || "inicio";
-  track("whatsapp", link.dataset.trackDetail || page);
+  const waLink = item.matches("a") ? item : item.querySelector("[data-whatsapp-link]");
+  waLink.href = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(t("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio."))}`;
+  waLink.dataset.track = "whatsapp";
 });
 
 /* ------------------------------------------------------------------
@@ -594,12 +610,11 @@ const PACK_INCLUDES = {
   "pack-encuentren": [],
   "pack-arranque": [],
   "pack-escaparate": ["diseno-web", "seo-local", "fotografia"],
+  "pack-escaparate-remoto": ["diseno-web", "seo-local"],
   "pack-singular": ["rebranding", "diseno-web", "seo-local", "fotografia", "trastienda"],
-  "plan-basico": [],
-  "pack-visible": [],
 };
-// Planes mensuales: se pueden combinar con un pack, pero solo uno a la vez
-const PLAN_SLUGS = ["plan-basico", "pack-visible"];
+// Planes mensuales: «Próximamente», todavía no se pueden contratar ni añadir a la propuesta
+const PLAN_SLUGS = [];
 // Servicios a la carta que existen (lo guardado de servicios retirados se ignora)
 const SERVICE_SLUGS = ["rebranding", "diseno-web", "seo-local", "ia", "fotografia", "redes-sociales", "trastienda"];
 const isPlan = (slug) => PLAN_SLUGS.includes(slug);
@@ -684,12 +699,33 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
+/* Opción de «¿Qué te interesa?» que se marca al llegar desde un botón: data-interes="diagnostico" | "plan"
+   (también con ?interes=diagnostico en la dirección o #contacto?interes=diagnostico) */
+const preselectInteres = (key) => {
+  document.querySelectorAll(`input[name="interes"][data-interes="${key}"]`).forEach((cb) => {
+    if (cb.checked) return;
+    cb.checked = true;
+    cb.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+};
+const applyInteresFromUrl = () => {
+  const m = /[?&]interes=(\w+)/.exec(location.search + location.hash);
+  if (!m) return;
+  preselectInteres(m[1]);
+  const target = document.getElementById("contacto");
+  if (target && location.hash.startsWith("#contacto") && location.hash !== "#contacto") target.scrollIntoView({ behavior: "instant", block: "start" });
+};
+applyInteresFromUrl();
+window.addEventListener("hashchange", applyInteresFromUrl);
+
 /* Botones de diagnóstico: saltan directamente al formulario, sin el desplazamiento largo */
 document.addEventListener("click", (e) => {
   const a = e.target.closest('a[href="#contacto"], a[href="./#contacto"]');
   const target = document.getElementById("contacto");
   if (!a || !target || e.metaKey || e.ctrlKey || e.shiftKey) return;
   e.preventDefault();
+  document.querySelectorAll("dialog[open]").forEach((d) => d.close()); // el botón «Avísame» de un detalle
+  if (a.dataset.interes) preselectInteres(a.dataset.interes);
   target.scrollIntoView({ behavior: "instant", block: "start" });
   history.pushState(null, "", "#contacto");
 });
@@ -935,6 +971,13 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     status.textContent = msg;
     status.className = `form__status ${ok ? "is-ok" : "is-error"}`;
   };
+  // «Diagnóstico gratis de mi ficha»: pide la ciudad o barrio y se envía como formulario «Diagnóstico»
+  const diagChip = form.querySelector('input[name="interes"][data-interes="diagnostico"]');
+  const ciudadEl = form.querySelector('[name="ciudad"]');
+  const syncDiag = () => { if (diagChip && ciudadEl) ciudadEl.required = diagChip.checked; };
+  form.addEventListener("change", syncDiag);
+  form.addEventListener("reset", () => setTimeout(syncDiag));
+  syncDiag();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -957,8 +1000,24 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       setStatus(
         t(invalid.type === "radio" ? "Elige el servicio que quieres contratar."
         : invalid.type === "checkbox" ? "Necesitamos que aceptes la política de privacidad."
+        : invalid.name === "ciudad" ? "Indica tu ciudad o barrio para preparar el diagnóstico."
         : "Revisa los campos marcados: nombre, negocio y un email válido."), false);
       return;
+    }
+    // Formularios con WhatsApp: hace falta el email o el WhatsApp (al menos uno)
+    const emailEl = form.querySelector('[name="email"]');
+    const waEl = form.querySelector('[name="whatsapp"]');
+    if (emailEl && waEl) {
+      if (!emailEl.value.trim() && !waEl.value.trim()) {
+        emailEl.focus();
+        setStatus(t("Déjanos tu email o tu WhatsApp para poder contestarte."), false);
+        return;
+      }
+      if (emailEl.value.trim() && !emailEl.checkValidity()) {
+        emailEl.focus();
+        setStatus(t("Revisa tu email: no parece válido."), false);
+        return;
+      }
     }
 
     // Respuestas agrupadas por sección (qué contrata, cada servicio, datos de contacto) y por pregunta
@@ -979,8 +1038,10 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const body = report.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n");
 
     const data = new FormData(form);
+    const diag = !!diagChip?.checked;
+    const formulario = diag ? "Diagnóstico" : (form.dataset.subject || "Contacto");
     const servicio = [...data.getAll("pack"), ...data.getAll("plan"), ...data.getAll("servicio")].join(" + ");
-    const subject = `${form.dataset.subject || "Contacto"}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
+    const subject = `${diag ? "Diagnóstico gratis" : form.dataset.subject || "Contacto"}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
 
     if (!SITE.formEndpoint) {
       window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -997,7 +1058,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         const get = (n) => (data.get(n) || "").toString();
         // En el informe no se repite lo que ya va en el resumen (servicios y datos de contacto)
         const summary = ["Qué quiere contratar"];
-        const contactKeys = ["nombre", "negocio", "email", "telefono", "sector", "ciudad", "interes"].map((n) => {
+        const contactKeys = ["nombre", "negocio", "email", "telefono", "whatsapp", "ficha", "sector", "ciudad", "interes"].map((n) => {
           const el = form.querySelector(`[name="${n}"]`);
           return el ? fieldLabel(el) : n;
         });
@@ -1007,8 +1068,8 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
             ? { titulo: "Más información", filas: s.filas.filter(([k]) => !contactKeys.includes(k)) } : s))
           .filter((s) => s.filas.length);
         const payload = new URLSearchParams({
-          formulario: form.dataset.subject || "Contacto", asunto: subject, servicios: servicio || data.getAll("interes").join(", "),
-          nombre: get("nombre"), negocio: get("negocio"), email: get("email"), telefono: get("telefono"),
+          formulario, asunto: subject, servicios: servicio || data.getAll("interes").join(", "),
+          nombre: get("nombre"), negocio: get("negocio"), email: get("email"), telefono: get("telefono"), whatsapp: get("whatsapp"), ficha: get("ficha"),
           sector: get("sector"), ciudad: get("ciudad"), pagina: location.href, secciones: JSON.stringify(detail),
         });
         await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
@@ -1019,9 +1080,13 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         const res = await fetch(SITE.formEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
         if (!res.ok) throw new Error(res.statusText);
       }
-      track("formulario", (form.dataset.subject || "contacto").toLowerCase().replace(/\s+/g, "-"));
       form.reset();
-      setStatus(t("¡Recibido! Te escribimos en menos de 24 h laborables. ☕"), true);
+      track(`form-${slugify(formulario)}-enviado`);
+      setStatus(diag
+        ? (SITE.whatsapp
+          ? t("¡Recibido! En 48 h laborables te mando tu diagnóstico. Si prefieres WhatsApp, escríbeme al {phone}.", { phone: prettyPhone(SITE.whatsapp) })
+          : t("¡Recibido! En 48 h laborables te mando tu diagnóstico."))
+        : t("¡Recibido! Te escribimos en menos de 24 h laborables. ☕"), true);
     } catch {
       setStatus(t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }), false);
     } finally {
