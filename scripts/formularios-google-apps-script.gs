@@ -14,7 +14,20 @@ const DESTINO = "hola@agenciasingular.es";
 const HOJA = "Solicitudes";
 // "Ciudad o barrio" recoge el campo «Ciudad o barrio» de los formularios (obligatorio en el diagnóstico).
 // Las columnas nuevas van al final para no descolocar las filas que ya tengas en la hoja.
-const COLUMNAS = ["Fecha", "Formulario", "Nombre", "Negocio", "Email", "Teléfono", "Servicios", "Sector", "Ciudad o barrio", "Respuestas", "Ficha Google", "WhatsApp"];
+const COLUMNAS = ["Fecha", "Formulario", "Nombre", "Negocio", "Email", "Teléfono", "Servicios", "Sector", "Ciudad o barrio", "Respuestas", "Ficha Google", "WhatsApp", "Origen", "Slug"];
+
+// Origen de cada contacto: "QR visita" (/hola/), "Test visibilidad", "Contratar", "Diagnóstico" o "Café virtual".
+// Si el formulario no lo manda, se deduce del nombre del formulario.
+function origen_(p) {
+  const o = String(p.origen || "").trim();
+  if (o) return o.slice(0, 40);
+  const f = String(p.formulario || "");
+  if (/test/i.test(f)) return "Test visibilidad";
+  if (/diagn/i.test(f)) return "Diagnóstico";
+  if (/contratar/i.test(f)) return "Contratar";
+  if (/caf/i.test(f)) return "Café virtual";
+  return f.slice(0, 40) || "Web";
+}
 const PREFIJO_DIAGNOSTICO = "[Diagnóstico]";
 
 function doPost(e) {
@@ -31,6 +44,8 @@ function doPost(e) {
     telefono: limpio(p.telefono, 40),
     whatsapp: limpio(p.whatsapp, 40),
     ficha: limpio(p.ficha, 300),
+    origen: origen_(p),
+    slug: limpio(p.slug, 60).replace(/[^a-z0-9-]/gi, ""),
     servicios: limpio(p.servicios, 400),
     sector: limpio(p.sector, 80),
     ciudad: limpio(p.ciudad, 120),
@@ -67,7 +82,7 @@ function doPost(e) {
   // Evita que un texto que empiece por = + - @ se interprete como fórmula
   const celda = (v) => (/^[=+\-@]/.test(v) ? "'" + v : v);
   hoja.appendRow([fecha, datos.formulario, datos.nombre, datos.negocio, datos.email, datos.telefono,
-    datos.servicios, datos.sector, datos.ciudad, texto, datos.ficha, datos.whatsapp].map((v) => (v instanceof Date ? v : celda(v))));
+    datos.servicios, datos.sector, datos.ciudad, texto, datos.ficha, datos.whatsapp, datos.origen, datos.slug].map((v) => (v instanceof Date ? v : celda(v))));
 
   // 2. Informe por email + PDF
   const html = informe_(datos, secciones, fecha, libro.getUrl());
@@ -120,7 +135,7 @@ function informe_(d, secciones, fecha, urlHoja) {
         <div style="font-family:Arial Black,Arial,sans-serif;font-size:22px;margin-top:6px;color:${amarillo}">${esc_(d.negocio || d.nombre || "Nueva solicitud")}</div>
         <div style="font-size:13px;margin-top:6px">${esc_(cuando)}</div>
       </div>
-      ${bloque("Resumen", fila("Servicios", d.servicios) + fila("Nombre", d.nombre) + fila("Negocio", d.negocio) +
+      ${bloque("Resumen", fila("Origen", d.origen) + fila("Diagnóstico (slug)", d.slug) + fila("Servicios", d.servicios) + fila("Nombre", d.nombre) + fila("Negocio", d.negocio) +
         fila("Email", d.email) + fila("Teléfono", d.telefono) + fila("WhatsApp", d.whatsapp) + fila("Sector", d.sector) +
         fila("Ciudad o barrio", d.ciudad) + fila("Ficha de Google", d.ficha))}
       ${secciones.map((s) => bloque(s.titulo, s.filas.map((f) => fila(f[0], f[1])).join(""))).join("")}

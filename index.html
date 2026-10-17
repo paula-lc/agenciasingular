@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/css/styles.css?v=73">
+  <link rel="stylesheet" href="assets/css/styles.css?v=74">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -1363,30 +1363,6 @@
               <div class="quiz__nav"><button type="button" class="link-btn" data-quiz-back hidden>← Anterior</button><span></span></div>
             </div>
 
-            <div class="quiz__gate" data-quiz-gate hidden>
-              <p class="quiz__gate-kicker">¡Test completado!</p>
-              <h3 class="quiz__gate-title">¿Dónde te enviamos tu diagnóstico?</h3>
-              <p class="quiz__gate-text">Déjanos tu email y te escribimos con tu nota, el pack que mejor encaja contigo y los primeros pasos para tu negocio. Sin spam.</p>
-              <form class="form" data-quiz-gate-form novalidate>
-                <div class="field">
-                  <label for="q-email">Dirección de email</label>
-                  <input id="q-email" name="email" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
-                </div>
-                <div class="field">
-                  <label for="q-business">Nombre de tu negocio <small>(opcional)</small></label>
-                  <input id="q-business" name="negocio" type="text" autocomplete="organization" placeholder="Tu tienda, cafetería, salón…">
-                </div>
-                <input class="hp" type="text" name="web_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-                <label class="field--check">
-                  <input type="checkbox" name="privacidad" required>
-                  <span>He leído y acepto la <a href="privacidad.html">política de privacidad</a>. Usaremos tus datos solo para enviarte el diagnóstico.</span>
-                </label>
-                <button class="btn btn--crimson" type="submit">Ver mi resultado</button>
-                <p class="form__status" role="status" data-gate-status></p>
-              </form>
-              <button type="button" class="link-btn" data-quiz-gate-skip>Prefiero ver el resultado sin dejar mi email</button>
-            </div>
-
             <div class="quiz__result" data-quiz-result>
               <div class="score">
                 <div class="score__ring" data-score-ring><span data-score>0</span></div>
@@ -1407,6 +1383,28 @@
               </div>
               <p class="quiz__tips-title">Lo que puedes hacer tú hoy mismo</p>
               <ul class="quiz__tips" data-quiz-tips></ul>
+              <div class="quiz__gate" data-quiz-gate>
+                <p class="quiz__gate-kicker">Opcional</p>
+                <h3 class="quiz__gate-title">¿Te mando los 3 arreglos de tu ficha, hechos para tu negocio?</h3>
+                <p class="quiz__gate-text">Déjame tu WhatsApp o tu email y te escribo con lo primero que yo cambiaría en tu caso. Sin spam.</p>
+                <form class="form" data-quiz-gate-form novalidate>
+                  <div class="field">
+                    <label for="q-business">Nombre de tu negocio</label>
+                    <input id="q-business" name="negocio" type="text" autocomplete="organization" placeholder="Tu tienda, cafetería, salón…">
+                  </div>
+                  <div class="field">
+                    <label for="q-contact">WhatsApp o email</label>
+                    <input id="q-contact" name="contacto" type="text" inputmode="email" autocomplete="email" placeholder="600 000 000 o tucorreo@ejemplo.com" required>
+                  </div>
+                  <input class="hp" type="text" name="web_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                  <label class="field--check">
+                    <input type="checkbox" name="privacidad" required>
+                    <span>He leído y acepto la <a href="privacidad.html">política de privacidad</a>. Usaremos tus datos solo para enviarte los arreglos.</span>
+                  </label>
+                  <button class="btn btn--crimson" type="submit">Quiero mis 3 arreglos</button>
+                  <p class="form__status" role="status" data-gate-status></p>
+                </form>
+              </div>
               <button type="button" class="link-btn" data-quiz-restart>Repetir el test</button>
             </div>
           </div>
@@ -1846,6 +1844,6 @@
     <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
   </aside>
 
-  <script src="assets/js/main.js?v=73" defer></script>
+  <script src="assets/js/main.js?v=74" defer></script>
 </body>
 </html>

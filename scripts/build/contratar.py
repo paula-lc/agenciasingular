@@ -184,6 +184,7 @@ page=f'''<!doctype html>
           </nav>
           <h1 class="hire-title"><span class="hire-title__kicker" data-hire-kicker>Cuéntanos</span><span class="hire-title__name"><span data-hire-title>Qué necesitas</span></span></h1>
           <p data-hire-lead>Elige un pack o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
+          <p class="hire-wa"><a class="btn btn--yellow" href="#" data-whatsapp data-whatsapp-link target="_blank" rel="noopener" hidden><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Prefiero escribir por WhatsApp</a></p>
         </div>
       </section>
 

@@ -39,9 +39,16 @@ if (SITE.goatcounter) {
   gc.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
   document.head.appendChild(gc);
 }
-const track = (name) => {
-  try { window.goatcounter?.count?.({ path: name, title: name, event: true }); } catch { /* sin analítica */ }
+const track = (name, detail) => {
+  // count.js se carga de forma asíncrona: si aún no está, se espera a que termine
+  const send = () => {
+    try { window.goatcounter?.count?.({ path: detail ? `${name}/${detail}` : name, title: detail ? `${name} · ${detail}` : name, event: true }); } catch { /* sin analítica */ }
+  };
+  if (!SITE.goatcounter) return;
+  if (window.goatcounter?.count) send();
+  else document.querySelector("script[data-goatcounter]")?.addEventListener("load", send, { once: true });
 };
+window.AS = { SITE, track, t }; // lo usa /hola/ (assets/src/js/hola.js)
 const slugify = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 // Clic en cualquier elemento con data-track="evento" (o en un botón de diagnóstico gratis)
 document.addEventListener("click", (e) => {
@@ -359,9 +366,10 @@ if (quiz) {
   const gate = $("[data-quiz-gate]");
   const gateForm = $("[data-quiz-gate-form]");
   const gateStatus = $("[data-gate-status]");
-  let leadAsked = false; // solo se pide el email una vez por visita
+  const gateText = gate.querySelector(".quiz__gate-text");
+  const gateIntro = gateText.textContent;
   let started = false;   // el evento «test iniciado» se anota una vez por intento
-  let report = null;     // datos del resultado para enviar junto al email
+  let report = null;     // datos del resultado para enviar junto al contacto
   const answers = [];
   let current = 0;
 
@@ -492,15 +500,10 @@ if (quiz) {
       answers: QUESTIONS.map((q, i) => [q.q, answers[i].label]),
     };
     qWrap.hidden = true;
-    if (leadAsked || !SITE.formEndpoint) { revealResult(); return; }
-    gate.hidden = false;
-    gate.setAttribute("tabindex", "-1");
-    gate.focus({ preventScroll: true });
-  };
-
-  const revealResult = () => {
-    leadAsked = true;
-    gate.hidden = true;
+    gateForm.hidden = false;
+    gateForm.reset();
+    gateStatus.textContent = "";
+    gateText.textContent = gateIntro;
     resultWrap.classList.add("is-visible");
     resultWrap.setAttribute("tabindex", "-1");
     resultWrap.focus({ preventScroll: true });
@@ -513,54 +516,56 @@ if (quiz) {
       { titulo: "Resultado del test", filas: [["Nota", `${report.score}/100 (${report.title})`], ["Pack recomendado", servicio], ["Áreas más flojas", report.weak || "—"]] },
       { titulo: "Respuestas del test", filas: report.answers },
     ];
-    const subject = `${t("Test de visibilidad")}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""} · ${report.score}/100 · ${data.negocio || data.email}`;
+    const subject = `[Test] ${data.negocio || data.contacto} · ${report.score}/100${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}`;
     if (SITE.formEndpoint.includes("script.google.com")) {
       const payload = new URLSearchParams({
-        formulario: "Test de visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
-        telefono: "", whatsapp: "", ficha: "", sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
+        formulario: "Test visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
+        telefono: data.telefono, whatsapp: "", ficha: "", sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
       });
       await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
     } else {
       const body = new FormData();
-      body.set("email", data.email); body.set("negocio", data.negocio); body.set("_subject", subject);
+      body.set("contacto", data.contacto); body.set("negocio", data.negocio); body.set("_subject", subject);
       body.set("resumen", sections.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n"));
       const res = await fetch(SITE.formEndpoint, { method: "POST", body, headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(res.statusText);
     }
   };
 
+  const gateError = (el, msg) => {
+    el.focus();
+    gateStatus.textContent = msg;
+    gateStatus.className = "form__status is-error";
+  };
+
   gateForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (gateForm.web_hp.value) return revealResult(); // bot
-    const email = gateForm.email.value.trim();
-    if (!email || !gateForm.email.checkValidity()) {
-      gateForm.email.focus();
-      gateStatus.textContent = t("Escribe un email válido para enviarte el diagnóstico.");
-      gateStatus.className = "form__status is-error";
-      return;
-    }
-    if (!gateForm.privacidad.checked) {
-      gateForm.privacidad.focus();
-      gateStatus.textContent = t("Necesitamos que aceptes la política de privacidad.");
-      gateStatus.className = "form__status is-error";
-      return;
-    }
+    if (gateForm.web_hp.value) return; // bot
+    const contacto = gateForm.contacto.value.trim();
+    const esEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto);
+    const esTelefono = /^[+\d][\d\s.-]{7,}$/.test(contacto);
+    if (!esEmail && !esTelefono) return gateError(gateForm.contacto, t("Escribe un WhatsApp o un email válido para poder escribirte."));
+    if (!gateForm.privacidad.checked) return gateError(gateForm.privacidad, t("Necesitamos que aceptes la política de privacidad."));
     const btn = gateForm.querySelector('button[type="submit"]');
     btn.disabled = true;
     try {
-      await sendLead({ email, negocio: gateForm.negocio.value.trim() });
+      await sendLead({
+        contacto, negocio: gateForm.negocio.value.trim(),
+        email: esEmail ? contacto : "", telefono: esEmail ? "" : contacto,
+      });
       track("form-test-de-visibilidad-enviado");
-      document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = email; });
-    } catch { /* si falla el envío no se bloquea el resultado */ }
+      if (esEmail) document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = contacto; });
+      gateText.textContent = t("¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos. ☕");
+      gateForm.hidden = true;
+    } catch {
+      gateError(gateForm.contacto, t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }));
+    }
     btn.disabled = false;
-    revealResult();
   });
-  $("[data-quiz-gate-skip]").addEventListener("click", revealResult);
 
   $("[data-quiz-back]").addEventListener("click", () => { if (current > 0) { current--; render(); } });
   $("[data-quiz-restart]").addEventListener("click", () => {
     answers.length = 0; current = 0; quizSummary = ""; started = false;
-    gate.hidden = true;
     resultWrap.classList.remove("is-visible");
     qWrap.hidden = false;
     render();
@@ -587,13 +592,13 @@ document.addEventListener("click", (e) => {
 /* ------------------------------------------------------------------
    Formulario de contacto
    ------------------------------------------------------------------ */
-const waItem = document.querySelector("[data-whatsapp]");
-if (SITE.whatsapp && waItem) {
-  waItem.hidden = false;
-  const waLink = waItem.querySelector("[data-whatsapp-link]");
+document.querySelectorAll("[data-whatsapp]").forEach((item) => {
+  if (!SITE.whatsapp) return;
+  item.hidden = false;
+  const waLink = item.matches("a") ? item : item.querySelector("[data-whatsapp-link]");
   waLink.href = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(t("¡Hola, Agencia Singular! Me gustaría pedir el diagnóstico gratis para mi negocio."))}`;
   waLink.dataset.track = "whatsapp";
-}
+});
 
 /* ------------------------------------------------------------------
    Mi propuesta (cesta): packs y servicios elegidos, guardados en este navegador.

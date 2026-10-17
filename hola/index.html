@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hola, soy Paula · Agencia Singular</title>
+  <meta name="description" content="Página de bienvenida para quien ha recibido la tarjeta o el diagnóstico de Agencia Singular.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#3e6083">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
+  <link rel="stylesheet" href="../assets/css/styles.css?v=74">
+</head>
+<body class="hola-body">
+  <main class="hola">
+    <header class="hola__top">
+      <a href="../" aria-label="Agencia Singular, ir a la web"><img src="../assets/img/logo-agencia-singular.webp" alt="Agencia Singular" width="537" height="201"></a>
+    </header>
+
+    <section class="hola__intro" aria-labelledby="hola-title">
+      <p class="hola__kicker" data-hola-kicker hidden></p>
+      <h1 id="hola-title" data-hola-title>¿Cómo sales en Google Maps? Te lo digo gratis en 24&nbsp;h</h1>
+      <div class="hola__who">
+        <img class="hola__foto" src="" alt="Paula, de Agencia Singular" width="96" height="96" data-hola-foto hidden>
+        <p>Soy Paula, vecina de Horta-Guinardó. Con Agencia Singular ayudo a los negocios del barrio a que los encuentren en Google, en Maps y en las IA.</p>
+      </div>
+      <p class="hola__diag" data-hola-diag hidden>
+        <a class="btn btn--cream" href="#" data-hola-diag-link>Ver mi diagnóstico</a>
+      </p>
+      <a class="btn btn--yellow btn--block hola__wa" href="#" data-whatsapp data-whatsapp-link data-hola-wa target="_blank" rel="noopener" hidden>
+        <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Escríbeme por WhatsApp
+      </a>
+    </section>
+
+    <section class="hola__card" aria-labelledby="hola-form-title">
+      <h2 id="hola-form-title">¿Prefieres que te escriba yo?</h2>
+      <p>Déjame tres datos y te respondo en menos de 24&nbsp;h laborables.</p>
+      <form class="form" data-hola-form novalidate>
+        <div class="field">
+          <label for="h-nombre">Tu nombre</label>
+          <input id="h-nombre" name="nombre" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="h-negocio">Tu negocio</label>
+          <input id="h-negocio" name="negocio" type="text" autocomplete="organization" required>
+        </div>
+        <div class="field">
+          <label for="h-contacto">WhatsApp o email</label>
+          <input id="h-contacto" name="contacto" type="text" inputmode="email" autocomplete="email" placeholder="600 000 000 o tucorreo@ejemplo.com" required>
+        </div>
+        <input class="hp" type="text" name="web_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="field--check">
+          <input type="checkbox" name="privacidad" required>
+          <span>He leído y acepto la <a href="../privacidad.html">política de privacidad</a>. Usaré tus datos solo para responderte.</span>
+        </label>
+        <button class="btn btn--crimson" type="submit">Que me escribas tú</button>
+        <p class="form__status" role="status" data-hola-status></p>
+      </form>
+    </section>
+
+    <section class="hola__card hola__pack" aria-labelledby="hola-pack-title">
+      <p class="hola__kicker">Lo que más piden en el barrio</p>
+      <h2 id="hola-pack-title">Pack «Que te encuentren»</h2>
+      <ul class="hola__list">
+        <li>Tu ficha de Google Maps arreglada de arriba abajo: categorías, fotos, servicios y horarios.</li>
+        <li>Kit de reseñas: QR, cartel para el mostrador y mensajes para pedirlas sin vergüenza.</li>
+        <li>Tus datos iguales en directorios y web, para que Google y las IA se fíen de ti.</li>
+        <li>Listo en 1 a 2 semanas. Pago 50&nbsp;% al empezar y 50&nbsp;% a la entrega.</li>
+      </ul>
+      <p class="hola__price"><strong>290&nbsp;€ + IVA</strong> <span>· 350,90&nbsp;€ en total</span></p>
+    </section>
+
+    <section class="hola__card" data-hola-opiniones hidden aria-labelledby="hola-op-title">
+      <h2 id="hola-op-title">Lo que dicen los negocios del barrio</h2>
+      <div data-hola-opiniones-list></div>
+    </section>
+
+    <footer class="hola__foot">
+      <p><a href="../">agenciasingular.es</a> · <a href="../privacidad.html">Privacidad</a></p>
+    </footer>
+  </main>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 01-12.4 7.6L3 21l1.4-5.4A8.5 8.5 0 1121 12z"/></symbol></svg>
+
+  <script src="../assets/js/main.js?v=74" defer></script>
+  <script src="../assets/js/hola.js?v=74" defer></script>
+</body>
+</html>
