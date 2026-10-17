@@ -4,7 +4,7 @@ const { SITE: HSITE, track: htrack, t: ht } = window.AS;
 /* Foto de Paula: guarda assets/img/paula.webp y pon fotoPaula a true. Opiniones: añade objetos { texto, nombre }
    a OPINIONES SOLO cuando sean reales y tengas permiso; mientras esté vacío el bloque no se muestra. */
 const HOLA = {
-  fotoPaula: false,
+  fotoPaula: true,
   OPINIONES: [],
 };
 
