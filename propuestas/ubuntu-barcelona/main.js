@@ -70,7 +70,7 @@
     if (!reduced) parallax.forEach(img => {
       const r = img.parentElement.getBoundingClientRect();
       if (r.bottom < -100 || r.top > vh + 100) return;
-      const k = parseFloat(img.dataset.parallax), lim = r.height * .08;
+      const k = parseFloat(img.dataset.parallax), lim = r.height * .05;
       const off = Math.max(-lim, Math.min(lim, (r.top + r.height / 2 - vh / 2) * -k));
       img.style.translate = `0 ${off.toFixed(1)}px`;
     });
