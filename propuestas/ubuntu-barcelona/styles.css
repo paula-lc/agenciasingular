@@ -390,6 +390,8 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
 .contacto__photos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .footer{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .footer__id{display:flex;align-items:center;gap:18px;line-height:1.3}
+.footer__link{border-bottom:1px solid currentColor;padding-bottom:1px;transition:color .3s}
+.footer__link:hover{color:var(--peach)}
 .footer__id img{width:auto;height:64px}
 
 /* ===== CTA móvil ===== */
