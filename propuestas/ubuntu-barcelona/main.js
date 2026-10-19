@@ -200,7 +200,7 @@
       const s = SERVICES[current];
       $('#svcTitle').textContent = current;
       $('#svcText').textContent = 'Detalle del servicio por confirmar: qué incluye, cuánto dura y para quién es.';
-      $('#svcMedia').innerHTML = s.photos.map((p, i) => `<img src="assets/${p}" alt="${i ? '' : s.alt}">`).join('');
+      $('#svcMedia').innerHTML = s.photos.map((p, i) => `<figure class="svc__fig"><img src="assets/${p}" alt="${i ? '' : s.alt}"><figcaption>Foto provisional, extraída de @ubuntu.bcn</figcaption></figure>`).join('');
       $('#svcMedia').dataset.n = s.photos.length;
       openModal(serviceModal);
     }));
