@@ -6,7 +6,22 @@
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Ventanas emergentes */
+  const bookingModal = $('#bookingModal'), serviceModal = $('#serviceModal');
+  const openModal = d => { if (!d.open) d.showModal(); document.documentElement.classList.add('modal-open'); };
+  const closeModal = d => { if (d.open) d.close(); };
+  const openBooking = () => { const r = $('#bReset'); if (r && !$('#sumDone').hidden) r.click(); openModal(bookingModal); };
+  [bookingModal, serviceModal].forEach(d => {
+    d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-close]')) closeModal(d); });
+    d.addEventListener('close', () => { if (!$$('dialog[open]').length) document.documentElement.classList.remove('modal-open'); });
+  });
+
   if (BOOKING_URL) $$('[data-booking]').forEach(a => { a.href = BOOKING_URL; a.target = '_blank'; a.rel = 'noopener'; });
+
+  $$('[data-booking]').forEach(a => a.addEventListener('click', e => {
+    if (BOOKING_URL) return;
+    e.preventDefault(); if (typeof setMenu === 'function') setMenu(false); closeModal(serviceModal); openBooking();
+  }));
 
   /* Trazo dorado a mano alrededor de las palabras clave */
   const STROKE = 'M335.861 14.9838C244.324 -8.85224 81.7993 -0.90689 23.8882 28.8882C-17.21 50.7379 -2.26523 90.4647 63.1183 104.369C145.315 126.219 305.971 110.328 350.806 82.5193C391.904 56.6969 348.938 12.9975 287.29 9.0248C193.885 -2.89323 72.4588 11.0111 27.6244 38.8199';
@@ -59,7 +74,7 @@
 
   /* Cabecera, parallax, hilo del ritual, CTA móvil */
   const header = $('#header'), sticky = $('#stickyCta'), thread = $('#thread'), steps = $$('[data-step]');
-  const stepsEl = $('#steps'), parallax = $$('[data-parallax]'), contact = $('#reservar');
+  const stepsEl = $('#steps'), parallax = $$('[data-parallax]'), contact = $('#contacto');
   let ticking = false;
 
   function frame() {
@@ -166,12 +181,30 @@
       const v = e.target.value.trim(); set(S.name, v || 'Sin indicar', !!v);
     });
 
-    // las tarjetas de Servicios preseleccionan el cuidado
-    $$('.card').forEach(card => card.addEventListener('click', () => {
-      const name = $('.card__name', card).textContent.trim();
+    // preselecciona el cuidado al reservar desde una tarjeta o ventana de servicio
+    const preselect = name => {
       const r = form.querySelector(`input[name="servicio"][value="${name}"]`);
       if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); }
+    };
+
+    // ventana de detalle de cada servicio (textos y precios por confirmar con el salón)
+    const SERVICES = {
+      'Spa capilar': { photos: ['servicio-spa-1.png', 'servicio-spa-2.png'], alt: 'Lavado con masaje en la sala del salón' },
+      'Corte': { photos: ['servicio-corte.png'], alt: 'Corte y ondas suaves en tono cobrizo' },
+      'Color vegano': { photos: ['servicio-spa.webp', 'servicio-color.png'], alt: 'Color vegano en tonos rojizos' },
+      'Tratamientos': { photos: ['trabajo-1.png', 'trabajo-3.png'], alt: 'Melena larga y cuidada' }
+    };
+    let current = '';
+    $$('[data-service]').forEach(card => card.addEventListener('click', () => {
+      current = card.dataset.service;
+      const s = SERVICES[current];
+      $('#svcTitle').textContent = current;
+      $('#svcText').textContent = 'Detalle del servicio por confirmar: qué incluye, cuánto dura y para quién es.';
+      $('#svcMedia').innerHTML = s.photos.map((p, i) => `<img src="assets/${p}" alt="${i ? '' : s.alt}">`).join('');
+      $('#svcMedia').dataset.n = s.photos.length;
+      openModal(serviceModal);
     }));
+    $('#svcBook').addEventListener('click', () => { closeModal(serviceModal); openBooking(); preselect(current); });
 
     form.addEventListener('submit', e => {
       e.preventDefault();
