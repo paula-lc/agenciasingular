@@ -188,20 +188,16 @@
     };
 
     // ventana de detalle de cada servicio (textos y precios por confirmar con el salón)
-    const SERVICES = {
-      'Spa capilar': { photos: ['servicio-spa-1.png', 'servicio-spa-2.png'], alt: 'Lavado con masaje en la sala del salón' },
-      'Corte': { photos: ['servicio-corte.png'], alt: 'Corte y ondas suaves en tono cobrizo' },
-      'Color vegano': { photos: ['servicio-spa.webp', 'servicio-color.png'], alt: 'Color vegano en tonos rojizos' },
-      'Tratamientos': { photos: ['trabajo-1.png', 'trabajo-3.png'], alt: 'Melena larga y cuidada' }
-    };
+    const SERVICES = { 'Spa capilar': 'video', 'Corte': 'foto', 'Color vegano': 'foto', 'Tratamientos': 'foto' };
+    const ICON_VIDEO = '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26"/><path d="M26 21v22l18-11Z"/></svg>';
+    const ICON_PHOTO = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="8"/><circle cx="24" cy="29" r="5"/><path d="M10 46l14-12 10 8 8-6 14 12"/></svg>';
     let current = '';
     $$('[data-service]').forEach(card => card.addEventListener('click', () => {
       current = card.dataset.service;
-      const s = SERVICES[current];
+      const video = SERVICES[current] === 'video';
       $('#svcTitle').textContent = current;
       $('#svcText').textContent = 'Detalle del servicio por confirmar: qué incluye, cuánto dura y para quién es.';
-      $('#svcMedia').innerHTML = s.photos.map((p, i) => `<figure class="svc__fig"><img src="assets/${p}" alt="${i ? '' : s.alt}"><figcaption>Foto provisional, extraída de @ubuntu.bcn</figcaption></figure>`).join('');
-      $('#svcMedia').dataset.n = s.photos.length;
+      $('#svcMedia').innerHTML = `<div class="svc__ph">${video ? ICON_VIDEO : ICON_PHOTO}<p><b>${video ? 'Vídeo pendiente' : 'Foto pendiente'}</b>${video ? 'Aquí irá el vídeo del spa capilar, de su Instagram.' : 'Aquí irá una foto del servicio, en buena calidad.'}</p></div>`;
       openModal(serviceModal);
     }));
     $('#svcBook').addEventListener('click', () => { closeModal(serviceModal); openBooking(); preselect(current); });

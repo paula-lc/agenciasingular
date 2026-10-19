@@ -256,14 +256,12 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
 .modal__close:hover{background:var(--gold);transform:rotate(90deg)}
 .modal--service{width:min(920px,calc(100vw - 32px))}
 .svc{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);padding:clamp(28px,4vw,48px);clear:both}
-.svc__media{display:grid;gap:12px;align-content:start}
-.svc__fig{position:relative;overflow:hidden;border-radius:60px 24px 60px 24px;line-height:0}
-.svc__fig+.svc__fig{border-radius:24px 60px 24px 60px}
-.svc__fig::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(74,46,34,.82),rgba(74,46,34,.45) 45%,rgba(74,46,34,.3));pointer-events:none}
-.svc__fig figcaption{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:14px 22px 16px;color:var(--cream);font-size:13px;line-height:1.35;text-align:center;font-style:italic}
-.svc__media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-.svc__media[data-n="2"] img{aspect-ratio:16/10}
-.svc__media[data-n="1"] img{aspect-ratio:4/5}
+.svc__media{display:grid}
+.svc__ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:32px;aspect-ratio:1/1;border:1.5px dashed var(--brown);border-radius:60px 24px 60px 24px;background:rgba(247,237,226,.55)}
+.svc__ph svg{width:72px;height:72px;fill:none;stroke:var(--brown);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.svc__ph svg path:last-child{fill:var(--brown);fill-opacity:.12}
+.svc__ph p{display:flex;flex-direction:column;gap:6px;max-width:16em;font-size:15px;line-height:1.4;opacity:.85}
+.svc__ph b{font-family:var(--serif);font-weight:400;font-size:22px}
 .svc__body{display:flex;flex-direction:column;gap:18px;align-self:center}
 .svc__cta{display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px;margin-top:8px}
 .svc__chips li{border-color:rgba(74,46,34,.4)}
@@ -467,11 +465,7 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
   .works__label{grid-column:1/-1;order:5;padding-top:8px}
   dialog.modal{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:36px 18px 36px 18px}
   .svc{grid-template-columns:1fr;padding:24px 20px 28px}
-  .svc__fig{border-radius:40px 18px 40px 18px}
-  .svc__fig+.svc__fig{border-radius:18px 40px 18px 40px}
-  .svc__fig figcaption{font-size:11px;padding:10px 12px 12px}
-  .svc__media[data-n="2"]{grid-template-columns:1fr 1fr}
-  .svc__media[data-n="2"] img{aspect-ratio:3/4}
+  .svc__ph{aspect-ratio:4/3;border-radius:40px 18px 40px 18px;padding:24px}
   .reservar{padding:20px 14px 24px}
   .for-him{grid-template-columns:1fr;gap:20px;padding:24px 24px 28px;border-radius:56px 22px 56px 22px}
   .for-him__photo{width:150px;border-radius:75px 22px 75px 22px}
