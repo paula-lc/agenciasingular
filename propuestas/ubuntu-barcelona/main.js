@@ -129,11 +129,12 @@
   if (form) {
     const dayBox = $('#optDay'), timeBox = $('#optTime'), err = $('#bError');
     const S = { service: $('#sService'), day: $('#sDay'), time: $('#sTime'), name: $('#sName') };
-    const SLOTS = ['10:00', '10:45', '11:30', '12:15', '13:00', '16:00', '16:45', '17:30', '18:15', '19:00'];
+    const SLOTS_WEEK = ['10:00', '10:45', '11:30', '12:15', '13:00', '16:00', '16:45', '17:30', '18:15', '19:00'];   // mar–vie, 10–20 h
+    const SLOTS_SAT = ['09:00', '09:45', '10:30', '11:15', '12:00', '12:45'];                              // sáb, 9–14 h
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
     const fmtDay = d => cap(d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }));
     const today = new Date(); today.setHours(0, 0, 0, 0);
-    const days = Array.from({ length: 8 }, (_, i) => { const d = new Date(today); d.setDate(d.getDate() + i + 1); return d; });
+    const days = []; for (let d = new Date(today); days.length < 8;) { d.setDate(d.getDate() + 1); if (d.getDay() >= 2 && d.getDay() <= 6) days.push(new Date(d)); }   // abre de martes a sábado
 
     dayBox.innerHTML = days.map((d, i) => `
       <label class="day"><input type="radio" name="dia" value="${i}"><span>
@@ -141,13 +142,13 @@
       </span></label>`).join('');
 
     const renderSlots = di => {
+      const SLOTS = days[di].getDay() === 6 ? SLOTS_SAT : SLOTS_WEEK;
       timeBox.innerHTML = SLOTS.map((t, i) => {
         const taken = (di * 7 + i * 3) % 4 === 0;                 // huecos "ocupados" de ejemplo
         return `<label class="slot"><input type="radio" name="hora" value="${t}"${taken ? ' disabled' : ''}><span>${t}</span></label>`;
       }).join('');
       S.time.textContent = 'Sin elegir'; S.time.classList.remove('is-set');
     };
-    renderSlots(0);
     timeBox.innerHTML = '<p class="small tag-pending">Elige primero un día.</p>';
 
     const set = (el, txt, ok) => { el.textContent = txt; el.classList.toggle('is-set', ok); };

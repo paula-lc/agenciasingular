@@ -321,10 +321,14 @@ ol{list-style:none}
 .rating:hover .star{transform:rotate(72deg) scale(1.15)}
 .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .quote-card{
-  background:var(--peach);min-height:156px;padding:32px;display:flex;align-items:center;font-size:18px;
+  background:var(--peach);min-height:156px;padding:32px;display:flex;font-size:18px;
   border-radius:48px 24px 48px 24px;transition:border-radius .7s var(--ease),transform .5s var(--ease),opacity .9s var(--ease),filter .9s var(--ease)
 }
-.quote-card span{opacity:.7}
+.quote-card{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:18px}
+.quote-card p{font-family:var(--serif);font-size:clamp(18px,1.5vw,21px);line-height:1.35}
+.quote-card cite{font-style:normal;font-size:14px;opacity:.7}
+.facts a{border-bottom:1px solid currentColor}
+.facts a:hover{color:var(--peach)}
 .quote-card:hover{border-radius:24px 48px 24px 48px;transform:translateY(-6px)}
 
 /* ===== Contacto ===== */
