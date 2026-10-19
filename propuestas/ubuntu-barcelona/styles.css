@@ -251,7 +251,7 @@ dialog.modal[open]{animation:modalIn .55s var(--ease)}
 dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);animation:fadeIn .4s}
 @keyframes modalIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}}
-.modal__close{position:sticky;top:14px;float:right;margin:14px 14px 0 0;z-index:5;width:44px;height:44px;border:1px solid var(--brown);border-radius:50%;background:var(--cream);cursor:pointer;display:grid;place-items:center;transition:background .3s,transform .4s var(--ease)}
+.modal__close{position:sticky;top:14px;display:grid;margin:14px 14px -58px auto;z-index:5;width:44px;height:44px;border:1px solid var(--brown);border-radius:50%;background:var(--cream);cursor:pointer;display:grid;place-items:center;transition:background .3s,transform .4s var(--ease)}
 .modal__close span{grid-area:1/1;width:18px;height:1.5px;background:var(--brown);transform:rotate(45deg)}
 .modal__close span+span{transform:rotate(-45deg)}
 .modal__close:hover{background:var(--gold);transform:rotate(90deg)}
@@ -269,7 +269,7 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
 
 /* ===== Reserva (demo) ===== */
 .reservar{padding:clamp(24px,3.5vw,48px);display:flex;flex-direction:column;gap:32px}
-.reservar__head{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.reservar__head{display:flex;flex-direction:column;gap:20px;align-items:flex-start;padding-right:56px}
 .demo-pill{display:inline-flex;align-items:center;gap:10px;background:var(--cream);border-radius:30px;padding:9px 18px;font-size:14px}
 .demo-pill i{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite;flex:none}
 @keyframes pulse{50%{transform:scale(1.6);opacity:.5}}
@@ -460,9 +460,19 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
   .works{grid-template-columns:repeat(3,1fr);gap:9px}
   .works__label{grid-column:1/-1;order:5;padding-top:8px}
   dialog.modal{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:36px 18px 36px 18px}
-  .svc{grid-template-columns:1fr;padding:24px 20px 28px}
+  .svc{grid-template-columns:1fr;padding:64px 20px 28px}
   .svc__ph{aspect-ratio:4/3;border-radius:40px 18px 40px 18px;padding:24px}
-  .reservar{padding:20px 14px 24px}
+  dialog.modal--booking{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border-radius:0}
+  .reservar{padding:8px 14px 28px;gap:24px}
+  .reservar__head{gap:14px;padding-right:44px}
+  .reservar .h2{font-size:42px}
+  .booking{gap:20px}
+  .booking__form{padding:24px 16px;gap:26px;border-radius:36px 18px 36px 18px}
+  .bstep legend{flex-wrap:wrap;row-gap:2px}
+  .legend__hint{flex-basis:100%;margin:0 0 0 44px}
+  .opts,.days,.slots{gap:8px}
+  .opt span,.slot span{padding:9px 16px}
+  .summary{padding:24px 20px}
   .for-him{grid-template-columns:96px minmax(0,1fr);gap:8px 16px;padding:22px 20px 24px;border-radius:56px 22px 56px 22px;align-items:start}
   .for-him__copy{display:contents}
   .for-him__photo{grid-column:1;grid-row:1/span 2;width:96px;border-radius:48px 16px 48px 16px}
