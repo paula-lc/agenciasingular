@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cool Nails Gràcia | Salón de uñas en Barcelona</title>
+<meta name="description" content="Tu salón de uñas en Vila de Gràcia, Barcelona. Manicura, pedicura spa y nail art con más de 300 colores. Reserva tu cita online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf5ee;     /* fondo de su web actual */
+  --sand:#f3ebdf;
+  --ink:#2a2420;       /* marrón oscuro de su web actual */
+  --soft:#6b5b52;
+  --gold:#c4a96b;      /* dorado del logo */
+  --gold-d:#7a5d1e;    /* dorado oscuro para texto (contraste AA) */
+  --line:#e3d7c3;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 1.0625rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.05;letter-spacing:-.01em}
+h1{font-size:clamp(3rem,7vw,5.6rem)}
+h1 em,h2 em{font-style:italic;color:var(--gold-d)}
+h2{font-size:clamp(2.1rem,4.4vw,3.4rem)}
+h3{font-size:1.6rem;font-weight:500}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+section{padding:clamp(60px,9vw,112px) 0}
+:focus-visible{outline:3px solid var(--gold-d);outline-offset:3px}
+.skip{position:absolute;left:16px;top:-100px;background:var(--ink);color:#fff;padding:12px 18px;z-index:100}
+.skip:focus{top:12px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 30px;border:1px solid var(--ink);border-radius:2px;background:var(--ink);color:var(--cream);font:500 1rem var(--sans);letter-spacing:.04em;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--gold-d);border-color:var(--gold-d)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--cream)}
+.btn.wa::before{content:"";width:18px;height:18px;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.100-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 .9-2.300c.3-.3.600-.3.800-.3h.6c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .6l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.100 1 2 1.300 2.300 1.400.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.300z'/%3E%3C/svg%3E") center/contain no-repeat}
+.link{color:var(--gold-d);font-weight:500;text-underline-offset:4px}
+
+/* cabecera */
+header.top{position:sticky;top:0;z-index:50;background:rgba(250,245,238,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:74px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo svg{width:40px;height:40px}
+.logo b{display:block;font:300 1.35rem/1 var(--sans);letter-spacing:.28em;color:#555}
+.logo b span{font-weight:500}
+.logo small{display:block;font-size:.62rem;letter-spacing:.22em;color:#6b6b6b;margin-top:4px}
+nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;font-weight:400;padding:10px 0;border-bottom:1px solid transparent}
+nav a:hover{border-color:var(--gold)}
+.top .btn{min-height:46px;padding:0 24px}
+
+/* hero */
+.hero{padding-top:clamp(32px,5vw,64px)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
+.hero .lead{font-size:1.2rem;color:var(--soft);max-width:36ch;margin:26px 0 34px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px}
+.trust{display:flex;flex-wrap:wrap;gap:12px 28px;margin:34px 0 0;padding:22px 0 0;border-top:1px solid var(--line);list-style:none;font-size:.98rem;color:var(--soft)}
+.trust b{color:var(--ink);font-weight:500}
+.trust .st{color:var(--gold-d);letter-spacing:2px}
+.hero{position:relative;overflow:hidden;padding-bottom:clamp(48px,7vw,96px)}
+.hero::before{content:"";position:absolute;right:-180px;top:-120px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,#efe0bd 0,rgba(239,224,189,0) 68%);pointer-events:none}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(3.2rem,7.6vw,6.4rem);line-height:.98}
+.mosaic{margin:0;position:relative;padding:0 0 60px 40px}
+.arch{border-radius:999px 999px 6px 6px;overflow:hidden;aspect-ratio:3/4;background:var(--sand);box-shadow:0 30px 60px -30px rgba(42,36,32,.45)}
+.arch video{width:100%;height:100%;object-fit:cover;display:block}
+.round{position:absolute;left:-10px;bottom:0;width:46%;height:auto;aspect-ratio:1;object-fit:cover;object-position:25% 40%;border-radius:50%;border:8px solid var(--cream);box-shadow:0 18px 40px -18px rgba(42,36,32,.5)}
+.mosaic figcaption{position:absolute;right:-6px;bottom:18px;background:var(--ink);color:var(--cream);padding:14px 22px;font-family:var(--serif);font-size:1.35rem;font-style:italic;line-height:1.2;max-width:200px}
+
+/* banda de colores */
+.palette{position:relative;padding:0;min-height:clamp(380px,48vw,560px);display:grid;align-items:center;color:var(--cream);isolation:isolate;overflow:hidden}
+.palette>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.palette::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(32,26,22,.88) 0,rgba(32,26,22,.62) 45%,rgba(32,26,22,.1) 100%)}
+.palette .wrap{padding:60px 0}
+.palette h2{font-size:clamp(2.8rem,6.4vw,5.4rem);max-width:12ch;line-height:.98}
+.palette h2 em{color:var(--gold)}
+.palette p{margin:22px 0 30px;max-width:36ch;color:#efe6d8;font-size:1.15rem}
+.palette .btn{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.palette .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.palette :focus-visible{outline-color:var(--gold)}
+
+/* servicios destacados */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:54px}
+.fcard{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:480px;padding:32px;color:var(--cream);isolation:isolate;overflow:hidden}
+.fcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s}
+.fcard:hover img{transform:scale(1.04)}
+.fcard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(32,26,22,.94) 0,rgba(32,26,22,.7) 42%,rgba(32,26,22,.1) 80%)}
+.fcard h3{font-size:2.4rem;line-height:1}
+.fcard small{display:block;color:var(--gold);font-size:1rem;margin-bottom:8px}
+.fcard p{margin:12px 0 20px;max-width:38ch;color:#efe6d8}
+.fcard .btn{align-self:flex-start;background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.fcard .btn:hover{background:var(--gold);border-color:var(--gold)}
+.fcard :focus-visible{outline-color:var(--gold)}
+
+/* quiz */
+.quiz{background:var(--sand);border-block:1px solid var(--line)}
+.quiz .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.quiz p.sub{color:var(--soft);margin-top:18px;max-width:38ch}
+.qbox{background:var(--cream);border:1px solid var(--line);padding:clamp(22px,3vw,38px)}
+.qbox h3{margin-bottom:18px}
+.qopts{display:grid;gap:10px}
+.qopts button,.chip{font:400 1.05rem var(--sans);text-align:left;min-height:52px;padding:12px 18px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:2px;cursor:pointer;transition:border-color .15s,background .15s}
+.qopts button:hover,.qopts button:focus-visible{border-color:var(--gold-d);background:#fffdf8}
+.qprog{font-size:.95rem;color:var(--soft);margin-bottom:10px}
+.result{display:grid;gap:14px}
+.result h3{font-size:2.1rem}
+.result p{color:var(--soft)}
+.result .tagline{font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--gold-d)}
+
+/* servicios */
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;margin-bottom:44px}
+.head p{color:var(--soft);max-width:40ch}
+.svc{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.svc li{display:grid;grid-template-columns:1fr 1.3fr auto;gap:12px 36px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}
+.svc p{color:var(--soft)}
+.svc .btn{min-height:44px;padding:0 20px;font-size:.95rem}
+.svc small{display:block;font-family:var(--sans);font-size:.92rem;color:var(--gold-d);margin-top:4px}
+
+/* estudio */
+.studio{background:var(--ink);color:var(--cream)}
+.studio h2 em{color:var(--gold)}
+.studio .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.studio .txt p{color:#d8cdbf;margin-top:20px;max-width:44ch}
+.stats{display:flex;flex-wrap:wrap;gap:20px 44px;margin-top:34px;padding:0;list-style:none}
+.stats b{display:block;font:400 3rem/1 var(--serif);color:var(--gold)}
+.stats span{font-size:.95rem;color:#d8cdbf}
+.photos img{width:100%;max-height:640px;object-fit:cover;object-position:50% 70%;aspect-ratio:4/5;border-radius:999px 999px 6px 6px;border:1px solid #5a4d44}
+
+/* reseñas */
+.rev .row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+blockquote{margin:0;padding:28px;background:#fff;border:1px solid var(--line)}
+blockquote p{font-family:var(--serif);font-size:1.45rem;line-height:1.3}
+blockquote footer{margin-top:16px;font-size:.95rem;color:var(--soft)}
+.score{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:12px;color:var(--soft)}
+.score b{font:400 3.4rem/1 var(--serif);color:var(--ink)}
+.score .st{color:var(--gold-d);letter-spacing:3px;font-size:1.2rem}
+
+/* reserva */
+.book{background:var(--sand);border-block:1px solid var(--line)}
+.book .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,72px);align-items:start}
+.book .intro p{color:var(--soft);margin-top:18px;max-width:36ch}
+.facts{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:10px}
+.facts li::before{content:"✓";color:var(--gold-d);margin-right:12px;font-weight:500}
+.panel{background:var(--cream);border:1px solid var(--line);padding:clamp(22px,3vw,40px)}
+.steps{display:flex;gap:0;margin:0 0 26px;padding:0;list-style:none;border-bottom:1px solid var(--line)}
+.steps li{flex:1;padding:0 0 12px;font-size:.95rem;color:var(--soft);border-bottom:3px solid transparent;margin-bottom:-1px}
+.steps li[aria-current="step"]{color:var(--ink);border-color:var(--gold-d);font-weight:500}
+.steps li.done{color:var(--gold-d)}
+.step[hidden]{display:none}
+.step h3{margin-bottom:16px;outline:none}
+.opts{display:grid;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.opt span{display:block;padding:13px 18px;border:1px solid var(--line);background:#fff;border-radius:2px}
+.opt small{display:block;color:var(--soft);font-size:.92rem}
+.opt input:checked + span{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opt input:focus-visible + span{outline:3px solid var(--gold-d);outline-offset:2px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-top:8px}
+.slots .opt span{text-align:center;padding:12px 4px}
+label.f,legend.f{display:block;font-weight:500;margin-bottom:6px;padding:0}
+.field{margin-bottom:18px}
+input[type=text],input[type=tel],input[type=date],textarea{width:100%;min-height:52px;padding:12px 16px;border:1px solid #b9aa92;border-radius:2px;font:400 1.05rem var(--sans);color:var(--ink);background:#fff}
+textarea{min-height:88px}
+.hint{font-size:.95rem;color:var(--soft);margin-top:6px}
+.err{color:#9c1c1c;font-weight:500;min-height:1.5em;margin-top:8px}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;flex-wrap:wrap}
+.summary{background:#fff;border-left:3px solid var(--gold);padding:14px 18px;margin-bottom:18px}
+
+/* faq */
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--ink)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;font:400 1.55rem var(--serif);padding:10px 0}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:300 2rem var(--sans);color:var(--gold-d)}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 22px;color:var(--soft);max-width:62ch}
+.faqwrap{max-width:820px;margin-top:36px}
+
+/* contacto */
+.contact{background:var(--ink);color:var(--cream)}
+.contact .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px)}
+.contact h2 em{color:var(--gold)}
+.contact dl{margin:30px 0;display:grid;grid-template-columns:auto 1fr;gap:12px 28px}
+.contact dt{color:var(--gold)}
+.contact dd{margin:0}
+.contact a{text-underline-offset:4px}
+.contact .btn{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.contact .btn:hover{background:var(--gold);border-color:var(--gold)}
+.contact .btn.ghost{background:transparent;color:var(--cream)}
+.contact .btn.ghost:hover{background:var(--cream);color:var(--ink)}
+.contact :focus-visible{outline-color:var(--gold)}
+.hours{border:1px solid #5a4d44;padding:28px}
+.hours h3{margin-bottom:12px}
+.hours div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #4a3f38}
+.hours div:last-child{border:0}
+.hours .today{color:var(--gold);font-weight:500}
+footer.end{background:#1f1a17;color:#bfb2a3;padding:22px 0 92px;font-size:.92rem}
+
+/* ===== brillo, tipografía y elegancia ===== */
+@keyframes foil{to{background-position:-200% 0}}
+@keyframes sweep{to{transform:translateX(260%) skewX(-20deg)}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+@keyframes tick{to{transform:translateX(-50%)}}
+.foil,h1 em,h2 em,.stats b,.score b{background:linear-gradient(100deg,#7a5d1e 0,#b8923f 22%,#e8d08a 38%,#b8923f 52%,#7a5d1e 70%,#b8923f 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:foil 9s linear infinite}
+.studio h2 em,.contact h2 em,.palette h2 em,.studio .stats b{background-image:linear-gradient(100deg,#b8923f 0,#f3e2a5 28%,#c4a96b 48%,#fff2c2 62%,#b8923f 82%,#e8d08a 100%)}
+/* titular de portada con juego de escalas */
+.hero h1{display:flex;flex-direction:column;align-items:flex-start;line-height:.9;font-size:inherit}
+.hero h1 .l1{font:italic 400 clamp(1.6rem,3vw,2.4rem)/1 var(--serif);color:var(--soft);margin-left:.15em}
+.hero h1 .l2{font-size:clamp(5.2rem,15vw,12rem);letter-spacing:-.045em;line-height:.82;margin:.02em 0 0 -.04em}
+.hero h1 .l3{font-size:clamp(2.6rem,6vw,4.8rem);margin:.08em 0 0 .6em;letter-spacing:-.02em}
+.hero h1 .l3 em{font-style:italic;padding-right:.08em}
+.hero .lead{position:relative;padding-left:22px;border-left:1px solid var(--gold)}
+/* destellos */
+.sp{position:absolute;width:var(--s,22px);height:var(--s,22px);pointer-events:none;color:#c9a64a;animation:twinkle var(--d,4.5s) ease-in-out infinite;animation-delay:var(--t,0s)}
+.sp svg{width:100%;height:100%;display:block;fill:currentColor}
+.sparkles{position:absolute;inset:0;pointer-events:none}
+/* brillo al pasar en botones */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,240,190,.55),transparent);transform:skewX(-20deg);pointer-events:none}
+.btn:hover::after{animation:sweep .8s ease}
+.btn:not(.ghost){border-color:#b8923f;box-shadow:inset 0 0 0 1px rgba(232,208,138,.35)}
+/* cinta tipográfica */
+.ticker{background:var(--ink);color:var(--cream);overflow:hidden;border-block:1px solid #b8923f;padding:10px 0}
+.ticker .rail{display:flex;width:max-content;animation:tick 42s linear infinite}
+.ticker span{display:flex;align-items:center;gap:34px;padding-right:34px;font:italic 400 clamp(1.8rem,3.4vw,2.8rem)/1.3 var(--serif);white-space:nowrap}
+.ticker span i{font-style:normal;color:var(--gold);font-size:.7em}
+.ticker span b{font-weight:400;font-style:normal;color:transparent;-webkit-text-stroke:1px #c4a96b}
+/* 300 en contorno dorado */
+.palette h2{max-width:none}
+.palette h2 .big{display:block;font-size:clamp(7rem,22vw,17rem);line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px #e8d08a;font-style:normal;background:none;-webkit-text-fill-color:transparent;animation:none}
+.palette h2 .sub2{display:block;font-size:clamp(2.2rem,5vw,4rem);margin:.4em 0 0 .1em;font-style:italic;line-height:1.05}
+/* separador ornamental */
+.odiv{display:flex;align-items:center;gap:20px;width:min(1160px,100% - 40px);margin:0 auto;color:var(--gold-d)}
+.odiv::before,.odiv::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,#c4a96b)}
+.odiv::after{background:linear-gradient(270deg,transparent,#c4a96b)}
+.odiv svg{width:34px;height:34px}
+/* cita editorial */
+blockquote{position:relative}
+blockquote::before{content:"“";position:absolute;top:-6px;left:20px;font:400 6rem/1 var(--serif);background:linear-gradient(180deg,#e8d08a,#a8822f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+blockquote p{padding-top:34px}
+.rev .row blockquote:first-child{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.rev .row blockquote:first-child footer{color:#d8cdbf}
+.rev .row blockquote:first-child p{font-size:1.9rem}
+/* capitular */
+.studio .txt p:first-of-type::first-letter{float:left;font:italic 400 5.2rem/.8 var(--serif);padding:8px 12px 0 0;color:var(--gold)}
+h2.xl{font-size:clamp(2.6rem,6vw,4.8rem)}
+@media (prefers-reduced-motion:reduce){.foil,h1 em,h2 em,.stats b,.score b,.sp,.ticker .rail{animation:none!important}.ticker .rail{flex-wrap:wrap;width:auto}}
+
+.mbar{display:none}
+@media (max-width:900px){
+  nav,.top .btn{display:none}
+  .hero .wrap,.quiz .grid,.studio .grid,.book .grid,.contact .grid{grid-template-columns:1fr}
+  .mosaic{padding-left:0;max-width:440px;margin-inline:auto}
+  .round{left:-6px}
+  .feat{grid-template-columns:1fr}
+  .fcard{min-height:400px}
+  .palette::after{background:linear-gradient(0deg,rgba(32,26,22,.85),rgba(32,26,22,.55))}
+  .photos img{max-width:420px;margin-inline:auto}
+  .rev .row{grid-template-columns:1fr}
+  .svc li{grid-template-columns:1fr;gap:10px}
+  .svc .btn{justify-self:start}
+  .mbar{display:flex;position:fixed;inset:auto 0 0;z-index:60;gap:10px;padding:10px 16px;background:var(--cream);border-top:1px solid var(--line)}
+  .mbar .btn{flex:1;padding:0 12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="orn" viewBox="0 0 80 80"><g fill="none" stroke="#C4A96B" stroke-width="2.2" stroke-linecap="round">
+    <g id="cl"><ellipse cx="40" cy="21" rx="7" ry="18" transform="rotate(-14 40 40)"/><ellipse cx="40" cy="21" rx="7" ry="18"/><ellipse cx="40" cy="21" rx="7" ry="18" transform="rotate(14 40 40)"/></g>
+    <use href="#cl" transform="rotate(90 40 40)"/><use href="#cl" transform="rotate(180 40 40)"/><use href="#cl" transform="rotate(270 40 40)"/></g></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Cool Nails Beauty & Care, inicio">
+      <svg aria-hidden="true"><use href="#orn"/></svg>
+      <span><b>COOL <span>NAILS</span></b><small>BEAUTY &amp; CARE</small></span>
+    </a>
+    <nav aria-label="Principal"><ul>
+      <li><a href="#servicios">Servicios</a></li><li><a href="#estudio">El estudio</a></li><li><a href="#resenas">Reseñas</a></li><li><a href="#faq">Preguntas</a></li><li><a href="#contacto">Contacto</a></li>
+    </ul></nav>
+    <a class="btn" href="#reservar">Reservar cita</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div>
+      <h1 id="h1"><span class="l1">Tu salón de</span><span class="l2">uñas</span><span class="l3">en <em>Gràcia</em></span></h1>
+      <p class="lead">Manicura, pedicura spa y nail art en un espacio íntimo y cuidado, con más de 300 colores para elegir.</p>
+      <div class="cta-row">
+        <a class="btn" href="#reservar">Reservar cita</a>
+        <a class="btn ghost wa" href="https://wa.me/34614894792" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+      <ul class="trust">
+        <li><span class="st" aria-hidden="true">★★★★★</span> <b>5,0</b> en Google · 93 reseñas</li>
+        <li>A 5 min de Joanic y Verdaguer</li>
+        <li>Respondemos en menos de 2 h</li>
+      </ul>
+    </div>
+    <figure class="mosaic">
+      <div class="arch"><video id="hv" autoplay muted loop playsinline poster="img/hero-poster.jpg" aria-label="Manicura profesional en Cool Nails Gràcia"><source src="img/hero.mp4" type="video/mp4"></video></div>
+      <img class="round" src="img/img-e6b252f842.webp" alt="Especialista realizando una manicura frente a la pared de esmaltes Victoria Vynn" width="900" height="600">
+      <figcaption>Más de 300 colores en cabina</figcaption>
+      <div class="sparkles" aria-hidden="true">
+        <i class="sp" style="--s:30px;top:6%;left:8%"><svg viewBox="0 0 24 24"><path d="M12 0c.9 7.200 4.800 11.100 12 12-7.200.9-11.100 4.800-12 12-.9-7.200-4.800-11.100-12-12C7.200 11.100 11.100 7.200 12 0z"/></svg></i>
+        <i class="sp" style="--s:18px;--d:3.6s;--t:1.2s;top:30%;right:-4%"><svg viewBox="0 0 24 24"><path d="M12 0c.9 7.200 4.800 11.100 12 12-7.200.9-11.100 4.800-12 12-.9-7.200-4.800-11.100-12-12C7.200 11.100 11.100 7.200 12 0z"/></svg></i>
+        <i class="sp" style="--s:24px;--d:5.2s;--t:2.4s;bottom:30%;left:38%"><svg viewBox="0 0 24 24"><path d="M12 0c.9 7.200 4.800 11.100 12 12-7.200.9-11.100 4.800-12 12-.9-7.200-4.800-11.100-12-12C7.200 11.100 11.100 7.200 12 0z"/></svg></i>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="rail">
+  <span>Manicura <i>✦</i> <b>Pedicura spa</b> <i>✦</i> Nail art <i>✦</i> <b>Semipermanente</b> <i>✦</i> Gel y acrigel <i>✦</i> <b>BIAB</b> <i>✦</i></span>
+  <span>Manicura <i>✦</i> <b>Pedicura spa</b> <i>✦</i> Nail art <i>✦</i> <b>Semipermanente</b> <i>✦</i> Gel y acrigel <i>✦</i> <b>BIAB</b> <i>✦</i></span>
+</div></div>
+
+<section class="palette" aria-labelledby="h-pal">
+  <img src="img/img-49dd309f14.webp" alt="" loading="lazy">
+  <div class="wrap">
+    <h2 id="h-pal"><span class="big" aria-hidden="true">300</span><span class="sr-only" style="position:absolute;left:-9999px">300 </span><span class="sub2">colores. <em>Elige el tuyo.</em></span></h2>
+    <p>Toda la gama de gel Victoria Vynn a la vista en cabina: del nude más suave al rojo cereza.</p>
+    <a class="btn" href="#reservar">Reservar y elegir mi color</a>
+  </div>
+</section>
+
+<section class="quiz" aria-labelledby="h-quiz">
+  <div class="wrap grid">
+    <div>
+      <h2 id="h-quiz">¿No sabes qué <em>servicio</em> elegir?</h2>
+      <p class="sub">Responde dos preguntas y te recomendamos el servicio que mejor encaja. Después, reservas con un clic.</p>
+    </div>
+    <div class="qbox" id="qbox" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="servicios" aria-labelledby="h-serv">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="h-serv">Servicios</h2>
+      <p>Elige uno y lo dejamos seleccionado en tu reserva. Si dudas, escríbenos por WhatsApp.</p>
+    </div>
+    <div class="feat">
+      <article class="fcard"><img src="img/img-668836926c.webp" alt="" loading="lazy" style="object-position:50% 30%"><small>Dura 3-4 semanas</small><h3>Manicura semipermanente</h3><p>Forma, cutículas y esmalte gel Victoria Vynn. Más de 300 colores en cabina.</p><a class="btn" href="#reservar" data-service="Manicura semipermanente">Reservar</a></article>
+      <article class="fcard"><img src="img/img-3a198ce5c2.webp" alt="" loading="lazy" style="object-position:70% 60%"><small>Ritual completo</small><h3>Pedicura spa</h3><p>Baño de sal y aceites esenciales, exfoliación, masaje hidratante y esmalte gel o tradicional.</p><a class="btn" href="#reservar" data-service="Pedicura semipermanente spa">Reservar</a></article>
+    </div>
+    <ul class="svc">
+      <li><div><h3>Manicura rusa con BIAB</h3><small>Sin acrílico</small></div><p>Cutícula en seco con torno y base Mega Base que fortalece la uña natural. Ideal para uñas finas o tras el acrílico.</p><a class="btn ghost" href="#reservar" data-service="Manicura rusa con BIAB">Reservar</a></li>
+      <li><div><h3>Pedicura semipermanente spa</h3></div><p>Baño de sal y aceites esenciales, exfoliación, eliminación de durezas, masaje hidratante y esmalte gel.</p><a class="btn ghost" href="#reservar" data-service="Pedicura semipermanente spa">Reservar</a></li>
+      <li><div><h3>Pedicura tradicional spa</h3></div><p>El mismo ritual spa, con esmalte tradicional.</p><a class="btn ghost" href="#reservar" data-service="Pedicura tradicional spa">Reservar</a></li>
+      <li><div><h3>Manicura tradicional</h3></div><p>Esmalte clásico con forma, cutículas, exfoliación y masaje.</p><a class="btn ghost" href="#reservar" data-service="Manicura tradicional">Reservar</a></li>
+      <li><div><h3>Manicura natural</h3></div><p>Cuidado completo sin esmalte final, para un acabado de uñas desnudas.</p><a class="btn ghost" href="#reservar" data-service="Manicura natural">Reservar</a></li>
+      <li><div><h3>Manicura masculina</h3></div><p>Cutícula en seco, limado, pulido y masaje, con top coat mate opcional.</p><a class="btn ghost" href="#reservar" data-service="Manicura masculina">Reservar</a></li>
+      <li><div><h3>Uñas de gel y acrigel</h3><small>Rellenos y mantenimiento</small></div><p>Extensiones y reconstrucción en forma cuadrada, almendra, stiletto o coffin.</p><a class="btn ghost" href="#reservar" data-service="Uñas de gel y acrigel">Reservar</a></li>
+      <li><div><h3>Nail art y decoraciones</h3><small>Más de 12 técnicas</small></div><p>Ombré, stamping, foils cromados, pigmentos espejo, mármol, líneas minimalistas, flores 3D o un diseño tuyo. Cuéntanos tu idea.</p><a class="btn ghost" href="#reservar" data-service="Nail art y decoraciones">Reservar</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="estudio" class="studio" aria-labelledby="h-est">
+  <div class="wrap grid">
+    <div class="txt">
+      <h2 id="h-est">Un espacio <em>íntimo</em>, sin prisas</h2>
+      <p>Cool Nails es un salón pequeño en el corazón de Gràcia, donde cada cita se hace con calma y atención al detalle.</p>
+      <p>Trabajamos con Victoria Vynn, por su durabilidad, su seguridad y sus acabados sofisticados, y seguimos formándonos para que tus uñas salgan mejor cada vez.</p>
+      <ul class="stats">
+        <li><b>300+</b><span>colores de gel</span></li>
+        <li><b>3-4</b><span>semanas de duración</span></li>
+        <li><b>12+</b><span>técnicas de nail art</span></li>
+      </ul>
+    </div>
+    <div class="photos">
+      <img src="img/img-3a198ce5c2.webp" alt="Interior del salón con vigas de madera, mesa de manicura y sillón de pedicura spa" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<div class="odiv" aria-hidden="true"><svg viewBox="0 0 80 80"><use href="#orn"/></svg></div>
+
+<section id="resenas" class="rev" aria-labelledby="h-rev">
+  <div class="wrap">
+    <h2 id="h-rev">Lo que dicen nuestras <em>clientas</em></h2>
+    <div class="score"><b>5,0</b><span class="st" aria-hidden="true">★★★★★</span><span>93 reseñas verificadas en Google</span></div>
+    <div class="row">
+      <blockquote><p>“Bianca es muy profesional, positiva y atenta.”</p><footer>Özge Ş. · manicura y pedicura</footer></blockquote>
+      <blockquote><p>Un salón pequeño y tranquilo; la pedicura, hecha con cuidado y sin prisas.</p><footer>Judith M. · pedicura</footer></blockquote>
+      <blockquote><p>Primera visita y repetiré: se nota la atención al detalle.</p><footer>Melisa · manicura</footer></blockquote>
+    </div>
+    <p style="margin-top:28px"><a class="link" href="https://www.google.com/maps/search/?api=1&query=Cool+Nails+Carrer+Mil%C3%A0+i+Fontanals+17+Barcelona" target="_blank" rel="noopener">Leer todas las reseñas en Google</a></p>
+  </div>
+</section>
+
+<section id="reservar" class="book" aria-labelledby="h-book">
+  <div class="wrap grid">
+    <div class="intro">
+      <h2 id="h-book">Reserva tu <em>cita</em></h2>
+      <p>Elige servicio, día y hora, y déjanos tu nombre y teléfono. Te confirmamos por WhatsApp en menos de 2 horas en horario de apertura.</p>
+      <ul class="facts"><li>Sin registrarte</li><li>Cambios y cancelaciones por WhatsApp</li><li>Atendemos en español e inglés</li></ul>
+      <p style="margin-top:22px"><a class="link" href="https://www.coolnails.art/reservar" target="_blank" rel="noopener">Prefiero el sistema de reserva online</a></p>
+    </div>
+
+    <div class="panel">
+      <ol class="steps" aria-label="Progreso de la reserva"><li id="s1" aria-current="step">1. Servicio</li><li id="s2">2. Día y hora</li><li id="s3">3. Tus datos</li></ol>
+      <form id="bf" novalidate>
+        <div class="step" data-step="1">
+          <h3 id="q1">¿Qué servicio quieres?</h3>
+          <div class="opts" role="radiogroup" aria-labelledby="q1" id="svc"></div>
+          <p class="err" id="e1" role="alert"></p>
+          <div class="nav"><span></span><button type="button" class="btn" data-next>Siguiente</button></div>
+        </div>
+        <div class="step" data-step="2" hidden>
+          <h3>¿Cuándo te viene bien?</h3>
+          <div class="field"><label class="f" for="date">Día</label><input type="date" id="date"><p class="hint">Lunes a viernes de 10:00 a 20:00 y sábados de 10:00 a 14:00.</p></div>
+          <fieldset style="border:0;padding:0;margin:0"><legend class="f">Hora preferida</legend><div class="slots" id="slots"><p class="hint">Elige primero un día.</p></div></fieldset>
+          <p class="err" id="e2" role="alert"></p>
+          <div class="nav"><button type="button" class="btn ghost" data-prev>Atrás</button><button type="button" class="btn" data-next>Siguiente</button></div>
+        </div>
+        <div class="step" data-step="3" hidden>
+          <h3>¿A nombre de quién?</h3>
+          <div class="summary" id="sum" aria-live="polite"></div>
+          <div class="field"><label class="f" for="nm">Nombre</label><input type="text" id="nm" autocomplete="given-name"></div>
+          <div class="field"><label class="f" for="tel">Teléfono</label><input type="tel" id="tel" autocomplete="tel" inputmode="tel" placeholder="612 345 678"></div>
+          <div class="field"><label class="f" for="note">¿Tienes alguna idea o inspiración? (opcional)</label><textarea id="note"></textarea></div>
+          <p class="err" id="e3" role="alert"></p>
+          <div class="nav"><button type="button" class="btn ghost" data-prev>Atrás</button><button type="submit" class="btn wa">Enviar por WhatsApp</button></div>
+          <p class="hint" style="margin-top:14px">Se abrirá WhatsApp con tu solicitud ya escrita. La cita queda confirmada cuando te respondamos.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="h-faq">
+  <div class="wrap">
+    <h2 id="h-faq">Preguntas <em>frecuentes</em></h2>
+    <div class="faqwrap">
+      <details><summary>¿Dónde estáis?</summary><p>En Carrer Milà i Fontanals, 17, Barcelona. A 5 minutos andando de las estaciones de metro Joanic y Verdaguer (L4).</p></details>
+      <details><summary>¿Cuánto dura una manicura semipermanente?</summary><p>Entre 3 y 4 semanas, según tus uñas y tu día a día.</p></details>
+      <details><summary>¿Qué es la manicura rusa con BIAB?</summary><p>Trabajamos la cutícula en seco y aplicamos una base que refuerza tu uña natural, sin acrílico. Funciona bien con uñas finas o después de llevar acrílico.</p></details>
+      <details><summary>¿Hacéis manicura para hombres?</summary><p>Sí. Incluye cutícula, limado, pulido y masaje, con top coat mate opcional.</p></details>
+      <details><summary>¿Cómo puedo reservar?</summary><p>Con el formulario de esta página, por WhatsApp al +34 614 89 47 92, por email o por teléfono.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="contact" aria-labelledby="h-con">
+  <div class="wrap grid">
+    <div>
+      <h2 id="h-con">Te esperamos en <em>Gràcia</em></h2>
+      <dl>
+        <dt>Dirección</dt><dd>Carrer Milà i Fontanals, 17<br>08012 Barcelona</dd>
+        <dt>Metro</dt><dd>Joanic o Verdaguer (L4)</dd>
+        <dt>WhatsApp</dt><dd><a href="https://wa.me/34614894792">+34 614 89 47 92</a></dd>
+        <dt>Email</dt><dd><a href="mailto:coolnailsgracia@gmail.com">coolnailsgracia@gmail.com</a></dd>
+        <dt>Instagram</dt><dd><a href="https://instagram.com/coolnailsviladegracia" target="_blank" rel="noopener">@coolnailsviladegracia</a></dd>
+      </dl>
+      <div class="cta-row"><a class="btn" href="#reservar">Reservar cita</a><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Carrer+Mil%C3%A0+i+Fontanals+17+Barcelona" target="_blank" rel="noopener">Cómo llegar</a></div>
+    </div>
+    <div class="hours">
+      <h3>Horario</h3>
+      <div data-d="1-5"><span>Lunes a viernes</span><span>10:00 a 20:00</span></div>
+      <div data-d="6"><span>Sábado</span><span>10:00 a 14:00</span></div>
+      <div data-d="0"><span>Domingo</span><span>Cerrado</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="end"><div class="wrap">© 2026 Cool Nails Beauty &amp; Care · Barcelona · Propuesta de rediseño</div></footer>
+<div class="mbar"><a class="btn" href="#reservar">Reservar cita</a><a class="btn ghost wa" href="https://wa.me/34614894792" target="_blank" rel="noopener">WhatsApp</a></div>
+
+<script>
+(function(){
+  var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+  var WA='34614894792', pad=function(n){return (n<10?'0':'')+n};
+
+  /* vídeo: respeta movimiento reducido */
+  var hv=$('#hv');if(hv&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){hv.removeAttribute('autoplay');hv.pause()}
+
+  /* horario: resalta hoy */
+  var dow=new Date().getDay();
+  $$('.hours div').forEach(function(d){var r=d.dataset.d;if(r==='1-5'?(dow>=1&&dow<=5):Number(r)===dow)d.classList.add('today')});
+
+  /* reserva */
+  var services=['Manicura semipermanente','Manicura rusa con BIAB','Pedicura semipermanente spa','Pedicura tradicional spa','Manicura tradicional','Manicura natural','Manicura masculina','Uñas de gel y acrigel','Nail art y decoraciones'];
+  var svc=$('#svc');
+  services.forEach(function(s){var l=document.createElement('label');l.className='opt';l.innerHTML='<input type="radio" name="svc" value="'+s+'"><span>'+s+'</span>';svc.appendChild(l)});
+  var cur=1, steps=$$('.step'), date=$('#date'), slots=$('#slots'), art=false;
+  function val(n){var r=$('input[name='+n+']:checked');return r?r.value:''}
+  function fmt(){return date.value?new Date(date.value+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'}):''}
+  function go(n,focus){
+    cur=n; steps.forEach(function(s){s.hidden=Number(s.dataset.step)!==n});
+    [1,2,3].forEach(function(i){var li=$('#s'+i);li.className=i<n?'done':'';i===n?li.setAttribute('aria-current','step'):li.removeAttribute('aria-current')});
+    if(n===3)$('#sum').textContent=val('svc')+(art?' + nail art':'')+' · '+fmt()+' · '+val('time');
+    if(focus!==false){var h=$('[data-step="'+n+'"] h3');h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+  }
+  function pick(name){var r=$('input[name=svc][value="'+name+'"]');if(r){r.checked=true;go(2,false);go(1,false)}}
+  $$('[data-service]').forEach(function(a){a.addEventListener('click',function(){art=false;pick(a.dataset.service)})});
+
+  var t=new Date(); date.min=t.getFullYear()+'-'+pad(t.getMonth()+1)+'-'+pad(t.getDate());
+  date.addEventListener('change',function(){
+    slots.innerHTML='';$('#e2').textContent='';if(!date.value)return;
+    var w=new Date(date.value+'T12:00:00').getDay();
+    if(w===0){slots.innerHTML='<p class="hint">Los domingos estamos cerrados. Elige otro día.</p>';return}
+    var end=w===6?14:20, now=new Date(), today=date.value===date.min;
+    for(var h=10;h<end;h++)[0,30].forEach(function(m){
+      if(today&&h<now.getHours()+1)return;
+      var v=pad(h)+':'+pad(m),l=document.createElement('label');l.className='opt';
+      l.innerHTML='<input type="radio" name="time" value="'+v+'"><span>'+v+'</span>';slots.appendChild(l)});
+    if(!slots.children.length)slots.innerHTML='<p class="hint">Hoy ya no quedan horas. Elige otro día.</p>';
+  });
+  $$('[data-prev]').forEach(function(b){b.addEventListener('click',function(){go(cur-1)})});
+  $$('[data-next]').forEach(function(b){b.addEventListener('click',function(){
+    if(cur===1){if(!val('svc')){$('#e1').textContent='Elige un servicio para continuar.';return}$('#e1').textContent='';go(2)}
+    else{if(!date.value){$('#e2').textContent='Elige un día.';return}if(!val('time')){$('#e2').textContent='Elige una hora.';return}go(3)}
+  })});
+  $('#bf').addEventListener('submit',function(e){
+    e.preventDefault();
+    var nm=$('#nm').value.trim(),tel=$('#tel').value.replace(/[\s.-]/g,'');
+    if(!nm){$('#e3').textContent='Escribe tu nombre.';$('#nm').focus();return}
+    if(!/^\+?\d{9,14}$/.test(tel)){$('#e3').textContent='Escribe un teléfono válido, por ejemplo 612345678.';$('#tel').focus();return}
+    $('#e3').textContent='';var note=$('#note').value.trim();
+    var msg='Hola, soy '+nm+' y quiero reservar: '+val('svc')+(art?' con nail art':'')+', '+fmt()+' a las '+val('time')+'. Mi teléfono: '+tel+'.'+(note?' Idea: '+note:'');
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank','noopener');
+  });
+
+  /* recomendador */
+  var goals=[
+    ['Color que me dure semanas','Manicura semipermanente','Esmalte gel con brillo intacto durante 3-4 semanas, en más de 300 colores.'],
+    ['Uñas más fuertes, sin acrílico','Manicura rusa con BIAB','Una base que refuerza tu uña natural. Muy buena si tus uñas son finas o vienes del acrílico.'],
+    ['Más largo o con otra forma','Uñas de gel y acrigel','Extensiones en cuadrada, almendra, stiletto o coffin, con rellenos para mantenerlas.'],
+    ['Algo natural y bien cuidado','Manicura natural','Forma, cutículas y masaje, sin esmalte final, para un acabado de uñas desnudas.'],
+    ['Cuidar mis pies','Pedicura semipermanente spa','Baño de sal y aceites esenciales, exfoliación, masaje y esmalte gel.']
+  ];
+  var qb=$('#qbox'), choice=null;
+  function q1(){
+    qb.innerHTML='<p class="qprog">Pregunta 1 de 2</p><h3>¿Qué buscas ahora mismo?</h3><div class="qopts"></div>';
+    var box=$('.qopts',qb);
+    goals.forEach(function(g,i){var b=document.createElement('button');b.type='button';b.textContent=g[0];b.addEventListener('click',function(){choice=g;q2()});box.appendChild(b)});
+  }
+  function q2(){
+    qb.innerHTML='<p class="qprog">Pregunta 2 de 2</p><h3>¿Te apetece un diseño?</h3><div class="qopts"></div>';
+    var box=$('.qopts',qb);
+    [['Sí, quiero nail art',true],['No, mejor liso',false]].forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[0];b.addEventListener('click',function(){res(o[1])});box.appendChild(b)});
+    $('h3',qb).setAttribute('tabindex','-1');$('h3',qb).focus({preventScroll:true});
+  }
+  function res(a){
+    qb.innerHTML='<div class="result"><p class="qprog">Te recomendamos</p><h3 tabindex="-1"></h3><p class="tagline"></p><p class="d"></p><div class="cta-row"><button type="button" class="btn" id="qgo">Reservar este servicio</button><button type="button" class="btn ghost" id="qre">Volver a empezar</button></div></div>';
+    $('h3',qb).textContent=choice[1];
+    $('.tagline',qb).textContent=a?'Y añadimos nail art a tu medida.':'Con un acabado limpio y elegante.';
+    $('.d',qb).textContent=choice[2]+(a?' Hacemos más de 12 técnicas: ombré, cromados, mármol, flores 3D y diseños tuyos.':'');
+    $('h3',qb).focus({preventScroll:true});
+    $('#qre').onclick=q1;
+    $('#qgo').onclick=function(){art=a;pick(choice[1]);$('#reservar').scrollIntoView({behavior:'smooth'})};
+  }
+  q1();
+})();
+</script>
+</body>
+</html>
