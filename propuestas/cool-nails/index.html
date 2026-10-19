@@ -8,7 +8,7 @@
 <meta name="description" content="Tu salón de uñas en Vila de Gràcia, Barcelona. Manicura, pedicura spa y nail art con más de 300 colores. Reserva tu cita online.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#faf5ee;     /* fondo de su web actual */
@@ -18,7 +18,8 @@
   --gold:#c4a96b;      /* dorado del logo */
   --gold-d:#7a5d1e;    /* dorado oscuro para texto (contraste AA) */
   --line:#e3d7c3;
-  --serif:'Cormorant Garamond',Georgia,serif;
+  --serif:'Bodoni Moda','Didot',Georgia,serif;
+  --script:'Pinyon Script','Snell Roundhand',cursive;
   --sans:'Jost',system-ui,sans-serif;
 }
 *{box-sizing:border-box}
@@ -255,6 +256,93 @@ blockquote p{padding-top:34px}
 h2.xl{font-size:clamp(2.6rem,6vw,4.8rem)}
 @media (prefers-reduced-motion:reduce){.foil,h1 em,h2 em,.stats b,.score b,.sp,.ticker .rail{animation:none!important}.ticker .rail{flex-wrap:wrap;width:auto}}
 
+/* ===== v7: pareja tipográfica Bodoni + Pinyon + Jost, movimiento firma ===== */
+h1,h2,h3,summary,blockquote p,.stats b,.score b{font-optical-sizing:auto}
+h2{font-weight:500;letter-spacing:-.03em}
+h3{font-weight:500;letter-spacing:-.015em}
+h1 em,h2 em,.hero h1 .l3 em{font-family:var(--script);font-style:normal;font-weight:400;font-size:1.32em;line-height:.8;letter-spacing:0;padding:0 .12em;display:inline-block}
+/* portada: "uñas" en Bodoni negrita y "Gràcia" en caligrafía encima, como en el moodboard */
+.hero h1{line-height:1;position:relative}
+.hero h1 .l1{font:italic 500 clamp(1.3rem,2.4vw,1.9rem)/1 var(--serif);color:var(--soft);margin:0 0 .1em .2em}
+.hero h1 .l2{font-weight:800;font-size:clamp(5.6rem,16vw,13rem);letter-spacing:-.06em;line-height:.8;margin:0 0 0 -.05em;font-variation-settings:"opsz" 96}
+.hero h1 .l3{display:block;position:relative;z-index:2;margin:-.62em 0 0 .5em;font:italic 500 clamp(1.6rem,3vw,2.4rem)/1 var(--serif);letter-spacing:0}
+.hero h1 .l3 em{font-size:4.3em;margin-left:.04em;vertical-align:-.14em}
+@keyframes rise{from{clip-path:inset(0 0 100% 0);transform:translateY(46%)}to{clip-path:inset(-10% -10% -10% -10%);transform:none}}
+@keyframes wipe{from{clip-path:inset(-20% 100% -20% 0)}to{clip-path:inset(-20% -10% -20% 0)}}
+.js .hero h1 .l1,.js .hero h1 .l2{animation:rise 1.1s cubic-bezier(.2,.7,.1,1) both}
+.js .hero h1 .l2{animation-delay:.12s}
+.js .hero h1 .l3 em{animation:wipe 1.7s cubic-bezier(.55,0,.2,1) .75s both,foil 9s linear infinite}
+.js .hero .lead,.js .hero .cta-row,.js .hero .trust{animation:rise .9s cubic-bezier(.2,.7,.1,1) 1.5s both}
+.js .hero .cta-row{animation-delay:1.65s}.js .hero .trust{animation-delay:1.8s}
+/* resplandor que sigue al cursor */
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,72%) var(--my,28%),rgba(232,208,138,.38),transparent 62%)}
+.hero .wrap{z-index:1}
+/* palabras en caligrafía: se escriben al entrar en pantalla */
+.js h2 em.ink{clip-path:inset(-30% 100% -30% 0)}
+.js h2 em.ink.in{clip-path:inset(-30% -10% -30% 0);transition:clip-path 1.5s cubic-bezier(.55,0,.2,1)}
+/* menú */
+nav a{position:relative;border:0}
+nav a::after{content:"";position:absolute;left:50%;right:50%;bottom:4px;height:1px;background:var(--gold-d);transition:left .35s,right .35s}
+nav a:hover::after,nav a:focus-visible::after{left:0;right:0}
+/* cinta */
+.ticker:hover .rail{animation-play-state:paused}
+.ticker span{font-weight:500}
+.ticker span em{font-family:var(--script);font-size:1.3em;color:var(--gold);font-style:normal;padding:0}
+/* 300: contorno que se rellena de oro al entrar y al pasar el cursor */
+.palette h2 .big{font-family:var(--serif);font-weight:800;font-variation-settings:"opsz" 96;transition:-webkit-text-fill-color 1.2s;-webkit-text-fill-color:transparent;-webkit-text-stroke:2px #e8d08a}
+.palette.in h2 .big,.palette:hover h2 .big{-webkit-text-fill-color:rgba(232,208,138,.92)}
+.palette>img{transition:transform 1.6s cubic-bezier(.2,.7,.1,1)}
+.palette:hover>img{transform:scale(1.05)}
+/* servicios: barrido de color y desplazamiento */
+.svc li{position:relative;isolation:isolate}
+.svc li::before{content:"";position:absolute;inset:0 -20px;z-index:-1;background:linear-gradient(90deg,#f3e4bd,rgba(243,228,189,0));transform:scaleX(0);transform-origin:left;transition:transform .55s cubic-bezier(.2,.7,.1,1)}
+.svc li:hover::before,.svc li:focus-within::before{transform:scaleX(1)}
+.svc h3{transition:transform .45s cubic-bezier(.2,.7,.1,1),color .3s;position:relative}
+.svc li:hover h3,.svc li:focus-within h3{transform:translateX(18px);color:var(--gold-d)}
+.svc h3::before{content:"✦";position:absolute;left:-26px;opacity:0;color:var(--gold-d);font-size:.8em;transition:opacity .3s}
+.svc li:hover h3::before,.svc li:focus-within h3::before{opacity:1}
+.svc small{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem}
+.fcard::before{content:"";position:absolute;inset:14px;border:1px solid rgba(232,208,138,0);z-index:1;transition:border-color .5s,inset .5s;pointer-events:none}
+.fcard:hover::before,.fcard:focus-within::before{border-color:rgba(232,208,138,.9);inset:20px}
+.fcard h3{transition:transform .5s cubic-bezier(.2,.7,.1,1)}
+.fcard:hover h3{transform:translateY(-6px)}
+.fcard small{text-transform:uppercase;letter-spacing:.2em;font-size:.72rem}
+/* fotos */
+.arch video{transition:transform 1.4s cubic-bezier(.2,.7,.1,1)}
+.arch:hover video{transform:scale(1.06)}
+.round{transition:transform .6s cubic-bezier(.2,.7,.1,1)}
+.mosaic:hover .round{transform:translate(-8px,-10px) scale(1.06)}
+.photos{overflow:hidden;border-radius:999px 999px 6px 6px}
+.photos img{transition:transform .9s cubic-bezier(.2,.7,.1,1);border-radius:0;border:0}
+.photos:hover img{transform:scale(1.05)}
+/* cifras, citas, preguntas, formularios */
+.stats li{transition:transform .4s cubic-bezier(.2,.7,.1,1)}
+.stats li:hover{transform:translateY(-6px)}
+.stats span{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem}
+blockquote{transition:transform .5s cubic-bezier(.2,.7,.1,1),box-shadow .5s}
+blockquote:hover{transform:translateY(-8px);box-shadow:0 26px 40px -24px rgba(42,36,32,.45)}
+blockquote::before{transition:transform .6s cubic-bezier(.2,.7,.1,1)}
+blockquote:hover::before{transform:translateY(-4px) scale(1.12)}
+blockquote p{font-weight:400}
+details:hover{background:linear-gradient(90deg,#f6ecd2,transparent)}
+summary::after{transition:transform .4s}
+details[open] summary::after{transform:rotate(180deg)}
+.opt span{transition:border-color .2s,transform .2s}
+.opt:hover span{border-color:var(--gold-d);transform:translateY(-2px)}
+.qopts button{transition:transform .3s,border-color .2s,padding .3s}
+.qopts button:hover{transform:translateX(8px)}
+.hours div{transition:padding .3s,color .3s}
+.hours div:hover{padding-left:12px;color:var(--gold)}
+.contact dd a{transition:color .3s}
+.contact dd a:hover{color:var(--gold)}
+.logo svg{transition:transform .9s cubic-bezier(.2,.7,.1,1)}
+.logo:hover svg{transform:rotate(90deg)}
+@media (prefers-reduced-motion:reduce){
+  .js .hero h1 *,.js .hero .lead,.js .hero .cta-row,.js .hero .trust{animation:none!important}
+  .js h2 em.ink{clip-path:none!important}
+}
+@media (max-width:900px){.hero h1 .l3{margin-left:.2em}.hero::after{display:none}}
+
 .mbar{display:none}
 @media (max-width:900px){
   nav,.top .btn{display:none}
@@ -273,6 +361,7 @@ h2.xl{font-size:clamp(2.6rem,6vw,4.8rem)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -326,8 +415,8 @@ h2.xl{font-size:clamp(2.6rem,6vw,4.8rem)}
 </section>
 
 <div class="ticker" aria-hidden="true"><div class="rail">
-  <span>Manicura <i>✦</i> <b>Pedicura spa</b> <i>✦</i> Nail art <i>✦</i> <b>Semipermanente</b> <i>✦</i> Gel y acrigel <i>✦</i> <b>BIAB</b> <i>✦</i></span>
-  <span>Manicura <i>✦</i> <b>Pedicura spa</b> <i>✦</i> Nail art <i>✦</i> <b>Semipermanente</b> <i>✦</i> Gel y acrigel <i>✦</i> <b>BIAB</b> <i>✦</i></span>
+  <span>Manicura <i>✦</i> <b>Pedicura spa</b> <i>✦</i> <em>Nail art</em> <i>✦</i> <b>Semipermanente</b> <i>✦</i> Gel y acrigel <i>✦</i> <b>BIAB</b> <i>✦</i></span>
+  <span>Manicura <i>✦</i> <b>Pedicura spa</b> <i>✦</i> <em>Nail art</em> <i>✦</i> <b>Semipermanente</b> <i>✦</i> Gel y acrigel <i>✦</i> <b>BIAB</b> <i>✦</i></span>
 </div></div>
 
 <section class="palette" aria-labelledby="h-pal">
@@ -491,6 +580,21 @@ h2.xl{font-size:clamp(2.6rem,6vw,4.8rem)}
 
   /* vídeo: respeta movimiento reducido */
   var hv=$('#hv');if(hv&&window.matchMedia('(prefers-reduced-motion:reduce)').matches){hv.removeAttribute('autoplay');hv.pause()}
+
+  /* movimiento firma: escribir palabras, contar hasta 300, resplandor del cursor */
+  var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var inks=$$('h2 em');inks.forEach(function(e){e.classList.add('ink')});
+  var pal=$('.palette'), big=$('.palette .big');
+  if('IntersectionObserver' in window&&!rm){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){
+      if(!en.isIntersecting)return; var t=en.target;
+      if(t===pal){pal.classList.add('in');var st=performance.now();(function f(now){var p=Math.min((now-st)/1600,1);big.textContent=Math.round(300*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(st)}
+      else t.classList.add('in');
+      io.unobserve(t)})},{threshold:.35});
+    inks.forEach(function(e){io.observe(e)}); if(pal)io.observe(pal);
+    var hero=$('.hero');
+    hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();hero.style.setProperty('--mx',(e.clientX-r.left)+'px');hero.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  }else{inks.forEach(function(e){e.classList.add('in')});if(pal)pal.classList.add('in')}
 
   /* horario: resalta hoy */
   var dow=new Date().getDay();
