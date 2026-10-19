@@ -463,8 +463,14 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
   .svc{grid-template-columns:1fr;padding:24px 20px 28px}
   .svc__ph{aspect-ratio:4/3;border-radius:40px 18px 40px 18px;padding:24px}
   .reservar{padding:20px 14px 24px}
-  .for-him{grid-template-columns:1fr;gap:20px;padding:24px 24px 28px;border-radius:56px 22px 56px 22px}
-  .for-him__photo{width:150px;border-radius:75px 22px 75px 22px}
+  .for-him{grid-template-columns:96px minmax(0,1fr);gap:8px 16px;padding:22px 20px 24px;border-radius:56px 22px 56px 22px;align-items:start}
+  .for-him__copy{display:contents}
+  .for-him__photo{grid-column:1;grid-row:1/span 2;width:96px;border-radius:48px 16px 48px 16px}
+  .for-him__tag{grid-column:2;grid-row:1;align-self:end;font-size:12px}
+  .for-him__title{grid-column:2;grid-row:2;align-self:start;font-size:24px}
+  .for-him__text,.for-him__chips{grid-column:1/-1}
+  .for-him__text{margin-top:10px;font-size:15.5px}
+  .for-him__btn{grid-column:1/-1}
   .for-him__btn{width:100%}
   .booking{grid-template-columns:1fr}
   .booking__form{border-radius:44px 22px 44px 22px;padding:28px 22px;gap:28px}
