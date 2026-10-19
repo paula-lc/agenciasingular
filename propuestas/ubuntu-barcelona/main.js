@@ -188,7 +188,7 @@
     };
 
     // ventana de detalle de cada servicio (textos y precios por confirmar con el salón)
-    const SERVICES = { 'Spa capilar': 'video', 'Corte': 'foto', 'Color vegano': 'foto', 'Tratamientos': 'foto' };
+    const SERVICES = { 'Spa capilar': 'video', 'Corte': 'foto', 'Color vegano': 'foto', 'Tratamientos': 'foto', 'Peinados': 'foto' };
     const ICON_VIDEO = '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26"/><path d="M26 21v22l18-11Z"/></svg>';
     const ICON_PHOTO = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="8"/><circle cx="24" cy="29" r="5"/><path d="M10 46l14-12 10 8 8-6 14 12"/></svg>';
     let current = '';

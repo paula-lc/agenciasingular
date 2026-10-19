@@ -192,7 +192,9 @@ ol{list-style:none}
 /* ===== Servicios ===== */
 .servicios{padding:clamp(72px,7vw,100px) var(--pad);display:flex;flex-direction:column;gap:48px;align-items:flex-start}
 .servicios__intro{display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:24px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;width:100%}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;width:100%}
+.cards .card{grid-column:span 2}
+.cards .card:nth-child(n+4){grid-column:span 3}
 .cards{align-items:start}
 button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%}
 .card{
@@ -214,6 +216,7 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%
 .card__photo img[data-pos=corte]{object-position:50% 22%}
 .card__photo img[data-pos=color]{object-position:50% 30%}
 .card__photo img[data-pos=trat]{object-position:50% 40%}
+.card__photo img[data-pos=pein]{object-position:50% 24%}
 .card:hover .card__photo{height:200px}
 .card:hover .card__photo img{transform:scale(1);border-radius:16px 34px 16px 34px}
 .works{width:100%;padding-top:16px;display:grid;grid-template-columns:minmax(180px,1fr) repeat(3,minmax(0,clamp(200px,19vw,290px)));gap:clamp(14px,2vw,28px);align-items:end}
@@ -321,16 +324,6 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
 .tick path{stroke-dasharray:50;stroke-dashoffset:50;animation-delay:.6s}
 @keyframes drawTick{to{stroke-dashoffset:0}}
 
-/* ===== Peinados ===== */
-.peinados{padding:clamp(72px,7vw,100px) var(--pad);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:center;background:var(--cream)}
-.peinados__copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
-.peinados__photos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,24px);align-items:end}
-.blob--peinado{height:clamp(300px,34vw,480px);border-radius:clamp(80px,9vw,130px) clamp(30px,3.5vw,50px) clamp(80px,9vw,130px) clamp(30px,3.5vw,50px)}
-.blob--peinado-b{height:clamp(240px,27vw,380px);border-radius:clamp(30px,3.5vw,50px) clamp(80px,9vw,130px) clamp(30px,3.5vw,50px) clamp(80px,9vw,130px)}
-.blob--peinado img{object-position:50% 35%}
-.blob--peinado:hover{border-radius:clamp(30px,3.5vw,50px) clamp(80px,9vw,130px) clamp(30px,3.5vw,50px) clamp(80px,9vw,130px)}
-.blob--peinado-b:hover{border-radius:clamp(80px,9vw,130px) clamp(30px,3.5vw,50px) clamp(80px,9vw,130px) clamp(30px,3.5vw,50px)}
-
 /* ===== Ubuntu ===== */
 .ubuntu{background:var(--peach);padding:clamp(72px,7vw,100px) var(--pad);display:flex;flex-direction:column;gap:clamp(40px,4.5vw,64px)}
 .ubuntu__row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:stretch}
@@ -409,6 +402,8 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
   .booking{grid-template-columns:1fr}
   .summary{position:static}
   .cards{grid-template-columns:repeat(2,1fr)}
+  .cards .card,.cards .card:nth-child(n+4){grid-column:auto}
+  .cards .card:last-child{grid-column:1/-1}
   .hero{grid-template-columns:1fr 1fr}
   .badge{right:-18px;width:104px;height:104px}
   .chip--a{left:-14px;width:116px;height:150px}
@@ -458,6 +453,7 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
 
   .servicios__intro{flex-direction:column;gap:8px}
   .cards{grid-template-columns:1fr}
+  .cards .card:last-child{grid-column:auto}
   .card{padding:26px 24px 22px}
   .card__photo{height:150px}
   .card:hover .card__photo{height:190px}
@@ -481,10 +477,6 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
   .blob--work{border-radius:54px 27px 54px 27px}
 
   .ubuntu__row{grid-template-columns:1fr}
-  .peinados{grid-template-columns:1fr}
-  .peinados__copy .btn{display:none}
-  .blob--peinado{height:260px}
-  .blob--peinado-b{height:210px}
   .ubuntu__img{min-height:236px}
   .team{grid-template-columns:1fr;gap:24px}
   .team__grid{gap:12px}
