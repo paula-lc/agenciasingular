@@ -143,7 +143,7 @@
   const form = $('#bookingForm');
   if (form) {
     const dayBox = $('#optDay'), timeBox = $('#optTime'), err = $('#bError');
-    const S = { service: $('#sService'), day: $('#sDay'), time: $('#sTime'), name: $('#sName') };
+    const S = { dur: $('#sDur'), service: $('#sService'), day: $('#sDay'), time: $('#sTime'), name: $('#sName') };
     const SLOTS_WEEK = ['10:00', '10:45', '11:30', '12:15', '13:00', '16:00', '16:45', '17:30', '18:15', '19:00'];   // mar–vie, 10–20 h
     const SLOTS_SAT = ['09:00', '09:45', '10:30', '11:15', '12:00', '12:45'];                              // sáb, 9–14 h
     const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
@@ -167,11 +167,18 @@
     timeBox.innerHTML = '<p class="small tag-pending">Elige primero un día.</p>';
 
     const set = (el, txt, ok) => { el.textContent = txt; el.classList.toggle('is-set', ok); };
+    const services = () => $$('input[name="servicio"]:checked', form).map(i => ({ name: i.value, min: +i.dataset.min }));
+    const fmtDur = min => { const h = Math.floor(min / 60), m = min % 60; return (h ? h + ' h' : '') + (h && m ? ' ' : '') + (m ? m + ' min' : ''); };
+    const refreshServices = () => {
+      const s = services(), total = s.reduce((a, x) => a + x.min, 0);
+      set(S.service, s.length ? s.map(x => x.name).join(' + ') : 'Sin elegir', !!s.length);
+      set(S.dur, s.length ? '≈ ' + fmtDur(total) : 'Sin calcular', !!s.length);
+    };
     const val = n => (form.querySelector(`[name="${n}"]:checked`) || {}).value || '';
 
     form.addEventListener('change', e => {
       err.hidden = true;
-      if (e.target.name === 'servicio') set(S.service, e.target.value, true);
+      if (e.target.name === 'servicio') refreshServices();
       if (e.target.name === 'dia') {
         const d = days[+e.target.value]; renderSlots(+e.target.value); set(S.day, fmtDay(d), true);
       }
@@ -204,12 +211,12 @@
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const service = val('servicio'), di = val('dia'), time = val('hora'), name = $('#bName').value.trim(), phone = $('#bPhone').value.trim();
+      const chosen = services(), service = chosen.map(x => x.name).join(' + '), total = chosen.reduce((a, x) => a + x.min, 0), di = val('dia'), time = val('hora'), name = $('#bName').value.trim(), phone = $('#bPhone').value.trim();
       const missing = !service ? 'Elige un cuidado.' : di === '' ? 'Elige un día.' : !time ? 'Elige una hora.' : !name ? 'Dinos tu nombre.' : !phone ? 'Déjanos un teléfono.' : '';
       if (missing) { err.textContent = missing; err.hidden = false; return; }
-      $('#doneText').textContent = `${name}, te esperamos el ${fmtDay(days[+di]).toLowerCase()} a las ${time} para tu ${service.toLowerCase()}.`;
+      $('#doneText').textContent = `${name}, te esperamos el ${fmtDay(days[+di]).toLowerCase()} a las ${time} para tu ${service.toLowerCase()} (aprox. ${fmtDur(total)}).`;
       const start = new Date(days[+di]); const [hh, mm] = time.split(':').map(Number); start.setHours(hh, mm, 0, 0);
-      const end = new Date(start.getTime() + 60 * 60000);
+      const end = new Date(start.getTime() + total * 60000);
       const p2 = n => String(n).padStart(2, '0');
       const stamp = d => `${d.getFullYear()}${p2(d.getMonth() + 1)}${p2(d.getDate())}T${p2(d.getHours())}${p2(d.getMinutes())}00`;
       const title = `${cap(service)} · Saló Ubuntu Barcelona`, place = 'Saló Ubuntu Barcelona, Ronda del Guinardó 209, local 2, Barcelona';
@@ -223,7 +230,7 @@
 
     $('#bReset').addEventListener('click', () => {
       form.reset(); timeBox.innerHTML = '<p class="small tag-pending">Elige primero un día.</p>';
-      set(S.service, 'Sin elegir', false); set(S.day, 'Sin elegir', false); set(S.time, 'Sin elegir', false); set(S.name, 'Sin indicar', false);
+      set(S.service, 'Sin elegir', false); set(S.dur, 'Sin calcular', false); set(S.day, 'Sin elegir', false); set(S.time, 'Sin elegir', false); set(S.name, 'Sin indicar', false);
       $('#sumDone').hidden = true; $('#sumIdle').hidden = false;
     });
   }

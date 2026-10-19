@@ -277,6 +277,7 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
 .booking__form{background:var(--cream);border-radius:70px 28px 70px 28px;padding:clamp(28px,3.5vw,48px);display:flex;flex-direction:column;gap:34px;min-width:0}
 .bstep{border:0;display:flex;flex-direction:column;gap:14px;min-width:0}
 .bstep legend{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:clamp(22px,2vw,26px);padding:0;margin-bottom:14px;float:left;width:100%}
+.legend__hint{font-family:var(--sans);font-size:13px;opacity:.65;margin-left:2px}
 .bstep legend span{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--brown);display:grid;place-items:center;font-family:var(--sans);font-size:14px}
 .bstep > div{clear:both}
 .opts,.days,.slots{display:flex;flex-wrap:wrap;gap:10px}

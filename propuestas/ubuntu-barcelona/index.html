@@ -298,14 +298,14 @@
   <div class="booking">
     <form class="booking__form" id="bookingForm" novalidate>
       <fieldset class="bstep">
-        <legend><span>1</span>¿Qué te apetece?</legend>
+        <legend><span>1</span>¿Qué te apetece? <small class="legend__hint">Puedes elegir varios</small></legend>
         <div class="opts" id="optService">
-          <label class="opt"><input type="radio" name="servicio" value="Spa capilar"><span>Spa capilar</span></label>
-          <label class="opt"><input type="radio" name="servicio" value="Corte"><span>Corte</span></label>
-          <label class="opt"><input type="radio" name="servicio" value="Color vegano"><span>Color vegano</span></label>
-          <label class="opt"><input type="radio" name="servicio" value="Tratamientos"><span>Tratamientos</span></label>
-          <label class="opt"><input type="radio" name="servicio" value="Peinados"><span>Peinados</span></label>
-          <label class="opt"><input type="radio" name="servicio" value="Lavado con masaje"><span>Lavado con masaje</span></label>
+          <label class="opt"><input type="checkbox" name="servicio" value="Spa capilar" data-min="60"><span>Spa capilar</span></label>
+          <label class="opt"><input type="checkbox" name="servicio" value="Corte" data-min="45"><span>Corte</span></label>
+          <label class="opt"><input type="checkbox" name="servicio" value="Color vegano" data-min="120"><span>Color vegano</span></label>
+          <label class="opt"><input type="checkbox" name="servicio" value="Tratamientos" data-min="45"><span>Tratamientos</span></label>
+          <label class="opt"><input type="checkbox" name="servicio" value="Peinados" data-min="60"><span>Peinados</span></label>
+          <label class="opt"><input type="checkbox" name="servicio" value="Lavado con masaje" data-min="30"><span>Lavado con masaje</span></label>
         </div>
       </fieldset>
 
@@ -336,6 +336,7 @@
         <p class="summary__label">Tu ritual</p>
         <dl class="summary__list">
           <div><dt>Cuidado</dt><dd id="sService">Sin elegir</dd></div>
+          <div><dt>Duración aprox.</dt><dd id="sDur">Sin calcular</dd></div>
           <div><dt>Día</dt><dd id="sDay">Sin elegir</dd></div>
           <div><dt>Hora</dt><dd id="sTime">Sin elegir</dd></div>
           <div><dt>Nombre</dt><dd id="sName">Sin indicar</dd></div>
