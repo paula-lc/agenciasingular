@@ -192,24 +192,22 @@ ol{list-style:none}
 /* ===== Servicios ===== */
 .servicios{padding:clamp(72px,7vw,100px) var(--pad);display:flex;flex-direction:column;gap:48px;align-items:flex-start}
 .servicios__intro{display:flex;justify-content:space-between;align-items:flex-start;width:100%;gap:24px}
-.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;width:100%}
-.cards .card{grid-column:span 2}
-.cards .card:nth-child(n+4){grid-column:span 3}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;width:100%}
 .cards{align-items:start}
 button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%}
 .card{
-  display:flex;flex-direction:column;gap:14px;padding:26px 26px 22px;
+  display:flex;flex-direction:column;gap:14px;padding:24px clamp(16px,1.6vw,24px) 20px;
   border:1px solid var(--brown);border-radius:70px 42px 74px 40px;overflow:hidden;
   transition:background .5s var(--ease),color .5s,border-radius .7s var(--ease),transform .5s var(--ease),opacity .9s var(--ease),filter .9s var(--ease);
 }
 .card--peach{background:var(--peach)}
 .card--cream{background:var(--cream)}
 .card:hover{background:var(--brown);color:var(--cream);border-radius:42px 74px 40px 70px;transform:translateY(-8px) rotate(-.6deg)}
-.card__top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 6px}
-.card__name{font-family:var(--serif);font-size:clamp(24px,2.1vw,30px);line-height:1.15}
-.card__arrow{font-size:22px;transition:transform .45s var(--ease),color .3s}
+.card__top{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:0 2px}
+.card__name{font-family:var(--serif);font-size:clamp(19px,1.55vw,26px);line-height:1.15;white-space:nowrap}
+.card__arrow{font-size:18px;transition:transform .45s var(--ease),color .3s}
 .card:hover .card__arrow{transform:translate(4px,-4px) rotate(45deg);color:var(--gold)}
-.card__price{opacity:.7;font-size:15px;padding:0 6px;margin-top:-8px}
+.card__price{opacity:.7;font-size:14px;padding:0 2px;margin-top:-8px}
 .card__photo{display:block;height:128px;margin-top:2px;border-top:1px solid currentColor;padding-top:14px;transition:height .7s var(--ease)}
 .card__photo img{width:100%;height:100%;object-fit:cover;border-radius:34px 16px 34px 16px;transform:scale(1.04);transition:transform .9s var(--ease),border-radius .7s var(--ease)}
 .card__photo img[data-pos=spa]{object-position:50% 40%}
@@ -404,7 +402,6 @@ dialog.modal::backdrop{background:rgba(74,46,34,.55);backdrop-filter:blur(6px);a
   .booking{grid-template-columns:1fr}
   .summary{position:static}
   .cards{grid-template-columns:repeat(2,1fr)}
-  .cards .card,.cards .card:nth-child(n+4){grid-column:auto}
   .cards .card:last-child{grid-column:1/-1}
   .hero{grid-template-columns:1fr 1fr}
   .badge{right:-18px;width:104px;height:104px}
