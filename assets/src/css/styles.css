@@ -1245,8 +1245,6 @@ html:has(.pmodal[open]) { overflow: hidden; }
 /* ==========================================================================
    Pasos 1 a 3: precio web / precio fundador, insignia de plazas y letra pequeña
    ========================================================================== */
-.packs--duo { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
-@media (max-width: 760px) { .packs--duo { grid-template-columns: minmax(0, 1fr); } }
 /* El contenedor del precio no cuenta para la maquetación; [hidden] lo oculta (precio fundador agotado) */
 .pack__prices { display: contents; }
 .pack__prices[hidden], .pack__fine[hidden] { display: none; }
@@ -1274,4 +1272,32 @@ html:has(.pmodal[open]) { overflow: hidden; }
 .trastienda.ask .trastienda__text { flex: 1 1 280px; }
 .trastienda.ask .btn { flex: none; }
 @media (max-width: 600px) { .trastienda.ask .icon { display: block; } }
-.packs--duo .pack ul { align-content: start; }
+
+/* ==========================================================================
+   Camino en tres pasos: una caja por paso, con selector de variante dentro
+   ========================================================================== */
+.packs--steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px; padding-top: 14px; }
+.pack--step { padding: 24px 20px 20px; gap: 14px; }
+.pack--step:hover { transform: none; box-shadow: none; }
+.pack--step.pack--featured:hover { box-shadow: 8px 8px 0 var(--yellow); }
+.step__num { position: absolute; top: -20px; right: 18px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--crimson); color: var(--white); border: 3px solid var(--cream); font-family: var(--font-display); font-size: 20px; }
+/* Flecha que une cada paso con el siguiente */
+.pack--step:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; top: 50%; right: -37px; width: 30px; height: 30px; margin-top: -15px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: var(--yellow); font-weight: 800; font-size: 16px; }
+.pack__tabs { display: flex; gap: 6px; padding: 4px; border: 2px solid currentColor; border-radius: 999px; }
+.pack__tab { flex: 1 1 0; padding: 7px 8px; border: 0; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; cursor: pointer; transition: background-color .2s, color .2s; }
+.pack__tab[aria-pressed="true"] { background: var(--blue); color: var(--cream); }
+.pack--featured .pack__tab[aria-pressed="true"] { background: var(--yellow); color: var(--blue-deep); }
+.pack__tab:not([aria-pressed="true"]):hover { background: rgba(62, 96, 131, .15); }
+.pack__tab:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.pack__variant { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.pack__variant[hidden] { display: none; }
+.no-js .pack__variant[hidden] { display: flex; }
+.no-js .pack__tabs { display: none; }
+.pack--step h3 { font-size: 21px; }
+.pack--step ul { gap: 7px; font-size: 14px; }
+.pack--step .pack__price { font-size: 30px; }
+@media (max-width: 1040px) {
+  .packs--steps { grid-template-columns: minmax(0, 1fr); gap: 52px; }
+  .pack--step:not(:last-child)::after { content: "↓"; top: auto; right: auto; left: 50%; bottom: -41px; margin: 0 0 0 -15px; }
+}
+.pack--step ul { align-content: start; }

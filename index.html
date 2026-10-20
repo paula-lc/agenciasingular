@@ -756,9 +756,15 @@
             <span class="badge badge--blue">Sin textos rellenos, trabajo real</span>
           </div>
 
-          <div class="packs packs--duo">
-            <article class="pack pack--featured reveal" id="cuidados-esenciales">
+          <div class="packs packs--steps">
+            <article class="pack pack--step pack--featured reveal" data-variants>
               <span class="pack__ribbon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Recomendado</span>
+              <span class="step__num" aria-hidden="true">1</span>
+              <div class="pack__tabs">
+                <button type="button" class="pack__tab" data-variant-tab="cuidados-esenciales" aria-pressed="true">Cuidados esenciales</button>
+                <button type="button" class="pack__tab" data-variant-tab="cuidados-esenciales-distancia" aria-pressed="false">Fuera de Barcelona</button>
+              </div>
+              <div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales">
               <span class="pack__kicker">Paso 1 · Para empezar</span>
               <h3>Cuidados esenciales</h3>
               <p class="pack__for">Que te encuentren en Google, te elijan y reserven sin intermediarios.</p>
@@ -784,9 +790,8 @@
               <p class="pack__fine" data-founder>A cambio, nos dejas una reseña, nos permites enseñar el antes y el después, y compartes con nosotros las estadísticas de tu ficha durante 60 días.</p>
               <a class="btn btn--yellow" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Quiero Cuidados esenciales</a>
               <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
-            </article>
-
-            <article class="pack reveal" id="cuidados-esenciales-distancia">
+              </div>
+              <div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" hidden>
               <span class="pack__kicker">Paso 1 · Fuera de Barcelona</span>
               <h3>Cuidados esenciales a distancia</h3>
               <p class="pack__for">Lo mismo, sin sesión de fotos.</p>
@@ -808,9 +813,16 @@
               <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Plazo: 1–2 semanas</p>
               <a class="btn btn--ghost" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Quiero la versión a distancia</a>
               <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+              </div>
             </article>
 
-            <article class="pack reveal" id="web-una-pagina">
+            <article class="pack pack--step reveal" data-variants>
+              <span class="step__num" aria-hidden="true">2</span>
+              <div class="pack__tabs">
+                <button type="button" class="pack__tab" data-variant-tab="web-una-pagina" aria-pressed="true">Web de una página</button>
+                <button type="button" class="pack__tab" data-variant-tab="web-completa" aria-pressed="false">Web completa</button>
+              </div>
+              <div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina">
               <span class="pack__kicker">Paso 2</span>
               <h3>Web de una página</h3>
               <p class="pack__for">Tu escaparate propio, con tu botón de reservas.</p>
@@ -826,9 +838,8 @@
               <p class="pack__fine">A partir del segundo año, la renovación del dominio corre de tu cuenta.</p>
               <a class="btn btn--ghost" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Quiero mi web</a>
               <button type="button" class="add-btn add-btn--pack" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
-            </article>
-
-            <article class="pack reveal" id="web-completa">
+              </div>
+              <div class="pack__variant" id="web-completa" data-variant="web-completa" hidden>
               <span class="pack__kicker">Paso 2</span>
               <h3>Web completa</h3>
               <p class="pack__for">Para negocios con muchos servicios que contar.</p>
@@ -843,9 +854,16 @@
               </ul>
               <a class="btn btn--ghost" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Pedir presupuesto</a>
               <button type="button" class="add-btn add-btn--pack" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+              </div>
             </article>
 
-            <article class="pack reveal" id="plan-basico">
+            <article class="pack pack--step reveal" data-variants>
+              <span class="step__num" aria-hidden="true">3</span>
+              <div class="pack__tabs">
+                <button type="button" class="pack__tab" data-variant-tab="plan-basico" aria-pressed="true">Plan Básico</button>
+                <button type="button" class="pack__tab" data-variant-tab="plan-siempre-visible" aria-pressed="false">Plan Siempre visible</button>
+              </div>
+              <div class="pack__variant" id="plan-basico" data-variant="plan-basico">
               <span class="pack__kicker">Paso 3</span>
               <h3>Plan Básico</h3>
               <p class="pack__for">Tu ficha, siempre al día.</p>
@@ -858,9 +876,8 @@
               <p class="pack__fine">Mes a mes, sin permanencia.</p>
               <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Quiero el Plan Básico</a>
               <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
-            </article>
-
-            <article class="pack reveal" id="plan-siempre-visible">
+              </div>
+              <div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" hidden>
               <span class="pack__kicker">Paso 3</span>
               <h3>Plan Siempre visible</h3>
               <p class="pack__for">Ficha y web, cuidadas cada mes. Para clientes con web.</p>
@@ -876,8 +893,8 @@
               <p class="pack__fine">Mes a mes, sin permanencia. Requiere web con nosotros.</p>
               <a class="btn btn--ghost" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Quiero el Plan Siempre visible</a>
               <button type="button" class="add-btn add-btn--pack" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+              </div>
             </article>
-
           </div>
 
           <p class="packs-note">

@@ -695,6 +695,24 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
+/* Cajas de los pasos: el selector de arriba cambia entre las variantes (p. ej. Cuidados esenciales / Fuera de Barcelona).
+   Un enlace #<variante> abre la caja con esa variante a la vista */
+const variantBoxes = [...document.querySelectorAll("[data-variants]")];
+const showVariant = (box, slug) => {
+  box.querySelectorAll("[data-variant-tab]").forEach((tab) => tab.setAttribute("aria-pressed", String(tab.dataset.variantTab === slug)));
+  box.querySelectorAll("[data-variant]").forEach((panel) => { panel.hidden = panel.dataset.variant !== slug; });
+};
+variantBoxes.forEach((box) => box.querySelectorAll("[data-variant-tab]").forEach((tab) => tab.addEventListener("click", () => showVariant(box, tab.dataset.variantTab))));
+const openLinkedVariant = () => {
+  const id = location.hash.slice(1);
+  const panel = id && variantBoxes.length && document.querySelector(`[data-variant="${CSS.escape(id)}"]`);
+  if (!panel) return;
+  showVariant(panel.closest("[data-variants]"), id);
+  panel.closest("[data-variants]").scrollIntoView({ block: "center" });
+};
+openLinkedVariant();
+window.addEventListener("hashchange", openLinkedVariant);
+
 /* Opción de «¿Qué te interesa?» que se marca al llegar desde un botón: data-interes="diagnostico" | "otra" (Pregúntanos)
    (también con ?interes=diagnostico en la dirección o #contacto?interes=diagnostico) */
 const preselectInteres = (key) => {

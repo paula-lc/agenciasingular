@@ -739,9 +739,15 @@
 </div>
 <span class="badge badge--blue">Sense textos de farciment, feina real</span>
 </div>
-<div class="packs packs--duo">
-<article class="pack pack--featured reveal" id="cuidados-esenciales">
+<div class="packs packs--steps">
+<article class="pack pack--step pack--featured reveal" data-variants="">
 <span class="pack__ribbon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"></use></svg>Recomanat</span>
+<span class="step__num" aria-hidden="true">1</span>
+<div class="pack__tabs">
+<button type="button" class="pack__tab" data-variant-tab="cuidados-esenciales" aria-pressed="true">Cures essencials</button>
+<button type="button" class="pack__tab" data-variant-tab="cuidados-esenciales-distancia" aria-pressed="false">Fora de Barcelona</button>
+</div>
+<div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales">
 <span class="pack__kicker">Pas 1 · Per començar</span>
 <h3>Cures essencials</h3>
 <p class="pack__for">Que et trobin a Google, et triïn i reservin sense intermediaris.</p>
@@ -767,8 +773,8 @@
 <p class="pack__fine" data-founder="">A canvi, ens deixes una ressenya, ens permets ensenyar l'abans i el després, i comparteixes amb nosaltres les estadístiques de la teva fitxa durant 60 dies.</p>
 <a class="btn btn--yellow" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Vull Cures essencials</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
-</article>
-<article class="pack reveal" id="cuidados-esenciales-distancia">
+</div>
+<div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" hidden="">
 <span class="pack__kicker">Pas 1 · Fora de Barcelona</span>
 <h3>Cures essencials a distància</h3>
 <p class="pack__for">El mateix, sense sessió de fotos.</p>
@@ -790,8 +796,15 @@
 <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Termini: 1–2 setmanes</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Vull la versió a distància</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+</div>
 </article>
-<article class="pack reveal" id="web-una-pagina">
+<article class="pack pack--step reveal" data-variants="">
+<span class="step__num" aria-hidden="true">2</span>
+<div class="pack__tabs">
+<button type="button" class="pack__tab" data-variant-tab="web-una-pagina" aria-pressed="true">Web d'una pàgina</button>
+<button type="button" class="pack__tab" data-variant-tab="web-completa" aria-pressed="false">Web completa</button>
+</div>
+<div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina">
 <span class="pack__kicker">Pas 2</span>
 <h3>Web d'una pàgina</h3>
 <p class="pack__for">El teu aparador propi, amb el teu botó de reserves.</p>
@@ -807,8 +820,8 @@
 <p class="pack__fine">A partir del segon any, la renovació del domini va a càrrec teu.</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Vull el meu web</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
-</article>
-<article class="pack reveal" id="web-completa">
+</div>
+<div class="pack__variant" id="web-completa" data-variant="web-completa" hidden="">
 <span class="pack__kicker">Pas 2</span>
 <h3>Web completa</h3>
 <p class="pack__for">Per a negocis amb molts serveis per explicar.</p>
@@ -823,8 +836,15 @@
 </ul>
 <a class="btn btn--ghost" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Demanar pressupost</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+</div>
 </article>
-<article class="pack reveal" id="plan-basico">
+<article class="pack pack--step reveal" data-variants="">
+<span class="step__num" aria-hidden="true">3</span>
+<div class="pack__tabs">
+<button type="button" class="pack__tab" data-variant-tab="plan-basico" aria-pressed="true">Pla Bàsic</button>
+<button type="button" class="pack__tab" data-variant-tab="plan-siempre-visible" aria-pressed="false">Pla Sempre visible</button>
+</div>
+<div class="pack__variant" id="plan-basico" data-variant="plan-basico">
 <span class="pack__kicker">Pas 3</span>
 <h3>Pla Bàsic</h3>
 <p class="pack__for">La teva fitxa, sempre al dia.</p>
@@ -837,8 +857,8 @@
 <p class="pack__fine">Mes a mes, sense permanència.</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Vull el Pla Bàsic</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
-</article>
-<article class="pack reveal" id="plan-siempre-visible">
+</div>
+<div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" hidden="">
 <span class="pack__kicker">Pas 3</span>
 <h3>Pla Sempre visible</h3>
 <p class="pack__for">Fitxa i web, cuidades cada mes. Per a clients amb web.</p>
@@ -854,6 +874,7 @@
 <p class="pack__fine">Mes a mes, sense permanència. Requereix web amb nosaltres.</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Vull el Pla Sempre visible</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+</div>
 </article>
 </div>
 <p class="packs-note">
