@@ -10,8 +10,8 @@ ICONO = {"verde": "✓", "ambar": "!", "rojo": "✕"}
 ETIQUETA = {"verde": "Bien", "ambar": "Mejorable", "rojo": "A arreglar"}
 URL_SITIO = "https://agenciasingular.es"
 
-# Precio del Pack "Que te encuentren" (el mismo que la web: index.html, FAQ y modals.py)
-PACK_PRECIO, PACK_IVA = 290, 21
+# Precio web de Cuidados esenciales (el mismo que la web: index.html y FAQ). Es el precio sin fundador: lo impreso no caduca.
+PACK_PRECIO, PACK_IVA = 450, 21
 
 
 def tokens():
@@ -153,14 +153,15 @@ def render(d, apartados, nota, titulo, posiciones, tel_wa, qr_svg, dorso):
     oferta = f"""
     <section class="oferta {'dorso' if dorso else 'solo-pant'}" aria-labelledby="of-t">
       <h2 id="of-t">Si preferís que lo haga yo</h2>
-      <p>Pack «Que te encuentren»: dejo vuestra ficha de Google Maps lista y os doy las herramientas para conseguir reseñas.</p>
+      <p>Cuidados esenciales: dejo vuestra ficha de Google lista, con botón de reserva y fotos, y os doy las herramientas para conseguir reseñas.</p>
       <ul>
-        <li>Ficha de Google optimizada de arriba abajo: categorías, servicios, horario y fotos.</li>
-        <li>Kit de reseñas: QR, cartel para el mostrador y plantillas de respuesta.</li>
-        <li>Datos iguales en directorios y web, para que Google y las IA se fíen de vosotros.</li>
-        <li>Listo en 1 a 2 semanas. Pago 50&nbsp;% al empezar y 50&nbsp;% a la entrega.</li>
+        <li>Ficha de Google completa y cuidada: categorías, servicios, horarios y descripción.</li>
+        <li>Botón «Reservar» conectado a vuestro Booksy, Fresha o Treatwell.</li>
+        <li>Sesión de fotos de 1&nbsp;h en el local: 10–12 fotos editadas.</li>
+        <li>Cartel con QR para conseguir reseñas y plantillas para responderlas.</li>
+        <li>Listo en 1–2 semanas. Pago 50&nbsp;% al empezar y 50&nbsp;% a la entrega.</li>
       </ul>
-      <p class="precio">{PACK_PRECIO}&nbsp;€ + IVA <small>· {euros(total)}&nbsp;€ en total</small></p>
+      <p class="precio">{PACK_PRECIO}&nbsp;€ + IVA <small>· {euros(total)}&nbsp;€ IVA incl.</small></p>
       <div class="qr">{qr_svg}<span>Escanea y escríbeme</span></div>
     </section>"""
 

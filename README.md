@@ -7,7 +7,7 @@ Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singul
 ```
 index.html                              Landing principal
 guia-aparecer-en-ia-y-google-maps.html  Guía gratuita (contenido SEO y captación)
-contratar.html                          Formulario de contratación: un pack + los servicios que quieran (?servicio=pack-escaparate,redes-sociales)
+contratar.html                          Formulario de contratación: un producto de cada paso + los servicios a la carta que quieran (?servicio=cuidados-esenciales,web-una-pagina,fotografia)
 ca/ · en/                               Versiones en catalán e inglés (generadas, no se editan a mano)
 scripts/build/                          Generador de la web: ventanas de detalle, contratar, idiomas y sitemap
 aviso-legal.html · privacidad.html      Plantillas legales (completar datos)
@@ -31,13 +31,13 @@ site.webmanifest · favicon.svg
 2. **Cinta de sectores**.
 3. **Problema/empatía** (del Figma) + 3 datos de dolor.
 4. **Tres sitios donde te buscan**: Google, Google Maps y las IA (GEO).
-5. **Packs** con precio “desde” y el total con IVA debajo: Que te encuentren · Arranque · Escaparate (con la línea «¿Fuera de Barcelona?» que abre el **Escaparate remoto**, sin sesión de fotos) · Singular, y los **planes mensuales** Básico · Siempre visible, que están en **«Próximamente»** (botón «Avísame», no se pueden contratar).
-6. **Servicios a la carta** (tarjetas del Figma) + banner de La Trastienda.
+5. **Tres pasos** (packs y planes), con el precio base grande + IVA y el total con IVA debajo: Paso 1 Cuidados esenciales (y a distancia, con **precio fundador**) · Paso 2 Web de una página / Web completa · Paso 3 Plan Básico / Plan Siempre visible. La nota al pie recoge IVA, pago y permanencia.
+6. **A la carta**: Fotografía Local y La Trastienda, más la línea «Pregúntanos» (rebranding, redes, SEO o IA).
 7. **Test de visibilidad** interactivo (8 preguntas → nota, consejos y pack recomendado).
 8. **Sectores** en pestañas, con búsquedas reales de cada tipo de negocio.
 9. **Proceso** en 4 pasos + compromisos.
 10. **FAQ** (también en datos estructurados FAQPage).
-11. **Contacto** “¿Tomamos un café virtual?” (del Figma), ampliado con sector, ciudad, enlace a la ficha de Google, WhatsApp e interés. Los botones «Diagnóstico gratis» y «Avísame» lo abren con la opción ya marcada (`data-interes="diagnostico"` o `"plan"`; también `?interes=diagnostico#contacto`). Con el diagnóstico elegido se envía como formulario «Diagnóstico».
+11. **Contacto** “¿Tomamos un café virtual?” (del Figma), ampliado con sector, ciudad, enlace a la ficha de Google, WhatsApp e interés. Los botones «Diagnóstico gratis» y «Pregúntanos» lo abren con la opción ya marcada (`data-interes="diagnostico"` o `"otra"`; también `?interes=diagnostico#contacto`). Con el diagnóstico elegido se envía como formulario «Diagnóstico».
 
 ## SEO y posicionamiento en IA incluidos
 
@@ -55,7 +55,7 @@ site.webmanifest · favicon.svg
 | **Email** (`hola@agenciasingular.es`) | `assets/src/js/main.js` (`SITE.email`), HTML, `llms.txt` |
 | **WhatsApp** (se oculta si está vacío) | `assets/src/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/src/js/main.js` → `SITE.formEndpoint` |
-| **Precios** (packs: 290 € Que te encuentren / 490 € Arranque / 1.290 € Escaparate / 990 € Escaparate remoto / 2.490 € Singular; planes «Próximamente»: 59 €/mes Básico / 149 €/mes Siempre visible; fotografía desde 250 €, La Trastienda desde 120 €). Todos con el total con IVA al 21 % (tabla `VAT` en `modals.py` y `contratar.py`, y las tarjetas de `index.html`) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
+| **Precios** (Cuidados esenciales 450 € / fundador 350 €; a distancia 300 € / fundador 250 €; Web de una página 690 € (250 € para clientes de Cuidados); Web completa desde 1.290 €; planes 59 y 149 €/mes; Fotografía Local 250 €; La Trastienda 120 €). Todos con el total con IVA al 21 %. **Plazas del precio fundador**: `SITE.fundadorPlazas` en `assets/src/js/main.js` (con 0 se oculta solo el precio fundador) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
 | **Analítica sin cookies** (GoatCounter): código de tu sitio en goatcounter.com; vacío = no se carga nada | `assets/src/js/main.js` → `SITE.goatcounter` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
@@ -90,7 +90,7 @@ En la portada, cada servicio y cada pack tiene un botón **Añadir**; lo elegido
 del visitante y aparece un contador en el menú que lleva a `contratar.html`. Allí se combinan un pack
 (solo uno) con los servicios a la carta que quieran: los que ya incluye el pack salen como "incluido", las
 preguntas comunes no se repiten y, si varios servicios sueltos forman un pack, se sugiere cambiar al pack.
-Qué incluye cada pack está en `assets/src/js/main.js` → `PACK_INCLUDES`. Los planes mensuales no están en la cesta ni en `contratar.html` mientras sean «Próximamente».
+De cada paso (1, 2, 3) solo se elige un producto (`STEP_OF` en `assets/src/js/main.js`); los servicios a la carta se añaden sin límite.
 
 ## Recibir los formularios por email (informe en PDF + hoja de cálculo)
 
