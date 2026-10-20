@@ -22,115 +22,95 @@ def chips(name,label,opts,kind='checkbox'):
     c=''.join(f'<label class="chip"><input type="{kind}" name="{name}" value="{html.escape(x)}"><span>{html.escape(x)}</span></label>' for x in opts)
     return f'<fieldset class="field chips"><legend>{label}</legend>{c}</fieldset>'
 
+BOOK=['Booksy','Fresha','Treatwell','WhatsApp','Teléfono','Nada todavía']
+FICHA=chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio')
+# Cada producto lleva: precio web, total con IVA y, si lo hay, precio fundador (founder) o de cliente (client)
 P=[
- dict(slug='pack-encuentren',name='Pack Que te encuentren',short='Que te encuentren',icon='i-pin',price='desde 290 €',
-  intro='Para negocios con clientes fieles que en Google Maps son invisibles o están a medias.',
-  inc=['Perfil de Empresa de Google optimizado de arriba abajo','Kit de reseñas: QR, cartel impreso y plantillas','Alta coherente en directorios y base para la IA'],
-  plazo='1 a 2 semanas',
-  fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
+ dict(slug='cuidados-esenciales',name='Cuidados esenciales',short='Cuidados esenciales',icon='i-pin',step=1,
+  price='450 € + IVA',vat='544,50 € IVA incl.',founder=('350 € + IVA','423,50 € IVA incl.'),
+  intro='Que te encuentren en Google, te elijan y reserven sin intermediarios.',
+  inc=['Ficha de Google completa y cuidada: categorías, servicios, horarios y descripción','Botón «Reservar» conectado a tu Booksy, Fresha o Treatwell','Sesión de fotos de 1 h en tu local: 10–12 fotos editadas','Cartel con QR para conseguir reseñas y plantillas para responderlas','Alta en Apple Maps y Bing','Informe de resultados a los 60 días'],
+  plazo='1–2 semanas',
+  fields=[FICHA,
           select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50']),
+          chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),
+          text('direccion','Dirección del local','Calle, número y ciudad'),
+          text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
+ dict(slug='cuidados-esenciales-distancia',name='Cuidados esenciales a distancia',short='Cuidados a distancia',icon='i-pin',step=1,
+  price='300 € + IVA',vat='363 € IVA incl.',founder=('250 € + IVA','302,50 € IVA incl.'),
+  intro='Lo mismo que Cuidados esenciales, sin sesión de fotos. Para negocios fuera de Barcelona.',
+  inc=['Todo lo de Cuidados esenciales, excepto la sesión de fotos','Guía para hacer buenas fotos con el móvil','Edición de tus fotos'],
+  plazo='1–2 semanas',
+  fields=[FICHA,
+          select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50']),
+          chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),
           text('direccion','Dirección del local','Calle, número y ciudad')]),
- dict(slug='pack-arranque',name='Pack Arranque',short='Arranque',icon='i-store',price='desde 490 €',
-  intro='Lo esencial bien hecho en 7 a 10 días: Google Maps, web de una página con reservas, fotos exprés e Instagram alineado.',
-  inc=['Google Maps esencial: perfil completo y fotos','Web de una página con botón de reserva (Booksy, Fresha o WhatsApp)','Sesión de fotos exprés (1 hora, 15 fotos) e Instagram alineado'],
-  plazo='7 a 10 días',
-  fields=[chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio'),
-          chips('reservas','¿Cómo te reservan ahora?',['Booksy','Fresha','Treatwell','WhatsApp','Teléfono','Nada todavía'],'radio'),
-          text('instagram','Tu usuario de Instagram','@tunegocio'),
-          text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
- dict(slug='pack-escaparate',name='Pack Escaparate',short='Escaparate',icon='i-monitor',price='desde 1.290 €',
-  intro='Web nueva o rediseñada, SEO local, sesión de fotos y Google Maps: tu casa digital a la altura de tu negocio.',
-  inc=['Diseño o rediseño web rápida y fácil de actualizar, con dominio y alojamiento el primer año','SEO local, sesión de fotografía y todo el Pack Que te encuentren','De regalo: 30 minutos de La Trastienda'],
-  plazo='3 a 4 semanas',
+ dict(slug='web-una-pagina',name='Web de una página',short='Web de una página',icon='i-monitor',step=2,
+  price='690 € + IVA',vat='834,90 € IVA incl.',client=('250 € + IVA','302,50 € IVA incl.'),
+  intro='Tu escaparate propio, con tu botón de reservas.',
+  inc=['Una página clara, rápida y pensada para el móvil','Botón de reserva de Booksy o Fresha integrado','2 rondas de cambios','Dominio y alojamiento el primer año'],
+  plazo='',
+  fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
+          text('url','Dirección de tu web actual','https://…'),
+          chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),
+          chips('dominio','¿Tienes dominio (tunegocio.es)?',['Sí','No','No lo sé'],'radio')]),
+ dict(slug='web-completa',name='Web completa',short='Web completa',icon='i-monitor',step=2,
+  price='desde 1.290 € + IVA',vat='1.560,90 € IVA incl.',
+  intro='Para negocios con muchos servicios que contar. Presupuesto a medida.',
+  inc=['Hasta 6 páginas','SEO local con una página por servicio clave','Preguntas frecuentes y datos estructurados para buscadores e IA','30 min de La Trastienda'],
+  plazo='',
   fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
           text('url','Dirección de tu web actual','https://…'),
           chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú']),
-          text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
- dict(slug='pack-escaparate-remoto',name='Escaparate remoto',short='Escaparate remoto',icon='i-monitor',price='desde 990 €',
-  intro='Web, SEO local y todo el Pack Que te encuentren para negocios de fuera de Barcelona, sin sesión de fotos: trabajamos con tus fotos y te damos una guía para hacerlas con el móvil.',
-  inc=['Web nueva o rediseñada, con dominio y alojamiento el primer año','SEO local y todo el Pack Que te encuentren (cartel en PDF listo para imprimir)','Guía para hacer buenas fotos con el móvil, sin sesión de fotos en tu local'],
-  plazo='3 a 4 semanas, todo por videollamada',
-  fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
-          text('url','Dirección de tu web actual','https://…'),
-          chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú']),
-          chips('fotos_como','¿Cómo harás las fotos?',['Con el móvil, siguiendo vuestra guía','Tengo fotógrafo','Aún no lo sé'],'radio')]),
- dict(slug='pack-singular',name='Pack Singular',short='Singular',icon='i-palette',price='desde 2.490 €',
-  intro='Cambio de imagen total: nueva marca, web, fotos, SEO y lanzamiento en redes.',
-  inc=['Rebranding completo y aplicaciones (rótulo, tarjetas, carta…)','Todo el Pack Escaparate','Primer mes de redes con vídeos y sesión de La Trastienda'],
-  plazo='6 a 10 semanas',
-  fields=[chips('motivo','¿Qué te trae?',['Voy a abrir','Voy a reabrir o reformar','Mi marca ya no me representa','Quiero subir precios o de categoría'],'radio'),
-          chips('logo_actual','¿Tienes logo ahora?',['Sí, y quiero renovarlo','Sí, pero no me representa','No tengo'],'radio'),
-          chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, y me sirve'],'radio'),
-          text('fecha','¿Tienes una fecha clave?','Ej.: reapertura en marzo')]),
+          chips('dominio','¿Tienes dominio (tunegocio.es)?',['Sí','No','No lo sé'],'radio')]),
+ dict(slug='plan-basico',name='Plan Básico',short='Plan Básico',icon='i-pin',step=3,
+  price='59 €/mes + IVA',vat='71,39 €/mes IVA incl.',
+  intro='Tu ficha, siempre al día. Mes a mes, sin permanencia.',
+  inc=['1 publicación al mes en tu ficha de Google','Respuesta a todas tus reseñas'],
+  plazo='Mes a mes, sin permanencia',
+  fields=[FICHA]),
+ dict(slug='plan-siempre-visible',name='Plan Siempre visible',short='Siempre visible',icon='i-chart',step=3,
+  price='149 €/mes + IVA',vat='180,29 €/mes IVA incl.',
+  intro='Ficha y web, cuidadas cada mes. Para clientes con web. Mes a mes, sin permanencia.',
+  inc=['Todo lo del Plan Básico','Mantenimiento web (hasta 1 h de cambios, copias, dominio y alojamiento)','Contenido SEO','Seguimiento de tu visibilidad en IA','Informe mensual'],
+  plazo='Mes a mes, sin permanencia',
+  fields=[FICHA,
+          text('url','Dirección de tu web','https://…')]),
 ]
 
 S=[
- dict(slug='rebranding',name='Rebranding',icon='i-palette',
-  intro='Una identidad que se recuerda y que cuenta quién eres: logo, colores, tipografías y tono de voz.',
-  inc=['Diagnóstico de tu marca actual y de tu competencia','Logo, paleta, tipografías y manual de uso sencillo','Aplicaciones: rótulo, tarjetas, carta, packaging o redes'],
-  plazo='3 a 5 semanas',
-  fields=[chips('logo_actual','¿Tienes logo ahora?',['Sí, y quiero renovarlo','Sí, pero no me representa','No tengo'],'radio'),
-          chips('piezas','¿Qué necesitas?',['Logo','Colores y tipografías','Rótulo o fachada','Tarjetas','Carta o menú','Packaging','Plantillas para redes']),
-          text('estilo','¿Cómo te gustaría que se viera tu marca?','Ej.: retro, cálida, elegante, divertida…'),
-          text('fecha','¿Tienes una fecha clave?','Ej.: reapertura en marzo')]),
- dict(slug='diseno-web',name='Diseño Web',icon='i-monitor',
-  intro='Una web rápida, bonita y fácil de actualizar que convierte visitas en clientes de tu barrio.',
-  inc=['Diseño a medida, adaptado al móvil','Textos pensados para Google y para las IA','Reservas, WhatsApp, carta o tienda integrados'],
-  plazo='3 a 6 semanas',
-  fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
-          text('url','Dirección de tu web actual','https://…'),
-          chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú','Blog o novedades']),
-          chips('dominio','¿Tienes dominio (tunegocio.es)?',['Sí','No','No lo sé'],'radio')]),
- dict(slug='seo-local',name='SEO Local',icon='i-search',
-  intro='Que te encuentren tus vecinos justo cuando buscan lo que tú vendes.',
-  inc=['Análisis de tus búsquedas clave y de tu competencia','Páginas por servicio y zona optimizadas','Informe mensual con posiciones y llamadas'],
-  plazo='Resultados en 3 a 6 meses',
-  fields=[text('url','Dirección de tu web','https://…'),
-          text('busquedas','¿Por qué búsquedas te gustaría aparecer?','Ej.: manicura semipermanente en Sant Antoni'),
-          text('competencia','¿Qué negocios de tu zona salen ahora por delante?','Nombres o webs')]),
- dict(slug='ia',name='Posicionamiento en IA',icon='i-sparkles',
-  intro='Preparamos tu información para que Gemini, ChatGPT y la IA de Google te entiendan, se fíen de ti y te recomienden.',
-  inc=['Auditoría de lo que dicen hoy las IA de tu negocio','Datos coherentes en web, Maps y directorios','Contenido y datos estructurados que las IA pueden citar'],
-  plazo='Primeros cambios en 4 a 8 semanas',
-  fields=[chips('prueba','Si preguntas a una IA por tu servicio en tu zona…',['Me recomienda','Recomienda a mi competencia','No lo he probado'],'radio'),
-          text('pregunta','¿Qué pregunta te gustaría que te trajera clientes?','Ej.: ¿dónde compro un ramo bonito en Gràcia?'),
-          text('url','Dirección de tu web','https://…')]),
- dict(slug='fotografia',name='Fotografía Local',icon='i-aperture',price='desde 250 €',
-  intro='Fotos reales y profesionales de tu negocio, tu equipo y tus productos estrella. Nada de bancos de imágenes.',
+ dict(slug='fotografia',name='Fotografía Local',icon='i-aperture',price='250 € + IVA',vat='302,50 € IVA incl.',
+  intro='Fotos de tu espacio y tus productos. Nada de bancos de imágenes.',
   inc=['Sesión en tu local con dirección de arte','Fotos editadas para web, Google Maps y redes','Derechos de uso para siempre'],
   plazo='Entrega en 1 a 2 semanas',
   fields=[chips('que_fotos','¿Qué quieres fotografiar?',['El local','El equipo','Productos','Platos o bebidas','Trabajos (uñas, peinados…)','Ambiente con clientes']),
           text('direccion','¿Dónde está tu negocio?','Ciudad y barrio'),
           text('fecha','¿Para cuándo las necesitas?','Ej.: antes de la campaña de Navidad')]),
- dict(slug='redes-sociales',name='Redes Sociales',icon='i-share',
-  intro='Plantillas con tu marca, calendario de contenidos y gestión para que tus redes trabajen sin robarte las noches.',
-  inc=['Estrategia y calendario de contenidos','Plantillas con tu identidad','Gestión, publicación y respuesta (opcional)'],
-  plazo='Arranque en 2 semanas',
-  fields=[chips('redes','¿Qué redes usas?',['Instagram','TikTok','Facebook','Google (publicaciones)','Ninguna aún']),
-          chips('ayuda','¿Qué tipo de ayuda buscas?',['Plantillas para hacerlo yo','Calendario e ideas','Gestión completa','Formación'],'checkbox'),
-          text('usuario','Tu usuario principal','@tunegocio')]),
- dict(slug='trastienda',name='La Trastienda',icon='i-chart',price='desde 120 € por sesión',
-  intro='Consultoría de negocio retro-directa: precios, márgenes y estrategia comercial para vender mejor.',
+ dict(slug='trastienda',name='La Trastienda',icon='i-chart',price='120 € + IVA',vat='145,20 € IVA incl.',
+  intro='Sesión de consultoría de marketing para tu comercio: precios, márgenes y estrategia comercial para vender mejor.',
   inc=['Sesión de diagnóstico de tu negocio','Revisión de precios, márgenes y oferta','Plan de acción claro y priorizado'],
   plazo='Sesiones de 90 minutos',
   fields=[chips('temas','¿Qué te preocupa?',['Precios','Márgenes','Qué productos o servicios potenciar','Captar clientes nuevos','Fidelizar clientes','Abrir o ampliar el negocio']),
           select('antiguedad','¿Cuánto tiempo lleva abierto tu negocio?',['Aún no he abierto','Menos de 1 año','1 a 3 años','Más de 3 años'])]),
 ]
 
-PLANS=()  # los planes mensuales están en «Próximamente»: no se pueden contratar
-VAT={'desde 290 €':'350,90 €','desde 490 €':'592,90 €','desde 990 €':'1.197,90 €','desde 1.290 €':'1.560,90 €','desde 2.490 €':'3.012,90 €','desde 250 €':'302,50 €','desde 120 € por sesión':'145,20 €'}
+def price_attrs(s):
+    """Precio que ve el cesto (data-price) y, si lo hay, el de fundador o el de cliente de Cuidados"""
+    a=f' data-price="{s["price"]} · {s["vat"]}"'
+    if s.get('founder'): a+=f' data-price-founder="{s["founder"][0]} · {s["founder"][1]}"'
+    if s.get('client'): a+=f' data-price-client="{s["client"][0]} · {s["client"][1]}"'
+    return a
 def chip_(s, g):
     radio = g == 'packs'
-    kind, name = ('radio', 'pack') if radio else ('checkbox', 'servicio')
-    extra = f' data-price="{s["price"]}"' if s.get('price') else ''
+    kind = 'radio' if radio else 'checkbox'
+    name = f'paso{s["step"]}' if radio else 'servicio'
     return (f'<label class="chip chip--service" data-group="{g}"><input type="{kind}" name="{name}" value="{s["name"]}" data-slug="{s["slug"]}"'
-            f' data-short="{s.get("short", s["name"])}" data-icon="{s["icon"]}"{extra}><span><svg class="icon icon--sm" aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
-            f'{s.get("short", s["name"])}{"" if radio else "<small class=chip__inc>· incluido</small>"}</span></label>')
+            f' data-short="{s.get("short", s["name"])}" data-icon="{s["icon"]}"{price_attrs(s)}><span><svg class="icon icon--sm" aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
+            f'{s.get("short", s["name"])}</span></label>')
 head_=lambda g, t: f'<button type="button" class="chips__group" data-group-toggle="{g}" aria-expanded="true">{t} <span class="chips__arrow" aria-hidden="true">▾</span></button>'
-PK=[x for x in P if x['slug'] not in PLANS]; PL=[x for x in P if x['slug'] in PLANS]
-picker=(head_('packs','Packs <small>(elige uno)</small>')+''.join(chip_(x,'packs') for x in PK)
+picker=(head_('packs','Packs y planes <small>(uno por paso)</small>')+''.join(chip_(x,'packs') for x in P)
 
-                +head_('carta','Servicios a la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
+                +head_('carta','A la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
 ALL=P+S
 
 fieldsets=''
@@ -142,14 +122,18 @@ for s in ALL:
                 {"".join(s["fields"]).replace('id="f-', f'id="f-{s["slug"]}-').replace('for="f-', f'for="f-{s["slug"]}-')}
               </fieldset>'''
     lis=''.join(f'<li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>{x}</li>' for x in s['inc'])
+    precio=f'<p class="service-info__price">{s["price"]}<small class="service-info__vat">{s["vat"]}</small></p>'
+    if s.get('founder'): precio+=f'<p class="service-info__founder" data-founder>Precio fundador: <strong>{s["founder"][0]}</strong> · {s["founder"][1]}</p>'
+    if s.get('client'): precio+=f'<p class="service-info__founder">Si ya eres cliente de Cuidados esenciales: <strong>{s["client"][0]}</strong> · {s["client"][1]}</p>'
+    tiempo=f'<p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{s["plazo"]}</p>' if s['plazo'] else ''
     aside+=f'''
               <div class="contact-card service-info" data-info="{s["slug"]}" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#{s["icon"]}"/></svg></span>
-                <h3>{s["name"]}</h3>{f'<p class="service-info__price">{s["price"]}<small class="service-info__vat">+ IVA · {VAT[s["price"]]} en total</small></p>' if s.get("price") else ""}
+                <h3>{s["name"]}</h3>{precio}
                 <p>{s["intro"]}</p>
                 <h4>Qué incluye</h4>
                 <ul>{lis}</ul>
-                <p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{s["plazo"]}</p>
+                {tiempo}
               </div>'''
 
 page=f'''<!doctype html>
@@ -158,7 +142,7 @@ page=f'''<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contratar un servicio · Agencia Singular</title>
-  <meta name="description" content="Cuéntanos qué servicio quieres contratar (rebranding, web, SEO local, Google Maps, IA, fotografía, redes o consultoría) y te enviamos una propuesta cerrada en 48 horas.">
+  <meta name="description" content="Cuéntanos qué quieres contratar (Cuidados esenciales, web, planes mensuales, fotografía o consultoría) y te enviamos una propuesta cerrada en 48 horas.">
   <link rel="canonical" href="https://agenciasingular.es/contratar.html">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#3e6083">

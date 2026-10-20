@@ -14,6 +14,9 @@ const SITE = {
   // Código de tu sitio en goatcounter.com (analítica sin cookies): "micodigo" → https://micodigo.goatcounter.com.
   // Vacío = no se carga nada.
   goatcounter: "agenciasingular",
+  // Plazas que quedan del precio fundador de Cuidados esenciales (y de su versión a distancia), de 5 en total.
+  // Es el único sitio donde se cambia: con 0 desaparecen la insignia y el precio fundador y queda solo el precio web.
+  fundadorPlazas: 5,
 };
 
 document.documentElement.classList.remove("no-js");
@@ -27,6 +30,14 @@ const t = (s, vars) => {
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Precio fundador: [data-founder] (precio fundador, insignia y condiciones) solo se ve si quedan plazas;
+   [data-web-price] (precio web sin tachar) solo cuando se han acabado */
+const founderLeft = Math.max(0, Math.min(5, Math.floor(Number(SITE.fundadorPlazas)) || 0));
+const founderOn = founderLeft > 0;
+document.querySelectorAll("[data-founder]").forEach((el) => { el.hidden = !founderOn; });
+document.querySelectorAll("[data-web-price]").forEach((el) => { el.hidden = founderOn; });
+document.querySelectorAll("[data-founder-left]").forEach((el) => { el.textContent = founderLeft; });
 
 /* ------------------------------------------------------------------
    Analítica sin cookies (GoatCounter): solo se carga si SITE.goatcounter tiene valor.
@@ -325,34 +336,37 @@ const QUESTIONS = [
     tip: t("<strong>Programa una publicación semanal</strong> en tu ficha de Google (ofertas, novedades, eventos). 15 minutos que marcan la diferencia.") },
 ];
 
+// Dónde lleva cada área débil del test; sin enlace (IA, redes) = formulario de contacto
+const ALT_LINK = { "google-maps": "cuidados-esenciales", "diseno-web": "web-una-pagina", "fotografia": "fotografia" };
 const SERVICE_NAMES = {
   "google-maps": t("Google Maps y reseñas"), "diseno-web": t("Diseño web"), "ia": t("Posicionamiento en IA"),
   "fotografia": t("Fotografía local"), "redes-sociales": t("Redes sociales"),
 };
 const PACKS = {
-  encuentren: { slug: "pack-encuentren", name: t("Pack Que te encuentren"), short: t("Que te encuentren") },
-  arranque: { slug: "pack-arranque", name: t("Pack Arranque"), short: t("Arranque") },
-  escaparate: { slug: "pack-escaparate", name: t("Pack Escaparate"), short: t("Escaparate") },
-  visible: { slug: "pack-visible", name: t("Plan Siempre visible (próximamente)"), short: t("Siempre visible (próximamente)"), soon: true },
+  cuidados: { slug: "cuidados-esenciales", name: t("Cuidados esenciales"), short: t("Cuidados esenciales") },
+  web: { slug: "web-una-pagina", name: t("Web de una página"), short: t("Web de una página") },
+  completa: { slug: "web-completa", name: t("Web completa"), short: t("Web completa") },
+  basico: { slug: "plan-basico", name: t("Plan Básico"), short: t("Plan Básico") },
+  visible: { slug: "plan-siempre-visible", name: t("Plan Siempre visible"), short: t("Siempre visible") },
 };
 
-/* Elige el pack según qué ha fallado (g(servicio) = puntos perdidos) */
-function recommend(g, score) {
+/* Elige el producto según qué ha fallado (g(servicio) = puntos perdidos; hasWeb = ya tiene alguna web) */
+function recommend(g, score, hasWeb) {
   if (g("diseno-web") >= 2 && score < 45) {
-    return { pack: PACKS.arranque, why: t("Partes casi de cero: el Arranque te da en 7 a 10 días lo esencial (web con reservas, Google Maps, fotos e Instagram) por un precio de entrada.") };
+    return { pack: PACKS.cuidados, why: t("Partes casi de cero: empieza por lo que más se nota. Cuidados esenciales deja tu ficha de Google a punto, con botón de reserva, fotos y reseñas; la web va en el paso 2.") };
   }
   if (g("diseno-web") >= 2) {
-    return { pack: PACKS.escaparate, why: g("fotografia") >= 1
-      ? t("Tu web no está a la altura y te faltan fotos reales: el Escaparate te da web nueva, sesión de fotos y Google Maps en un solo paso.")
-      : t("Tu web es el punto débil, y es la fuente que leen Google y las IA. El Escaparate incluye web nueva, SEO local y Google Maps.") };
+    return hasWeb
+      ? { pack: PACKS.completa, why: t("Tu web existe pero no está a la altura. La Web completa añade SEO local con una página por servicio clave y datos estructurados para buscadores e IA.") }
+      : { pack: PACKS.web, why: t("Tu web es el punto débil, y es la fuente que leen Google y las IA. Una página clara, rápida y con botón de reserva es el primer paso.") };
   }
   if (score >= 75) {
-    return { pack: PACKS.visible, why: t("Tienes buena base. El plan mensual (próximamente) mantendrá tu ficha activa, tus reseñas al día y vigilará qué dicen las IA de ti.") };
+    return { pack: PACKS.visible, why: t("Tienes buena base. El Plan Siempre visible mantendrá tu ficha y tu web cuidadas cada mes y vigilará qué dicen las IA de ti.") };
   }
   if (g("google-maps") + g("ia") >= 3) {
-    return { pack: PACKS.encuentren, why: t("Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Este pack ataca justo eso, rápido y por menos.") };
+    return { pack: PACKS.cuidados, why: t("Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Cuidados esenciales ataca justo eso, rápido y por menos.") };
   }
-  return { pack: g("redes-sociales") + g("fotografia") >= 2 ? PACKS.visible : PACKS.encuentren,
+  return { pack: g("redes-sociales") + g("fotografia") >= 2 ? PACKS.basico : PACKS.cuidados,
     why: t("Te falta constancia más que una gran reforma: pequeñas mejoras cada mes para seguir subiendo en Google, Maps y las IA.") };
 }
 
@@ -429,7 +443,7 @@ if (quiz) {
     const gap = {};
     QUESTIONS.forEach((q, i) => { gap[q.svc] = (gap[q.svc] || 0) + (2 - answers[i].pts); });
     const g = (k) => gap[k] || 0;
-    const reco = recommend(g, score);
+    const reco = recommend(g, score, answers[2].pts > 0);
 
     const ring = $("[data-score-ring]");
     ring.style.setProperty("--ring", color);
@@ -445,7 +459,8 @@ if (quiz) {
     alt.forEach(([k]) => {
       const a = document.createElement("a");
       a.className = "quiz__alt-item";
-      a.href = `contratar.html?servicio=${k === "google-maps" ? "pack-encuentren" : k}&test=${score}`;
+      a.href = ALT_LINK[k] ? `contratar.html?servicio=${ALT_LINK[k]}&test=${score}` : "#contacto";
+      if (!ALT_LINK[k]) a.dataset.interes = "otra"; // rebranding, redes, SEO o IA: «Pregúntanos»
       a.textContent = SERVICE_NAMES[k];
       altList.appendChild(a);
     });
@@ -481,18 +496,8 @@ if (quiz) {
 
     quizSummary = t("Resultado del test de visibilidad: {score}/100 ({title}). Recomendación: {pack}.", { score, title, pack: reco.pack.name });
     const cta = $("[data-quiz-cta]");
-    if (reco.pack.soon) {
-      // Plan mensual aún no disponible: el botón lleva al formulario para que le avisemos
-      cta.href = "#contacto";
-      cta.dataset.interes = "plan";
-      cta.dataset.track = "plan-avisame";
-      cta.innerHTML = `${t("Avísame")}<span class="cta-pack">: ${reco.pack.short}</span>`;
-    } else {
-      cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
-      delete cta.dataset.interes;
-      delete cta.dataset.track;
-      cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
-    }
+    cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
+    cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
 
     report = {
       score, title, pack: reco.pack.name,
@@ -602,24 +607,21 @@ document.querySelectorAll("[data-whatsapp]").forEach((item) => {
 
 /* ------------------------------------------------------------------
    Mi propuesta (cesta): packs y servicios elegidos, guardados en este navegador.
-   Se puede combinar un pack con servicios a la carta, pero no dos packs.
+   Se pueden combinar productos de distintos pasos y servicios a la carta, pero no dos del mismo paso.
    ------------------------------------------------------------------ */
 const CART_KEY = "mi-propuesta";
-// Servicios a la carta que ya van dentro de cada pack
-const PACK_INCLUDES = {
-  "pack-encuentren": [],
-  "pack-arranque": [],
-  "pack-escaparate": ["diseno-web", "seo-local", "fotografia"],
-  "pack-escaparate-remoto": ["diseno-web", "seo-local"],
-  "pack-singular": ["rebranding", "diseno-web", "seo-local", "fotografia", "trastienda"],
+// Pasos: de cada paso solo se elige un producto (Cuidados esenciales o a distancia, una web, un plan mensual)
+const STEP_OF = {
+  "cuidados-esenciales": 1, "cuidados-esenciales-distancia": 1,
+  "web-una-pagina": 2, "web-completa": 2,
+  "plan-basico": 3, "plan-siempre-visible": 3,
 };
-// Planes mensuales: «Próximamente», todavía no se pueden contratar ni añadir a la propuesta
-const PLAN_SLUGS = [];
 // Servicios a la carta que existen (lo guardado de servicios retirados se ignora)
-const SERVICE_SLUGS = ["rebranding", "diseno-web", "seo-local", "ia", "fotografia", "redes-sociales", "trastienda"];
-const isPlan = (slug) => PLAN_SLUGS.includes(slug);
-const isPack = (slug) => slug.startsWith("pack-") && !isPlan(slug);
-const knownSlug = (slug) => slug in PACK_INCLUDES || SERVICE_SLUGS.includes(slug);
+const SERVICE_SLUGS = ["fotografia", "trastienda"];
+// Enlaces y propuestas guardadas con los nombres antiguos
+const LEGACY_SLUGS = { "pack-encuentren": "cuidados-esenciales", "pack-escaparate-remoto": "cuidados-esenciales-distancia", "pack-visible": "plan-siempre-visible" };
+const stepOf = (slug) => STEP_OF[slug] || 0;
+const knownSlug = (slug) => slug in STEP_OF || SERVICE_SLUGS.includes(slug);
 const pop = (el) => { el.classList.remove("is-popping"); void el.offsetWidth; el.classList.add("is-popping"); };
 document.addEventListener("animationend", (e) => {
   if (e.animationName === "add-pop") e.target.classList?.remove("is-popping");
@@ -629,7 +631,7 @@ const cart = {
   get() {
     try {
       const v = JSON.parse(localStorage.getItem(CART_KEY));
-      return Array.isArray(v) ? v.filter((x) => typeof x === "string" && knownSlug(x)) : [];
+      return Array.isArray(v) ? [...new Set(v.map((x) => LEGACY_SLUGS[x] || x))].filter((x) => typeof x === "string" && knownSlug(x)) : [];
     } catch { return []; }
   },
   set(list) {
@@ -637,14 +639,8 @@ const cart = {
     renderCartPill();
   },
   add(slug) {
-    let list = this.get().filter((s) => s !== slug);
-    if (isPack(slug)) {
-      const inc = PACK_INCLUDES[slug] || [];
-      list = [slug, ...list.filter((s) => !isPack(s) && !inc.includes(s))];
-    } else if (isPlan(slug)) {
-      list = [...list.filter((s) => !isPlan(s)), slug];
-    } else list.push(slug);
-    this.set(list);
+    const step = stepOf(slug);
+    this.set([...this.get().filter((s) => s !== slug && !(step && stepOf(s) === step)), slug]);
   },
   remove(slug) { this.set(this.get().filter((s) => s !== slug)); },
 };
@@ -699,7 +695,7 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
-/* Opción de «¿Qué te interesa?» que se marca al llegar desde un botón: data-interes="diagnostico" | "plan"
+/* Opción de «¿Qué te interesa?» que se marca al llegar desde un botón: data-interes="diagnostico" | "otra" (Pregúntanos)
    (también con ?interes=diagnostico en la dirección o #contacto?interes=diagnostico) */
 const preselectInteres = (key) => {
   document.querySelectorAll(`input[name="interes"][data-interes="${key}"]`).forEach((cb) => {
@@ -724,7 +720,7 @@ document.addEventListener("click", (e) => {
   const target = document.getElementById("contacto");
   if (!a || !target || e.metaKey || e.ctrlKey || e.shiftKey) return;
   e.preventDefault();
-  document.querySelectorAll("dialog[open]").forEach((d) => d.close()); // el botón «Avísame» de un detalle
+  document.querySelectorAll("dialog[open]").forEach((d) => d.close()); // el botón de una ventana de detalle
   if (a.dataset.interes) preselectInteres(a.dataset.interes);
   target.scrollIntoView({ behavior: "instant", block: "start" });
   history.pushState(null, "", "#contacto");
@@ -761,6 +757,8 @@ document.querySelectorAll("[data-pmodal]").forEach((btn) => {
 });
 const openLinkedPack = () => {
   const dlg = location.hash.startsWith("#detalle-") && document.getElementById(location.hash.slice(1));
+  // Enlaces antiguos a ventanas que ya no existen (packs retirados, rebranding, web, SEO, IA, redes): a la sección de packs
+  if (location.hash.startsWith("#detalle-") && !dlg) { location.hash = "#packs"; return; }
   if (dlg?.showModal && !dlg.open) dlg.showModal();
 };
 openLinkedPack();
@@ -781,7 +779,6 @@ if (hireForm) {
   let lastTouched = null;
 
   const selected = () => inputs.filter((i) => i.checked).map((i) => i.dataset.slug);
-  const currentPack = () => inputs.find((i) => i.name === "pack" && i.checked);
 
   // Ajusta el tamaño del nombre para que quepa en una línea sin cambiar la altura del título
   const fitTitle = () => {
@@ -811,14 +808,21 @@ if (hireForm) {
     applyFold();
   }));
 
-  const cartItem = (input) => {
+  // Precio de cada elegido: el de fundador mientras queden plazas y el de cliente de Cuidados esenciales en la web de una página
+  const priceOf = (input, slugs) => {
+    const d = input.dataset;
+    if (d.priceFounder && founderOn) return d.priceFounder;
+    if (d.priceClient && slugs.some((s) => s.startsWith("cuidados-esenciales"))) return d.priceClient;
+    return d.price;
+  };
+  const cartItem = (input, slugs) => {
     const li = document.createElement("li");
     li.className = "cart__item";
     li.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#${input.dataset.icon}"/></svg><span class="cart__name"></span><button type="button" class="cart__remove">×</button>`;
     const name = li.querySelector(".cart__name");
     name.textContent = input.value;
     const small = document.createElement("small");
-    small.textContent = input.dataset.price || t("Precio a medida en tu propuesta");
+    small.textContent = priceOf(input, slugs) || t("Precio a medida en tu propuesta");
     name.append(small);
     const remove = li.querySelector(".cart__remove");
     remove.setAttribute("aria-label", t("Quitar {name}", { name: input.value }));
@@ -826,40 +830,7 @@ if (hireForm) {
     return li;
   };
 
-  // Si varios servicios sueltos ya forman un pack, se sugiere el pack
-  const packTip = (slugs) => {
-    let best = null;
-    Object.entries(PACK_INCLUDES).forEach(([pack, inc]) => {
-      const hits = slugs.filter((s) => inc.includes(s));
-      if (hits.length >= 2 && (!best || hits.length > best.hits.length)) best = { pack, inc, hits };
-    });
-    if (!best) return null;
-    const packInput = bySlug(best.pack);
-    const list = (arr) => arr.map((s) => bySlug(s).dataset.short).join(", ").replace(/, ([^,]*)$/, `${t(" y ")}$1`);
-    const rest = best.inc.filter((s) => !best.hits.includes(s));
-    const tip = document.createElement("div");
-    tip.innerHTML = `<p>${t("<strong></strong> ya van incluidos en el <strong></strong> ({price}){rest}. Suele salir más a cuenta.", { price: packInput.dataset.price, rest: rest.length ? t(", junto con {list}", { list: list(rest) }) : "" })}</p><button type="button" class="btn btn--crimson">${t("Cambiar al pack")}</button>`;
-    const [a, b] = tip.querySelectorAll("strong");
-    a.textContent = list(best.hits);
-    b.textContent = packInput.value;
-    tip.querySelector("button").addEventListener("click", () => {
-      packInput.checked = true;
-      lastTouched = best.pack;
-      update();
-    });
-    return tip;
-  };
-
   const update = () => {
-    const pack = currentPack();
-    const included = pack ? PACK_INCLUDES[pack.dataset.slug] || [] : [];
-    inputs.filter((i) => i.name === "servicio").forEach((i) => {
-      const inc = included.includes(i.dataset.slug);
-      if (inc) i.checked = false;
-      i.disabled = inc;
-      i.closest(".chip").classList.toggle("is-included", inc);
-      i.closest(".chip").title = inc ? t("Ya va incluido en el {pack}", { pack: pack.value }) : "";
-    });
     const slugs = selected();
 
     // Preguntas de cada elegido, sin repetir las que ya se han hecho
@@ -884,10 +855,8 @@ if (hireForm) {
 
     // Resumen
     cartBox.hidden = !slugs.length;
-    cartList.replaceChildren(...slugs.map((s) => cartItem(bySlug(s))));
-    const tip = pack ? null : packTip(slugs);
-    tipBox.hidden = !tip;
-    tipBox.replaceChildren(...(tip ? [tip] : []));
+    cartList.replaceChildren(...slugs.map((s) => cartItem(bySlug(s), slugs)));
+    tipBox.hidden = true;
 
     // Título
     const names = slugs.map((s) => bySlug(s).dataset.short);
@@ -932,16 +901,13 @@ if (hireForm) {
 
   // Selección inicial: lo guardado en el navegador + lo que venga en el enlace
   const params = new URLSearchParams(location.search);
-  const wanted = (params.get("servicio") || "").split(",").filter((s) => bySlug(s));
+  const wanted = (params.get("servicio") || "").split(",").map((s) => LEGACY_SLUGS[s] || s).filter((s) => bySlug(s));
   let start = cart.get().filter((s) => bySlug(s));
   wanted.forEach((s) => {
-    if (isPack(s)) start = start.filter((x) => !isPack(x));
-    if (isPlan(s)) start = start.filter((x) => !isPlan(x));
+    if (stepOf(s)) start = start.filter((x) => stepOf(x) !== stepOf(s));
     if (!start.includes(s)) start.push(s);
   });
-  const firstPack = start.find(isPack);
-  const firstPlan = start.find(isPlan);
-  start.filter((s) => (!isPack(s) && !isPlan(s)) || s === firstPack || s === firstPlan).forEach((s) => { bySlug(s).checked = true; });
+  start.forEach((s) => { bySlug(s).checked = true; });
   lastTouched = wanted.at(-1) || start.at(-1) || null;
   if (lastTouched) {
     const group = bySlug(lastTouched).closest(".chip").dataset.group;
@@ -1040,7 +1006,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const data = new FormData(form);
     const diag = !!diagChip?.checked;
     const formulario = diag ? "Diagnóstico" : (form.dataset.subject || "Contacto");
-    const servicio = [...data.getAll("pack"), ...data.getAll("plan"), ...data.getAll("servicio")].join(" + ");
+    const servicio = [...data.getAll("paso1"), ...data.getAll("paso2"), ...data.getAll("paso3"), ...data.getAll("servicio")].join(" + ");
     const subject = `${diag ? "Diagnóstico gratis" : form.dataset.subject || "Contacto"}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
 
     if (!SITE.formEndpoint) {

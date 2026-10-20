@@ -1092,17 +1092,8 @@ body:has(.nav__links.is-open) .sticky-cta { display: none; }
 
 
 /* ==========================================================================
-   Packs: "Ver detalles" y ventana con la información completa
+   Ventana con el detalle de los servicios a la carta
    ========================================================================== */
-.pack__more {
-  position: relative; z-index: 1; align-self: center; margin-top: -4px; padding: 2px 0; background: none; border: 0; cursor: pointer;
-  font: inherit; font-size: 13.5px; font-weight: 800; color: var(--blue); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px;
-}
-.pack__more span { display: inline-block; transition: transform .3s cubic-bezier(.34, 1.8, .5, 1); }
-.pack__more:hover { color: var(--crimson); }
-.pack__more:hover span { transform: translateX(4px); }
-.pack--featured .pack__more { color: var(--cream); }
-.pack--featured .pack__more:hover { color: var(--yellow); }
 
 html:has(.pmodal[open]) { overflow: hidden; }
 .pmodal {
@@ -1207,37 +1198,15 @@ html:has(.pmodal[open]) { overflow: hidden; }
 .service__price { margin-top: -8px; font-size: 14px; font-weight: 600; color: var(--blue); }
 .service__price strong { font-family: var(--font-display); font-weight: 400; font-size: 20px; color: var(--crimson); }
 
-/* Planes mensuales: fila aparte bajo los packs */
-.plans-head { margin: 48px 0 20px; }
-.plans-title { font-size: clamp(20px, 2.4vw, 26px); text-transform: uppercase; color: var(--blue); }
-.plans-head p { margin-top: 6px; font-size: 15px; }
-.packs--plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 900px) { .packs--plans .pack ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; } }
-@media (max-width: 640px) { .packs--plans { grid-template-columns: minmax(0, 1fr); } }
-.chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "ver planes"; margin-left: 4px; padding: 3px 9px; border-radius: 999px; border: 1.5px solid currentColor; font-size: 10.5px; letter-spacing: .06em; }
-:lang(ca) .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "veure plans"; }
-:lang(en) .chips__group[data-group-toggle="planes"][aria-expanded="false"]::after { content: "see plans"; }
-/* Nombre del Pack Arranque para estética */
-.pack__alias { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; margin-top: -6px; padding: 4px 10px; border-radius: 999px; background: var(--yellow); color: var(--blue-deep); font-size: 12.5px; font-weight: 600; }
-.pack__alias .icon { width: 13px; height: 13px; color: var(--crimson); flex: none; }
-.pack__alias strong { font-weight: 800; }
 /* Botones de la cabecera: en móvil pueden partir línea (en inglés y catalán los textos son más largos) */
 @media (max-width: 600px) { .hero__ctas .btn { white-space: normal; text-align: center; line-height: 1.3; } }
 
-/* Precios con IVA, planes «Próximamente» y Escaparate remoto */
+/* Precios con IVA */
 .pack__vat { margin-top: -8px; font-size: 13px; font-weight: 700; color: var(--blue); }
 .pack--featured .pack__vat { color: var(--cream); }
-.pack__ribbon--soon { background: var(--yellow); color: var(--blue-deep); }
-.pack__ribbon--soon .icon { color: var(--crimson); }
-.pack--soon { border-style: dashed; }
-.pack__remote { margin-top: 2px; padding-top: 12px; border-top: 2px dashed currentColor; font-size: 13.5px; line-height: 1.45; }
-.pack__remote-link { display: inline; padding: 0; border: 0; background: none; font: inherit; font-weight: 800; text-align: left; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-.pack__remote-link:hover, .pack__remote-link:focus-visible { color: var(--crimson); }
-.pack--featured .pack__remote-link:hover, .pack--featured .pack__remote-link:focus-visible { color: var(--yellow); }
 .service__vat { margin-top: -8px; font-size: 12.5px; font-weight: 600; color: var(--blue); }
 .service-info__vat { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; }
 .pmodal__vat { font-size: 13px; font-weight: 700; color: var(--cream); }
-.pmodal__soon { align-self: center; padding: 4px 10px; border-radius: 6px; background: var(--yellow); color: var(--blue-deep); font-family: var(--font-display); font-size: 12px; text-transform: uppercase; }
 .pmodal__note { margin-top: 12px; padding: 10px 14px; border-left: 4px solid var(--yellow); background: var(--white); border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; font-weight: 600; }
 /* Test de visibilidad: bloque de contacto opcional debajo del resultado */
 .quiz__result .quiz__gate { padding-top: 22px; border-top: 2px dashed var(--blue); }
@@ -1272,3 +1241,37 @@ html:has(.pmodal[open]) { overflow: hidden; }
 /* Botón "Diagnóstico gratis" sobre la caja amarilla: contraste suficiente */
 .contact-card--yellow .btn--ghost { color: var(--blue-deep); border-color: var(--blue-deep); }
 .contact-card--yellow .btn--ghost:hover { background: var(--blue-deep); color: var(--cream-soft); }
+
+/* ==========================================================================
+   Pasos 1 a 3: precio web / precio fundador, insignia de plazas y letra pequeña
+   ========================================================================== */
+.packs--duo { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+@media (max-width: 760px) { .packs--duo { grid-template-columns: minmax(0, 1fr); } }
+/* El contenedor del precio no cuenta para la maquetación; [hidden] lo oculta (precio fundador agotado) */
+.pack__prices { display: contents; }
+.pack__prices[hidden], .pack__fine[hidden] { display: none; }
+.pack__was { margin-bottom: -10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 15px; font-weight: 700; opacity: .8; }
+.pack__was s { text-decoration-thickness: 2px; text-decoration-color: var(--crimson); }
+.pack--featured .pack__was s { text-decoration-color: var(--yellow); }
+.pack__was-tot { font-size: 12.5px; font-weight: 600; }
+.pack__badge { display: block; width: fit-content; align-self: flex-start; padding: 5px 12px; border-radius: 999px; background: var(--yellow); color: var(--blue-deep); font-size: 12.5px; font-weight: 800; line-height: 1.35; }
+.pack__badge .icon { display: inline-block; width: 13px; height: 13px; margin-right: 6px; vertical-align: -2px; color: var(--crimson); }
+.pack__fine { font-size: 12.5px; line-height: 1.5; opacity: .85; }
+.pack__time { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; }
+.pack__time .icon { width: 16px; height: 16px; flex: none; color: var(--crimson); }
+.pack--featured .pack__time .icon { color: var(--yellow); }
+.pack__alt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; padding: 10px 14px; border: 2px dashed currentColor; border-radius: 14px; font-size: 14px; font-weight: 600; line-height: 1.4; }
+.pack__alt strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; color: var(--crimson); }
+.pack__alt small { flex: 1 1 100%; font-size: 12.5px; opacity: .85; }
+.service-info__founder { margin: -4px 0 10px; font-size: 14px; font-weight: 600; }
+.service-info__founder strong { color: var(--yellow-light); }
+.service-info__founder[hidden] { display: none; }
+/* A la carta: dos tarjetas y la línea «Pregúntanos» */
+.services--duo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .services--duo { grid-template-columns: minmax(0, 1fr); } }
+.trastienda.ask { justify-content: space-between; text-align: left; flex-wrap: wrap; }
+.trastienda.ask .icon { flex: none; }
+.trastienda.ask .trastienda__text { flex: 1 1 280px; }
+.trastienda.ask .btn { flex: none; }
+@media (max-width: 600px) { .trastienda.ask .icon { display: block; } }
+.packs--duo .pack ul { align-content: start; }

@@ -2,7 +2,7 @@ import re, json
 from bs4 import BeautifulSoup, NavigableString, Comment
 ROOT=str(__import__('pathlib').Path(__file__).resolve().parents[2])+'/'
 PAGES=['index.html','contratar.html','guia-aparecer-en-ia-y-google-maps.html']
-ATTRS=['alt','title','aria-label','placeholder','data-typing','data-short','data-price']
+ATTRS=['alt','title','aria-label','placeholder','data-typing','data-short','data-price','data-price-founder','data-price-client']
 SKIP={'script','style','svg','code'}
 def norm(s): return re.sub(r'\s+',' ',s).strip()
 def has_words(s): return bool(re.search(r'[A-Za-zÁÉÍÓÚÑáéíóúñü]{2,}', s)) or bool(re.search(r'\d.*€|€.*\d', s))
@@ -23,7 +23,8 @@ def strings_of(html):
         if el.name=='input' and el.get('type') in ('radio','checkbox') and el.get('value') and has_words(el['value']):
             out.append(norm(el['value']))
         if el.name=='input' and el.has_attr('data-short'): out.append(norm(el['data-short']))
-        if el.has_attr('data-price'): out.append(norm(el['data-price']))
+        for a in ('data-price','data-price-founder','data-price-client'):
+            if el.has_attr(a): out.append(norm(el[a]))
     # JSON-LD
     for sc in soup.find_all('script', type='application/ld+json'):
         def walk(o):
