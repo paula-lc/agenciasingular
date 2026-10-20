@@ -695,14 +695,37 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
-/* Cajas de los pasos: el selector de arriba cambia entre las variantes (p. ej. Cuidados esenciales / Fuera de Barcelona).
-   Un enlace #<variante> abre la caja con esa variante a la vista */
+/* Cajas de los pasos: el interruptor (Paso 1) o las pestañas (pasos 2 y 3) cambian la variante visible.
+   Un enlace #<variante> abre la caja con esa variante a la vista. Cada cambio se anota para medir qué se mira. */
 const variantBoxes = [...document.querySelectorAll("[data-variants]")];
 const showVariant = (box, slug) => {
-  box.querySelectorAll("[data-variant-tab]").forEach((tab) => tab.setAttribute("aria-pressed", String(tab.dataset.variantTab === slug)));
+  box.querySelectorAll("[data-variant-tab]").forEach((tab) => {
+    const on = tab.dataset.variantTab === slug;
+    tab.setAttribute("aria-selected", String(on));
+    tab.tabIndex = on ? 0 : -1;
+  });
+  box.querySelectorAll("[data-variant-switch]").forEach((sw) => { sw.checked = sw.dataset.variantSwitch === slug; });
   box.querySelectorAll("[data-variant]").forEach((panel) => { panel.hidden = panel.dataset.variant !== slug; });
 };
-variantBoxes.forEach((box) => box.querySelectorAll("[data-variant-tab]").forEach((tab) => tab.addEventListener("click", () => showVariant(box, tab.dataset.variantTab))));
+variantBoxes.forEach((box) => {
+  const tabs = [...box.querySelectorAll("[data-variant-tab]")];
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => { showVariant(box, tab.dataset.variantTab); track(`variante-${tab.dataset.variantTab}`); });
+    tab.addEventListener("keydown", (e) => {
+      const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (next === undefined) return;
+      e.preventDefault();
+      const target = tabs[(next + tabs.length) % tabs.length];
+      showVariant(box, target.dataset.variantTab);
+      target.focus();
+    });
+  });
+  box.querySelectorAll("[data-variant-switch]").forEach((sw) => sw.addEventListener("change", () => {
+    const slug = sw.checked ? sw.dataset.variantSwitch : sw.dataset.variantBase;
+    showVariant(box, slug);
+    track(`variante-${slug}`);
+  }));
+});
 const openLinkedVariant = () => {
   const id = location.hash.slice(1);
   const panel = id && variantBoxes.length && document.querySelector(`[data-variant="${CSS.escape(id)}"]`);

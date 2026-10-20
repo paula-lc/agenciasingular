@@ -739,15 +739,13 @@
 </div>
 <span class="badge badge--blue">No filler, real work</span>
 </div>
+<p class="packs-path">Start with Step 1; the rest whenever you need it.</p>
 <div class="packs packs--steps">
 <article class="pack pack--step pack--featured reveal" data-variants="">
 <span class="pack__ribbon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"></use></svg>Recommended</span>
 <span class="step__num" aria-hidden="true">1</span>
-<div class="pack__tabs">
-<button type="button" class="pack__tab" data-variant-tab="cuidados-esenciales" aria-pressed="true">Essential Care</button>
-<button type="button" class="pack__tab" data-variant-tab="cuidados-esenciales-distancia" aria-pressed="false">Outside Barcelona</button>
-</div>
-<div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales">
+<label class="pack__switch"><input type="checkbox" data-variant-switch="cuidados-esenciales-distancia" data-variant-base="cuidados-esenciales"><span class="pack__switch-ui" aria-hidden="true"></span><span class="pack__switch-text"><strong>Outside Barcelona</strong><small>The same, without the photo session.</small></span></label>
+<div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales" role="tabpanel" aria-labelledby="tab-cuidados-esenciales">
 <span class="pack__kicker">Step 1 · To get started</span>
 <h3>Essential Care</h3>
 <p class="pack__for">Get found on Google, get chosen, and get bookings with no middleman.</p>
@@ -770,11 +768,11 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Results report after 60 days</li>
 </ul>
 <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Timeline: 1–2 weeks</p>
-<p class="pack__fine" data-founder="">In return, you leave us a review, let us show the before and after, and share your profile stats with us for 60 days.</p>
+<details class="pack__terms" data-founder=""><summary>See terms</summary><p class="pack__fine">In return, you leave us a review, let us show the before and after, and share your profile stats with us for 60 days.</p></details>
 <a class="btn btn--yellow" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">I want Essential Care</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Add to my proposal</span></button>
 </div>
-<div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" hidden="">
+<div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" role="tabpanel" aria-labelledby="tab-cuidados-esenciales-distancia" hidden="">
 <span class="pack__kicker">Step 1 · Outside Barcelona</span>
 <h3>Essential Care Remote</h3>
 <p class="pack__for">The same, without the photo session.</p>
@@ -800,11 +798,11 @@
 </article>
 <article class="pack pack--step reveal" data-variants="">
 <span class="step__num" aria-hidden="true">2</span>
-<div class="pack__tabs">
-<button type="button" class="pack__tab" data-variant-tab="web-una-pagina" aria-pressed="true">One-page Website</button>
-<button type="button" class="pack__tab" data-variant-tab="web-completa" aria-pressed="false">Full Website</button>
+<div class="pack__tabs" role="tablist">
+<button type="button" class="pack__tab" role="tab" id="tab-web-una-pagina" aria-controls="web-una-pagina" aria-selected="true" tabindex="0" data-variant-tab="web-una-pagina">One-page Website<small>€690 + VAT</small></button>
+<button type="button" class="pack__tab" role="tab" id="tab-web-completa" aria-controls="web-completa" aria-selected="false" tabindex="-1" data-variant-tab="web-completa">Full Website<small>from €1,290 + VAT</small></button>
 </div>
-<div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina">
+<div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina" role="tabpanel" aria-labelledby="tab-web-una-pagina">
 <span class="pack__kicker">Step 2</span>
 <h3>One-page Website</h3>
 <p class="pack__for">Your own shopfront, with your booking button.</p>
@@ -821,7 +819,7 @@
 <a class="btn btn--ghost" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">I want my website</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Add to my proposal</span></button>
 </div>
-<div class="pack__variant" id="web-completa" data-variant="web-completa" hidden="">
+<div class="pack__variant" id="web-completa" data-variant="web-completa" role="tabpanel" aria-labelledby="tab-web-completa" hidden="">
 <span class="pack__kicker">Step 2</span>
 <h3>Full Website</h3>
 <p class="pack__for">For businesses with lots of services to show.</p>
@@ -840,11 +838,11 @@
 </article>
 <article class="pack pack--step reveal" data-variants="">
 <span class="step__num" aria-hidden="true">3</span>
-<div class="pack__tabs">
-<button type="button" class="pack__tab" data-variant-tab="plan-basico" aria-pressed="true">Basic Plan</button>
-<button type="button" class="pack__tab" data-variant-tab="plan-siempre-visible" aria-pressed="false">Always Visible Plan</button>
+<div class="pack__tabs" role="tablist">
+<button type="button" class="pack__tab" role="tab" id="tab-plan-basico" aria-controls="plan-basico" aria-selected="true" tabindex="0" data-variant-tab="plan-basico">Basic Plan<small>€59/month + VAT</small></button>
+<button type="button" class="pack__tab" role="tab" id="tab-plan-siempre-visible" aria-controls="plan-siempre-visible" aria-selected="false" tabindex="-1" data-variant-tab="plan-siempre-visible">Always Visible<small>€149/month + VAT</small></button>
 </div>
-<div class="pack__variant" id="plan-basico" data-variant="plan-basico">
+<div class="pack__variant" id="plan-basico" data-variant="plan-basico" role="tabpanel" aria-labelledby="tab-plan-basico">
 <span class="pack__kicker">Step 3</span>
 <h3>Basic Plan</h3>
 <p class="pack__for">Your profile, always up to date.</p>
@@ -858,7 +856,7 @@
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">I want the Basic Plan</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Add to my proposal</span></button>
 </div>
-<div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" hidden="">
+<div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" role="tabpanel" aria-labelledby="tab-plan-siempre-visible" hidden="">
 <span class="pack__kicker">Step 3</span>
 <h3>Always Visible Plan</h3>
 <p class="pack__for">Profile and website, looked after every month. For website clients.</p>
