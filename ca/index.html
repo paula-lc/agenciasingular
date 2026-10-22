@@ -38,7 +38,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&amp;display=swap"></noscript>
-<link rel="stylesheet" href="../assets/css/styles.css?v=76">
+<link rel="stylesheet" href="../assets/css/styles.css?v=77">
 <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
 <script type="application/ld+json">
   {
@@ -747,7 +747,7 @@
 <label class="pack__switch"><input type="checkbox" data-variant-switch="cuidados-esenciales-distancia" data-variant-base="cuidados-esenciales"><span class="pack__switch-ui" aria-hidden="true"></span><span class="pack__switch-text"><strong>Fora de Barcelona</strong><small>El mateix, sense sessió de fotos.</small></span></label>
 <div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales" role="tabpanel" aria-labelledby="tab-cuidados-esenciales">
 <span class="pack__kicker">Pas 1 · Per començar</span>
-<h3>Cures essencials</h3>
+<h3><button type="button" class="pack__title-btn" data-pmodal="detalle-cuidados-esenciales">Cures essencials</button></h3>
 <p class="pack__for">Que et trobin a Google, et triïn i reservin sense intermediaris.</p>
 <div class="pack__prices" data-founder="">
 <p class="pack__was"><s>450 € + IVA</s> <span class="pack__was-tot"><s>544,50 € IVA incl.</s></span></p>
@@ -768,12 +768,13 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Informe de resultats als 60 dies</li>
 </ul>
 <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Termini: 1–2 setmanes</p>
+<button type="button" class="pack__more" data-pmodal="detalle-cuidados-esenciales">Veure detall <span aria-hidden="true">→</span></button>
 <a class="btn btn--yellow" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Vull Cures essencials</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
 </div>
 <div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" role="tabpanel" aria-labelledby="tab-cuidados-esenciales-distancia" hidden="">
 <span class="pack__kicker">Pas 1 · Fora de Barcelona</span>
-<h3>Cures essencials a distància</h3>
+<h3><button type="button" class="pack__title-btn" data-pmodal="detalle-cuidados-esenciales-distancia">Cures essencials a distància</button></h3>
 <p class="pack__for">El mateix, sense sessió de fotos.</p>
 <div class="pack__prices" data-founder="">
 <p class="pack__was"><s>300 € + IVA</s> <span class="pack__was-tot"><s>363 € IVA incl.</s></span></p>
@@ -791,6 +792,7 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Edició de les teves fotos</li>
 </ul>
 <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Termini: 1–2 setmanes</p>
+<button type="button" class="pack__more" data-pmodal="detalle-cuidados-esenciales-distancia">Veure detall <span aria-hidden="true">→</span></button>
 <a class="btn btn--ghost" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Vull la versió a distància</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
 </div>
@@ -803,7 +805,7 @@
 </div>
 <div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina" role="tabpanel" aria-labelledby="tab-web-una-pagina">
 <span class="pack__kicker">Pas 2</span>
-<h3>Web d'una pàgina</h3>
+<h3><button type="button" class="pack__title-btn" data-pmodal="detalle-web-una-pagina">Web d'una pàgina</button></h3>
 <p class="pack__for">El teu aparador propi, amb el teu botó de reserves.</p>
 <p class="pack__price">690 €<small>+ IVA</small></p>
 <p class="pack__vat">834,90 € IVA incl.</p>
@@ -815,12 +817,13 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Domini i allotjament el primer any</li>
 </ul>
 <p class="pack__fine">A partir del segon any, la renovació del domini va a càrrec teu.</p>
+<button type="button" class="pack__more" data-pmodal="detalle-web-una-pagina">Veure detall <span aria-hidden="true">→</span></button>
 <a class="btn btn--ghost" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Vull el meu web</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
 </div>
 <div class="pack__variant" id="web-completa" data-variant="web-completa" role="tabpanel" aria-labelledby="tab-web-completa" hidden="">
 <span class="pack__kicker">Pas 2</span>
-<h3>Web completa</h3>
+<h3><button type="button" class="pack__title-btn" data-pmodal="detalle-web-completa">Web completa</button></h3>
 <p class="pack__for">Per a negocis amb molts serveis per explicar.</p>
 <p class="pack__price"><small>des de</small>1.290 €<small>+ IVA</small></p>
 <p class="pack__vat">1.560,90 € IVA incl.</p>
@@ -831,6 +834,7 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Preguntes freqüents i dades estructurades per a cercadors i IA</li>
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>30 min de La Trastienda</li>
 </ul>
+<button type="button" class="pack__more" data-pmodal="detalle-web-completa">Veure detall <span aria-hidden="true">→</span></button>
 <a class="btn btn--ghost" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Demanar pressupost</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
 </div>
@@ -843,7 +847,7 @@
 </div>
 <div class="pack__variant" id="plan-basico" data-variant="plan-basico" role="tabpanel" aria-labelledby="tab-plan-basico">
 <span class="pack__kicker">Pas 3</span>
-<h3>Pla Bàsic</h3>
+<h3><button type="button" class="pack__title-btn" data-pmodal="detalle-plan-basico">Pla Bàsic</button></h3>
 <p class="pack__for">La teva fitxa, sempre al dia.</p>
 <p class="pack__price">59 €<small>/mes + IVA</small></p>
 <p class="pack__vat">71,39 €/mes IVA incl.</p>
@@ -852,12 +856,13 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Resposta a totes les teves ressenyes</li>
 </ul>
 <p class="pack__fine">Mes a mes, sense permanència.</p>
+<button type="button" class="pack__more" data-pmodal="detalle-plan-basico">Veure detall <span aria-hidden="true">→</span></button>
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Vull el Pla Bàsic</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
 </div>
 <div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" role="tabpanel" aria-labelledby="tab-plan-siempre-visible" hidden="">
 <span class="pack__kicker">Pas 3</span>
-<h3>Pla Sempre visible</h3>
+<h3><button type="button" class="pack__title-btn" data-pmodal="detalle-plan-siempre-visible">Pla Sempre visible</button></h3>
 <p class="pack__for">Fitxa i web, cuidades cada mes. Per a clients amb web.</p>
 <p class="pack__price">149 €<small>/mes + IVA</small></p>
 <p class="pack__vat">180,29 €/mes IVA incl.</p>
@@ -869,11 +874,156 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Informe mensual</li>
 </ul>
 <p class="pack__fine">Mes a mes, sense permanència. Requereix web amb nosaltres.</p>
+<button type="button" class="pack__more" data-pmodal="detalle-plan-siempre-visible">Veure detall <span aria-hidden="true">→</span></button>
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Vull el Pla Sempre visible</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
 </div>
 </article>
 </div>
+<dialog class="pmodal" id="detalle-cuidados-esenciales" aria-labelledby="detalle-cuidados-esenciales-title">
+<div class="pmodal__inner">
+<header class="pmodal__head">
+<button type="button" class="pmodal__close" data-pmodal-close="" aria-label="Tanca"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span class="pmodal__kicker">Pas 1 · Per començar</span>
+<h3 id="detalle-cuidados-esenciales-title">Cures essencials</h3>
+<p class="pmodal__meta"><span data-founder=""><span class="pmodal__was"><s>450 € + IVA</s></span><span class="pmodal__price">350 €<small>+ IVA</small></span><span class="pmodal__vat">423,50 € IVA incl.</span><span class="pmodal__badge">Preu fundador · queden <span data-founder-left="">5</span> de 5 places</span></span><span data-web-price="" hidden=""><span class="pmodal__price">450 €<small>+ IVA</small></span><span class="pmodal__vat">544,50 € IVA incl.</span></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>1–2 setmanes</span></p>
+</header>
+<div class="pmodal__body" tabindex="0" autofocus="">
+<section><h4 class="pmodal__h">És per a tu si…</h4><p>Tens clients que t'estimen, però a Google surts a mitges, sense reserves directes o amb poques ressenyes. Vols que et trobin, et triïn i reservin sense intermediaris.</p></section>
+<section><h4 class="pmodal__h">Què inclou, en detall</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>La teva fitxa de Google</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Fitxa de Google completa i cuidada: categories, serveis, horaris i descripció</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Alta a Apple Maps i Bing</span></li></ul></div><div class="pmodal__group"><h4>Reserves sense intermediaris</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Botó «Reservar» connectat al teu Booksy, Fresha o Treatwell</span></li></ul></div><div class="pmodal__group"><h4>Fotos</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Sessió de fotos d'1 h al teu local: 10–12 fotos editades</span></li></ul></div><div class="pmodal__group"><h4>Ressenyes</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Cartell amb QR per aconseguir ressenyes i plantilles per respondre-les</span></li></ul></div><div class="pmodal__group"><h4>Resultats</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Informe de resultats als 60 dies</span></li></ul></div></div><p class="pmodal__note">La sessió de fotos és presencial a Barcelona i àrea metropolitana. Fora d'aquesta zona, mira Cures essencials a distància.</p></section>
+<section><h4 class="pmodal__h">Com ho fem</h4><ol class="pmodal__steps"><li><span class="pmodal__when">1–2 setmanes</span><span>Deixem la teva fitxa a punt, connectem el botó de reserva, fem la sessió de fotos i t'entreguem el cartell amb QR i les plantilles.</span></li><li><span class="pmodal__when">Als 60 dies</span><span>T'enviem l'informe de resultats.</span></li></ol></section>
+<div class="pmodal__cols">
+<section><h4 class="pmodal__h">Què necessitem de tu</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés a la teva fitxa de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés al teu Booksy, Fresha o Treatwell</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Els teus serveis i horaris, i una hora al teu local per a les fotos</span></li></ul></section>
+<section><h4 class="pmodal__h">Què t'emportes</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>La teva fitxa de Google completa i cuidada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>10–12 fotos professionals editades</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Cartell amb QR i plantilles per a les ressenyes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Informe de resultats als 60 dies</span></li></ul></section>
+</div>
+<p class="pmodal__not"><strong>No inclou:</strong> El web (Pas 2) ni la gestió mensual de la fitxa (Pas 3). No prometem posicions a Google.</p>
+</div>
+<footer class="pmodal__foot">
+<a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Vull Cures essencials</a>
+<button type="button" class="add-btn" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix</span></button>
+</footer>
+</div>
+</dialog>
+<dialog class="pmodal" id="detalle-cuidados-esenciales-distancia" aria-labelledby="detalle-cuidados-esenciales-distancia-title">
+<div class="pmodal__inner">
+<header class="pmodal__head">
+<button type="button" class="pmodal__close" data-pmodal-close="" aria-label="Tanca"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span class="pmodal__kicker">Pas 1 · Fora de Barcelona</span>
+<h3 id="detalle-cuidados-esenciales-distancia-title">Cures essencials a distància</h3>
+<p class="pmodal__meta"><span data-founder=""><span class="pmodal__was"><s>300 € + IVA</s></span><span class="pmodal__price">250 €<small>+ IVA</small></span><span class="pmodal__vat">302,50 € IVA incl.</span><span class="pmodal__badge">Preu fundador · queden <span data-founder-left="">5</span> de 5 places</span></span><span data-web-price="" hidden=""><span class="pmodal__price">300 €<small>+ IVA</small></span><span class="pmodal__vat">363 € IVA incl.</span></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>1–2 setmanes</span></p>
+</header>
+<div class="pmodal__body" tabindex="0" autofocus="">
+<section><h4 class="pmodal__h">És per a tu si…</h4><p>El teu negoci és fora de Barcelona, o prefereixes treballar a distància, i vols el mateix que Cures essencials sense la sessió de fotos al teu local.</p></section>
+<section><h4 class="pmodal__h">Què inclou, en detall</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Tot el de Cures essencials, excepte la sessió de fotos</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Fitxa de Google completa i cuidada: categories, serveis, horaris i descripció</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Botó «Reservar» connectat al teu Booksy, Fresha o Treatwell</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Cartell amb QR per aconseguir ressenyes i plantilles per respondre-les</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Alta a Apple Maps i Bing</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Informe de resultats als 60 dies</span></li></ul></div><div class="pmodal__group"><h4>Les teves fotos, ben aprofitades</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Guia per fer bones fotos amb el mòbil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Edició de les teves fotos</span></li></ul></div></div></section>
+<section><h4 class="pmodal__h">Com ho fem</h4><ol class="pmodal__steps"><li><span class="pmodal__when">1–2 setmanes</span><span>T'enviem la guia de fotos, editem les que ens enviïs i deixem la teva fitxa a punt amb el botó de reserva, el cartell amb QR i les plantilles.</span></li><li><span class="pmodal__when">Als 60 dies</span><span>T'enviem l'informe de resultats.</span></li></ol></section>
+<div class="pmodal__cols">
+<section><h4 class="pmodal__h">Què necessitem de tu</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés a la teva fitxa de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés al teu Booksy, Fresha o Treatwell</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Les teves fotos, fetes amb el mòbil seguint la guia</span></li></ul></section>
+<section><h4 class="pmodal__h">Què t'emportes</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>La teva fitxa de Google completa i cuidada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Les teves fotos editades</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Cartell amb QR i plantilles per a les ressenyes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Informe de resultats als 60 dies</span></li></ul></section>
+</div>
+<p class="pmodal__not"><strong>No inclou:</strong> La sessió de fotos professional al teu local, el web (Pas 2) ni la gestió mensual de la fitxa (Pas 3).</p>
+</div>
+<footer class="pmodal__foot">
+<a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Vull la versió a distància</a>
+<button type="button" class="add-btn" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix</span></button>
+</footer>
+</div>
+</dialog>
+<dialog class="pmodal" id="detalle-web-una-pagina" aria-labelledby="detalle-web-una-pagina-title">
+<div class="pmodal__inner">
+<header class="pmodal__head">
+<button type="button" class="pmodal__close" data-pmodal-close="" aria-label="Tanca"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span class="pmodal__kicker">Pas 2</span>
+<h3 id="detalle-web-una-pagina-title">Web d'una pàgina</h3>
+<p class="pmodal__meta"><span class="pmodal__price">690 €<small>+ IVA</small></span><span class="pmodal__vat">834,90 € IVA incl.</span></p>
+</header>
+<div class="pmodal__body" tabindex="0" autofocus="">
+<section><h4 class="pmodal__h">És per a tu si…</h4><p>Vols el teu propi aparador a internet: clar, ràpid i amb el teu botó de reserves, sense complicacions.</p></section>
+<section><h4 class="pmodal__h">Què inclou, en detall</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>La teva pàgina</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Una pàgina clara, ràpida i pensada per al mòbil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Botó de reserva de Booksy o Fresha integrat</span></li></ul></div><div class="pmodal__group"><h4>Canvis</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>2 rondes de canvis</span></li></ul></div><div class="pmodal__group"><h4>Domini i allotjament</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Domini i allotjament el primer any</span></li></ul></div></div><p class="pmodal__note">Si ja ets client de Cures essencials: 250 € + IVA (302,50 € IVA incl.).</p></section>
+<section><h4 class="pmodal__h">Com ho fem</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Arrencada</span><span>Parlem del teu negoci i del que ha d'explicar la teva pàgina.</span></li><li><span class="pmodal__when">Disseny</span><span>T'ensenyem una primera versió.</span></li><li><span class="pmodal__when">Canvis</span><span>Fem fins a 2 rondes de canvis amb tu.</span></li><li><span class="pmodal__when">Publicació</span><span>Publiquem la teva pàgina.</span></li></ol></section>
+<div class="pmodal__cols">
+<section><h4 class="pmodal__h">Què necessitem de tu</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>El teu logo i colors</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Els teus serveis, preus i horaris</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés al teu sistema de reserves (Booksy o Fresha)</span></li></ul></section>
+<section><h4 class="pmodal__h">Què t'emportes</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>La teva pàgina publicada i adaptada al mòbil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Botó de reserva integrat</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Domini i allotjament el primer any</span></li></ul></section>
+</div>
+<p class="pmodal__not"><strong>No inclou:</strong> A partir del segon any, la renovació del domini va a càrrec teu. Si necessites diverses pàgines o SEO local per servei, mira la Web completa.</p>
+</div>
+<footer class="pmodal__foot">
+<a class="btn btn--crimson" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Vull el meu web</a>
+<button type="button" class="add-btn" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix</span></button>
+</footer>
+</div>
+</dialog>
+<dialog class="pmodal" id="detalle-web-completa" aria-labelledby="detalle-web-completa-title">
+<div class="pmodal__inner">
+<header class="pmodal__head">
+<button type="button" class="pmodal__close" data-pmodal-close="" aria-label="Tanca"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span class="pmodal__kicker">Pas 2</span>
+<h3 id="detalle-web-completa-title">Web completa</h3>
+<p class="pmodal__meta"><span class="pmodal__price"><small>des de</small>1.290 €<small>+ IVA</small></span><span class="pmodal__vat">1.560,90 € IVA incl.</span></p>
+</header>
+<div class="pmodal__body" tabindex="0" autofocus="">
+<section><h4 class="pmodal__h">És per a tu si…</h4><p>El teu negoci té molts serveis per explicar i vols que cadascun tingui el seu lloc al web i es pugui trobar.</p></section>
+<section><h4 class="pmodal__h">Què inclou, en detall</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>El teu web</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Fins a 6 pàgines</span></li></ul></div><div class="pmodal__group"><h4>SEO local</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>SEO local amb una pàgina per servei clau</span></li></ul></div><div class="pmodal__group"><h4>Cercadors i IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Preguntes freqüents i dades estructurades per a cercadors i IA</span></li></ul></div><div class="pmodal__group"><h4>Inclòs</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>30 min de La Trastienda</span></li></ul></div></div><p class="pmodal__note">Pressupost a mida a partir de 1.290 € + IVA.</p></section>
+<section><h4 class="pmodal__h">Com ho fem</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Pressupost</span><span>Preparem un pressupost a mida segons els teus serveis.</span></li><li><span class="pmodal__when">Disseny i textos</span><span>Dissenyem el teu web i organitzem els teus serveis.</span></li><li><span class="pmodal__when">Publicació</span><span>T'ensenyem el web, ajustem i el publiquem.</span></li></ol></section>
+<div class="pmodal__cols">
+<section><h4 class="pmodal__h">Què necessitem de tu</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>La teva llista de serveis i preus</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>El teu logo i colors</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Les teves fotos, si en tens</span></li></ul></section>
+<section><h4 class="pmodal__h">Què t'emportes</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>El teu web de fins a 6 pàgines publicat</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Una pàgina per servei clau</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>30 min de La Trastienda</span></li></ul></section>
+</div>
+<p class="pmodal__not"><strong>No inclou:</strong> Una botiga en línia amb molts productes es pressuposta a part.</p>
+</div>
+<footer class="pmodal__foot">
+<a class="btn btn--crimson" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Demanar pressupost</a>
+<button type="button" class="add-btn" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix</span></button>
+</footer>
+</div>
+</dialog>
+<dialog class="pmodal" id="detalle-plan-basico" aria-labelledby="detalle-plan-basico-title">
+<div class="pmodal__inner">
+<header class="pmodal__head">
+<button type="button" class="pmodal__close" data-pmodal-close="" aria-label="Tanca"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span class="pmodal__kicker">Pas 3</span>
+<h3 id="detalle-plan-basico-title">Pla Bàsic</h3>
+<p class="pmodal__meta"><span class="pmodal__price">59 €<small>/mes + IVA</small></span><span class="pmodal__vat">71,39 €/mes IVA incl.</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Mes a mes, sense permanència</span></p>
+</header>
+<div class="pmodal__body" tabindex="0" autofocus="">
+<section><h4 class="pmodal__h">És per a tu si…</h4><p>Ja tens la teva fitxa de Google i vols que no es quedi aturada.</p></section>
+<section><h4 class="pmodal__h">Què inclou, en detall</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Cada mes</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>1 publicació al mes a la teva fitxa de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Resposta a totes les teves ressenyes</span></li></ul></div><div class="pmodal__group"><h4>Sense lligams</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Mes a mes, sense permanència</span></li></ul></div></div></section>
+<section><h4 class="pmodal__h">Com ho fem</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Cada mes</span><span>Publiquem a la teva fitxa de Google i responem a les teves ressenyes.</span></li></ol></section>
+<div class="pmodal__cols">
+<section><h4 class="pmodal__h">Què necessitem de tu</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés a la teva fitxa de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Un avís quan tinguis novetats o ofertes</span></li></ul></section>
+<section><h4 class="pmodal__h">Què t'emportes</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>La teva fitxa de Google activa cada mes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Totes les teves ressenyes respostes</span></li></ul></section>
+</div>
+<p class="pmodal__not"><strong>No inclou:</strong> Manteniment web, contingut SEO, seguiment de la teva visibilitat a la IA ni informe mensual (Pla Sempre visible).</p>
+</div>
+<footer class="pmodal__foot">
+<a class="btn btn--crimson" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Vull el Pla Bàsic</a>
+<button type="button" class="add-btn" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix</span></button>
+</footer>
+</div>
+</dialog>
+<dialog class="pmodal" id="detalle-plan-siempre-visible" aria-labelledby="detalle-plan-siempre-visible-title">
+<div class="pmodal__inner">
+<header class="pmodal__head">
+<button type="button" class="pmodal__close" data-pmodal-close="" aria-label="Tanca"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<span class="pmodal__kicker">Pas 3</span>
+<h3 id="detalle-plan-siempre-visible-title">Pla Sempre visible</h3>
+<p class="pmodal__meta"><span class="pmodal__price">149 €<small>/mes + IVA</small></span><span class="pmodal__vat">180,29 €/mes IVA incl.</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Mes a mes, sense permanència</span></p>
+</header>
+<div class="pmodal__body" tabindex="0" autofocus="">
+<section><h4 class="pmodal__h">És per a tu si…</h4><p>Ja tens web amb nosaltres i vols que algú cuidi la teva fitxa i el teu web cada mes.</p></section>
+<section><h4 class="pmodal__h">Què inclou, en detall</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Tot el del Pla Bàsic</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>1 publicació al mes a la teva fitxa de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Resposta a totes les teves ressenyes</span></li></ul></div><div class="pmodal__group"><h4>El teu web</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Manteniment web (fins a 1 h de canvis, còpies, domini i allotjament)</span></li></ul></div><div class="pmodal__group"><h4>Visibilitat</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Contingut SEO</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Seguiment de la teva visibilitat a la IA</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Informe mensual</span></li></ul></div></div></section>
+<section><h4 class="pmodal__h">Com ho fem</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Cada mes</span><span>Cuidem la teva fitxa i el teu web, i t'enviem l'informe mensual.</span></li></ol></section>
+<div class="pmodal__cols">
+<section><h4 class="pmodal__h">Què necessitem de tu</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Accés a la teva fitxa de Google i al teu web (si el vam fer nosaltres, ja el tenim)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Un avís quan hi hagi novetats</span></li></ul></section>
+<section><h4 class="pmodal__h">Què t'emportes</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>La teva fitxa i el teu web cuidats cada mes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Informe mensual</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg><span>Mes a mes, sense permanència</span></li></ul></section>
+</div>
+<p class="pmodal__not"><strong>No inclou:</strong> Aquest pla requereix un web fet amb nosaltres.</p>
+</div>
+<footer class="pmodal__foot">
+<a class="btn btn--crimson" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Vull el Pla Sempre visible</a>
+<button type="button" class="add-btn" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix</span></button>
+</footer>
+</div>
+</dialog>
 <p class="packs-note">
 <span><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"></use></svg>Preus per a negocis, tancats per a l'abast descrit. IVA (21 %) no inclòs; t'indiquem el total amb IVA. Pagament 50 % en començar i 50 % a l'entrega. Sense permanència.</span>
 </p>
@@ -1446,7 +1596,7 @@
 <aside class="sticky-cta" data-sticky-cta="" aria-label="Diagnosi gratuïta">
 <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"></use></svg>Diagnosi gratuïta</a>
 </aside>
-<script src="../assets/js/i18n.js?v=76" defer=""></script>
-  <script src="../assets/js/main.js?v=76" defer=""></script>
+<script src="../assets/js/i18n.js?v=77" defer=""></script>
+  <script src="../assets/js/main.js?v=77" defer=""></script>
 </body>
 </html>
