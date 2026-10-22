@@ -695,6 +695,47 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
+/* Cajas de los pasos: el interruptor (Paso 1) o las pestañas (pasos 2 y 3) cambian la variante visible.
+   Un enlace #<variante> abre la caja con esa variante a la vista. Cada cambio se anota para medir qué se mira. */
+const variantBoxes = [...document.querySelectorAll("[data-variants]")];
+const showVariant = (box, slug) => {
+  box.querySelectorAll("[data-variant-tab]").forEach((tab) => {
+    const on = tab.dataset.variantTab === slug;
+    tab.setAttribute("aria-selected", String(on));
+    tab.tabIndex = on ? 0 : -1;
+  });
+  box.querySelectorAll("[data-variant-switch]").forEach((sw) => { sw.checked = sw.dataset.variantSwitch === slug; });
+  box.querySelectorAll("[data-variant]").forEach((panel) => { panel.hidden = panel.dataset.variant !== slug; });
+};
+variantBoxes.forEach((box) => {
+  const tabs = [...box.querySelectorAll("[data-variant-tab]")];
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => { showVariant(box, tab.dataset.variantTab); track(`variante-${tab.dataset.variantTab}`); });
+    tab.addEventListener("keydown", (e) => {
+      const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (next === undefined) return;
+      e.preventDefault();
+      const target = tabs[(next + tabs.length) % tabs.length];
+      showVariant(box, target.dataset.variantTab);
+      target.focus();
+    });
+  });
+  box.querySelectorAll("[data-variant-switch]").forEach((sw) => sw.addEventListener("change", () => {
+    const slug = sw.checked ? sw.dataset.variantSwitch : sw.dataset.variantBase;
+    showVariant(box, slug);
+    track(`variante-${slug}`);
+  }));
+});
+const openLinkedVariant = () => {
+  const id = location.hash.slice(1);
+  const panel = id && variantBoxes.length && document.querySelector(`[data-variant="${CSS.escape(id)}"]`);
+  if (!panel) return;
+  showVariant(panel.closest("[data-variants]"), id);
+  panel.closest("[data-variants]").scrollIntoView({ block: "center" });
+};
+openLinkedVariant();
+window.addEventListener("hashchange", openLinkedVariant);
+
 /* Opción de «¿Qué te interesa?» que se marca al llegar desde un botón: data-interes="diagnostico" | "otra" (Pregúntanos)
    (también con ?interes=diagnostico en la dirección o #contacto?interes=diagnostico) */
 const preselectInteres = (key) => {

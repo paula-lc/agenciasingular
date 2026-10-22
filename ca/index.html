@@ -739,9 +739,13 @@
 </div>
 <span class="badge badge--blue">Sense textos de farciment, feina real</span>
 </div>
-<div class="packs packs--duo">
-<article class="pack pack--featured reveal" id="cuidados-esenciales">
+<p class="packs-path">Comença pel Pas 1; la resta, quan ho necessitis.</p>
+<div class="packs packs--steps">
+<article class="pack pack--step pack--featured reveal" data-variants="">
 <span class="pack__ribbon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"></use></svg>Recomanat</span>
+<span class="step__num" aria-hidden="true">1</span>
+<label class="pack__switch"><input type="checkbox" data-variant-switch="cuidados-esenciales-distancia" data-variant-base="cuidados-esenciales"><span class="pack__switch-ui" aria-hidden="true"></span><span class="pack__switch-text"><strong>Fora de Barcelona</strong><small>El mateix, sense sessió de fotos.</small></span></label>
+<div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales" role="tabpanel" aria-labelledby="tab-cuidados-esenciales">
 <span class="pack__kicker">Pas 1 · Per començar</span>
 <h3>Cures essencials</h3>
 <p class="pack__for">Que et trobin a Google, et triïn i reservin sense intermediaris.</p>
@@ -764,11 +768,11 @@
 <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>Informe de resultats als 60 dies</li>
 </ul>
 <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Termini: 1–2 setmanes</p>
-<p class="pack__fine" data-founder="">A canvi, ens deixes una ressenya, ens permets ensenyar l'abans i el després, i comparteixes amb nosaltres les estadístiques de la teva fitxa durant 60 dies.</p>
+<details class="pack__terms" data-founder=""><summary>Veure condicions</summary><p class="pack__fine">A canvi, ens deixes una ressenya, ens permets ensenyar l'abans i el després, i comparteixes amb nosaltres les estadístiques de la teva fitxa durant 60 dies.</p></details>
 <a class="btn btn--yellow" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Vull Cures essencials</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
-</article>
-<article class="pack reveal" id="cuidados-esenciales-distancia">
+</div>
+<div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" role="tabpanel" aria-labelledby="tab-cuidados-esenciales-distancia" hidden="">
 <span class="pack__kicker">Pas 1 · Fora de Barcelona</span>
 <h3>Cures essencials a distància</h3>
 <p class="pack__for">El mateix, sense sessió de fotos.</p>
@@ -790,8 +794,15 @@
 <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>Termini: 1–2 setmanes</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Vull la versió a distància</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+</div>
 </article>
-<article class="pack reveal" id="web-una-pagina">
+<article class="pack pack--step reveal" data-variants="">
+<span class="step__num" aria-hidden="true">2</span>
+<div class="pack__tabs" role="tablist">
+<button type="button" class="pack__tab" role="tab" id="tab-web-una-pagina" aria-controls="web-una-pagina" aria-selected="true" tabindex="0" data-variant-tab="web-una-pagina">Web d'una pàgina<small>690 € + IVA</small></button>
+<button type="button" class="pack__tab" role="tab" id="tab-web-completa" aria-controls="web-completa" aria-selected="false" tabindex="-1" data-variant-tab="web-completa">Web completa<small>des de 1.290 € + IVA</small></button>
+</div>
+<div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina" role="tabpanel" aria-labelledby="tab-web-una-pagina">
 <span class="pack__kicker">Pas 2</span>
 <h3>Web d'una pàgina</h3>
 <p class="pack__for">El teu aparador propi, amb el teu botó de reserves.</p>
@@ -807,8 +818,8 @@
 <p class="pack__fine">A partir del segon any, la renovació del domini va a càrrec teu.</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Vull el meu web</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
-</article>
-<article class="pack reveal" id="web-completa">
+</div>
+<div class="pack__variant" id="web-completa" data-variant="web-completa" role="tabpanel" aria-labelledby="tab-web-completa" hidden="">
 <span class="pack__kicker">Pas 2</span>
 <h3>Web completa</h3>
 <p class="pack__for">Per a negocis amb molts serveis per explicar.</p>
@@ -823,8 +834,15 @@
 </ul>
 <a class="btn btn--ghost" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Demanar pressupost</a>
 <button type="button" class="add-btn add-btn--pack" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+</div>
 </article>
-<article class="pack reveal" id="plan-basico">
+<article class="pack pack--step reveal" data-variants="">
+<span class="step__num" aria-hidden="true">3</span>
+<div class="pack__tabs" role="tablist">
+<button type="button" class="pack__tab" role="tab" id="tab-plan-basico" aria-controls="plan-basico" aria-selected="true" tabindex="0" data-variant-tab="plan-basico">Pla Bàsic<small>59 €/mes + IVA</small></button>
+<button type="button" class="pack__tab" role="tab" id="tab-plan-siempre-visible" aria-controls="plan-siempre-visible" aria-selected="false" tabindex="-1" data-variant-tab="plan-siempre-visible">Sempre visible<small>149 €/mes + IVA</small></button>
+</div>
+<div class="pack__variant" id="plan-basico" data-variant="plan-basico" role="tabpanel" aria-labelledby="tab-plan-basico">
 <span class="pack__kicker">Pas 3</span>
 <h3>Pla Bàsic</h3>
 <p class="pack__for">La teva fitxa, sempre al dia.</p>
@@ -837,8 +855,8 @@
 <p class="pack__fine">Mes a mes, sense permanència.</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Vull el Pla Bàsic</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
-</article>
-<article class="pack reveal" id="plan-siempre-visible">
+</div>
+<div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" role="tabpanel" aria-labelledby="tab-plan-siempre-visible" hidden="">
 <span class="pack__kicker">Pas 3</span>
 <h3>Pla Sempre visible</h3>
 <p class="pack__for">Fitxa i web, cuidades cada mes. Per a clients amb web.</p>
@@ -854,6 +872,7 @@
 <p class="pack__fine">Mes a mes, sense permanència. Requereix web amb nosaltres.</p>
 <a class="btn btn--ghost" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Vull el Pla Sempre visible</a>
 <button type="button" class="add-btn add-btn--pack" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+</div>
 </article>
 </div>
 <p class="packs-note">
