@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/css/styles.css?v=75">
+  <link rel="stylesheet" href="assets/css/styles.css?v=77">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -765,7 +765,7 @@
               <label class="pack__switch"><input type="checkbox" data-variant-switch="cuidados-esenciales-distancia" data-variant-base="cuidados-esenciales"><span class="pack__switch-ui" aria-hidden="true"></span><span class="pack__switch-text"><strong>Fuera de Barcelona</strong><small>Lo mismo, sin sesión de fotos.</small></span></label>
               <div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales" role="tabpanel" aria-labelledby="tab-cuidados-esenciales">
               <span class="pack__kicker">Paso 1 · Para empezar</span>
-              <h3>Cuidados esenciales</h3>
+              <h3><button type="button" class="pack__title-btn" data-pmodal="detalle-cuidados-esenciales">Cuidados esenciales</button></h3>
               <p class="pack__for">Que te encuentren en Google, te elijan y reserven sin intermediarios.</p>
               <div class="pack__prices" data-founder>
                 <p class="pack__was"><s>450 € + IVA</s> <span class="pack__was-tot"><s>544,50 € IVA incl.</s></span></p>
@@ -786,13 +786,13 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Informe de resultados a los 60 días</li>
               </ul>
               <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Plazo: 1–2 semanas</p>
-              <details class="pack__terms" data-founder><summary>Ver condiciones</summary><p class="pack__fine">A cambio, nos dejas una reseña, nos permites enseñar el antes y el después, y compartes con nosotros las estadísticas de tu ficha durante 60 días.</p></details>
+              <button type="button" class="pack__more" data-pmodal="detalle-cuidados-esenciales">Ver detalle <span aria-hidden="true">→</span></button>
               <a class="btn btn--yellow" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Quiero Cuidados esenciales</a>
               <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
               <div class="pack__variant" id="cuidados-esenciales-distancia" data-variant="cuidados-esenciales-distancia" role="tabpanel" aria-labelledby="tab-cuidados-esenciales-distancia" hidden>
               <span class="pack__kicker">Paso 1 · Fuera de Barcelona</span>
-              <h3>Cuidados esenciales a distancia</h3>
+              <h3><button type="button" class="pack__title-btn" data-pmodal="detalle-cuidados-esenciales-distancia">Cuidados esenciales a distancia</button></h3>
               <p class="pack__for">Lo mismo, sin sesión de fotos.</p>
               <div class="pack__prices" data-founder>
                 <p class="pack__was"><s>300 € + IVA</s> <span class="pack__was-tot"><s>363 € IVA incl.</s></span></p>
@@ -810,6 +810,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Edición de tus fotos</li>
               </ul>
               <p class="pack__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Plazo: 1–2 semanas</p>
+              <button type="button" class="pack__more" data-pmodal="detalle-cuidados-esenciales-distancia">Ver detalle <span aria-hidden="true">→</span></button>
               <a class="btn btn--ghost" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Quiero la versión a distancia</a>
               <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
@@ -823,7 +824,7 @@
               </div>
               <div class="pack__variant" id="web-una-pagina" data-variant="web-una-pagina" role="tabpanel" aria-labelledby="tab-web-una-pagina">
               <span class="pack__kicker">Paso 2</span>
-              <h3>Web de una página</h3>
+              <h3><button type="button" class="pack__title-btn" data-pmodal="detalle-web-una-pagina">Web de una página</button></h3>
               <p class="pack__for">Tu escaparate propio, con tu botón de reservas.</p>
               <p class="pack__price">690 €<small>+ IVA</small></p>
               <p class="pack__vat">834,90 € IVA incl.</p>
@@ -835,12 +836,13 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Dominio y alojamiento el primer año</li>
               </ul>
               <p class="pack__fine">A partir del segundo año, la renovación del dominio corre de tu cuenta.</p>
+              <button type="button" class="pack__more" data-pmodal="detalle-web-una-pagina">Ver detalle <span aria-hidden="true">→</span></button>
               <a class="btn btn--ghost" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Quiero mi web</a>
               <button type="button" class="add-btn add-btn--pack" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
               <div class="pack__variant" id="web-completa" data-variant="web-completa" role="tabpanel" aria-labelledby="tab-web-completa" hidden>
               <span class="pack__kicker">Paso 2</span>
-              <h3>Web completa</h3>
+              <h3><button type="button" class="pack__title-btn" data-pmodal="detalle-web-completa">Web completa</button></h3>
               <p class="pack__for">Para negocios con muchos servicios que contar.</p>
               <p class="pack__price"><small>desde</small>1.290 €<small>+ IVA</small></p>
               <p class="pack__vat">1.560,90 € IVA incl.</p>
@@ -851,6 +853,7 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Preguntas frecuentes y datos estructurados para buscadores e IA</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>30 min de La Trastienda</li>
               </ul>
+              <button type="button" class="pack__more" data-pmodal="detalle-web-completa">Ver detalle <span aria-hidden="true">→</span></button>
               <a class="btn btn--ghost" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Pedir presupuesto</a>
               <button type="button" class="add-btn add-btn--pack" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
@@ -864,7 +867,7 @@
               </div>
               <div class="pack__variant" id="plan-basico" data-variant="plan-basico" role="tabpanel" aria-labelledby="tab-plan-basico">
               <span class="pack__kicker">Paso 3</span>
-              <h3>Plan Básico</h3>
+              <h3><button type="button" class="pack__title-btn" data-pmodal="detalle-plan-basico">Plan Básico</button></h3>
               <p class="pack__for">Tu ficha, siempre al día.</p>
               <p class="pack__price">59 €<small>/mes + IVA</small></p>
               <p class="pack__vat">71,39 €/mes IVA incl.</p>
@@ -873,12 +876,13 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Respuesta a todas tus reseñas</li>
               </ul>
               <p class="pack__fine">Mes a mes, sin permanencia.</p>
+              <button type="button" class="pack__more" data-pmodal="detalle-plan-basico">Ver detalle <span aria-hidden="true">→</span></button>
               <a class="btn btn--ghost" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Quiero el Plan Básico</a>
               <button type="button" class="add-btn add-btn--pack" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
               <div class="pack__variant" id="plan-siempre-visible" data-variant="plan-siempre-visible" role="tabpanel" aria-labelledby="tab-plan-siempre-visible" hidden>
               <span class="pack__kicker">Paso 3</span>
-              <h3>Plan Siempre visible</h3>
+              <h3><button type="button" class="pack__title-btn" data-pmodal="detalle-plan-siempre-visible">Plan Siempre visible</button></h3>
               <p class="pack__for">Ficha y web, cuidadas cada mes. Para clientes con web.</p>
               <p class="pack__price">149 €<small>/mes + IVA</small></p>
               <p class="pack__vat">180,29 €/mes IVA incl.</p>
@@ -890,11 +894,163 @@
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Informe mensual</li>
               </ul>
               <p class="pack__fine">Mes a mes, sin permanencia. Requiere web con nosotros.</p>
+              <button type="button" class="pack__more" data-pmodal="detalle-plan-siempre-visible">Ver detalle <span aria-hidden="true">→</span></button>
               <a class="btn btn--ghost" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Quiero el Plan Siempre visible</a>
               <button type="button" class="add-btn add-btn--pack" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
           </div>
+
+          <dialog class="pmodal" id="detalle-cuidados-esenciales" aria-labelledby="detalle-cuidados-esenciales-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Paso 1 · Para empezar</span>
+                <h3 id="detalle-cuidados-esenciales-title">Cuidados esenciales</h3>
+                <p class="pmodal__meta"><span data-founder><span class="pmodal__was"><s>450 € + IVA</s></span><span class="pmodal__price">350 €<small>+ IVA</small></span><span class="pmodal__vat">423,50 € IVA incl.</span><span class="pmodal__badge">Precio fundador · quedan <span data-founder-left>5</span> de 5 plazas</span></span><span data-web-price hidden><span class="pmodal__price">450 €<small>+ IVA</small></span><span class="pmodal__vat">544,50 € IVA incl.</span></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>1–2 semanas</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tienes clientes que te quieren, pero en Google apareces a medias, sin reservas directas o con pocas reseñas. Quieres que te encuentren, te elijan y reserven sin intermediarios.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Tu ficha de Google</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ficha de Google completa y cuidada: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta en Apple Maps y Bing</span></li></ul></div><div class="pmodal__group"><h4>Reservas sin intermediarios</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Botón «Reservar» conectado a tu Booksy, Fresha o Treatwell</span></li></ul></div><div class="pmodal__group"><h4>Fotos</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Sesión de fotos de 1 h en tu local: 10–12 fotos editadas</span></li></ul></div><div class="pmodal__group"><h4>Reseñas</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel con QR para conseguir reseñas y plantillas para responderlas</span></li></ul></div><div class="pmodal__group"><h4>Resultados</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe de resultados a los 60 días</span></li></ul></div></div><p class="pmodal__note">La sesión de fotos es presencial en Barcelona y área metropolitana. Fuera de esa zona, mira Cuidados esenciales a distancia.</p></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">1–2 semanas</span><span>Dejamos tu ficha lista, conectamos el botón de reserva, hacemos la sesión de fotos y te entregamos el cartel con QR y las plantillas.</span></li><li><span class="pmodal__when">A los 60 días</span><span>Te enviamos el informe de resultados.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu Booksy, Fresha o Treatwell</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios y horarios, y una hora en tu local para las fotos</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu ficha de Google completa y cuidada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>10–12 fotos profesionales editadas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel con QR y plantillas para las reseñas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe de resultados a los 60 días</span></li></ul></section>
+                </div>
+                
+                <p class="pmodal__not"><strong>No incluye:</strong> La web (Paso 2) ni la gestión mensual de la ficha (Paso 3). No prometemos posiciones en Google.</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales" data-track="cuidados-esenciales-lo-quiero">Quiero Cuidados esenciales</a>
+                <button type="button" class="add-btn" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
+          <dialog class="pmodal" id="detalle-cuidados-esenciales-distancia" aria-labelledby="detalle-cuidados-esenciales-distancia-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Paso 1 · Fuera de Barcelona</span>
+                <h3 id="detalle-cuidados-esenciales-distancia-title">Cuidados esenciales a distancia</h3>
+                <p class="pmodal__meta"><span data-founder><span class="pmodal__was"><s>300 € + IVA</s></span><span class="pmodal__price">250 €<small>+ IVA</small></span><span class="pmodal__vat">302,50 € IVA incl.</span><span class="pmodal__badge">Precio fundador · quedan <span data-founder-left>5</span> de 5 plazas</span></span><span data-web-price hidden><span class="pmodal__price">300 €<small>+ IVA</small></span><span class="pmodal__vat">363 € IVA incl.</span></span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>1–2 semanas</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tu negocio está fuera de Barcelona, o prefieres trabajar a distancia, y quieres lo mismo que Cuidados esenciales sin la sesión de fotos en tu local.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Todo lo de Cuidados esenciales, excepto la sesión de fotos</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Ficha de Google completa y cuidada: categorías, servicios, horarios y descripción</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Botón «Reservar» conectado a tu Booksy, Fresha o Treatwell</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel con QR para conseguir reseñas y plantillas para responderlas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alta en Apple Maps y Bing</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe de resultados a los 60 días</span></li></ul></div><div class="pmodal__group"><h4>Tus fotos, bien aprovechadas</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Guía para hacer buenas fotos con el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Edición de tus fotos</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">1–2 semanas</span><span>Te enviamos la guía de fotos, editamos las que nos mandes y dejamos tu ficha lista con el botón de reserva, el cartel con QR y las plantillas.</span></li><li><span class="pmodal__when">A los 60 días</span><span>Te enviamos el informe de resultados.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu Booksy, Fresha o Treatwell</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos, hechas con el móvil siguiendo la guía</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu ficha de Google completa y cuidada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos editadas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cartel con QR y plantillas para las reseñas</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe de resultados a los 60 días</span></li></ul></section>
+                </div>
+                
+                <p class="pmodal__not"><strong>No incluye:</strong> La sesión de fotos profesional en tu local, la web (Paso 2) ni la gestión mensual de la ficha (Paso 3).</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="cuidados-esenciales-distancia-lo-quiero">Quiero la versión a distancia</a>
+                <button type="button" class="add-btn" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
+          <dialog class="pmodal" id="detalle-web-una-pagina" aria-labelledby="detalle-web-una-pagina-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Paso 2</span>
+                <h3 id="detalle-web-una-pagina-title">Web de una página</h3>
+                <p class="pmodal__meta"><span class="pmodal__price">690 €<small>+ IVA</small></span><span class="pmodal__vat">834,90 € IVA incl.</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Quieres tu propio escaparate en internet: claro, rápido y con tu botón de reservas, sin complicarte.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Tu página</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una página clara, rápida y pensada para el móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de reserva de Booksy o Fresha integrado</span></li></ul></div><div class="pmodal__group"><h4>Cambios</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>2 rondas de cambios</span></li></ul></div><div class="pmodal__group"><h4>Dominio y alojamiento</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio y alojamiento el primer año</span></li></ul></div></div><p class="pmodal__note">Si ya eres cliente de Cuidados esenciales: 250 € + IVA (302,50 € IVA incl.).</p></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Arranque</span><span>Hablamos de tu negocio y de lo que debe contar tu página.</span></li><li><span class="pmodal__when">Diseño</span><span>Te enseñamos una primera versión.</span></li><li><span class="pmodal__when">Cambios</span><span>Hacemos hasta 2 rondas de cambios contigo.</span></li><li><span class="pmodal__when">Publicación</span><span>Publicamos tu página.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu logo y colores</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus servicios, precios y horarios</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu sistema de reservas (Booksy o Fresha)</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu página publicada y adaptada al móvil</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Botón de reserva integrado</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Dominio y alojamiento el primer año</span></li></ul></section>
+                </div>
+                
+                <p class="pmodal__not"><strong>No incluye:</strong> A partir del segundo año, la renovación del dominio corre de tu cuenta. Si necesitas varias páginas o SEO local por servicio, mira la Web completa.</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--crimson" href="contratar.html?servicio=web-una-pagina" data-track="web-una-pagina-lo-quiero">Quiero mi web</a>
+                <button type="button" class="add-btn" data-add="web-una-pagina" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
+          <dialog class="pmodal" id="detalle-web-completa" aria-labelledby="detalle-web-completa-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Paso 2</span>
+                <h3 id="detalle-web-completa-title">Web completa</h3>
+                <p class="pmodal__meta"><span class="pmodal__price"><small>desde</small>1.290 €<small>+ IVA</small></span><span class="pmodal__vat">1.560,90 € IVA incl.</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Tu negocio tiene muchos servicios que contar y quieres que cada uno tenga su sitio en la web y se pueda encontrar.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Tu web</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Hasta 6 páginas</span></li></ul></div><div class="pmodal__group"><h4>SEO local</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>SEO local con una página por servicio clave</span></li></ul></div><div class="pmodal__group"><h4>Buscadores e IA</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Preguntas frecuentes y datos estructurados para buscadores e IA</span></li></ul></div><div class="pmodal__group"><h4>Incluido</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>30 min de La Trastienda</span></li></ul></div></div><p class="pmodal__note">Presupuesto a medida a partir de 1.290 € + IVA.</p></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Presupuesto</span><span>Preparamos un presupuesto a medida según tus servicios.</span></li><li><span class="pmodal__when">Diseño y textos</span><span>Diseñamos tu web y organizamos tus servicios.</span></li><li><span class="pmodal__when">Publicación</span><span>Te enseñamos la web, ajustamos y la publicamos.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu lista de servicios y precios</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu logo y colores</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tus fotos, si las tienes</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu web de hasta 6 páginas publicada</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Una página por servicio clave</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>30 min de La Trastienda</span></li></ul></section>
+                </div>
+                
+                <p class="pmodal__not"><strong>No incluye:</strong> Una tienda online con muchos productos se presupuesta aparte.</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--crimson" href="contratar.html?servicio=web-completa" data-track="web-completa-lo-quiero">Pedir presupuesto</a>
+                <button type="button" class="add-btn" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
+          <dialog class="pmodal" id="detalle-plan-basico" aria-labelledby="detalle-plan-basico-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Paso 3</span>
+                <h3 id="detalle-plan-basico-title">Plan Básico</h3>
+                <p class="pmodal__meta"><span class="pmodal__price">59 €<small>/mes + IVA</small></span><span class="pmodal__vat">71,39 €/mes IVA incl.</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Ya tienes tu ficha de Google y quieres que no se quede parada.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Cada mes</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>1 publicación al mes en tu ficha de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Respuesta a todas tus reseñas</span></li></ul></div><div class="pmodal__group"><h4>Sin ataduras</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mes a mes, sin permanencia</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Cada mes</span><span>Publicamos en tu ficha de Google y respondemos a tus reseñas.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Un aviso cuando tengas novedades u ofertas</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu ficha de Google activa cada mes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Todas tus reseñas respondidas</span></li></ul></section>
+                </div>
+                
+                <p class="pmodal__not"><strong>No incluye:</strong> Mantenimiento web, contenido SEO, seguimiento de tu visibilidad en IA ni informe mensual (Plan Siempre visible).</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--crimson" href="contratar.html?servicio=plan-basico" data-track="plan-basico-lo-quiero">Quiero el Plan Básico</a>
+                <button type="button" class="add-btn" data-add="plan-basico" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
+          <dialog class="pmodal" id="detalle-plan-siempre-visible" aria-labelledby="detalle-plan-siempre-visible-title">
+            <div class="pmodal__inner">
+              <header class="pmodal__head">
+                <button type="button" class="pmodal__close" data-pmodal-close aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+                <span class="pmodal__kicker">Paso 3</span>
+                <h3 id="detalle-plan-siempre-visible-title">Plan Siempre visible</h3>
+                <p class="pmodal__meta"><span class="pmodal__price">149 €<small>/mes + IVA</small></span><span class="pmodal__vat">180,29 €/mes IVA incl.</span><span class="pmodal__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>Mes a mes, sin permanencia</span></p>
+              </header>
+              <div class="pmodal__body" tabindex="0" autofocus>
+                <section><h4 class="pmodal__h">Es para ti si…</h4><p>Ya tienes web con nosotros y quieres que alguien cuide tu ficha y tu web cada mes.</p></section>
+                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups"><div class="pmodal__group"><h4>Todo lo del Plan Básico</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>1 publicación al mes en tu ficha de Google</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Respuesta a todas tus reseñas</span></li></ul></div><div class="pmodal__group"><h4>Tu web</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mantenimiento web (hasta 1 h de cambios, copias, dominio y alojamiento)</span></li></ul></div><div class="pmodal__group"><h4>Visibilidad</h4><ul><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Contenido SEO</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Seguimiento de tu visibilidad en IA</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe mensual</span></li></ul></div></div></section>
+                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps"><li><span class="pmodal__when">Cada mes</span><span>Cuidamos tu ficha y tu web, y te enviamos el informe mensual.</span></li></ol></section>
+                <div class="pmodal__cols">
+                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Acceso a tu ficha de Google y a tu web (si la hicimos nosotros, ya lo tenemos)</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Un aviso cuando haya novedades</span></li></ul></section>
+                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Tu ficha y tu web cuidadas cada mes</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Informe mensual</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Mes a mes, sin permanencia</span></li></ul></section>
+                </div>
+                
+                <p class="pmodal__not"><strong>No incluye:</strong> Este plan requiere una web hecha con nosotros.</p>
+              </div>
+              <footer class="pmodal__foot">
+                <a class="btn btn--crimson" href="contratar.html?servicio=plan-siempre-visible" data-track="plan-siempre-visible-lo-quiero">Quiero el Plan Siempre visible</a>
+                <button type="button" class="add-btn" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir</span></button>
+              </footer>
+            </div>
+          </dialog>
 
           <p class="packs-note">
             <span><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Precios para negocios, cerrados para el alcance descrito. IVA (21 %) no incluido; te indicamos el total con IVA. Pago 50 % al empezar y 50 % a la entrega. Sin permanencia.</span>
@@ -1493,6 +1649,6 @@
     <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
   </aside>
 
-  <script src="assets/js/main.js?v=75" defer></script>
+  <script src="assets/js/main.js?v=77" defer></script>
 </body>
 </html>
