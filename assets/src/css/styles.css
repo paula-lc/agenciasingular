@@ -1278,8 +1278,6 @@ html:has(.pmodal[open]) { overflow: hidden; }
    ========================================================================== */
 .packs--steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px; padding-top: 14px; }
 .pack--step { padding: 24px 20px 20px; gap: 14px; }
-.pack--step:hover { transform: none; box-shadow: none; }
-.pack--step.pack--featured:hover { box-shadow: 8px 8px 0 var(--yellow); }
 .step__num { position: absolute; top: -20px; right: 18px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--crimson); color: var(--white); border: 3px solid var(--cream); font-family: var(--font-display); font-size: 20px; }
 /* Flecha que une cada paso con el siguiente */
 .pack--step:not(:last-child)::after { content: "→"; content: "→" / ""; position: absolute; z-index: 2; top: 50%; right: -37px; width: 30px; height: 30px; margin-top: -15px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: var(--yellow); font-weight: 800; font-size: 16px; }
@@ -1353,3 +1351,4 @@ html:has(.pmodal[open]) { overflow: hidden; }
 }
 @media (min-width: 641px) and (max-width: 899px) { .pmodal__body { gap: 24px; } }
 @media (max-width: 899px) { .pmodal__body { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: no-preference) { .pack__variant:not([hidden]) { animation: panel-in .35s cubic-bezier(.3, 1.2, .5, 1); } }
