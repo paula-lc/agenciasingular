@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/css/styles.css?v=79">
+  <link rel="stylesheet" href="assets/css/styles.css?v=81">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -759,9 +759,10 @@
           <p class="packs-path">Empieza por el Paso 1; el resto, cuando lo necesites.</p>
 
           <div class="packs packs--steps">
-            <article class="pack pack--step pack--featured reveal" data-variants>
+            <div class="path-step reveal">
+              <span class="path-step__num" aria-hidden="true">1</span>
+            <article class="pack pack--step pack--featured" data-variants>
               <span class="pack__ribbon"><svg class="icon icon--star" aria-hidden="true"><use href="#i-star"/></svg>Recomendado</span>
-              <span class="step__num" aria-hidden="true">1</span>
               <label class="pack__switch"><input type="checkbox" data-variant-switch="cuidados-esenciales-distancia" data-variant-base="cuidados-esenciales"><span class="pack__switch-ui" aria-hidden="true"></span><span class="pack__switch-text"><strong>Fuera de Barcelona</strong><small>Lo mismo, sin sesión de fotos.</small></span></label>
               <div class="pack__variant" id="cuidados-esenciales" data-variant="cuidados-esenciales" role="tabpanel" aria-labelledby="tab-cuidados-esenciales">
               <span class="pack__kicker">Paso 1 · Para empezar</span>
@@ -815,9 +816,12 @@
               <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
+            <span class="path-step__arrow" aria-hidden="true">→</span>
+            </div>
 
-            <article class="pack pack--step reveal" data-variants>
-              <span class="step__num" aria-hidden="true">2</span>
+            <div class="path-step reveal">
+              <span class="path-step__num" aria-hidden="true">2</span>
+            <article class="pack pack--step" data-variants>
               <div class="pack__tabs" role="tablist">
                 <button type="button" class="pack__tab" role="tab" id="tab-web-una-pagina" aria-controls="web-una-pagina" aria-selected="true" tabindex="0" data-variant-tab="web-una-pagina">Web de una página<small>690 € + IVA</small></button>
                 <button type="button" class="pack__tab" role="tab" id="tab-web-completa" aria-controls="web-completa" aria-selected="false" tabindex="-1" data-variant-tab="web-completa">Web completa<small>desde 1.290 € + IVA</small></button>
@@ -858,9 +862,12 @@
               <button type="button" class="add-btn add-btn--pack" data-add="web-completa" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
+            <span class="path-step__arrow" aria-hidden="true">→</span>
+            </div>
 
-            <article class="pack pack--step reveal" data-variants>
-              <span class="step__num" aria-hidden="true">3</span>
+            <div class="path-step reveal">
+              <span class="path-step__num" aria-hidden="true">3</span>
+            <article class="pack pack--step" data-variants>
               <div class="pack__tabs" role="tablist">
                 <button type="button" class="pack__tab" role="tab" id="tab-plan-basico" aria-controls="plan-basico" aria-selected="true" tabindex="0" data-variant-tab="plan-basico">Plan Básico<small>59 €/mes + IVA</small></button>
                 <button type="button" class="pack__tab" role="tab" id="tab-plan-siempre-visible" aria-controls="plan-siempre-visible" aria-selected="false" tabindex="-1" data-variant-tab="plan-siempre-visible">Siempre visible<small>149 €/mes + IVA</small></button>
@@ -899,6 +906,7 @@
               <button type="button" class="add-btn add-btn--pack" data-add="plan-siempre-visible" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
+            </div>
           </div>
 
           <dialog class="pmodal" id="detalle-cuidados-esenciales" aria-labelledby="detalle-cuidados-esenciales-title">
@@ -1681,6 +1689,6 @@
     <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
   </aside>
 
-  <script src="assets/js/main.js?v=79" defer></script>
+  <script src="assets/js/main.js?v=81" defer></script>
 </body>
 </html>

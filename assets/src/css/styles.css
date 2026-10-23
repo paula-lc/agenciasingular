@@ -1278,9 +1278,18 @@ html:has(.pmodal[open]) { overflow: hidden; }
    ========================================================================== */
 .packs--steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px; padding-top: 14px; }
 .pack--step { padding: 24px 20px 20px; gap: 14px; }
-.step__num { position: absolute; top: -20px; right: 18px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--crimson); color: var(--white); border: 3px solid var(--cream); font-family: var(--font-display); font-size: 20px; }
-/* Flecha que une cada paso con el siguiente */
-.pack--step:not(:last-child)::after { content: "→"; content: "→" / ""; position: absolute; z-index: 2; top: 50%; right: -37px; width: 30px; height: 30px; margin-top: -15px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: var(--yellow); font-weight: 800; font-size: 16px; }
+/* Número y flecha de cada paso: capa propia, no se mueven con la inclinación de la caja */
+.path-step { position: relative; display: flex; }
+.path-step > .pack { flex: 1; min-width: 0; }
+.path-step__num { position: absolute; z-index: 3; top: -20px; right: 18px; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--crimson); color: var(--white); border: 3px solid var(--cream); font-family: var(--font-display); font-size: 20px; transition: transform .5s cubic-bezier(.34, 1.9, .5, 1); }
+.path-step:hover .path-step__num { transform: scale(1.18) rotate(-8deg); }
+.path-step__arrow { position: absolute; z-index: 3; top: 50%; right: -37px; width: 30px; height: 30px; margin-top: -15px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: var(--yellow); font-weight: 800; font-size: 16px; }
+@media (prefers-reduced-motion: no-preference) {
+  .path-step__arrow { animation: path-arrow 1.8s ease-in-out infinite; }
+  .path-step:nth-child(2) .path-step__arrow { animation-delay: .4s; }
+}
+@keyframes path-arrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@keyframes path-arrow-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 .pack__tabs { display: flex; gap: 6px; padding: 4px; border: 2px solid currentColor; border-radius: 999px; }
 .pack__tab { flex: 1 1 0; padding: 7px 8px; border: 0; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 800; line-height: 1.25; text-align: center; cursor: pointer; transition: background-color .2s, color .2s; }
 .pack__tab small { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 600; opacity: .9; }
@@ -1297,7 +1306,8 @@ html:has(.pmodal[open]) { overflow: hidden; }
 .pack--step .pack__price { font-size: 30px; }
 @media (max-width: 1040px) {
   .packs--steps { grid-template-columns: minmax(0, 1fr); gap: 52px; }
-  .pack--step:not(:last-child)::after { content: "↓"; content: "↓" / ""; top: auto; right: auto; left: 50%; bottom: -41px; margin: 0 0 0 -15px; }
+  .path-step__arrow { top: auto; right: auto; left: 50%; bottom: -41px; margin: 0 0 0 -15px; }
+  @media (prefers-reduced-motion: no-preference) { .path-step__arrow { animation-name: path-arrow-down; } }
 }
 .pack--step ul { align-content: start; }
 
