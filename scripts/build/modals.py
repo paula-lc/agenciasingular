@@ -50,15 +50,19 @@ def modal(p):
                 <p class="pmodal__meta">{price}{time}</p>
               </header>
               <div class="pmodal__body" tabindex="0" autofocus>
-                <section><h4 class="pmodal__h">Es para ti si…</h4><p>{esc(p["para"])}</p></section>
-                <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups">{inc}</div>{nota}</section>
-                <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps">{pasos}</ol></section>
-                <div class="pmodal__cols">
-                  <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list">{nec}</ul></section>
-                  <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list">{llev}</ul></section>
+                <div class="pmodal__col">
+                  <section><h4 class="pmodal__h">Es para ti si…</h4><p>{esc(p["para"])}</p></section>
+                  <section><h4 class="pmodal__h">Qué incluye, en detalle</h4><div class="pmodal__groups">{inc}</div>{nota}</section>
                 </div>
-                {expect}
-                <p class="pmodal__not"><strong>No incluye:</strong> {esc(p["noincluye"])}</p>
+                <div class="pmodal__col">
+                  <section><h4 class="pmodal__h">Cómo lo hacemos</h4><ol class="pmodal__steps">{pasos}</ol></section>
+                  <div class="pmodal__cols">
+                    <section><h4 class="pmodal__h">Qué necesitamos de ti</h4><ul class="pmodal__list">{nec}</ul></section>
+                    <section><h4 class="pmodal__h">Qué te llevas</h4><ul class="pmodal__list">{llev}</ul></section>
+                  </div>
+                  {expect}
+                  <p class="pmodal__not"><strong>No incluye:</strong> {esc(p["noincluye"])}</p>
+                </div>
               </div>
               <footer class="pmodal__foot">
                 {foot}
