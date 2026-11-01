@@ -1,1 +1,3 @@
 fuma.svg · ilustración de dominio público (aportada por el cliente de la propuesta). Recoloreada con la paleta de tuPelu y aligerada (decimales y metadatos eliminados). Conserva el humo del cigarrillo, que se anima desde CSS.
+logo.svg · logo-con-burbuja.svg · burbuja.svg · muneca.svg · ilustraciones y logo aportados por el cliente de la propuesta.
+rubia-lateral.webp · rubia-espalda.webp · rulos.webp · fotos aportadas por el cliente.
