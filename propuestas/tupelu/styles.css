@@ -420,3 +420,8 @@ h1 em:hover{rotate:2deg;scale:1.05}
   .svc::before{display:none}
   .polaroid.sticker:hover,.panel:hover{scale:none}
 }
+
+/* Zonas táctiles ≥ 44 px */
+.wordmark{min-height:44px}
+.foot a{display:inline-block;padding:12px 8px}
+.foot .sig a{padding:14px 6px}
