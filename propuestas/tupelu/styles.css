@@ -312,3 +312,78 @@ h1 em{position:relative}
 .pinwrap:hover .eye-r,.pinwrap:active .eye-r,.avatar:hover .eye-r,.card:hover .eye-r{animation:wink .9s ease-in-out}
 @keyframes wink{0%,100%{transform:scaleY(1)}20%,75%{transform:scaleY(.08)}}
 @media (prefers-reduced-motion:reduce){.pin,.eye-l,.eye-r{animation:none!important}}
+
+/* ===== v4: pin-ups de fondo, muñecas sentadas y reacciones ===== */
+:root{--seatw:clamp(180px,52vw,240px)}
+.sec>.bgpin-w{position:absolute;z-index:0;pointer-events:none;width:clamp(280px,84vw,440px);bottom:-40px;display:block}
+.bg-r{right:-70px}.bg-l{left:-80px}
+.bgpin-w svg{display:block;width:100%;height:auto;overflow:visible;animation:bgfloat 9s ease-in-out infinite}
+.bgpin-w svg{--k:inherit}
+@keyframes bgfloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
+.bgpin path,.bgpin-w path{vector-effect:none}
+.bgpin-w svg *{stroke:var(--k)}
+.pre-seat{padding-bottom:calc(var(--seatw)*1.5 + 16px)}
+.bandwrap{position:relative;z-index:5;height:64px}
+.bandwrap .band{position:absolute;inset:0}
+.seat{position:absolute;z-index:6;width:var(--seatw);right:6%;bottom:calc(64px - var(--seatw)*.304)}
+.seat-b{right:auto;left:6%}
+.seat-fig{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(4px 4px 0 rgba(22,22,22,.35))}
+.leg{transform-box:fill-box;transform-origin:50% 0}
+.leg-l{animation:swingl 2.4s ease-in-out infinite alternate}
+.leg-r{animation:swingr 2.4s ease-in-out infinite alternate}
+@keyframes swingl{from{transform:rotate(-14deg)}to{transform:rotate(16deg)}}
+@keyframes swingr{from{transform:rotate(16deg)}to{transform:rotate(-14deg)}}
+.seat:hover .leg,.seat:active .leg{animation-duration:.7s}
+.seat-bubble{position:absolute;left:-46%;top:6%;font:400 28px/1 var(--f-title);background:var(--white);color:var(--ink);border:var(--b) solid var(--ink);border-radius:18px 18px 4px 18px;padding:6px 14px;rotate:-5deg;box-shadow:3px 3px 0 var(--ink);transition:rotate .25s,scale .25s}
+.seat:hover .seat-bubble{rotate:3deg;scale:1.12}
+/* avatares con el busto nuevo */
+.av-svg{display:block;width:260px;margin:-78px 0 0 -76px;transition:scale .3s cubic-bezier(.3,1.6,.5,1)}
+.av-pin{display:block;width:100%;height:auto;overflow:visible}
+.avatar:hover .av-svg,.card:hover .av-svg{scale:1.08}
+
+/* reacciones al pasar el ratón / tocar */
+.card,.svc,.bubble,.proof,.tag,.chips span,.hours div,.tel,.map,.panel,.badge,.sign .l,.menu a,.foot a,.dock-tel,h1 em,.title,.wm-heart,.punto,.sub,.also{transition:translate .25s cubic-bezier(.3,1.6,.5,1),rotate .25s cubic-bezier(.3,1.6,.5,1),scale .25s cubic-bezier(.3,1.6,.5,1),box-shadow .2s,background-color .2s,color .2s}
+.card:hover,.card:active{translate:0 -8px;rotate:-1deg;box-shadow:9px 9px 0 var(--ink)}
+.card-small:hover{rotate:1.5deg}
+.svc:hover,.svc:active{translate:8px 0;box-shadow:9px 9px 0 var(--ink)}
+.svc .pow{transition:rotate .3s cubic-bezier(.3,1.6,.5,1),scale .3s cubic-bezier(.3,1.6,.5,1)}
+.svc:hover .pow,.svc:active .pow{rotate:14deg;scale:1.14}
+.chips span:hover,.chips span:active{rotate:-5deg;scale:1.12;background:var(--blue);color:var(--white)}
+.bubble:hover,.bubble:active{rotate:-1.5deg;scale:1.04}
+.proof:hover,.proof:active{rotate:-1deg;scale:1.03}
+.tag:hover,.tag:active{rotate:-2deg;scale:1.06}
+.sub:hover{translate:4px 0}
+.also:hover{translate:6px 0}
+.sign .l{cursor:default}
+.sign .l:hover,.sign .l:active{translate:0 -14px;rotate:-6deg;scale:1.1}
+.punto:hover{rotate:8deg;scale:1.1}
+h1 em:hover{rotate:2deg;scale:1.05}
+.title:hover{translate:6px 0;rotate:-1deg}
+.hours div:hover{background:var(--yellow);color:var(--ink);translate:6px 0}
+.tel:hover,.tel:active{rotate:-3deg;scale:1.08}
+.map:hover{translate:-3px -3px;box-shadow:9px 9px 0 var(--ink)}
+.panel:hover,.panel:active{scale:1.03}
+.badge:hover,.badge:active{scale:1.14}
+.wordmark:hover .wm-heart{scale:1.5;rotate:14deg}
+.wm-heart{transition:scale .25s cubic-bezier(.3,1.6,.5,1),rotate .25s}
+.menu a{background:linear-gradient(var(--fucsia),var(--fucsia)) 10px 82%/0 4px no-repeat;transition:background-size .25s,color .2s,translate .2s}
+.menu a:hover{background-size:calc(100% - 20px) 4px;translate:4px 0}
+.foot a:hover{color:var(--yellow);text-decoration-thickness:3px}
+.dock-tel:hover,.dock-tel:active{rotate:-10deg;scale:1.08}
+.btn:hover{background:#174BA0}
+.btn-yellow:hover{background:#FFE36B}
+/* clic en botones: estallido */
+.burst{position:fixed;z-index:99;width:96px;height:96px;margin:-48px 0 0 -48px;background:var(--ink);pointer-events:none;
+  clip-path:polygon(50% 0,61% 33%,96% 28%,70% 52%,86% 85%,50% 68%,14% 85%,30% 52%,4% 28%,39% 33%);animation:burst .5s ease-out forwards}
+.burst::before{content:"";position:absolute;inset:6px;background:var(--yellow);clip-path:inherit}
+@keyframes burst{from{transform:scale(.2) rotate(-20deg);opacity:1}70%{opacity:1}to{transform:scale(1.5) rotate(15deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .bgpin-w svg,.leg{animation:none!important}
+  .burst{display:none}
+  .card:hover,.svc:hover,.chips span:hover,.bubble:hover,.proof:hover,.tag:hover,.sign .l:hover,.panel:hover,.badge:hover,.tel:hover{translate:none;rotate:none;scale:none}
+}
+@media (min-width:860px){
+  :root{--seatw:240px}
+  .sec>.bgpin-w{width:520px;bottom:-60px}
+  .bg-r{right:-30px}.bg-l{left:-40px}
+}
