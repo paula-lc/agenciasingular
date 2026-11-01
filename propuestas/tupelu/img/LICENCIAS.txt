@@ -1,2 +1,1 @@
-chica-taxi.svg  · ilustración de dominio público (aportada por el cliente de la propuesta). Recoloreada con la paleta de tuPelu y sin el humo del cigarrillo.
-pin-up.svg      · ilustración con metadatos de dominio público (CC PD, aportada por el cliente de la propuesta). Aligerada (decimales y metadatos eliminados).
+fuma.svg · ilustración de dominio público (aportada por el cliente de la propuesta). Recoloreada con la paleta de tuPelu y aligerada (decimales y metadatos eliminados). Conserva el humo del cigarrillo, que se anima desde CSS.
