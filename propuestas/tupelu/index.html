@@ -40,10 +40,7 @@
 <a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="top">
-  <a class="wordmark" href="#inicio" aria-label="tuPelu, inicio">
-    <!-- TODO: sustituir por el logo real (rótulo amarillo «TUPELU …y punto.» de su Instagram) cuando esté vectorizado -->
-    <span class="wm-main">TUPELU</span><span class="wm-y" aria-hidden="true">…y punto.</span>
-  </a>
+  <a class="wordmark" href="#inicio" aria-label="tuPelu, inicio"><img class="wm-logo" src="img/logo.svg" alt="tuPelu" width="349" height="218"></a>
   <nav class="menu" id="menu" aria-label="Secciones">
     <a href="#equipo">Equipo</a>
     <a href="#servicios">Servicios</a>
@@ -60,33 +57,37 @@
 <!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-text">
-    <div class="sign" aria-hidden="true">
-      <span class="l" style="--i:0">T</span><span class="l" style="--i:1">U</span><span class="l" style="--i:2">P</span><span class="l" style="--i:3">E</span><span class="l" style="--i:4">L</span><span class="l" style="--i:5">U</span>
-      <span class="punto">…y punto.</span>
-    </div>
+    <img class="logo-hero" src="img/logo.svg" alt="tuPelu" width="349" height="218" fetchpriority="high">
     <div class="hero-row">
-      <div class="smoker" role="img" aria-label="Ilustración de una pin-up con gorra que fuma y guiña un ojo">
-        <img class="sm-body" src="img/fuma.svg" alt="" width="440" height="1607" fetchpriority="high" decoding="async">
-        <img class="sm-smoke" src="img/fuma.svg" alt="" width="440" height="1607" decoding="async">
-        <svg class="sm-fx" viewBox="0 0 440.4 1607" aria-hidden="true"><circle class="ember" cx="57" cy="307" r="5"/><g class="eye-blink"><ellipse cx="200" cy="229" rx="26" ry="10" fill="#E4BC90"/><path d="M176 226Q200 240 226 224M181 229L174 236M193 235L190 244M207 235L209 244M220 229L228 234" fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round"/></g></svg>
+      <div class="doll" aria-hidden="true">
+        <img class="doll-img" src="img/muneca.svg" alt="" width="480" height="637" fetchpriority="high" decoding="async">
+        <img class="doll-bubble" src="img/burbuja.svg" alt="" width="107" height="94" decoding="async">
       </div>
       <div class="hero-copy">
-    <p class="tag">Peluquería y estética en Vallcarca · Gràcia</p>
-      <h1>BUENAS MANOS QUE <em>siempre aciertan.<svg class="scribble" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 9Q40 1 80 8T160 8T240 7T298 9"/></svg></em></h1>
-      <p class="sub">Mónica y Nerea: corte, color, mechas y balayage</p>
+        <p class="tag">Peluquería y estética en Vallcarca · Gràcia</p>
+        <h1>BUENAS MANOS QUE <em>siempre aciertan.<svg class="scribble" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 9Q40 1 80 8T160 8T240 7T298 9"/></svg></em></h1>
+        <p class="sub">Mónica y Nerea: corte, color, mechas y balayage</p>
+      </div>
+    </div>
+    <div class="hero-cta">
       <a class="btn btn-lg" href="https://widget.treatwell.es/establecimiento/100032679/servicios/" target="_blank" rel="noopener">Reservar cita</a>
       <p class="proof"><strong>4,9★</strong> · 549 opiniones en Treatwell · <strong>4,6★</strong> en Google (105 reseñas)</p>
-      </div>
     </div>
   </div>
   <div class="hero-art">
-    <figure class="panel reveal ph ph-fucsia" style="--rot:-1.5deg">
-      <img src="img/foto_salon_pop.jpg" width="720" height="480" alt="Interior del salón tuPelu: pared fucsia, mural de chica de cómic y banco amarillo de lunares" fetchpriority="high" onerror="this.hidden=true">
-    </figure>
-    <div class="bubble bubble-quote"><p>«Trabajan con buenas manos y aciertan siempre con el corte de pelo requerido.»</p><cite>— Eloi, Treatwell</cite></div>
-    <div class="badge sticker" aria-label="Top Rated 2026 · Treatwell">
-      <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#circ" startOffset="0">TOP RATED 2026 · TREATWELL · </textPath></text></svg>
-      <span>★</span>
+    <div class="hero-collage">
+      <figure class="panel reveal ph ph-fucsia" style="--rot:-1.5deg">
+        <img src="img/foto_salon_pop.jpg" width="720" height="480" alt="Interior del salón tuPelu: pared fucsia, mural de chica de cómic y banco amarillo de lunares" fetchpriority="high" onerror="this.hidden=true">
+      </figure>
+      <figure class="snap snap-a rv-drop" style="--r:-5deg;--d:.5s"><span class="tape"></span><img src="img/trabajo_cobrizo.jpg" width="467" height="350" alt="Media melena cobriza con ondas" loading="lazy" decoding="async"></figure>
+      <figure class="snap snap-b rv-drop" style="--r:4deg;--d:.7s"><span class="tape"></span><img src="img/rubia-lateral.webp" width="382" height="510" alt="Melena rubia lisa con mechas, de lado" loading="lazy" decoding="async"></figure>
+    </div>
+    <div class="hero-proofrow">
+      <div class="bubble bubble-quote"><p>«Trabajan con buenas manos y aciertan siempre con el corte de pelo requerido.»</p><cite>— Eloi, Treatwell</cite></div>
+      <div class="badge sticker" aria-label="Top Rated 2026 · Treatwell">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#circ" startOffset="0">TOP RATED 2026 · TREATWELL · </textPath></text></svg>
+        <span>★</span>
+      </div>
     </div>
   </div>
 </section>
