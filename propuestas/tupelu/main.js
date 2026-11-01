@@ -1,6 +1,24 @@
 (function(){
   var d=document, b=d.body, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Letras sueltas para las animaciones del menú y del logotipo
+  function split(el,i0){var t=el.textContent;el.textContent='';el.setAttribute('aria-label',t);
+    t.split('').forEach(function(ch,i){var s=d.createElement('span');s.className='lt';s.style.setProperty('--i',i);s.setAttribute('aria-hidden','true');s.textContent=ch;el.appendChild(s)})}
+  d.querySelectorAll('.menu a').forEach(function(a,n){a.style.setProperty('--n',n);split(a)});
+  d.querySelectorAll('.wm-main').forEach(function(el){split(el)});
+  var top=d.querySelector('.top');
+  function onScroll(){top.classList.toggle('stuck',scrollY>12)}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  // Sección actual resaltada en el menú
+  if('IntersectionObserver' in window){
+    var links={};d.querySelectorAll('.menu a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+    var spy=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      Object.keys(links).forEach(function(k){links[k].classList.toggle('on',k===e.target.id)});
+    })},{rootMargin:'-30% 0px -60% 0px'});
+    Object.keys(links).forEach(function(k){var s=d.getElementById(k);if(s)spy.observe(s)});
+  }
+
   // Menú hamburguesa (bocadillo)
   var burger=d.getElementById('burger'), menu=d.getElementById('menu');
   function setMenu(o){menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú')}

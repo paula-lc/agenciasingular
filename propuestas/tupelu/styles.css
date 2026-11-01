@@ -323,40 +323,100 @@ h1 em:hover{rotate:2deg;scale:1.05}
   .bg-r{right:-30px}.bg-l{left:-40px}
 }
 
-/* ===== v5: ilustraciones SVG (taxista + pin-up) ===== */
-:root{--figh:clamp(380px,112vw,520px);--figw:calc(var(--figh)*.274)}
-.bgfig{position:absolute;z-index:0;pointer-events:none;display:block;height:min(calc(100% + 40px),760px);top:-20px}
-.bgfig img{display:block;height:100%;width:auto;animation:bgfloat 9s ease-in-out infinite;will-change:transform}
-.bg-r{right:-30px}.bg-l{left:-30px}
-.bg-taxi img{opacity:.9}
-@keyframes bgfloat{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-10px) rotate(.8deg)}}
-.pre-seat{padding-bottom:calc(var(--figh)*.466 + 16px)}
-.post-seat{padding-top:calc(var(--figh)*.534 - 64px + 24px)}
-.post-seat .title{max-width:calc(100% - var(--figw) - 36px)}
-.bandwrap{position:relative;z-index:5;height:64px}
-.bandwrap .band{position:absolute;inset:0}
-.seat{position:absolute;z-index:6;height:var(--figh);width:var(--figw);right:9%;bottom:calc(64px - var(--figh)*.534)}
-.seat-top,.seat-legs{position:absolute;inset:0}
-.seat img{display:block;width:100%;height:100%}
-.seat-top{clip-path:inset(0 0 52.6% 0)}
-.seat-legs{clip-path:inset(46.2% 0 0 0);transform-origin:48% 46.3%;animation:swing 2.2s ease-in-out infinite alternate;will-change:transform}
-@keyframes swing{from{transform:rotate(-7deg)}to{transform:rotate(9deg)}}
-.seat:hover .seat-legs,.seat:active .seat-legs{animation-duration:.6s}
-.seat-bubble{position:absolute;left:-150%;top:2%;font:400 28px/1 var(--f-title);background:var(--white);color:var(--ink);border:var(--b) solid var(--ink);border-radius:18px 18px 4px 18px;padding:6px 14px;rotate:-5deg;box-shadow:3px 3px 0 var(--ink);white-space:nowrap;transition:rotate .25s,scale .25s}
-.seat:hover .seat-bubble{rotate:3deg;scale:1.12}
-/* fotos provisionales del equipo */
-.avatar{position:relative}
-.av-img{position:absolute;max-width:none;display:block}
-.av-taxi{height:590px;width:auto;left:-22px;top:-4px}
-.av-pin{height:620px;width:auto;left:-64px;top:-4px}
-.avatar .av-img{transition:scale .3s cubic-bezier(.3,1.6,.5,1);transform-origin:50% 12%}
-.avatar:hover .av-img,.card:hover .av-img{scale:1.08}
-@media (prefers-reduced-motion:reduce){.bgfig img,.seat-legs{animation:none!important}}
-@media (min-width:860px){
-  :root{--figh:520px}
-  .bg-r{right:max(0px,calc((100vw - 1280px)/2))}.bg-l{left:max(0px,calc((100vw - 1280px)/2))}
-  .seat{right:max(40px,calc((100vw - 1180px)/2 + 20px))}
-  .post-seat .title{max-width:none}
+/* ===== v6 ===== */
+/* Hero: pin-up fumadora a la izquierda del texto */
+.hero-row{display:flex;gap:12px;align-items:flex-start;width:100%}
+.hero-copy{display:grid;gap:12px;justify-items:start;min-width:0}
+.hero-copy h1{font-size:clamp(30px,8.8vw,60px)}
+.smoker{position:relative;flex:none;width:clamp(92px,27vw,118px);aspect-ratio:440.4/1607;margin-top:4px;transform-origin:50% 100%;animation:smsway 5.5s ease-in-out infinite;will-change:transform}
+.smoker img{position:absolute;inset:0;width:100%;height:100%;display:block;max-width:none}
+.sm-body{clip-path:polygon(15.2% 0,100% 0,100% 100%,0 100%,0 18.4%,15.2% 18.4%)}
+.sm-smoke{clip-path:inset(0 84.8% 81.6% 0);transform-origin:7.5% 18.4%;animation:smoke 3.4s ease-in-out infinite}
+.sm-fx{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.eye-blink{opacity:0;animation:wink 5s steps(1,end) infinite}
+.ember{fill:#ff4a2a;transform-box:fill-box;transform-origin:center;animation:ember 1.6s ease-in-out infinite}
+@keyframes smsway{0%,100%{transform:rotate(-1.4deg) translateY(0)}50%{transform:rotate(1.4deg) translateY(-4px)}}
+@keyframes smoke{0%,100%{transform:skewX(-4deg) scaleY(1);opacity:.95}35%{transform:skewX(3deg) scaleY(1.03);opacity:.8}70%{transform:skewX(6deg) scaleY(1.05);opacity:.7}}
+@keyframes wink{0%,60%{opacity:0}62%{opacity:1}68%{opacity:0}72%{opacity:1}80%,100%{opacity:0}}
+@keyframes ember{0%,100%{opacity:1;scale:1}50%{opacity:.3;scale:.55}}
+.smoker:hover,.smoker:active{animation-duration:2s}
+.smoker:hover .eye-blink,.smoker:active .eye-blink{animation-duration:1.4s}
+
+/* Retratos provisionales del equipo */
+.portrait{position:relative;width:100%;height:210px;border:var(--b) solid var(--ink);border-radius:16px;overflow:hidden;background:var(--yellow) radial-gradient(rgba(0,0,0,.14) 22%,transparent 24%) 0 0/12px 12px;margin-bottom:8px}
+.pt-img{position:absolute;left:14px;top:6px;width:190px;max-width:none;height:auto;transition:scale .35s cubic-bezier(.3,1.5,.5,1);transform-origin:50% 0}
+.portrait.flip .pt-img{left:auto;right:14px;scale:-1 1}
+.card:hover .pt-img{scale:1.07}
+.portrait.flip{}
+.card:hover .portrait.flip .pt-img{scale:-1.07 1.07}
+.pt-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.9))}
+.pt-tag{position:absolute;right:12px;bottom:12px;max-width:62%;text-align:center;background:var(--white);border:var(--b) solid var(--ink);border-radius:12px;padding:8px 12px;rotate:-4deg;box-shadow:3px 3px 0 var(--ink);display:grid;gap:2px}
+.portrait.flip .pt-tag{right:auto;left:12px;rotate:4deg}
+.pt-tag b{font:400 22px/1 var(--f-title);letter-spacing:.04em;color:var(--fucsia)}
+.pt-tag small{font:800 13px/1.2 var(--f-body);color:var(--ink)}
+
+/* Banners de servicios: brillo, destello y color al pasar el ratón */
+.svc{position:relative;overflow:hidden;isolation:isolate;transition:translate .25s cubic-bezier(.3,1.6,.5,1),rotate .25s,box-shadow .2s,background-color .25s}
+.svc::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(247,210,62,.75) 50%,transparent 65%);translate:-130% 0;transition:translate .8s ease}
+.svc:hover::before,.svc:active::before{translate:130% 0}
+.svc::after{content:"✦";position:absolute;right:118px;top:8px;font-size:24px;color:var(--fucsia);opacity:0;scale:.2;rotate:-40deg;transition:opacity .3s,scale .4s cubic-bezier(.3,1.8,.5,1),rotate .4s}
+.svc:hover::after,.svc:active::after{opacity:1;scale:1;rotate:12deg}
+.svc:hover,.svc:active{background-color:#FFF6CC;rotate:-.5deg}
+.svc h3{transition:color .2s,translate .3s cubic-bezier(.3,1.6,.5,1)}
+.svc:hover h3,.svc:active h3{color:var(--fucsia);translate:8px 0}
+
+/* Fotos de clientas: se amplían al pasar el ratón */
+.js .polaroid.rv-drop,.polaroid.sticker{transition:transform .9s cubic-bezier(.3,1.5,.5,1) var(--d,0s),opacity .4s var(--d,0s),scale .35s cubic-bezier(.3,1.5,.5,1),box-shadow .25s}
+.polaroid.sticker:hover,.polaroid.sticker:active{animation:none;scale:1.1;z-index:4;box-shadow:11px 11px 0 var(--ink)}
+.js .rv-l,.js .rv-r{transition:transform .9s cubic-bezier(.3,1.4,.5,1),opacity .5s,scale .35s cubic-bezier(.3,1.5,.5,1)}
+.panel:hover,.panel:active{scale:1.07;z-index:3}
+
+/* Cabecera y menú */
+.wordmark{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.wm-main{font:400 34px/1 var(--f-title);letter-spacing:.03em;color:var(--yellow);-webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:2px 3px 0 var(--fucsia);white-space:nowrap}
+.wm-main .lt{display:inline-block;transition:translate .3s cubic-bezier(.3,1.8,.5,1) calc(var(--i)*.03s),rotate .3s calc(var(--i)*.03s)}
+.wordmark:hover .lt{translate:0 -5px}
+.wordmark:hover .lt:nth-child(odd){rotate:-6deg}
+.wordmark:hover .lt:nth-child(even){rotate:6deg}
+.wm-y{font:400 14px/1 var(--f-title);background:var(--white);border:3px solid var(--ink);border-radius:12px 12px 12px 2px;padding:3px 7px;rotate:3deg;transition:rotate .3s,scale .3s cubic-bezier(.3,1.8,.5,1)}
+.wordmark:hover .wm-y{rotate:-4deg;scale:1.15}
+@media (max-width:459px){.wm-y{display:none}}
+.top{transition:box-shadow .25s}
+.top.stuck{box-shadow:0 5px 0 rgba(22,22,22,.9)}
+.menu a,.menu a:hover{background:none}
+.menu a{position:relative;isolation:isolate;transition:color .2s}
+.menu a::before{content:"";position:absolute;inset:6px 0;z-index:-1;background:var(--yellow);border:3px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);scale:0 1;rotate:-3deg;transform-origin:left center;transition:scale .3s cubic-bezier(.3,1.5,.5,1),rotate .3s,background-color .2s}
+.menu a::after{content:"✦";position:absolute;top:-4px;right:-6px;font-size:18px;color:var(--fucsia);opacity:0;scale:.2;rotate:-30deg;transition:opacity .25s,scale .35s cubic-bezier(.3,1.8,.5,1),rotate .35s}
+.menu a:hover,.menu a:focus-visible{color:var(--ink);translate:0 0}
+.menu a:hover::before,.menu a:focus-visible::before{scale:1 1;rotate:-2deg}
+.menu a:hover::after,.menu a:focus-visible::after{opacity:1;scale:1;rotate:12deg}
+.menu a .lt{display:inline-block;transition:translate .25s cubic-bezier(.3,1.8,.5,1) calc(var(--i)*.03s)}
+.menu a:hover .lt{translate:0 -4px}
+.menu a.on{color:var(--white)}
+.menu a.on::before{scale:1 1;background:var(--fucsia)}
+.menu a.on:hover{color:var(--white)}
+.menu.open a{animation:itempop .38s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--n,0)*.055s + .05s)}
+@keyframes itempop{from{opacity:0;translate:-16px 0;scale:.8}}
+.burger{transition:rotate .25s cubic-bezier(.3,1.8,.5,1),scale .25s,background-color .2s}
+.burger:hover{rotate:-6deg;scale:1.07;background:var(--white)}
+.burger span{transition:translate .3s cubic-bezier(.3,1.5,.5,1),rotate .3s,opacity .2s,scale .3s}
+.burger[aria-expanded="true"] span:nth-child(1){translate:0 8px;rotate:45deg}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0;scale:0 1}
+.burger[aria-expanded="true"] span:nth-child(3){translate:0 -8px;rotate:-45deg}
+@supports (animation-timeline:scroll()){
+  .top::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:5px;background:var(--fucsia);border-bottom:2px solid var(--ink);transform-origin:left;scale:0 1;animation:prog linear both;animation-timeline:scroll(root)}
+  @keyframes prog{to{scale:1 1}}
 }
-.avatar{flex:none;width:116px;height:116px;border-radius:50%;border:var(--b) solid var(--ink);overflow:hidden;background:var(--yellow);box-shadow:var(--sh);margin-bottom:8px}
-.av-in{position:absolute;inset:0}
+@media (min-width:860px){
+  .smoker{width:150px}
+  .hero-copy h1{font-size:clamp(44px,5vw,64px)}
+  .hero-row{gap:22px}
+  .portrait{height:230px}
+  .pt-img{width:210px}
+}
+@media (prefers-reduced-motion:reduce){
+  .smoker,.sm-smoke,.eye-blink,.ember{animation:none!important}
+  .top::after{display:none}
+  .svc::before{display:none}
+  .polaroid.sticker:hover,.panel:hover{scale:none}
+}
