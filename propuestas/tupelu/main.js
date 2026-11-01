@@ -12,7 +12,7 @@
   d.addEventListener('touchstart',function(){},{passive:true});
 
   if(!('IntersectionObserver' in window)){
-    d.querySelectorAll('.reveal,.reveal-pop').forEach(function(el){el.classList.add('in','done')});
+    d.querySelectorAll('.title,.reveal,.reveal-pop,.pin,.also,.note,.rating-head,.visit-info,.map').forEach(function(el){el.classList.add('in','done')});
     return;
   }
 
@@ -24,11 +24,15 @@
       if(el.classList.contains('reveal')) el.addEventListener('animationend',function(){el.classList.add('done')},{once:true});
     });
   },{threshold:.2,rootMargin:'0px 0px -6% 0px'});
-  d.querySelectorAll('.reveal:not(.hero .reveal),.reveal-pop').forEach(function(el){io.observe(el)});
+  d.querySelectorAll('.reveal:not(.hero .reveal),.reveal-pop,.pin,.also,.note,.rating-head,.visit-info,.map').forEach(function(el){io.observe(el)});
   d.querySelectorAll('.hero .reveal').forEach(function(el){
     el.classList.add('in');
     el.addEventListener('animationend',function(){el.classList.add('done')},{once:true});
   });
+  d.querySelectorAll('.wall .polaroid').forEach(function(el,i){el.style.setProperty('--d',(i*.15)+'s')});
+  // Títulos: recortados, así que se observan con umbral 0
+  var tio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');tio.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+  d.querySelectorAll('.title').forEach(function(el){tio.observe(el)});
   // Los precios (li.svc) usan .reveal-pop + .in para disparar el estallido
 
   // Barra inferior: aparece al pasar el hero

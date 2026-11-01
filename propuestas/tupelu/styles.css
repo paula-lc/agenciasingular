@@ -15,7 +15,7 @@ a{color:inherit}
 .skip:focus{left:8px}
 
 /* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 22px;background:var(--fucsia);color:var(--white);
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 22px;background:var(--blue);color:var(--white);
   font:900 19px/1 var(--f-body);text-decoration:none;border:var(--b) solid var(--ink);border-radius:999px;box-shadow:4px 4px 0 var(--ink);
   transition:transform .12s,box-shadow .12s}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
@@ -228,3 +228,87 @@ h1 em{font:400 1.05em/1 var(--f-script);color:var(--yellow);font-style:normal;te
   .reviews .bubble{width:min(100%,340px)}
 }
 .polaroid.ph{min-height:240px}
+
+/* ===== v2 ===== */
+/* Franjas de lunares: sin animación continua; se desplazan solo con el scroll (compositor) */
+.band::before{animation:none}
+@supports (animation-timeline:view()){
+  .band::before{animation:bandscroll linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+  @keyframes bandscroll{from{transform:translateX(-100px)}to{transform:translateX(0)}}
+  .band-rev::before{animation-direction:reverse}
+}
+.wm-heart{animation:none}
+
+/* Garabato que se dibuja */
+h1 em{position:relative}
+.scribble{position:absolute;left:0;bottom:-8px;width:100%;height:12px;overflow:visible}
+.scribble path{fill:none;stroke:var(--white);stroke-width:4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1s ease-in-out 1.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* Pin-ups: se dibujan al entrar en pantalla */
+.pinwrap{display:block;position:relative;z-index:2}
+.pin-r{position:absolute;right:12px;top:18px}
+.pin-r .pin{width:clamp(96px,28vw,150px)}
+.pin-b{width:fit-content;margin:34px 0 0 auto}
+.pin{display:block;width:clamp(110px,34vw,170px);height:auto;overflow:visible;filter:drop-shadow(5px 5px 0 var(--ink))}
+.pin.flip{scale:-1 1}
+.pin .p{fill:var(--c);stroke:var(--ink);stroke-width:4;stroke-linejoin:round;stroke-linecap:butt}
+.pin .d{fill:var(--c)}
+.pin .bk{stroke:var(--ink);stroke-width:4}
+.js .pin:not(.in) .p{stroke-dasharray:1;stroke-dashoffset:1;fill-opacity:0}
+.js .pin:not(.in) .d{opacity:0}
+.js .pin.in .p{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s ease-in-out forwards,fillin .5s ease-out forwards;
+  animation-delay:calc(var(--k)*.07s),calc(var(--k)*.07s + 1.1s)}
+.js .pin.in .d{animation:fillin .5s ease-out 1.6s both}
+@keyframes fillin{from{opacity:0;fill-opacity:0}to{opacity:1;fill-opacity:1}}
+.punto-b{font:400 26px/1 var(--f-title);background:var(--white);color:var(--ink);border:var(--b) solid var(--ink);border-radius:18px 18px 4px 18px;padding:6px 14px;position:absolute;left:-120px;top:20px;transform:rotate(-4deg);box-shadow:3px 3px 0 var(--ink)}
+
+/* Más animación al hacer scroll */
+.js .title{clip-path:inset(-10px 97% -10px -10px);transition:clip-path .9s cubic-bezier(.6,.1,.2,1)}
+.js .title.in{clip-path:inset(-10px -10px -10px -10px)}
+.js .rv-drop{opacity:0;transform:translateY(-80px) rotate(calc(var(--rot) + 16deg));transition:transform .9s cubic-bezier(.3,1.5,.5,1) var(--d,0s),opacity .4s var(--d,0s)}
+.js .rv-drop.in{opacity:1;transform:rotate(var(--rot))}
+.js .rv-l,.js .rv-r{opacity:0;transition:transform .9s cubic-bezier(.3,1.4,.5,1),opacity .5s}
+.js .rv-l{transform:translateX(-70px) rotate(calc(var(--rot) - 8deg))}
+.js .rv-r{transform:translateX(70px) rotate(calc(var(--rot) + 8deg))}
+.js .rv-l.in,.js .rv-r.in{opacity:1;transform:rotate(var(--rot))}
+.js .also,.js .note,.js .rating-head,.js .visit-info,.js .map{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .7s cubic-bezier(.3,1.3,.5,1)}
+.js .also.in,.js .note.in,.js .rating-head.in,.js .visit-info.in,.js .map.in{opacity:1;transform:none}
+.js .map{transition-delay:.15s}
+
+@media (min-width:860px){
+  .pin-r{right:max(24px,calc((100vw - 1180px)/2));top:30px}
+  .pin-r .pin{width:190px}
+  .pin-b .pin{width:200px}
+}
+@media (prefers-reduced-motion:reduce){
+  .scribble path,.js .pin .p{stroke-dashoffset:0!important;fill-opacity:1!important;stroke-dasharray:none!important}
+  .js .pin .d{opacity:1!important}
+  .js .title{clip-path:none}
+  .js .rv-drop,.js .rv-l,.js .rv-r{opacity:1;transform:rotate(var(--rot))}
+  .js .also,.js .note,.js .rating-head,.js .visit-info,.js .map{opacity:1;transform:none}
+}
+.pin-r + *{margin-top:44px}
+@media (min-width:860px){
+  .pin-r{top:24px}
+  .pin-r .pin{width:140px}
+  .pin-r + *{margin-top:60px}
+}
+
+/* ===== v3: avatares y animación de las pin-ups ===== */
+.avatar{flex:none;width:116px;height:116px;border-radius:50%;border:var(--b) solid var(--ink);overflow:hidden;background:var(--yellow);box-shadow:var(--sh);margin-bottom:8px;position:relative}
+.av-in{width:100%;height:100%}
+.av-in .pin{width:138px;margin:-4px 0 0 -11px;filter:none}
+.pin{transform-origin:50% 100%}
+.js .pin.in{animation:popin .8s cubic-bezier(.3,1.7,.5,1) 1.7s both,sway 6s ease-in-out 2.6s infinite}
+@keyframes popin{from{transform:scale(.93) rotate(-3deg)}to{transform:none}}
+@keyframes sway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg) translateY(-3px)}}
+.eye-l,.eye-r{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.pinwrap,.av-in{transition:transform .2s}
+.pinwrap:hover,.pinwrap:active{animation:wiggle .7s ease-in-out}
+.avatar:hover .av-in,.avatar:active .av-in,.card:hover .av-in{animation:wiggle .7s ease-in-out}
+@keyframes wiggle{0%,100%{transform:none}20%{transform:rotate(-6deg) scale(1.07)}45%{transform:rotate(5deg) scale(1.07)}70%{transform:rotate(-3deg) scale(1.03)}}
+.pinwrap:hover .eye-r,.pinwrap:active .eye-r,.avatar:hover .eye-r,.card:hover .eye-r{animation:wink .9s ease-in-out}
+@keyframes wink{0%,100%{transform:scaleY(1)}20%,75%{transform:scaleY(.08)}}
+@media (prefers-reduced-motion:reduce){.pin,.eye-l,.eye-r{animation:none!important}}
