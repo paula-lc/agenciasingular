@@ -15,7 +15,7 @@ a{color:inherit}
 .skip:focus{left:8px}
 
 /* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 22px;background:var(--fucsia);color:var(--white);
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 22px;background:var(--blue);color:var(--white);
   font:900 19px/1 var(--f-body);text-decoration:none;border:var(--b) solid var(--ink);border-radius:999px;box-shadow:4px 4px 0 var(--ink);
   transition:transform .12s,box-shadow .12s}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
@@ -251,7 +251,7 @@ h1 em{position:relative}
 .pin-r .pin{width:clamp(96px,28vw,150px)}
 .pin-b{width:fit-content;margin:34px 0 0 auto}
 .pin{display:block;width:clamp(110px,34vw,170px);height:auto;overflow:visible;filter:drop-shadow(5px 5px 0 var(--ink))}
-.pin.flip{transform:scaleX(-1)}
+.pin.flip{scale:-1 1}
 .pin .p{fill:var(--c);stroke:var(--ink);stroke-width:4;stroke-linejoin:round;stroke-linecap:butt}
 .pin .d{fill:var(--c)}
 .pin .bk{stroke:var(--ink);stroke-width:4}
@@ -294,3 +294,21 @@ h1 em{position:relative}
   .pin-r .pin{width:140px}
   .pin-r + *{margin-top:60px}
 }
+
+/* ===== v3: avatares y animación de las pin-ups ===== */
+.avatar{flex:none;width:116px;height:116px;border-radius:50%;border:var(--b) solid var(--ink);overflow:hidden;background:var(--yellow);box-shadow:var(--sh);margin-bottom:8px;position:relative}
+.av-in{width:100%;height:100%}
+.av-in .pin{width:138px;margin:-4px 0 0 -11px;filter:none}
+.pin{transform-origin:50% 100%}
+.js .pin.in{animation:popin .8s cubic-bezier(.3,1.7,.5,1) 1.7s both,sway 6s ease-in-out 2.6s infinite}
+@keyframes popin{from{transform:scale(.93) rotate(-3deg)}to{transform:none}}
+@keyframes sway{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg) translateY(-3px)}}
+.eye-l,.eye-r{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.pinwrap,.av-in{transition:transform .2s}
+.pinwrap:hover,.pinwrap:active{animation:wiggle .7s ease-in-out}
+.avatar:hover .av-in,.avatar:active .av-in,.card:hover .av-in{animation:wiggle .7s ease-in-out}
+@keyframes wiggle{0%,100%{transform:none}20%{transform:rotate(-6deg) scale(1.07)}45%{transform:rotate(5deg) scale(1.07)}70%{transform:rotate(-3deg) scale(1.03)}}
+.pinwrap:hover .eye-r,.pinwrap:active .eye-r,.avatar:hover .eye-r,.card:hover .eye-r{animation:wink .9s ease-in-out}
+@keyframes wink{0%,100%{transform:scaleY(1)}20%,75%{transform:scaleY(.08)}}
+@media (prefers-reduced-motion:reduce){.pin,.eye-l,.eye-r{animation:none!important}}
