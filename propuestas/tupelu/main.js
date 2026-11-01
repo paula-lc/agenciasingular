@@ -11,6 +11,16 @@
   // Pegatinas: balanceo al tocar en móvil (iOS necesita un listener táctil para :active)
   d.addEventListener('touchstart',function(){},{passive:true});
 
+  // Clic en botones: estallido de cómic
+  if(!reduce){
+    d.addEventListener('pointerdown',function(e){
+      var t=e.target.closest&&e.target.closest('.btn,.dock-tel,.burger');
+      if(!t)return;
+      var s=d.createElement('span');s.className='burst';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';
+      b.appendChild(s);setTimeout(function(){s.remove()},550);
+    });
+  }
+
   if(!('IntersectionObserver' in window)){
     d.querySelectorAll('.title,.reveal,.reveal-pop,.pin,.also,.note,.rating-head,.visit-info,.map').forEach(function(el){el.classList.add('in','done')});
     return;
