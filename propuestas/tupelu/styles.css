@@ -442,7 +442,7 @@ h1 em:hover{rotate:2deg;scale:1.05}
 .wordmark:hover .wm-logo{rotate:-3deg;scale:1.08}
 @media (min-width:860px){
   :root{--dw:clamp(240px,22vw,420px);--dl:clamp(8px,2.3vw,50px);--hpl:max(24px,calc((100vw - 1180px)/2));
-    --tx:max(24px,calc(var(--dl) + var(--dw) - 100px - var(--hpl)))}
+    --tx:max(24px,calc(var(--dl) + var(--dw)*.74 + 18px - var(--hpl)))}
   .hero{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);min-height:calc(var(--dw)*1.328 + 94px);padding-top:calc(60px + clamp(52px,3.8vw,72px));padding-bottom:36px;align-items:start}
   .hero>.hero-text{position:static}
   .hero-row{position:static}
