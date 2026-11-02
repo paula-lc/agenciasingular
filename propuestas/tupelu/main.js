@@ -1,13 +1,29 @@
 (function(){
   var d=document, b=d.body, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Títulos: letra a letra (estilo cómic)
+  d.querySelectorAll('.title').forEach(function(h){
+    h.setAttribute('aria-label',h.textContent.replace(/\s+/g,' ').trim());
+    var n=0;
+    (function walk(node){Array.prototype.slice.call(node.childNodes).forEach(function(c){
+      if(c.nodeType===3){
+        var frag=d.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(function(tok){
+          if(!tok)return;
+          if(/^\s+$/.test(tok)){frag.appendChild(d.createTextNode(' '));return}
+          var w=d.createElement('span');w.className='w';w.setAttribute('aria-hidden','true');
+          tok.split('').forEach(function(chr){var s=d.createElement('span');s.className='ch';s.style.setProperty('--c',n++);s.textContent=chr;w.appendChild(s)});
+          frag.appendChild(w)});
+        c.parentNode.replaceChild(frag,c)}
+      else if(c.nodeType===1)walk(c)})})(h)});
+
   // Letras sueltas para las animaciones del menú y del logotipo
   function split(el,i0){var t=el.textContent;el.textContent='';el.setAttribute('aria-label',t);
     t.split('').forEach(function(ch,i){var s=d.createElement('span');s.className='lt';s.style.setProperty('--i',i);s.setAttribute('aria-hidden','true');s.textContent=ch;el.appendChild(s)})}
   d.querySelectorAll('.menu a').forEach(function(a,n){a.style.setProperty('--n',n);split(a)});
   d.querySelectorAll('.wm-main').forEach(function(el){split(el)});
   var top=d.querySelector('.top');
-  function onScroll(){top.classList.toggle('stuck',scrollY>12)}
+  function onScroll(){top.classList.toggle('stuck',scrollY>12);d.body.classList.toggle('scrolled',scrollY>150)}
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   // Sección actual resaltada en el menú
   if('IntersectionObserver' in window){
