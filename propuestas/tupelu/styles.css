@@ -587,3 +587,38 @@ h1 em:hover{rotate:2deg;scale:1.05}
 }
 
 .wordmark .st-w path{fill:#D92F78}
+
+/* ===== v12: pantallas medianas y ventanas pequeñas (860–1099 px): hero apilado ===== */
+@media (min-width:860px) and (max-width:1099px){
+  .hero{display:block;min-height:0;padding:100px 32px 40px}
+  .hero-text,.hero-art{max-width:720px;margin-inline:auto}
+  .sign-wrap{margin-left:0}
+  .sign{font-size:80px;margin-left:0!important}
+  .hero-row{position:relative;display:block;margin-top:36px}
+  .doll{position:absolute;left:auto;top:auto;bottom:calc(100% - 14px);right:10px;margin:0;width:170px;height:136px;aspect-ratio:auto;overflow:visible;clip-path:inset(-60px -100px 0 -100px)}
+  .doll-img{position:absolute;left:0;top:0;width:100%;height:auto;-webkit-mask-image:none;mask-image:none}
+  .doll-bubble{left:-26%;top:-8%;width:46%}
+  .tag{width:100%;box-sizing:border-box;text-align:center;font-size:16px;padding:8px 16px}
+  .hero-copy{padding-left:0;width:100%;gap:14px}
+  .hero-copy h1{font-size:clamp(44px,6.4vw,58px)}
+  .hero-cta{padding-left:0;margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+  .hero-art{margin-top:0}
+  .hero-collage{margin:52px 28px 46px 24px}
+  .snap-a{top:-10%;left:-5%;width:24%}
+  .snap-b{top:auto;bottom:-10%;right:-4%;width:20%}
+  .hero-proofrow{margin-top:8px}
+}
+/* Ventanas muy estrechas o bajas */
+@media (max-width:380px){
+  .sign{font-size:60px}
+  .hero{padding-inline:14px}
+  .hero-collage{margin-inline:10px}
+  .wm-sign{font-size:30px}
+  .top{padding-inline:8px;gap:6px}
+  .btn-sm{padding-inline:12px}
+}
+@media (max-width:859px) and (min-width:600px){
+  .hero{padding-inline:max(18px,calc((100vw - 640px)/2))}
+  .hero-cta .btn{display:none}
+  .doll{width:min(26vw,170px);height:calc(min(26vw,170px)*.8)}
+}
