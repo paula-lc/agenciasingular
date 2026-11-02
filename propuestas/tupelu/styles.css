@@ -463,3 +463,47 @@ h1 em:hover{rotate:2deg;scale:1.05}
 @media (prefers-reduced-motion:reduce){
   .doll,.doll-bubble,.logo-hero{animation:none!important}
 }
+
+/* ===== v9: ajustes tras revisión ===== */
+/* Separador de lunares: animación fluida (capa compuesta, mosaico exacto de 50 px) */
+.band::before{inset:0 -60px;width:auto;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cg fill='%23D92F78'%3E%3Ccircle cx='0' cy='0' r='9'/%3E%3Ccircle cx='50' cy='0' r='9'/%3E%3Ccircle cx='0' cy='50' r='9'/%3E%3Ccircle cx='50' cy='50' r='9'/%3E%3Ccircle cx='25' cy='25' r='9'/%3E%3C/g%3E%3C/svg%3E") 0 0/50px 50px repeat;
+  animation:bandmove 5s linear infinite;will-change:transform}
+.band-rev::before{animation-direction:reverse}
+@keyframes bandmove{from{transform:translate3d(0,0,0)}to{transform:translate3d(50px,0,0)}}
+/* Rótulo TUPELU (letras sueltas) con los colores del logo */
+.sign{font:400 clamp(66px,18vw,88px)/.9 var(--f-title);display:flex;gap:.01em;margin:0 0 4px;transform:skewX(-6deg);transform-origin:0 100%;width:max-content}
+.sign .l{color:#FEDF00;-webkit-text-stroke:5px #231F20;paint-order:stroke fill;
+  text-shadow:1px 1px 0 #B52C64,2px 2px 0 #B52C64,3px 3px 0 #B52C64,4px 4px 0 #B52C64,5px 5px 0 #B52C64,7px 7px 0 #231F20}
+/* Muñeca: respira sin despegarse de la divisoria */
+@keyframes dollsway{0%,100%{transform:scale(1)}50%{transform:scale(1.014)}}
+.doll{animation:dollsway 5s ease-in-out infinite}
+
+@media (min-width:860px){
+  .sign{font-size:clamp(60px,4.9vw,88px);margin-left:var(--tx);margin-bottom:6px}
+  .doll{height:auto;aspect-ratio:479.55/623.8;overflow:visible;clip-path:inset(-30% -30% 0 -30%);width:var(--dw);-webkit-mask-image:none;mask-image:none}
+  .doll-img{position:absolute;left:0;top:0;width:100%;height:auto}
+  .hero{min-height:calc(var(--dw)*1.301 + 94px)}
+}
+
+/* ===== Móvil según mockup: sin menú arriba al inicio, botón flotante, logo sube a la barra ===== */
+@media (max-width:859px){
+  :root{--mdw:min(36vw,170px)}
+  .top{translate:0 -118%;transition:translate .5s cubic-bezier(.3,1.35,.5,1),box-shadow .25s}
+  body.scrolled .top,.top:focus-within{translate:0 0}
+  html:not(.js) .top{translate:none}
+  body.scrolled .wm-logo{animation:logodock .7s cubic-bezier(.3,1.5,.5,1) both;transform-origin:0 0}
+  @keyframes logodock{from{transform:translate(8px,86px) scale(2.5);opacity:0}to{transform:none;opacity:1}}
+  .hero{padding:26px 18px 28px}
+  .hero-row{display:block}
+  .doll{position:absolute;top:0;right:-4px;margin:0;width:var(--mdw);height:calc(var(--mdw)*.86);overflow:visible;clip-path:inset(-40px -90px 0 -90px);transform-origin:50% 0}
+  .doll-img{position:absolute;left:0;top:0;width:100%;height:auto;-webkit-mask-image:linear-gradient(#000 50%,transparent 65%);mask-image:linear-gradient(#000 50%,transparent 65%)}
+  .doll-bubble{left:-20%;top:-6%;width:46%}
+  .hero-copy{margin-top:2px}
+  .hero-cta .btn{display:none}
+  .js .dock{transform:none}
+  .dock{background:transparent;border-top:0;padding:0 16px calc(14px + env(safe-area-inset-bottom));pointer-events:none}
+  .dock>*{pointer-events:auto}
+  .dock-cta{box-shadow:5px 5px 0 var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){.doll,.band::before{animation:none!important}}

@@ -7,7 +7,7 @@
   d.querySelectorAll('.menu a').forEach(function(a,n){a.style.setProperty('--n',n);split(a)});
   d.querySelectorAll('.wm-main').forEach(function(el){split(el)});
   var top=d.querySelector('.top');
-  function onScroll(){top.classList.toggle('stuck',scrollY>12)}
+  function onScroll(){top.classList.toggle('stuck',scrollY>12);d.body.classList.toggle('scrolled',scrollY>150)}
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   // Sección actual resaltada en el menú
   if('IntersectionObserver' in window){
