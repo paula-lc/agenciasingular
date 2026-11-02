@@ -558,3 +558,32 @@ h1 em:hover{rotate:2deg;scale:1.05}
   .js .also,.js .note,.js .rating-head,.js .visit-info,.js .map,.js .rv-drop,.js .rv-l,.js .rv-r{opacity:1}
   .st,.title::after,.doll-bubble{animation:none!important}
 }
+
+/* ===== v11: logo de la barra = rótulo del hero; móvil menos abarrotado ===== */
+.wordmark{position:relative;display:flex;align-items:center;text-decoration:none;padding:0 10px 0 4px}
+.wm-sign{display:flex;font:400 36px/1 var(--f-title);transform:skewX(-6deg)}
+.wm-sign .l{display:inline-block;color:#FEDF00;-webkit-text-stroke:5px #231F20;paint-order:stroke fill;text-shadow:1px 1px 0 #B52C64,2px 2px 0 #B52C64,3px 3px 0 #B52C64,2px 1px 0 #231F20,1px 2px 0 #231F20,2px 2px 0 #231F20,3px 2px 0 #231F20,2px 3px 0 #231F20,3px 3px 0 #231F20,4px 3px 0 #231F20,3px 4px 0 #231F20,4px 4px 0 #231F20,5px 4px 0 #231F20,4px 5px 0 #231F20,5px 5px 0 #231F20;transition:translate .25s cubic-bezier(.3,1.8,.5,1),rotate .25s}
+.wm-sign .l:hover{translate:0 -6px;rotate:-7deg}
+.wordmark .st{--s:14px}
+.wordmark:hover .st{translate:var(--hx,0) var(--hy,0);rotate:30deg;scale:1.35}
+@media (max-width:859px){
+  body.scrolled .wm-logo{animation:none}
+  body.scrolled .wordmark{animation:logodock .7s cubic-bezier(.3,1.5,.5,1) both;transform-origin:0 0}
+  /* muñeca asomando por detrás de la etiqueta */
+  .hero{padding:24px 18px 34px}
+  .hero-row{position:relative;margin-top:30px}
+  .doll{top:auto;bottom:calc(100% - 14px);right:6px;width:min(33vw,150px);height:calc(min(33vw,150px)*.8);clip-path:inset(-60px -90px 0 -90px)}
+  .tag{width:100%;box-sizing:border-box;text-align:center;font-size:15px;padding:7px 14px}
+  .hero-copy{gap:14px;margin-top:0;width:100%}
+  .hero-cta{margin-top:2px}
+  .proof{margin-top:2px}
+  .hero-collage{margin:46px 16px 44px 16px}
+  .snap-a{top:-12%;left:-6%;width:27%}
+  .snap-b{bottom:-10%;right:-5%;width:25%}
+  .hero-proofrow{margin-top:14px;gap:14px}
+  .dock{position:fixed;padding:18px 16px calc(14px + env(safe-area-inset-bottom))}
+  .dock::before{content:"";position:absolute;left:0;right:0;bottom:0;top:-26px;z-index:-1;pointer-events:none;
+    background:linear-gradient(to top,rgba(22,22,22,.5) 0%,rgba(22,22,22,.26) 50%,rgba(22,22,22,0) 100%)}
+}
+
+.wordmark .st-w path{fill:#D92F78}
