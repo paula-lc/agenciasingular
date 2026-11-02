@@ -35,6 +35,14 @@
     Object.keys(links).forEach(function(k){var s=d.getElementById(k);if(s)spy.observe(s)});
   }
 
+
+  // Botón «Volver a la propuesta»: solo si se abre con ?desde=propuesta y fuera de un iframe
+  (function(){
+    var bp=d.getElementById('back-prop'); if(!bp)return;
+    var fuera=true; try{fuera=window.self===window.top}catch(e){fuera=false}
+    if(fuera && /[?&]desde=propuesta(&|$)/.test(location.search)) bp.hidden=false;
+  })();
+
   // Menú hamburguesa (bocadillo)
   var burger=d.getElementById('burger'), menu=d.getElementById('menu');
   function setMenu(o){menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú')}

@@ -588,6 +588,12 @@ h1 em:hover{rotate:2deg;scale:1.05}
 
 .wordmark .st-w path{fill:#D92F78}
 
+/* Enlace de vuelta a la propuesta (solo con ?desde=propuesta; por encima de la barra «Reservar cita») */
+.foot .sig a{color:inherit;font-weight:800}
+.back-prop{position:fixed;left:12px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:45;background:var(--white);color:var(--ink);border:3px solid var(--ink);border-radius:999px;
+  padding:8px 14px;font:900 14px/1 var(--f-body);text-decoration:none;box-shadow:3px 3px 0 var(--ink);min-height:40px;display:inline-flex;align-items:center}
+.back-prop:hover,.back-prop:active{background:var(--yellow)}
+@media (min-width:860px){.back-prop{bottom:16px}}
 /* ===== v12: pantallas medianas y ventanas pequeñas (860–1099 px): hero apilado ===== */
 @media (min-width:860px) and (max-width:1099px){
   .hero{display:block;min-height:0;padding:100px 32px 40px}
