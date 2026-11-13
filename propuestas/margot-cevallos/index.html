@@ -38,6 +38,7 @@
 </script>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="site-header" id="top">
@@ -69,7 +70,7 @@
       <figure class="hero-photo">
         <picture>
           <source type="image/webp" srcset="img/recepcion-480.webp 480w, img/recepcion-780.webp 780w" sizes="(min-width: 900px) 560px, 100vw">
-          <img src="img/recepcion-780.jpg" srcset="img/recepcion-480.jpg 480w, img/recepcion-780.jpg 780w" sizes="(min-width: 900px) 560px, 100vw" width="780" height="520" alt="Recepción de la peluquería con el rótulo dorado «Donde el arte embellece tu esencia», el monograma MC y flores" fetchpriority="high">
+          <img data-parallax-img src="img/recepcion-780.jpg" srcset="img/recepcion-480.jpg 480w, img/recepcion-780.jpg 780w" sizes="(min-width: 900px) 560px, 100vw" width="780" height="520" alt="Recepción de la peluquería con el rótulo dorado «Donde el arte embellece tu esencia», el monograma MC y flores" fetchpriority="high">
         </picture>
       </figure>
       <div class="hero-copy">
@@ -85,6 +86,24 @@
         <p class="where">C/ Bailèn 224, Gràcia</p>
       </div>
     </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Keratina<i>✦</i>Método Curly<i>✦</i>Color<i>✦</i>Balayage<i>✦</i>Cortes<i>✦</i>Peinados<i>✦</i></span>
+      <span>Keratina<i>✦</i>Método Curly<i>✦</i>Color<i>✦</i>Balayage<i>✦</i>Cortes<i>✦</i>Peinados<i>✦</i></span>
+      <span>Keratina<i>✦</i>Método Curly<i>✦</i>Color<i>✦</i>Balayage<i>✦</i>Cortes<i>✦</i>Peinados<i>✦</i></span>
+      <span>Keratina<i>✦</i>Método Curly<i>✦</i>Color<i>✦</i>Balayage<i>✦</i>Cortes<i>✦</i>Peinados<i>✦</i></span>
+    </div>
+  </div>
+
+  <section class="stats" aria-label="Margot en cifras">
+    <ul class="stats-in">
+      <li class="reveal"><b class="count" data-to="5" data-dec="1">5,0</b><span>valoración en Google y Treatwell</span></li>
+      <li class="reveal"><b class="count" data-to="114">114</b><span>reseñas en Google</span></li>
+      <li class="reveal"><b class="count" data-to="69">69</b><span>reseñas en Treatwell</span></li>
+      <li class="reveal"><b><span class="count" data-to="18">18</span>+</b><span>años cuidando el cabello</span></li>
+    </ul>
   </section>
 
   <section class="section" id="especialidades">
@@ -116,12 +135,13 @@
     </div>
   </section>
 
-  <section class="section alt" id="margot">
+  <section class="section alt about-sec" id="margot">
+    <div class="mark" data-parallax="-0.12" aria-hidden="true"></div>
     <div class="wrap about">
-      <figure class="about-photo reveal">
+      <figure class="about-photo wipe">
         <picture>
           <source type="image/webp" srcset="img/margot-520.webp">
-          <img src="img/margot-520.jpg" width="520" height="346" loading="lazy" alt="Margot en su salón, con los espejos iluminados al fondo">
+          <img data-parallax-img src="img/margot-520.jpg" width="520" height="346" loading="lazy" alt="Margot en su salón, con los espejos iluminados al fondo">
         </picture>
       </figure>
       <div class="about-copy reveal">
@@ -165,7 +185,7 @@
     <div class="wrap narrow">
       <p class="tag reveal">Servicios y precios</p>
       <h2 class="reveal">Claro desde el principio</h2>
-      <ul class="prices reveal">
+      <ul class="prices">
         <li><span>Corte, lavado y peinado</span><b>desde 38 €</b></li>
         <li><span>Corte personalizado sin prisas</span><b>29 €</b></li>
         <li><span>Lavado y peinado</span><b>desde 18,99 €</b></li>
@@ -185,19 +205,19 @@
       <p class="tag reveal">El salón</p>
       <h2 class="reveal">Donde el arte embellece tu esencia</h2>
       <div class="gallery">
-        <figure class="g-main reveal">
+        <figure class="g-main wipe">
           <picture>
             <source type="image/webp" srcset="img/recepcion-480.webp 480w, img/recepcion-780.webp 780w" sizes="(min-width: 900px) 600px, 100vw">
             <img src="img/recepcion-780.jpg" srcset="img/recepcion-480.jpg 480w, img/recepcion-780.jpg 780w" sizes="(min-width: 900px) 600px, 100vw" width="780" height="520" loading="lazy" alt="Recepción con el rótulo dorado y flores">
           </picture>
         </figure>
-        <figure class="reveal">
+        <figure class="wipe">
           <picture>
             <source type="image/webp" srcset="img/margot-520.webp">
             <img src="img/margot-520.jpg" width="520" height="346" loading="lazy" alt="Zona de trabajo con espejos iluminados">
           </picture>
         </figure>
-        <figure class="reveal">
+        <figure class="wipe">
           <picture>
             <source type="image/webp" srcset="img/lavacabezas-520.webp">
             <img src="img/lavacabezas-520.jpg" width="520" height="346" loading="lazy" alt="Zona de lavado con pared de listones de madera">
