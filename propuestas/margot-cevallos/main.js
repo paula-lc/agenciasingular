@@ -39,7 +39,7 @@
   });
 
   /* Retardos escalonados dentro de cada grupo */
-  [['.cards .card', 0.1, 4], ['.reviews .review', 0.1, 3], ['.prices li', 0.06, 9], ['.amounts li', 0.12, 3], ['.stats-in li', 0.1, 4]].forEach(function (g) {
+  [['.voucher', 0.12, 3], ['.reviews .review', 0.1, 3], ['.prices li', 0.06, 9], ['.amounts li', 0.12, 3], ['.stats-in li', 0.1, 4]].forEach(function (g) {
     document.querySelectorAll(g[0]).forEach(function (el, i) {
       el.classList.add('reveal');
       el.style.transitionDelay = ((i % g[2]) * g[1]) + 's';
@@ -149,6 +149,39 @@
         b.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
       });
       b.addEventListener('mouseleave', function () { b.style.transform = ''; });
+    });
+  }
+
+  /* Pestañas de servicios */
+  var tabs = [].slice.call(document.querySelectorAll('.tab'));
+  function selectTab(t, focus) {
+    tabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute('aria-selected', String(on));
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) t.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { selectTab(t, false); });
+    t.addEventListener('keydown', function (e) {
+      var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
+      if (n === null) return;
+      e.preventDefault();
+      selectTab(tabs[(n + tabs.length) % tabs.length], true);
+    });
+  });
+
+  /* Formulario de contacto: abre el correo del usuario */
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = new FormData(form);
+      var NL = String.fromCharCode(10);
+      var body = 'Nombre: ' + d.get('nombre') + NL + 'Email: ' + d.get('email') + NL + NL + d.get('mensaje');
+      window.location.href = 'mailto:peluqueriamargotcevallos@gmail.com?subject=' + encodeURIComponent(d.get('asunto')) + '&body=' + encodeURIComponent(body);
     });
   }
 

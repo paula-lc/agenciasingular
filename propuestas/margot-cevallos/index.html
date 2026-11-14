@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" type="image/webp" href="img/recepcion-780.webp" imagesrcset="img/recepcion-480.webp 480w, img/recepcion-780.webp 780w" imagesizes="(min-width: 900px) 560px, 100vw">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap">
-<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="styles.css?v=4">
 <script>document.documentElement.className += ' js';</script>
 <script type="application/ld+json">
 {
@@ -51,13 +51,12 @@
       <span class="wordmark"><strong>MARGOT CEVALLOS</strong><small>ESTILISTAS</small></span>
     </a>
     <nav class="nav" id="nav" aria-label="Principal">
-      <a href="#especialidades">Especialidades</a>
-      <a href="#margot">Margot</a>
-      <a href="#clientas">Reseñas</a>
-      <a href="#precios">Precios</a>
-      <a href="#salon">El salón</a>
-      <a href="#vales">Vales</a>
-      <a href="#visitanos">Visítanos</a>
+      <a href="#hero">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#promociones">Promociones</a>
+      <a href="#contacto">Contacto</a>
     </nav>
     <a class="btn btn-sm head-cta" href="reservar.html">Reservar cita</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú"><span></span><span></span></button>
@@ -106,36 +105,7 @@
     </ul>
   </section>
 
-  <section class="section" id="especialidades">
-    <div class="wrap">
-      <p class="tag reveal">Especialidades</p>
-      <h2 class="reveal">Lo que mejor sabe hacer</h2>
-      <div class="cards">
-        <article class="card reveal">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 5 6.5 5 10a5 5 0 0 1-10 0c0-3.500 2-6 5-10z"/></svg>
-          <h3>Keratina y tratamientos capilares</h3>
-          <p>Cuidado profundo para un pelo más sano, suave y manejable.</p>
-        </article>
-        <article class="card reveal">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5c-3 2-3 6 0 7s3 4 0 5M16 7c3 2 3 5 0 6s-3 4 0 6"/></svg>
-          <h3>Método Curly</h3>
-          <p>Cuidado y corte pensados para el cabello rizado, respetando tu rizo natural.</p>
-        </article>
-        <article class="card reveal">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.600 5.600l2.100 2.100M16.300 16.300l2.100 2.100M5.600 18.400l2.100-2.100M16.300 7.700l2.100-2.100"/></svg>
-          <h3>Color, mechas y balayage</h3>
-          <p>Tonos a tu medida, con consejo sincero sobre lo que mejor te sienta.</p>
-        </article>
-        <article class="card reveal">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.500"/><circle cx="6" cy="17" r="2.500"/><path d="M8 8.500L20 18M8 15.500L20 6"/></svg>
-          <h3>Cortes y peinados</h3>
-          <p>Corte personalizado y sin prisas, para ti y para toda la familia.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt about-sec" id="margot">
+  <section class="section alt about-sec" id="nosotros">
     <div class="mark" data-parallax="-0.12" aria-hidden="true"></div>
     <div class="wrap about">
       <figure class="about-photo wipe">
@@ -145,14 +115,35 @@
         </picture>
       </figure>
       <div class="about-copy reveal">
-        <p class="tag">Sobre Margot</p>
-        <h2>Cuidar tu pelo es lo primero</h2>
-        <p>Llevo más de 18 años cuidando el cabello. Me especializo en keratina y en el método Curly, y trabajo contigo de forma personalizada, siempre pensando en la salud de tu pelo.</p>
+        <p class="tag">Nosotros</p>
+        <h2>Tu cabello, mi pasión</h2>
+        <p>Con más de 18 años de experiencia, me dedico a cuidar de tu melena, ofreciéndote resultados duraderos y una experiencia personalizada en cada visita.</p>
+        <div class="about-cols">
+          <div>
+            <h3>Mi filosofía</h3>
+            <p>Trabajo de cerca con cada clienta para entender lo que necesita. Quiero que tu pelo se mantenga sano, fuerte y manejable con el tiempo, con técnicas y tratamientos de calidad.</p>
+          </div>
+          <div>
+            <h3>Mi historia</h3>
+            <p>Descubrí mi pasión por el cuidado del cabello hace más de 18 años y me he especializado en tratamientos capilares, keratinas y cortes adaptados a cada tipo de cabello. Mi sueño de tener un espacio propio en Barcelona es hoy Peluquería Margot Cevallos.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="clientas">
+  <section class="section" id="servicios">
+    <div class="wrap">
+      <p class="tag reveal">Servicios</p>
+      <h2 class="reveal">Todo lo que puedo hacer por tu cabello</h2>
+      <div class="tabs" role="tablist" aria-label="Categorías de servicios"><button class="tab" role="tab" id="tab-cortes" aria-controls="panel-cortes" aria-selected="true" tabindex="0" type="button">Cortes y peinados</button><button class="tab" role="tab" id="tab-color" aria-controls="panel-color" aria-selected="false" tabindex="-1" type="button">Coloración</button><button class="tab" role="tab" id="tab-mechas" aria-controls="panel-mechas" aria-selected="false" tabindex="-1" type="button">Mechas y balayage</button><button class="tab" role="tab" id="tab-tratamientos" aria-controls="panel-tratamientos" aria-selected="false" tabindex="-1" type="button">Tratamientos capilares</button><button class="tab" role="tab" id="tab-estetica" aria-controls="panel-estetica" aria-selected="false" tabindex="-1" type="button">Estética y depilación</button></div>
+      <div class="panel" role="tabpanel" id="panel-cortes" aria-labelledby="tab-cortes"><p class="panel-intro">Ya sea un cambio de look, un corte elegante para todos los días o un peinado especial para una ocasión importante, me aseguro de que cada estilo refleje tu personalidad.</p><div class="svc-grid"><div class="svc"><h3>Cortes de cabello</h3><p>Adapto el corte a tu estilo y tipo de cabello, para un resultado moderno, fresco y fácil de mantener.</p><ul class="prices"><li><span>Corte mujer (incluye secado al aire)</span><b>29 €</b></li><li><span>Corte hombre</span><b>19 €</b></li><li><span>Corte niño (0-11 años)</span><b>17 €</b></li><li><span>Corte adicional (con otro servicio)</span><b>18,99 €</b></li><li><span>Corte + lavado + peinado + hidratación (corto)</span><b>38 €</b></li><li><span>Corte + lavado + peinado + hidratación (medio)</span><b>45 €</b></li><li><span>Corte + lavado + peinado + hidratación (largo)</span><b>52 €</b></li></ul></div><div class="svc"><h3>Peinados y recogidos</h3><p>Peinados elegantes o más informales y recogidos para ocasiones especiales, con un acabado único y duradero.</p><ul class="prices"><li><span>Lavado + peinado (corto)</span><b>18,99 €</b></li><li><span>Lavado + peinado (medio)</span><b>24,99 €</b></li><li><span>Lavado + peinado (largo)</span><b>27,99 €</b></li><li><span>Recogido sencillo (corto)</span><b>30 €</b></li><li><span>Recogido media melena</span><b>43 €</b></li><li><span>Recogido pelo largo (fiesta/novia)</span><b>57 €</b></li></ul></div></div></div><div class="panel" role="tabpanel" id="panel-color" aria-labelledby="tab-color" hidden><p class="panel-intro">Tu cabello merece brillar con el color perfecto. Ya busques un cambio sutil o un color vibrante, me encargaré de que el resultado sea el que siempre soñaste.</p><div class="svc-grid"><div class="svc"><h3>Baño de color</h3><p>Revitaliza tu cabello con un baño de color que aporta brillo y tono radiante, y lo deja suave y manejable.</p><ul class="prices"><li><span>Baño de color (corto)</span><b>30 €</b></li><li><span>Baño de color (medio)</span><b>35 €</b></li><li><span>Baño de color (largo)</span><b>40 €</b></li></ul></div><div class="svc"><h3>Coloración en raíz</h3><p>Al retocar las raíces, tendrás un resultado vibrante y duradero. Incluye lavado sin peinar, secado al aire.</p><ul class="prices"><li><span>Pelo corto</span><b>30 €</b></li><li><span>Pelo medio</span><b>35 €</b></li><li><span>Pelo largo</span><b>40 €</b></li></ul></div><div class="svc"><h3>Color, lavado y peinado</h3><p>Un servicio integral: color, lavado, peinado y, además, hidratación esencial.</p><ul class="prices"><li><span>Arrastre de color y lavado (corto)</span><b>40 €</b></li><li><span>Arrastre de color y lavado (medio)</span><b>60 €</b></li><li><span>Arrastre de color y lavado (largo)</span><b>80 €</b></li><li><span>Tinte completo + lavado + peinado + hidratación esencial (corto)</span><b>58,99 €</b></li><li><span>Tinte completo + lavado + peinado + hidratación esencial (medio)</span><b>66,99 €</b></li><li><span>Tinte completo + lavado + peinado + hidratación esencial (largo)</span><b>74,99 €</b></li></ul></div></div></div><div class="panel" role="tabpanel" id="panel-mechas" aria-labelledby="tab-mechas" hidden><p class="panel-intro">Con técnicas precisas y personalizadas, ilumino tu cabello con reflejos que complementan tu tono de piel y tu estilo, con la frescura de un color natural y luminoso.</p><div class="svc-grid"><div class="svc"><h3>Mechas plata</h3><p>Las mechas con papel plata permiten un control más preciso y un resultado más intenso, con un acabado impecable.</p><ul class="prices"><li><span>Mechas plata + matiz + hidratación esencial (corto)</span><b>78,99 €</b></li><li><span>Mechas plata + matiz + hidratación esencial (medio)</span><b>99,99 €</b></li><li><span>Mechas plata + matiz + hidratación esencial (largo)</span><b>110 €</b></li></ul></div><div class="svc"><h3>Mechas babylights</h3><p>Un efecto de luz suave y natural, como si el sol hubiera acariciado tu cabello, cuidando su salud y su textura.</p><ul class="prices"><li><span>Babylights + matiz + hidratación (corto)</span><b>140 €</b></li><li><span>Babylights + matiz + hidratación (medio largo)</span><b>160 €</b></li><li><span>Babylights + matiz + hidratación (extra largo)</span><b>180 €</b></li></ul></div><div class="svc"><h3>Mechas balayage</h3><p>Un look desenfadado y fresco: el color se integra con el cabello en una transición suave que no requiere mantenimiento constante.</p><ul class="prices"><li><span>Balayage + matiz + hidratación (corto)</span><b>140 €</b></li><li><span>Balayage + matiz + hidratación (medio largo)</span><b>160 €</b></li><li><span>Balayage + matiz + hidratación (extra largo)</span><b>180 €</b></li></ul></div></div></div><div class="panel" role="tabpanel" id="panel-tratamientos" aria-labelledby="tab-tratamientos" hidden><p class="panel-intro">No se trata solo de la apariencia, sino de la salud de tu cabello. Tratamientos que hidratan, reparan y revitalizan tu melena, desde keratinas premium hasta hidrataciones profundas.</p><div class="svc-grid"><div class="svc"><h3>Queratina</h3><p>Para alisar, suavizar y dar brillo. Ideal para cabellos rebeldes o con frizz: queda suave, manejable y brillante.</p><ul class="prices"><li><span>Queratina (corto)</span><b>120 €</b></li><li><span>Queratina (medio)</span><b>140 €</b></li><li><span>Queratina (largo)</span><b>165 €</b></li><li><span>Queratina (extra largo)</span><b>200 €</b></li></ul></div><div class="svc"><h3>Reconstrucción capilar intensiva</h3><p>Hidratación y restauración intensivas para devolver suavidad, elasticidad y brillo al cabello dañado o seco.</p><ul class="prices"><li><span>Reconstrucción capilar intensiva (corto)</span><b>99 €</b></li><li><span>Reconstrucción capilar intensiva (medio)</span><b>110 €</b></li><li><span>Reconstrucción capilar intensiva (largo)</span><b>135 €</b></li></ul></div><div class="svc"><h3>Hidratación</h3><p>Devuelve vitalidad y suavidad al cabello seco y opaco, con ingredientes ricos en nutrientes.</p><ul class="prices"><li><span>Pack de hidratación profunda</span><b>35 €</b></li></ul></div><div class="svc"><h3>Tratamiento capilar adicional</h3><p>Para complementar tu servicio: Ritual Abril el Nature, adicional con otro servicio.</p><ul class="prices"><li><span>Pelo corto</span><b>9 €</b></li><li><span>Pelo medio</span><b>10 €</b></li><li><span>Pelo largo</span><b>11 €</b></li></ul></div></div></div><div class="panel" role="tabpanel" id="panel-estetica" aria-labelledby="tab-estetica" hidden><p class="panel-intro">Depilación facial con los mejores resultados y la máxima suavidad. Me encargaré de que te sientas cómoda y segura.</p><div class="svc-grid"><div class="svc"><h3>Depilación facial</h3><p>Cejas, labio superior, entrecejo, pómulos o rostro completo, con resultados duraderos.</p><ul class="prices"><li><span>Depilación cejas</span><b>4 €</b></li><li><span>Depilación labio superior</span><b>7 €</b></li><li><span>Depilación entrecejo</span><b>3 €</b></li><li><span>Depilación pómulos</span><b>8 €</b></li><li><span>Depilación rostro completo</span><b>25 €</b></li></ul></div></div></div>
+      <p class="note">Precios orientativos. Consulta el precio exacto al reservar.</p>
+      <p class="center-cta"><a class="btn" href="reservar.html">Reservar cita</a></p>
+    </div>
+  </section>
+
+  <section class="section alt" id="clientas">
     <div class="wrap">
       <p class="tag reveal">Lo que dicen sus clientas</p>
       <h2 class="reveal">5,0 en Google (114 reseñas) y en Treatwell (69)</h2>
@@ -178,25 +169,6 @@
           <figcaption>Reseña en Google</figcaption>
         </figure>
       </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="precios">
-    <div class="wrap narrow">
-      <p class="tag reveal">Servicios y precios</p>
-      <h2 class="reveal">Claro desde el principio</h2>
-      <ul class="prices">
-        <li><span>Corte, lavado y peinado</span><b>desde 38 €</b></li>
-        <li><span>Corte personalizado sin prisas</span><b>29 €</b></li>
-        <li><span>Lavado y peinado</span><b>desde 18,99 €</b></li>
-        <li><span>Tinte + peinado + hidratación</span><b>desde 48,99 €</b></li>
-        <li><span>Tintes y mechas</span><b>desde 12 €</b></li>
-        <li><span>Tratamientos capilares</span><b>desde 9 €</b></li>
-        <li><span>Caballero, corte</span><b>19 €</b></li>
-        <li><span>Niños</span><b>desde 17 €</b></li>
-        <li><span>Depilación facial</span><b>desde 3 €</b></li>
-      </ul>
-      <p class="note">Precios orientativos. Consulta el precio exacto al reservar.</p>
     </div>
   </section>
 
@@ -227,25 +199,47 @@
     </div>
   </section>
 
-  <section class="section gift" id="vales">
-    <div class="wrap narrow center reveal">
-      <p class="tag">Vales regalo</p>
-      <h2>Regala belleza</h2>
-      <ul class="amounts">
-        <li>55 €</li>
-        <li>80 €</li>
-        <li>120 €</li>
-      </ul>
-      <a class="btn" href="https://wa.me/34632827106?text=Hola%20Margot%2C%20quiero%20reservar%20una%20cita" target="_blank" rel="noopener">Pedir un vale por WhatsApp</a>
+  <section class="section alt" id="tienda">
+    <div class="wrap">
+      <p class="tag reveal">Tienda</p>
+      <h2 class="reveal">Regala belleza</h2>
+      <p class="lead reveal">Vales regalo para que otra persona elija su momento en el salón.</p>
+      <div class="vouchers">
+        <article class="voucher">
+          <p class="v-label">Vale de regalo</p>
+          <p class="v-amount">55 €</p>
+          <a class="btn btn-line" href="https://wa.me/34632827106?text=Hola%20Margot%2C%20quiero%20un%20vale%20de%20regalo%20de%2055%20%E2%82%AC" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </article>
+        <article class="voucher">
+          <p class="v-label">Vale de regalo</p>
+          <p class="v-amount">80 €</p>
+          <a class="btn btn-line" href="https://wa.me/34632827106?text=Hola%20Margot%2C%20quiero%20un%20vale%20de%20regalo%20de%2080%20%E2%82%AC" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </article>
+        <article class="voucher">
+          <p class="v-label">Vale de regalo</p>
+          <p class="v-amount">120 €</p>
+          <a class="btn btn-line" href="https://wa.me/34632827106?text=Hola%20Margot%2C%20quiero%20un%20vale%20de%20regalo%20de%20120%20%E2%82%AC" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="visitanos">
-    <div class="wrap visit">
-      <div class="visit-info reveal">
-        <p class="tag">Visítanos</p>
-        <h2>Te esperamos en Gràcia</h2>
-        <address>Carrer de Bailèn 224<br>Barcelona</address>
+  <section class="section promo" id="promociones">
+    <div class="wrap narrow center reveal">
+      <p class="tag">Promociones</p>
+      <h2>Tu primera visita, con regalo</h2>
+      <p class="promo-text">Mascarilla profesional <strong>gratis</strong> en tu primera visita: reparación o hidratación según tu cabello.</p>
+      <p class="note">Válido solo para nuevos clientes.</p>
+      <a class="btn" href="reservar.html">Reservar cita</a>
+    </div>
+  </section>
+
+  <section class="section" id="contacto">
+    <div class="wrap contact">
+      <div class="contact-info reveal">
+        <p class="tag">Contacto</p>
+        <h2>Te atenderé de forma rápida y personalizada</h2>
+        <address>Carrer de Bailèn 224, Gràcia<br>08037 Barcelona</address>
         <table class="hours">
           <caption class="sr">Horario</caption>
           <tbody>
@@ -255,14 +249,24 @@
           </tbody>
         </table>
         <p><a class="phone" href="tel:+34632827106">632 82 71 06</a></p>
+        <p><a class="mail" href="mailto:peluqueriamargotcevallos@gmail.com">peluqueriamargotcevallos@gmail.com</a></p>
         <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Peluquer%C3%ADa%20Margot%20Cevallos%2C%20Carrer%20de%20Bail%C3%A8n%20224%2C%20Barcelona" target="_blank" rel="noopener">Cómo llegar</a>
       </div>
+      <form class="contact-form reveal" id="contact-form" action="mailto:peluqueriamargotcevallos@gmail.com" method="post" enctype="text/plain">
+        <h3>Envía tu mensaje</h3>
+        <label>Nombre<input name="nombre" required autocomplete="name"></label>
+        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Asunto<input name="asunto" required></label>
+        <label>Mensaje<textarea name="mensaje" rows="4" required></textarea></label>
+        <button class="btn" type="submit">Enviar mensaje</button>
+      </form>
       <div class="map reveal">
         <iframe title="Mapa: Peluquería Margot Cevallos, Carrer de Bailèn 224, Barcelona" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Peluquer%C3%ADa%20Margot%20Cevallos%2C%20Carrer%20de%20Bail%C3%A8n%20224%2C%20Barcelona&amp;output=embed"></iframe>
       </div>
     </div>
   </section>
 </main>
+
 
 <footer class="site-footer">
   <div class="wrap foot">
@@ -298,6 +302,6 @@
   </div>
 </dialog>
 
-<script src="main.js?v=3" defer></script>
+<script src="main.js?v=4" defer></script>
 </body>
 </html>
