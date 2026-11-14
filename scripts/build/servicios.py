@@ -68,7 +68,8 @@ def page(sid, plazas, cases):
             lis+=f'<li><strong>{esc(rot.get(x,x))}</strong>'+(f'<br><span>{esc(ex[x])}</span>' if x in ex else '')+'</li>'
         groups+=f'<h3>{esc(rotg.get(t,t))}</h3>\n<ul>{lis}</ul>\n'
     if d.get('nota') and 'IVA' not in d['nota']: groups+=f'<p>{esc(d["nota"])}</p>\n'
-    if d.get('noincluye'): groups+=f'<p><strong>No incluye:</strong> <span>{esc(d["noincluye"])}</span></p>'
+    noinc=pg.get('noincluye', d.get('noincluye'))
+    if noinc: groups+=f'<p><strong>No incluye:</strong> <span>{esc(noinc)}</span></p>'
     sec('incluye','Qué incluye, explicado',groups)
     # 3 · Cómo trabajamos
     pasos=''.join(f'<li><strong>{esc(w)}</strong><br><span>{esc(t)}</span></li>' for w,t in d['pasos'])

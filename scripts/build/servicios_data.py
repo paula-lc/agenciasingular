@@ -8,6 +8,7 @@
 #   rotulo:  nombre alternativo de un ítem para evitar jerga en la página (el dato original no se toca).
 #   no_para: (texto, id del servicio al que enlazar o None)
 #   faq:     (pregunta, respuesta, id del servicio al que enlazar o None). Van visibles y en el JSON-LD FAQPage.
+#   noincluye: sustituye el «No incluye» de los datos cuando el original lleva jerga.
 #   sigue:   ids de los servicios que se enlazan como siguiente paso.
 #   ejemplos: tipos de caso de data/portfolio.json que se enseñan en la página.
 PAGO=('¿Cómo se paga?', 'Pago: 50 % al empezar y 50 % a la entrega, por transferencia y con factura de cada pago.', None)
@@ -84,6 +85,7 @@ PAGES={
    ('Tienes muchos servicios y quieres que cada uno tenga su propia página. Para eso está la Web completa.', 'web-completa'),
    ('Quieres una tienda online con muchos productos. Eso se presupuesta aparte.', None),
   ],
+  noincluye='A partir del segundo año, la renovación del dominio corre de tu cuenta. Si necesitas varias páginas o una página por cada servicio, mira la Web completa.',
   explica={
    'Una página clara, rápida y pensada para el móvil': 'Toda tu información en una sola página, hecha para leerse bien en el móvil. Instagram te ayuda a enamorar, pero Google y los asistentes de IA leen sobre todo webs y fichas de empresa; y tu web es tuya, no depende de un algoritmo.',
    'Botón de reserva de Booksy o Fresha integrado': 'Tu página lleva el botón de tu sistema de reservas, para que quien entra pueda pedir cita desde ahí.',
