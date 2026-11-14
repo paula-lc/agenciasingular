@@ -43,27 +43,56 @@
     .cookie-pop .btn:focus-visible, .cookie-gate .btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
     @keyframes pop-in { from { transform: translateY(24px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
     @media (min-width: 760px) {
-      .cookie-pop { left: 0; right: 0; bottom: 0; width: auto; border-width: 3px 0 0; border-radius: 0; box-shadow: 0 -4px 0 var(--crimson); grid-template-columns: 72px minmax(0, 1fr); justify-content: center; column-gap: 20px; padding: 14px max(24px, calc((100vw - 1120px) / 2)); }
-      .cookie-pop__art { width: 72px; }
-      .cookie-pop__body { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "t b" "p b"; align-items: center; column-gap: 32px; }
+      .cookie-pop { left: 0; right: 0; margin-inline: auto; bottom: 24px; width: min(760px, calc(100vw - 48px)); grid-template-columns: 96px minmax(0, 1fr); column-gap: 20px; padding: 18px 24px 18px 18px; }
+      .cookie-pop__art { width: 96px; }
+      .cookie-pop__body { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "t b" "p b"; align-items: center; column-gap: 28px; }
       .cookie-pop h2 { grid-area: t; }
       .cookie-pop p { grid-area: p; margin-top: 2px; }
       .cookie-pop__btns { grid-area: b; margin-top: 0; }
-      .cookie-pop { animation-name: bar-in; }
     }
-    @keyframes bar-in { from { transform: translateY(100%); } to { transform: none; } }
     @media (max-width: 520px) { .cookie-pop { left: 12px; right: 12px; bottom: 12px; width: auto; grid-template-columns: 64px 1fr; padding: 14px; } .cookie-pop__art { width: 64px; } }
     .cookie-change { margin-top: 8px; font-size: 14px; }
     .cookie-change button { background: none; border: 0; padding: 0; font: inherit; color: var(--crimson); font-weight: 700; text-decoration: underline; cursor: pointer; }
-    .jag-chomp { transform-origin: 100px 150px; animation: jag-chomp 1.4s ease-in-out infinite; }
-    .jag-cookie { transform-origin: 100px 160px; animation: jag-cookie 1.4s ease-in-out infinite; }
-    .jag-crumb { animation: jag-crumb 1.4s ease-in infinite; opacity: 0; }
-    .jag-crumb:nth-of-type(2) { animation-delay: .35s; }
-    .jag-crumb:nth-of-type(3) { animation-delay: .7s; }
-    @keyframes jag-chomp { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(3px) scale(1.02, .97); } }
-    @keyframes jag-cookie { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) translateY(2px); } }
-    @keyframes jag-crumb { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(26px); } }
-    @media (prefers-reduced-motion: reduce) { .jag-chomp, .jag-cookie, .jag-crumb, .cookie-pop { animation: none; } .jag-crumb { opacity: 1; } }
+    /* Ciclo de 6 s: se acerca, muerde el mismo trozo, mastica ~7 veces, lo traga y la galleta recupera el trozo. */
+    .jag-chomp { transform-origin: 100px 150px; animation: jag-chomp 6s ease-in-out infinite; }
+    .jag-cheek { transform-box: fill-box; transform-origin: center; animation: jag-cheek 6s ease-in-out infinite; }
+    .jag-cookie { transform-origin: 100px 160px; animation: jag-cookie 6s ease-in-out infinite; }
+    .jag-chunk { transform-box: fill-box; transform-origin: center; animation: jag-chunk 6s ease-in-out infinite; }
+    .jag-crumb { opacity: 0; animation: jag-crumb 6s ease-in infinite; }
+    .jag-crumb:nth-of-type(2) { animation-delay: .12s; }
+    .jag-crumb:nth-of-type(3) { animation-delay: .24s; }
+    @keyframes jag-chomp {
+      0%, 8% { transform: none; }
+      16% { transform: translateY(5px) rotate(-3deg); }
+      19% { transform: translateY(6px) scale(1.05, .92); }
+      24%, 36%, 48%, 60% { transform: translateY(4px) scale(1.035, .955); }
+      21%, 30%, 42%, 54%, 66% { transform: translateY(3px) scale(.99, 1.02); }
+      74% { transform: translateY(1px) scale(1.04, .96); }
+      80%, 100% { transform: none; }
+    }
+    @keyframes jag-cheek {
+      0%, 18% { transform: none; }
+      24%, 36%, 48%, 60% { transform: scale(1.25, 1.1); }
+      21%, 30%, 42%, 54%, 66% { transform: scale(.95); }
+      74%, 100% { transform: none; }
+    }
+    @keyframes jag-cookie {
+      0%, 14% { transform: rotate(-2deg); }
+      19% { transform: rotate(5deg) translate(-2px, 2px); }
+      30%, 100% { transform: rotate(-2deg); }
+    }
+    @keyframes jag-chunk {
+      0%, 17% { opacity: 1; transform: none; }
+      20% { opacity: 0; transform: scale(.4) translate(-6px, -8px); }
+      91% { opacity: 0; transform: scale(.4); }
+      97%, 100% { opacity: 1; transform: none; }
+    }
+    @keyframes jag-crumb {
+      0%, 18% { opacity: 0; transform: translateY(0); }
+      21% { opacity: 1; }
+      34%, 100% { opacity: 0; transform: translateY(30px); }
+    }
+    @media (prefers-reduced-motion: reduce) { .jag-chomp, .jag-cheek, .jag-cookie, .jag-chunk, .jag-crumb, .cookie-pop { animation: none; } .jag-chunk, .jag-crumb { opacity: 0; } }
     .reserva-fallback { margin-top: 18px; font-size: 16px; color: var(--blue-ink); }
     .reserva-fallback a { color: var(--crimson); font-weight: 700; }
     .reserva-more { margin-top: 28px; }
@@ -146,8 +175,8 @@
               </g>
               <circle cx="64" cy="82" r="5" fill="#1f3349"/><circle cx="136" cy="82" r="5" fill="#1f3349"/>
               <ellipse cx="100" cy="128" rx="38" ry="28" fill="#ebe7d0"/>
-              <ellipse cx="72" cy="104" rx="9" ry="6" fill="#bf2f5a" opacity=".35"/>
-              <ellipse cx="128" cy="104" rx="9" ry="6" fill="#bf2f5a" opacity=".35"/>
+              <ellipse class="jag-cheek" cx="72" cy="104" rx="9" ry="6" fill="#bf2f5a" opacity=".35"/>
+              <ellipse class="jag-cheek" cx="128" cy="104" rx="9" ry="6" fill="#bf2f5a" opacity=".35"/>
               <ellipse cx="78" cy="92" rx="9" ry="11" fill="#1f3349"/>
               <ellipse cx="122" cy="92" rx="9" ry="11" fill="#1f3349"/>
               <circle cx="81" cy="88" r="3.4" fill="#fff"/><circle cx="125" cy="88" r="3.4" fill="#fff"/>
@@ -163,6 +192,11 @@
                 <circle cx="84" cy="168" r="4" fill="#6b3a1c"/><circle cx="104" cy="150" r="3.6" fill="#6b3a1c"/>
                 <circle cx="118" cy="176" r="3.4" fill="#6b3a1c"/>
               </g>
+              <clipPath id="bite-clip"><circle cx="126" cy="150" r="13"/><circle cx="118" cy="140" r="9"/></clipPath>
+              <g class="jag-chunk"><g clip-path="url(#bite-clip)">
+                <circle cx="100" cy="158" r="31" fill="#e0a45e" stroke="#1f3349" stroke-width="4"/>
+                <circle cx="118" cy="148" r="3.4" fill="#6b3a1c"/><circle cx="128" cy="154" r="3" fill="#6b3a1c"/>
+              </g></g>
               <ellipse cx="66" cy="152" rx="13" ry="11" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
               <ellipse cx="134" cy="170" rx="13" ry="11" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
             </g>
