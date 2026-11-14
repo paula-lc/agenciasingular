@@ -25,6 +25,7 @@ for page,prio in (('index.html','1.0'),('guia-aparecer-en-ia-y-google-maps.html'
     alts=''.join(f'\n    <xhtml:link rel="alternate" hreflang="{c}" href="{SITE}{url(c,page)}"/>' for c,_,_ in LANGS)+f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{url("es",page)}"/>'
     for c,_,_ in LANGS:
         rows.append(f'  <url>\n    <loc>{SITE}{url(c,page)}</loc>\n    <lastmod>{today}</lastmod>\n    <priority>{prio}</priority>{alts}\n  </url>')
+rows.append(f'  <url>\n    <loc>{SITE}/reserva/</loc>\n    <lastmod>{today}</lastmod>\n    <priority>0.8</priority>\n  </url>')
 open(ROOT+'sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+'\n'.join(rows)+'\n</urlset>\n')
 for lang,m in miss.items():
     if m:
