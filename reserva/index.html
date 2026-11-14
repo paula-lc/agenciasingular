@@ -26,6 +26,30 @@
     .reserva-list li { display: flex; gap: 14px; align-items: flex-start; background: var(--cream-soft); border-radius: var(--radius-sm); padding: 16px 18px; color: var(--blue-ink); line-height: 1.55; }
     .reserva-list .icon { flex: none; width: 22px; height: 22px; margin-top: 2px; color: var(--crimson); fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
     .reserva-widget { background: var(--white, #fff); border-radius: var(--radius-sm); min-height: 640px; }
+    .reserva-widget.is-gated { min-height: 0; background: var(--cream-soft); border: 3px solid var(--blue); box-shadow: 6px 6px 0 var(--crimson); }
+    .cookie-gate { display: grid; grid-template-columns: 180px 1fr; gap: clamp(16px, 4vw, 40px); align-items: center; padding: clamp(20px, 4vw, 36px); }
+    .cookie-gate__art { width: 100%; max-width: 180px; height: auto; margin: 0 auto; overflow: visible; }
+    .cookie-gate h2 { font-size: clamp(22px, 3vw, 30px); color: var(--blue); text-transform: uppercase; }
+    .cookie-gate p { margin-top: 10px; color: var(--blue-ink); line-height: 1.6; max-width: 56ch; }
+    .cookie-gate p a { color: var(--crimson); font-weight: 700; }
+    .cookie-gate__btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .cookie-gate__btns .btn { font-size: 14px; padding: 13px 20px; }
+    .cookie-gate__btns .btn--no { background: var(--cream-warm); color: var(--blue-deep); }
+    .cookie-gate__btns .btn--no:hover { box-shadow: 4px 4px 0 var(--blue); }
+    .cookie-gate__btns .btn--ok:hover { box-shadow: 4px 4px 0 var(--crimson); }
+    .cookie-gate__btns .btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .cookie-change { margin-top: 8px; font-size: 14px; }
+    .cookie-change button { background: none; border: 0; padding: 0; font: inherit; color: var(--crimson); font-weight: 700; text-decoration: underline; cursor: pointer; }
+    .jag-chomp { transform-origin: 100px 150px; animation: jag-chomp 1.4s ease-in-out infinite; }
+    .jag-cookie { transform-origin: 100px 160px; animation: jag-cookie 1.4s ease-in-out infinite; }
+    .jag-crumb { animation: jag-crumb 1.4s ease-in infinite; opacity: 0; }
+    .jag-crumb:nth-of-type(2) { animation-delay: .35s; }
+    .jag-crumb:nth-of-type(3) { animation-delay: .7s; }
+    @keyframes jag-chomp { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(3px) scale(1.02, .97); } }
+    @keyframes jag-cookie { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) translateY(2px); } }
+    @keyframes jag-crumb { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(26px); } }
+    @media (prefers-reduced-motion: reduce) { .jag-chomp, .jag-cookie, .jag-crumb { animation: none; } .jag-crumb { opacity: 1; } }
+    @media (max-width: 640px) { .cookie-gate { grid-template-columns: 1fr; text-align: center; } .cookie-gate p { margin-left: auto; margin-right: auto; } .cookie-gate__btns { justify-content: center; } .cookie-gate__art { max-width: 150px; } }
     .reserva-fallback { margin-top: 18px; font-size: 16px; color: var(--blue-ink); }
     .reserva-fallback a { color: var(--crimson); font-weight: 700; }
     .reserva-more { margin-top: 28px; }
@@ -73,15 +97,65 @@
           <li><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Sin compromiso:</strong> si no encajamos, te vas igualmente con ideas que puedes aplicar tú.</span></li>
         </ul>
 
-        <div class="reserva-widget">
+        <div class="reserva-widget is-gated" id="reserva-widget">
+          <div class="cookie-gate" id="cookie-gate">
+            <svg class="cookie-gate__art" viewBox="0 0 200 200" role="img" aria-label="Un jaguar dibujado comiéndose una galleta">
+            <g class="jag-chomp">
+              <circle cx="46" cy="58" r="24" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
+              <circle cx="154" cy="58" r="24" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
+              <circle cx="46" cy="60" r="11" fill="#bf2f5a"/>
+              <circle cx="154" cy="60" r="11" fill="#bf2f5a"/>
+              <ellipse cx="100" cy="105" rx="70" ry="62" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
+              <g fill="none" stroke="#1f3349" stroke-width="3.5" stroke-linecap="round">
+                <path d="M88 50c5 4 5 10 0 14"/><path d="M100 46c5 5 5 12 0 17"/><path d="M112 50c-5 4-5 10 0 14"/>
+                <path d="M38 98c8-1 12 3 12 8"/><path d="M162 98c-8-1-12 3-12 8"/>
+              </g>
+              <circle cx="64" cy="82" r="5" fill="#1f3349"/><circle cx="136" cy="82" r="5" fill="#1f3349"/>
+              <ellipse cx="100" cy="128" rx="38" ry="28" fill="#ebe7d0"/>
+              <ellipse cx="72" cy="104" rx="9" ry="6" fill="#bf2f5a" opacity=".35"/>
+              <ellipse cx="128" cy="104" rx="9" ry="6" fill="#bf2f5a" opacity=".35"/>
+              <ellipse cx="78" cy="92" rx="9" ry="11" fill="#1f3349"/>
+              <ellipse cx="122" cy="92" rx="9" ry="11" fill="#1f3349"/>
+              <circle cx="81" cy="88" r="3.4" fill="#fff"/><circle cx="125" cy="88" r="3.4" fill="#fff"/>
+              <circle cx="75" cy="96" r="1.6" fill="#fff"/><circle cx="119" cy="96" r="1.6" fill="#fff"/>
+              <path d="M91 114h18l-9 10z" fill="#bf2f5a" stroke="#1f3349" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M100 124v5" stroke="#1f3349" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <g class="jag-cookie">
+              <defs><mask id="bite"><rect width="200" height="200" fill="#fff"/><circle cx="126" cy="150" r="13" fill="#000"/><circle cx="118" cy="140" r="9" fill="#000"/></mask></defs>
+              <g mask="url(#bite)">
+                <circle cx="100" cy="158" r="31" fill="#e0a45e" stroke="#1f3349" stroke-width="4"/>
+                <circle cx="88" cy="148" r="4.5" fill="#6b3a1c"/><circle cx="108" cy="168" r="4.5" fill="#6b3a1c"/>
+                <circle cx="84" cy="168" r="4" fill="#6b3a1c"/><circle cx="104" cy="150" r="3.6" fill="#6b3a1c"/>
+                <circle cx="118" cy="176" r="3.4" fill="#6b3a1c"/>
+              </g>
+              <ellipse cx="66" cy="152" rx="13" ry="11" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
+              <ellipse cx="134" cy="170" rx="13" ry="11" fill="#fab419" stroke="#1f3349" stroke-width="4"/>
+            </g>
+            <circle class="jag-crumb" cx="132" cy="150" r="3" fill="#e0a45e" stroke="#1f3349" stroke-width="1.5"/>
+            <circle class="jag-crumb" cx="122" cy="156" r="2.4" fill="#e0a45e" stroke="#1f3349" stroke-width="1.5"/>
+            <circle class="jag-crumb" cx="138" cy="158" r="2" fill="#e0a45e" stroke="#1f3349" stroke-width="1.5"/>
+          </svg>
+            <div>
+              <h2>Ojo: calendario con galletas</h2>
+              <p>El calendario es de HubSpot y, para funcionar, puede guardar cookies en tu navegador. Hasta que digas que sí, no se carga nada de HubSpot. Si prefieres no aceptarlas, puedes reservar con el enlace de abajo o escribirme a <a href="mailto:hola@agenciasingular.es">hola@agenciasingular.es</a>. <a href="../privacidad.html#reservas">Más info</a>.</p>
+              <div class="cookie-gate__btns">
+                <button type="button" class="btn btn--yellow btn--ok" data-cookie-choice="accept" data-track="reserva-cookies-aceptar">Aceptar y ver el calendario</button>
+                <button type="button" class="btn btn--no" data-cookie-choice="reject" data-track="reserva-cookies-rechazar">No, gracias</button>
+              </div>
+            </div>
+          </div>
+          <template id="hs-embed">
 <!-- Start of Meetings Embed Script -->
     <div class="meetings-iframe-container" data-src="https://meetings-eu1.hubspot.com/paula-lara?embed=true"></div>
     <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
 <!-- End of Meetings Embed Script -->
+          </template>
         </div>
         <noscript><p class="reserva-fallback">Para ver el calendario necesitas activar JavaScript. Mientras tanto, <a href="https://meetings-eu1.hubspot.com/paula-lara" rel="noopener">reserva aquí</a>.</p></noscript>
 
         <p class="reserva-fallback">¿No se carga el calendario? <a href="https://meetings-eu1.hubspot.com/paula-lara" target="_blank" rel="noopener" data-track="reserva-enlace-respaldo">Reserva aquí</a></p>
+        <p class="cookie-change" id="cookie-change" hidden><button type="button" id="cookie-reset">Cambiar mi elección sobre las cookies</button></p>
         <p class="reserva-more"><a class="btn btn--crimson" href="../" data-track="reserva-conoce-agencia">Conoce la agencia</a></p>
       </div>
     </section>
@@ -96,5 +170,33 @@
     </div>
   </footer>
   <script src="../assets/js/main.js?v=81" defer></script>
+  <script>
+    /* El calendario de HubSpot (y sus cookies) solo se carga si la persona acepta. La elección se guarda en este navegador. */
+    (function () {
+      var KEY = "as-cookies-reserva", gate = document.getElementById("cookie-gate"),
+          widget = document.getElementById("reserva-widget"), tpl = document.getElementById("hs-embed"),
+          change = document.getElementById("cookie-change");
+      function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function write(v) { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch (e) {} }
+      function load() {
+        gate.hidden = true; widget.classList.remove("is-gated");
+        var frag = tpl.content.cloneNode(true), old = frag.querySelector("script"), s = document.createElement("script");
+        Array.prototype.forEach.call(old.attributes, function (a) { s.setAttribute(a.name, a.value); });
+        old.parentNode.replaceChild(s, old);
+        widget.appendChild(frag);
+      }
+      function show() { gate.hidden = false; widget.classList.add("is-gated"); }
+      function apply(v) {
+        change.hidden = !v;
+        if (v === "accept") load(); else show();
+      }
+      document.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-cookie-choice]");
+        if (b) { var v = b.getAttribute("data-cookie-choice"); write(v); apply(v); return; }
+        if (e.target.id === "cookie-reset") { write(null); location.reload(); }
+      });
+      apply(read());
+    })();
+  </script>
 </body>
 </html>
