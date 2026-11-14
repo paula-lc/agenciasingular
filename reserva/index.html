@@ -42,6 +42,16 @@
     .btn--no { background: var(--cream-warm); color: var(--blue-deep); }
     .cookie-pop .btn:focus-visible, .cookie-gate .btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
     @keyframes pop-in { from { transform: translateY(24px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+    @media (min-width: 760px) {
+      .cookie-pop { left: 0; right: 0; bottom: 0; width: auto; border-width: 3px 0 0; border-radius: 0; box-shadow: 0 -4px 0 var(--crimson); grid-template-columns: 72px minmax(0, 1fr); justify-content: center; column-gap: 20px; padding: 14px max(24px, calc((100vw - 1120px) / 2)); }
+      .cookie-pop__art { width: 72px; }
+      .cookie-pop__body { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "t b" "p b"; align-items: center; column-gap: 32px; }
+      .cookie-pop h2 { grid-area: t; }
+      .cookie-pop p { grid-area: p; margin-top: 2px; }
+      .cookie-pop__btns { grid-area: b; margin-top: 0; }
+      .cookie-pop { animation-name: bar-in; }
+    }
+    @keyframes bar-in { from { transform: translateY(100%); } to { transform: none; } }
     @media (max-width: 520px) { .cookie-pop { left: 12px; right: 12px; bottom: 12px; width: auto; grid-template-columns: 64px 1fr; padding: 14px; } .cookie-pop__art { width: 64px; } }
     .cookie-change { margin-top: 8px; font-size: 14px; }
     .cookie-change button { background: none; border: 0; padding: 0; font: inherit; color: var(--crimson); font-weight: 700; text-decoration: underline; cursor: pointer; }
