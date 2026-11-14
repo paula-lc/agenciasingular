@@ -151,4 +151,21 @@
       b.addEventListener('mouseleave', function () { b.style.transform = ''; });
     });
   }
+
+  /* Ventana de bienvenida */
+  var dlg = document.getElementById('welcome');
+  if (dlg && typeof dlg.showModal === 'function') {
+    dlg.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', function () { dlg.close(); });
+    });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    var seen = false;
+    try { seen = sessionStorage.getItem('welcome') === '1'; } catch (e) {}
+    if (!seen) {
+      setTimeout(function () {
+        dlg.showModal();
+        try { sessionStorage.setItem('welcome', '1'); } catch (e) {}
+      }, 1400);
+    }
+  }
 })();

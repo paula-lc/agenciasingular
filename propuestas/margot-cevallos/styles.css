@@ -296,3 +296,34 @@ h1 em, h2 em { font-style: italic; color: var(--gold-deep); }
   .hero h1 em { animation: none; }
   .mark { transform: none !important; }
 }
+
+/* Ventana de bienvenida */
+.welcome { border: 0; padding: 0; width: min(420px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; border-radius: 18px; background: var(--paper); color: var(--ink); box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .5); }
+.welcome::backdrop { background: rgba(34, 34, 34, .55); backdrop-filter: blur(3px); }
+.welcome[open] { animation: pop .55s cubic-bezier(.2, .9, .3, 1.15); }
+.welcome[open]::backdrop { animation: fade .4s ease; }
+.welcome img { width: 100%; height: 150px; object-fit: cover; object-position: 50% 30%; }
+.welcome-body { padding: 22px 24px 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.welcome-body h2 { font-size: 28px; margin: 0; }
+.welcome-body p { font-size: 17px; }
+.welcome-note { font-style: italic; color: #555; font-size: 15px !important; }
+.welcome .btn { width: 100%; }
+.welcome-later { align-self: center; min-height: 48px; padding: 0 16px; background: none; border: 0; font: 500 16px var(--serif); color: #555; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.welcome-x { position: absolute; top: 10px; right: 10px; width: 48px; height: 48px; border: 0; border-radius: 50%; background: rgba(253, 251, 248, .92); cursor: pointer; display: grid; place-items: center; z-index: 2; }
+.welcome-x svg { width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+@keyframes pop { from { opacity: 0; transform: translateY(24px) scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .welcome[open], .welcome[open]::backdrop { animation: none; } }
+
+/* Página de reserva */
+.book-head .header-in { justify-content: space-between; }
+.back { display: inline-flex; align-items: center; min-height: 48px; padding: 0 6px; text-decoration: none; font-weight: 500; }
+.back:hover { color: var(--gold-deep); }
+.book { padding: calc(var(--head) + 28px) 0 56px; }
+.book h1 { font-size: 34px; margin: 14px 0 10px; }
+.book .lead { max-width: 56ch; margin-bottom: 22px; }
+.book-frame { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.book-frame iframe { display: block; width: 100%; height: 1080px; border: 0; }
+.book-alt { margin-top: 18px; font-size: 16px; }
+.book-alt a { color: var(--gold-deep); font-weight: 500; }
+@media (min-width: 900px) { .book h1 { font-size: 48px; } }
