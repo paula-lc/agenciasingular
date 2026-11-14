@@ -9,6 +9,7 @@ class KeepOrder(HTMLFormatter):
 FMT=KeepOrder(entity_substitution=EntitySubstitution.substitute_xml, void_element_close_prefix=None, empty_attributes_are_booleans=True)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lang_ui import switcher, footer_langs, url, LANGS
+from routes import ROUTES, SERVICE_PAGES, BY_ES_URL
 HERE=os.path.dirname(os.path.abspath(__file__))
 ROOT=str(__import__('pathlib').Path(__file__).resolve().parents[2])+'/'
 PAGES=['index.html','contratar.html','guia-aparecer-en-ia-y-google-maps.html']
@@ -19,12 +20,22 @@ ROOT_FILES=('favicon.svg','site.webmanifest','llms.txt','aviso-legal.html','priv
 def norm(s): return re.sub(r'\s+',' ',s).strip()
 def load(lang):
     return json.load(open(os.path.join(HERE,'i18n',f'{lang}.json')))
-def rel(v):
+def rel(v, lang=None):
+    if lang and v.startswith('/'): return localize_path(v, lang)
     if v.startswith('assets/') or v.split('?')[0] in ROOT_FILES: return '../'+v
     return v
+def localize_path(path, lang):
+    """Enlaces absolutos (/..., los usan las páginas de servicio): la misma página en el otro idioma"""
+    m=re.match(r'^(/[^?#]*)(.*)$', path)
+    if not m or path.startswith('//'): return path
+    p,rest=m.groups()
+    if p in BY_ES_URL: return BY_ES_URL[p][lang]+rest
+    if p.startswith('/assets/') or p in ['/'+f for f in ROOT_FILES] or p.startswith(('/ca/','/en/','/reserva/','/propuestas/','/hola/','/d/')): return path
+    return f'/{lang}'+p+rest
 def localize_url(u, lang):
     if not isinstance(u,str) or not u.startswith(SITE+'/'): return u
     path=u[len(SITE):]
+    if re.match(r'^(/[^?#]*)', path).group(1) in BY_ES_URL: return SITE+localize_path(path, lang)
     if path.startswith('/assets/') or path.split('#')[0].split('?')[0] in ['/'+f for f in ROOT_FILES]: return u
     return SITE+f'/{lang}'+path
 SKIP_KEYS={'@type','@context','logo','image','email','sameAs','priceCurrency','price','addressCountry','inLanguage','datePublished','dateModified','unitCode','unitText','knowsLanguage','availableLanguage','contactType','areaServed'}
@@ -62,7 +73,7 @@ def build(page, lang, m, ver):
         if el.name=='meta' and el.get('content') and (el.get('name')=='description' or el.get('property') in ('og:title','og:description')):
             if norm(el['content']) in m: el['content']=m[norm(el['content'])]
         for a in ('href','src'):
-            if el.has_attr(a): el[a]=rel(el[a])
+            if el.has_attr(a): el[a]=rel(el[a], lang)
         if el.has_attr('srcset'): el['srcset']=', '.join(rel(p.strip()) for p in el['srcset'].split(','))
     # scripts en línea y datos estructurados
     for sc in soup.find_all('script'):
@@ -85,7 +96,8 @@ def build(page, lang, m, ver):
     # i18n.js antes de main.js
     main=soup.find('script', src=re.compile(r'main\.js'))
     if main and not soup.find('script', src=re.compile(r'i18n\.js')):
-        tag=soup.new_tag('script', src=f'../assets/js/i18n.js?v={ver}'); tag['defer']=''
+        pre='/' if main['src'].startswith('/') else '../'
+        tag=soup.new_tag('script', src=f'{pre}assets/js/i18n.js?v={ver}'); tag['defer']=''
         main.insert_before(tag); main.insert_before(NavigableString('\n  '))
     # cabecera: canonical, og, alternates
     canon=soup.find('link', rel='canonical')
@@ -104,8 +116,9 @@ def build(page, lang, m, ver):
     for d in soup.select('[data-lang-switch]'): d.replace_with(BeautifulSoup(switcher(lang,page),'html.parser'))
     for p in soup.select('p.footer-langs'): p.replace_with(BeautifulSoup(footer_langs(lang,page),'html.parser'))
     out=soup.decode(formatter=FMT)
-    os.makedirs(ROOT+lang, exist_ok=True)
-    open(ROOT+lang+'/'+page,'w').write(out)
+    dest=ROOT+(ROUTES[page][lang].lstrip('/')+'index.html' if page in ROUTES else lang+'/'+page)
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    open(dest,'w').write(out)
 def write_js():
     data={l: json.load(open(os.path.join(HERE,'i18n',f'js.{l}.json'))) for l in ('ca','en')}
     js='window.I18N='+json.dumps(data,ensure_ascii=False,separators=(',',':'))+';\n'  # ya minificado; se genera, no se edita
@@ -116,7 +129,7 @@ def missing():
     out={}
     for lang in ('ca','en'):
         m=load(lang); miss=[]
-        for page in PAGES:
+        for page in PAGES+SERVICE_PAGES:
             for s in strings_of(open(ROOT+page).read()):
                 if s not in m and s not in miss and re.search(r'[a-záéíóúñ]{3,}', s) and not s.startswith('http'): miss.append(s)
         out[lang]=miss
@@ -126,5 +139,5 @@ if __name__=='__main__':
     write_js()
     for lang in ('ca','en'):
         m=load(lang)
-        for page in PAGES: build(page, lang, m, ver)
+        for page in PAGES+SERVICE_PAGES: build(page, lang, m, ver)
         print(lang,'ok')

@@ -10,6 +10,7 @@ import sys
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
 from services_data import SERVICES
 from packs_data import PACKS
+from routes import SLUGS, service_url
 def esc(s): return s.replace('&','&amp;').replace('<','&lt;')
 check='<svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>'
 xicon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
@@ -24,6 +25,9 @@ def pack_meta(p):
         return (f'<span data-founder><span class="pmodal__was"><s>{base} € + IVA</s></span>{block(fb,ft)}<span class="pmodal__badge">Precio fundador · quedan <span data-founder-left>5</span> de 5 plazas</span></span>'
                 f'<span data-web-price hidden>{block(base,total)}</span>')
     return block(base,total)
+def page_link(p):
+    # Solo los servicios con página propia (routes.py); los planes mensuales no tienen
+    return f'<p class="pmodal__page"><a href="{service_url(p["slug"],"es")}">Ver la página completa de este servicio</a></p>' if p['slug'] in SLUGS else ''
 def modal(p):
     inc=''.join(f'<div class="pmodal__group"><h4>{esc(t)}</h4><ul>{"".join(f"<li>{check}<span>{esc(x)}</span></li>" for x in items)}</ul></div>' for t,items in p['incluye'])
     pasos=''.join(f'<li><span class="pmodal__when">{esc(w)}</span><span>{esc(d)}</span></li>' for w,d in p['pasos'])
@@ -62,6 +66,7 @@ def modal(p):
                   </div>
                   {expect}
                   <p class="pmodal__not"><strong>No incluye:</strong> {esc(p["noincluye"])}</p>
+                  {page_link(p)}
                 </div>
               </div>
               <footer class="pmodal__foot">
@@ -74,6 +79,14 @@ s=open(ROOT+'index.html').read()
 # limpiar una ejecución anterior
 s=re.sub(r'<button type="button" class="(?:add-btn )?service__more"[^>]*>.*?</button>','',s)
 s=re.sub(r'\s*<dialog class="pmodal".*?</dialog>','',s,flags=re.S)
+# Enlace a la página de cada servicio: en la tarjeta del pack (junto a «Ver detalle») y en el título de los servicios a la carta
+s=re.sub(r'\s*<a class="pack__more" href="[^"]*">.*?</a>','',s)
+for sid in SLUGS:
+    u=service_url(sid,'es')
+    s,n=re.subn(r'(\n(\s*)<button type="button" class="pack__more" data-pmodal="detalle-'+sid+r'">.*?</button>)', lambda m: m.group(1)+f'\n{m.group(2)}<a class="pack__more" href="{u}">Página del servicio <span aria-hidden="true">→</span></a>', s)
+    s,k=re.subn(r'<a class="service__link" href="[^"]*servicio='+sid+r'">', f'<a class="service__link" href="{u}">', s)
+    s,k2=re.subn(r'(<article class="service reveal" data-slug="'+sid+r'">\s*<div class="service__head"><h3><a class="service__link" href=")[^"]*"', lambda m: m.group(1)+u+'"', s)
+    assert n+k+k2>=1, sid
 # Servicios: botón "Detalles" en cada tarjeta
 for sv in SERVICES:
     pat=re.compile(r'(<article class="service reveal" data-slug="'+sv['slug']+r'">.*?<span class="service__actions">)', re.S)

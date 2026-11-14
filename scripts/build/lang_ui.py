@@ -1,9 +1,12 @@
 # Selector de idioma (cabecera) y enlaces de idioma (pie) para cada página
-import re
+import re, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from routes import ROUTES
 LANGS=[('es','Español','ES'),('ca','Català','CA'),('en','English','EN')]
 CUR=' aria-current="true"'
 LABEL={'es':'Idioma','ca':'Idioma','en':'Language'}
 def url(lang, page):
+    if page in ROUTES: return ROUTES[page][lang]
     base='/' if lang=='es' else f'/{lang}/'
     return base if page=='index.html' else base+page
 def switcher(lang, page):

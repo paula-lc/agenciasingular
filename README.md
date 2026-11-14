@@ -7,6 +7,8 @@ Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singul
 ```
 index.html                              Landing principal
 guia-aparecer-en-ia-y-google-maps.html  Guía gratuita (contenido SEO y captación)
+servicios/<slug>/                       Una página por servicio (generadas, no se editan a mano; en catalán /ca/serveis/ y en inglés /en/services/)
+data/portfolio.json                     Casos del portfolio (vacío = la sección «Ejemplos» no existe)
 contratar.html                          Formulario de contratación: un producto de cada paso + los servicios a la carta que quieran (?servicio=cuidados-esenciales,web-una-pagina,fotografia)
 ca/ · en/                               Versiones en catalán e inglés (generadas, no se editan a mano)
 scripts/build/                          Generador de la web: ventanas de detalle, contratar, idiomas y sitemap
@@ -143,6 +145,59 @@ Regenera las ventanas de detalle, `contratar.html`, el selector de idioma, las p
 Si hay textos nuevos sin traducir, el script los lista: añádelos a `ca.json` y `en.json` y vuelve a ejecutarlo
 (mientras tanto se quedan en castellano). Cada página enlaza sus otras versiones con `hreflang`, y el selector de idioma
 de la cabecera lleva a la misma página en el otro idioma.
+
+## Páginas de servicio
+
+Cada servicio con página propia (Cuidados esenciales, su versión a distancia, Web de una página, Web completa,
+Fotografía Local y La Trastienda) se genera con una sola plantilla, `scripts/build/servicios.py`:
+
+- **Qué incluye, pasos, qué necesitamos y precios**: `packs_data.py` y `services_data.py`, los mismos datos de las
+  ventanas de detalle. Se cambia allí y vale para los dos sitios.
+- **Titular, «no es para ti si…», la explicación de cada ítem y las preguntas frecuentes**: `servicios_data.py`.
+  Un ítem sin explicación se publica solo con su nombre y `build.py` lo lista como `TODO`.
+- **Direcciones en cada idioma**: `routes.py`. Las traducciones van, como siempre, en `i18n/ca.json` y `en.json`.
+- **Datos estructurados**: cada página lleva `Service` (con el precio sin IVA que se ve), `BreadcrumbList` y
+  `FAQPage` con las mismas preguntas visibles. Sin valoraciones ni reseñas.
+- **Precio fundador**: la única variable sigue siendo `SITE.fundadorPlazas` (`assets/src/js/main.js`). Después de
+  cambiarla hay que ejecutar `python3 scripts/build/build.py`: así el HTML y los datos estructurados dicen el mismo
+  precio que se ve (con 0 plazas, el precio normal).
+
+Los planes mensuales no tienen página propia.
+
+## Portfolio (sección «Ejemplos»)
+
+`data/portfolio.json` es una lista de casos. Está vacía (`[]`) y, mientras lo esté, la sección «Ejemplos» no
+aparece en ninguna página: ni título, ni «Próximamente», ni huecos. **No se añaden ejemplos inventados.**
+
+Para añadir un caso, añade un objeto a la lista y ejecuta `python3 scripts/build/build.py`:
+
+```json
+{
+  "id": "nombre-corto-sin-espacios",
+  "tipo": "ficha",
+  "negocio": "Nombre del negocio",
+  "permiso": { "ok": true, "fecha": "2026-12-01" },
+  "idioma": "es",
+  "antes": { "texto": "Cómo estaba", "imagen": "/assets/img/portfolio/caso-antes.webp", "alt": "Qué se ve en la foto", "ancho": 800, "alto": 600 },
+  "despues": { "texto": "Cómo quedó" },
+  "que_se_hizo": "Qué hicimos, en una o dos frases.",
+  "enlace": "https://…",
+  "etiqueta": "Caso real"
+}
+```
+
+- `tipo`: `ficha`, `instagram` o `web`. Decide en qué páginas sale: `ficha` en Cuidados esenciales (y a distancia),
+  `web` en las dos webs. `instagram` aún no sale en ninguna (se asigna en `servicios_data.py`, campo `ejemplos`).
+- `permiso`: **solo se publica con `"ok": true`** y con la fecha en que el negocio dio su permiso. Con `false` el caso
+  se queda guardado y no se muestra.
+- `etiqueta`: `Caso real` o `Maqueta de ejemplo — negocio ficticio`. Va siempre visible encima del caso. Una maqueta
+  ficticia nunca lleva el nombre ni el logo de un negocio real.
+- `antes` y `despues`: un texto, o un objeto con `texto` y, si hay foto, `imagen` + `alt` (obligatorio) y su tamaño.
+  El texto del caso va siempre en HTML, no dentro de la imagen.
+- `idioma`: el idioma en que está escrito el caso. Se enseña tal cual en las tres versiones de la web.
+- `enlace` y `que_se_hizo` pueden ir vacíos (`""`).
+
+Si falta un campo o la etiqueta no es una de las dos, `build.py` se para y dice cuál.
 
 ## Captación presencial: /hola/, diagnósticos y medición
 

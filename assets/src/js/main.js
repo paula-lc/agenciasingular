@@ -656,7 +656,7 @@ function renderCartPill() {
   if (isNew) {
     pill = document.createElement("a");
     pill.className = "cart-pill";
-    pill.href = "contratar.html";
+    pill.href = (LANG === "es" ? "/" : `/${LANG}/`) + "contratar.html"; /* absoluto: también vale en /servicios/<slug>/ */
     pill.title = t("Ver mi propuesta");
     pill.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span class="cart-pill__count"></span>';
     actions.prepend(pill);
