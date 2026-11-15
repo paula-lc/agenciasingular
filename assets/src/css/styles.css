@@ -1931,6 +1931,38 @@ p { text-wrap: pretty; }
    ========================================================================== */
 *, *::before, *::after { transition: none !important; }
 .reveal, .reveal.is-in, .pack.reveal, .service.reveal, .trastienda.reveal { opacity: 1 !important; translate: none !important; clip-path: none !important; }
-.alogo__swing, .hero__logo .alogo__paw, .alogo:hover .alogo__beat--a, .alogo:hover .alogo__beat--s { animation: none !important; }
+.alogo__swing, .hero__logo .alogo__paw { animation: none !important; }
 .hero__photo::before, .nav__cta::after, .sticky-cta .btn::after { display: none; }
 .btn.is-bouncing, .btn.is-bouncing .icon, .add-btn.is-popping, .cart-pill.is-popping, .alogo--nav.is-bouncing { animation: none !important; }
+
+/* ---------- Animaciones que sí se conservan (todo lo demás, directo) ---------- */
+.nav__links .btn--outline::after { transition: transform .24s steps(5) !important; }
+.hero__logo .alogo__rstar { transition: scale .25s ease !important; }
+.hero__logo:hover .alogo__rstar { transition: scale .45s cubic-bezier(.3, 1.8, .5, 1) !important; }
+.hero__logo .alogo__paw, .hero__logo .alogo__claws { transition: rotate .3s ease !important; }
+.hero__logo:hover .alogo__paw { transition: rotate .5s cubic-bezier(.3, 1.8, .5, 1) !important; }
+.hero__logo:hover .alogo__claws { transition: rotate .5s .08s cubic-bezier(.3, 1.8, .5, 1) !important; }
+.sx-nav-logo:hover { animation: alogo-pulse .6s ease-out; }
+@media (prefers-reduced-motion: reduce) { .nav__links .btn--outline::after { transition: none !important; } .sx-nav-logo:hover { animation: none; } }
+
+/* ---------- Cesta del menú: siempre visible, con desplegable ---------- */
+button.cart-pill { padding: 0; cursor: pointer; font: inherit; }
+.cart-pill svg { width: 28px; height: 28px; fill: none; stroke: none; }
+.cart-pill[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+.cart-panel {
+  position: absolute; top: calc(100% + 8px); right: var(--gutter); z-index: 60; width: min(380px, calc(100vw - 24px));
+  background: var(--paper-soft); color: var(--ink); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--crimson);
+  padding: 16px 20px 20px; display: grid; gap: 12px; text-align: left;
+}
+.cart-panel[hidden] { display: none; }
+.cart-panel__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 6px double var(--ink); padding-bottom: 10px; }
+.cart-panel__head strong { font-family: var(--font-slab); font-weight: 900; font-size: 24px; line-height: 1.1; }
+.cart-panel__list { list-style: none; margin: 0; padding: 0; }
+.cart-panel__list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; border-bottom: 1px solid var(--ink); font-family: var(--font-slab); font-weight: 800; font-size: 17px; }
+.cart-panel__remove, .cart-panel__close { flex: none; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; background: transparent; color: var(--ink); border: 2px solid var(--ink); cursor: pointer; }
+.cart-panel__remove svg, .cart-panel__close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+.cart-panel__remove:hover, .cart-panel__close:hover { background: var(--ink); color: var(--paper); }
+.cart-panel__empty { margin: 0; font-family: var(--font-slab); font-style: italic; font-size: 15px; line-height: 1.5; }
+.cart-panel__cta { margin-top: 4px; }
+.cart-panel :focus-visible { outline-color: var(--ink); }
+@media (max-width: 520px) { .cart-panel { right: 12px; left: 12px; width: auto; } }
