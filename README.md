@@ -8,6 +8,7 @@ Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singul
 index.html                              Landing principal
 guia-aparecer-en-ia-y-google-maps.html  Guía gratuita (contenido SEO y captación)
 servicios/<slug>/                       Una página por servicio (generadas, no se editan a mano; en catalán /ca/serveis/ y en inglés /en/services/)
+salones/                                Landing para peluquerías, uñas y estética (generada por scripts/build/landing.py; solo castellano)
 data/portfolio.json                     Casos del portfolio (vacío = la sección «Ejemplos» no existe)
 contratar.html                          Formulario de contratación: un producto de cada paso + los servicios a la carta que quieran (?servicio=cuidados-esenciales,web-una-pagina,fotografia)
 ca/ · en/                               Versiones en catalán e inglés (generadas, no se editan a mano)

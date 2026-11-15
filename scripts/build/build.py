@@ -19,6 +19,7 @@ import servicios
 from routes import SERVICE_PAGES
 from packs_data import PACKS
 todos=servicios.run()
+import landing; landing.build()   # /salones/: landing para salones (solo en castellano)
 def sync_founder():
     """Precio fundador: el JSON-LD y el número de plazas del HTML de la portada dicen lo mismo que se ve.
     La única variable sigue siendo SITE.fundadorPlazas (assets/src/js/main.js)."""
@@ -57,6 +58,7 @@ for page in SERVICE_PAGES:
     alts=''.join(f'\n    <xhtml:link rel="alternate" hreflang="{c}" href="{SITE}{url(c,page)}"/>' for c,_,_ in LANGS)+f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{url("es",page)}"/>'
     for c,_,_ in LANGS:
         rows.append(f'  <url>\n    <loc>{SITE}{url(c,page)}</loc>\n    <lastmod>{today}</lastmod>\n    <priority>0.9</priority>{alts}\n  </url>')
+rows.append(f'  <url>\n    <loc>{SITE}/salones/</loc>\n    <lastmod>{today}</lastmod>\n    <priority>0.9</priority>\n  </url>')
 rows.append(f'  <url>\n    <loc>{SITE}/reserva/</loc>\n    <lastmod>{today}</lastmod>\n    <priority>0.8</priority>\n  </url>')
 open(ROOT+'sitemap.xml','w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'+'\n'.join(rows)+'\n</urlset>\n')
 for lang,m in miss.items():
