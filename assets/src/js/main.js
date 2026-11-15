@@ -67,29 +67,39 @@ let ampReady = false;
 const ampQueue = [];
 if (SITE.amplitude?.apiKey) {
   const { apiKey, serverZone } = SITE.amplitude;
-  const s = document.createElement("script");
-  s.async = true;
-  // Los proyectos de la región EU se sirven desde cdn.eu.amplitude.com (la CDN global responde 401 a su clave)
-  s.src = `https://cdn${serverZone === "EU" ? ".eu" : ""}.amplitude.com/script/${apiKey}.js`;
-  s.addEventListener("load", () => {
+  // Se carga la librería de analítica directamente (no el cargador /script/<clave>.js, que además
+  // arranca Amplitude Experiment y deja una cookie aunque no haya consentimiento).
+  const CDN = `https://cdn${serverZone === "EU" ? ".eu" : ""}.amplitude.com/libs`;
+  const loadScript = (src) => new Promise((ok, ko) => {
+    const s = document.createElement("script");
+    s.async = true; s.src = src; s.onload = ok; s.onerror = ko;
+    document.head.appendChild(s);
+  });
+  const consented = readConsent() === "accept";
+  const libs = [loadScript(`${CDN}/analytics-browser-2.42.4-min.js.gz`)];
+  if (consented) libs.push(loadScript(`${CDN}/plugin-session-replay-browser-1.32.1-min.js.gz`));
+  Promise.all(libs).then(() => {
     const amp = window.amplitude;
-    if (!amp?.init) { console.error("[amplitude] el script no se ha cargado bien: no se enviarán eventos"); return; }
-    if (readConsent() === "accept") {
+    if (!amp?.init) throw new Error("sin window.amplitude");
+    if (consented) {
       if (window.sessionReplay?.plugin) amp.add(window.sessionReplay.plugin({ sampleRate: 1, serverZone }));
       amp.init(apiKey, { serverZone, autocapture: true });
     } else {
+      // Sin consentimiento: nada se guarda en el navegador y no se guarda la IP.
+      // Se desactivan las partes de la autocaptura que usan almacenamiento; la vista de página se anota a mano.
       amp.init(apiKey, {
         serverZone,
-        autocapture: true,
         identityStorage: "none",
         storageProvider: memoryStore(),
         trackingOptions: { ipAddress: false },
+        fetchRemoteConfig: false,
+        autocapture: { attribution: false, pageViews: false, pageUrlEnrichment: false, sessions: true, formInteractions: true, fileDownloads: true, elementInteractions: true, frustrationInteractions: false, webVitals: false, networkTracking: false },
       });
+      amp.track("pagina-vista", { ruta: location.pathname });
     }
     ampReady = true;
     ampQueue.splice(0).forEach(([n, p]) => amp.track(n, p));
-  });
-  document.head.appendChild(s);
+  }).catch(() => console.error("[amplitude] no se ha podido cargar la librería: no se enviarán eventos"));
 } else {
   console.error("[amplitude] falta SITE.amplitude.apiKey: no se enviarán eventos");
 }
