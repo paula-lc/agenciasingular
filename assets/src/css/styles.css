@@ -1362,3 +1362,10 @@ html:has(.pmodal[open]) { overflow: hidden; }
 @media (min-width: 641px) and (max-width: 899px) { .pmodal__body { gap: 24px; } }
 @media (max-width: 899px) { .pmodal__body { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: no-preference) { .pack__variant:not([hidden]) { animation: panel-in .35s cubic-bezier(.3, 1.2, .5, 1); } }
+
+/* Aviso de analítica (Amplitude): se crea desde main.js solo si la persona aún no ha elegido */
+.consent-pop { position: fixed; z-index: 60; left: 16px; bottom: 16px; width: min(420px, calc(100vw - 32px)); background: var(--cream-soft); color: var(--blue-ink); border: 3px solid var(--blue); border-radius: 14px; box-shadow: 6px 6px 0 var(--crimson); padding: 16px 18px; }
+.consent-pop h2 { font-size: 20px; color: var(--blue); text-transform: uppercase; margin: 0; }
+.consent-pop p { margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; }
+.consent-pop__btns { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.consent-pop__no { background: var(--cream-warm); color: var(--blue-deep); }
