@@ -438,12 +438,27 @@ p { text-wrap: pretty; }
 /* Anuncio junto al titular: dos columnas solo en pantallas anchas */
 @media (min-width: 861px) { .sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); } }
 
-/* Aviso de cookies: la jaguar secretaria dentro de la caja, a la izquierda del texto */
-.consent-pop { display: grid; grid-template-columns: 84px minmax(0, 1fr); column-gap: 14px; align-items: start; }
+/* Aviso de cookies: la jaguar secretaria dentro de la caja, tan alta como el texto y los botones.
+   Se escala al ancho de su columna y se recorta por abajo: con poco texto se ve hasta los hombros,
+   con más texto (pantallas estrechas) hasta la cintura. */
+.consent-pop { display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 16px; align-items: start; }
 .consent-pop::before {
-  content: ""; grid-column: 1; grid-row: 1 / span 3; width: 84px; height: 78px; margin-top: 2px;
-  background: url("../../img/jaguar-secretaria.svg") no-repeat center / contain;
+  content: ""; grid-column: 1; grid-row: 1 / 4; align-self: stretch; min-height: 120px; margin: -2px 0 -4px;
+  background: url("../../img/jaguar-secretaria.svg") no-repeat 50% 0 / 100% auto;
 }
 .consent-pop > * { grid-column: 2; }
-.consent-pop__btns { grid-column: 1 / -1; }
-@media (max-width: 420px) { .consent-pop { grid-template-columns: 64px minmax(0, 1fr); column-gap: 10px; } .consent-pop::before { width: 64px; height: 60px; } }
+.consent-pop__btns { grid-column: 2; }
+@media (max-width: 420px) { .consent-pop { grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; } }
+/* Ajuste del recorte: la figura se amplía en su columna (sobra margen a los lados) para que el corte
+   caiga en los hombros o el pecho en escritorio y en la cintura en móvil */
+.consent-pop { width: min(470px, calc(100vw - 32px)); grid-template-columns: 120px minmax(0, 1fr); }
+.consent-pop::before { background-size: 170% auto; }
+@media (max-width: 480px) {
+  .consent-pop { grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; }
+  .consent-pop::before { background-size: 190% auto; }
+  .consent-pop__btns { gap: 8px; }
+  .consent-pop__btns .btn { padding: 10px 12px; font-size: 12px; letter-spacing: .06em; }
+}
+.consent-pop__btns { gap: 10px; }
+.consent-pop__btns .btn { padding: 12px 18px; font-size: 13px; letter-spacing: .08em; }
+@media (max-width: 480px) { .consent-pop::before { background-size: 178% auto; } .consent-pop__btns .btn { padding: 10px 12px; font-size: 12px; letter-spacing: .06em; } }
