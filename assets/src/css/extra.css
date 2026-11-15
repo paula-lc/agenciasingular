@@ -462,3 +462,11 @@ p { text-wrap: pretty; }
 .consent-pop__btns { gap: 10px; }
 .consent-pop__btns .btn { padding: 12px 18px; font-size: 13px; letter-spacing: .08em; }
 @media (max-width: 480px) { .consent-pop::before { background-size: 178% auto; } .consent-pop__btns .btn { padding: 10px 12px; font-size: 12px; letter-spacing: .06em; } }
+
+/* Aviso de cookies: caja más ancha para que la jaguar quepa entera de lado a lado (cola y libreta incluidas) */
+.consent-pop { width: min(580px, calc(100vw - 32px)); grid-template-columns: 150px minmax(0, 1fr); column-gap: 18px; }
+.consent-pop::before { background-size: 100% auto; background-position: 50% 0; margin: 0 0 -4px; }
+@media (max-width: 480px) {
+  .consent-pop { grid-template-columns: 108px minmax(0, 1fr); column-gap: 10px; }
+  .consent-pop::before { background-size: 100% auto; }
+}
