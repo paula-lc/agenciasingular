@@ -21,6 +21,8 @@ MAPAS='No todo el mundo busca en Google: quien tiene iPhone suele abrir Apple Ma
 RESERVAR='Conectamos tu sistema de reservas a la ficha. Así, quien te encuentra puede pedir cita en el momento, sin llamarte ni escribirte.'
 QR='Un cartel para tu salón: tu cliente escanea el código y deja su reseña en el momento. Las plantillas te ahorran pensar qué contestar a cada una.'
 
+INFORME='A los 60 días te enseñamos qué ha cambiado, con las estadísticas de tu propia ficha.'
+
 PAGES={
  'cuidados-esenciales': dict(
   title='Cuidados esenciales: tu ficha de Google al día · Agencia Singular',
@@ -37,7 +39,7 @@ PAGES={
    'Botón «Reservar» conectado a tu Booksy, Fresha o Treatwell': RESERVAR,
    'Sesión de fotos de 1 h en tu local: 10–12 fotos editadas': 'Vamos una hora a tu salón y te entregamos entre 10 y 12 fotos editadas. Las fotos reales de tu local y de tu trabajo dan más confianza que las de banco de imágenes.',
    'Cartel con QR para conseguir reseñas y plantillas para responderlas': QR,
-   # 'Informe de resultados a los 60 días': TODO (no sabemos qué mide el informe)
+   'Informe de resultados a los 60 días': INFORME,
   },
   faq=[
    NO_PROMESA,
@@ -64,7 +66,7 @@ PAGES={
    'Alta en Apple Maps y Bing': MAPAS,
    'Guía para hacer buenas fotos con el móvil': 'Como no vamos a tu salón, las fotos las haces tú. La guía te explica cómo hacerlas bien con el móvil.',
    'Edición de tus fotos': 'Nos mandas las fotos que hagas con la guía y nosotros las editamos.',
-   # 'Informe de resultados a los 60 días': TODO (no sabemos qué mide el informe)
+   'Informe de resultados a los 60 días': INFORME,
   },
   faq=[
    ('¿En qué se diferencia de Cuidados esenciales?', 'Incluye lo mismo excepto la sesión de fotos en tu local. A cambio, te damos una guía para hacer buenas fotos con el móvil y editamos las que nos mandes.', 'cuidados-esenciales'),
