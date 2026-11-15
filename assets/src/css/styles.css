@@ -1929,7 +1929,15 @@ p { text-wrap: pretty; }
    Un solo gesto de entrada (los sellos giran una vez al llegar), la cinta que corre y el chat que se escribe.
    Nada más se anima solo y los hover son directos, sin transición.
    ========================================================================== */
-*, *::before, *::after { transition: none !important; }
+/* Hover a trompicones: todas las transiciones van por saltos, como el cine mudo */
+*, *::before, *::after { transition-timing-function: steps(4, end) !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .btn .icon, .chip span, .sector-tab, .add-btn, .pack, .service, .pack__tab, .pack__more, .text-link, .cart-pill,
+  .cart-panel__remove, .cart-panel__close, .nav__ig, .lang-switch__btn, .faq summary, .section-rail a, .section-rail .icon, .site-footer a, .contact-card a {
+    transition-property: transform, translate, scale, rotate, box-shadow, background-color, color, border-color, fill, text-decoration-color !important;
+    transition-duration: .3s !important;
+  }
+}
 .reveal, .reveal.is-in, .pack.reveal, .service.reveal, .trastienda.reveal { opacity: 1 !important; translate: none !important; clip-path: none !important; }
 .alogo__swing, .hero__logo .alogo__paw { animation: none !important; }
 .hero__photo::before, .nav__cta::after, .sticky-cta .btn::after { display: none; }
@@ -1937,11 +1945,11 @@ p { text-wrap: pretty; }
 
 /* ---------- Animaciones que sí se conservan (todo lo demás, directo) ---------- */
 .nav__links .btn--outline::after { transition: transform .24s steps(5) !important; }
-.hero__logo .alogo__rstar { transition: scale .25s ease !important; }
-.hero__logo:hover .alogo__rstar { transition: scale .45s cubic-bezier(.3, 1.8, .5, 1) !important; }
-.hero__logo .alogo__paw, .hero__logo .alogo__claws { transition: rotate .3s ease !important; }
-.hero__logo:hover .alogo__paw { transition: rotate .5s cubic-bezier(.3, 1.8, .5, 1) !important; }
-.hero__logo:hover .alogo__claws { transition: rotate .5s .08s cubic-bezier(.3, 1.8, .5, 1) !important; }
+.hero__logo .alogo__rstar { transition: scale .25s steps(3, end) !important; }
+.hero__logo:hover .alogo__rstar { transition: scale .45s steps(4, end) !important; }
+.hero__logo .alogo__paw, .hero__logo .alogo__claws { transition: rotate .3s steps(3, end) !important; }
+.hero__logo:hover .alogo__paw { transition: rotate .5s steps(4, end) !important; }
+.hero__logo:hover .alogo__claws { transition: rotate .5s .08s steps(4, end) !important; }
 .sx-nav-logo:hover { animation: alogo-pulse .6s ease-out; }
 @media (prefers-reduced-motion: reduce) { .nav__links .btn--outline::after { transition: none !important; } .sx-nav-logo:hover { animation: none; } }
 
@@ -1966,3 +1974,9 @@ button.cart-pill { padding: 0; cursor: pointer; font: inherit; }
 .cart-panel__cta { margin-top: 4px; }
 .cart-panel :focus-visible { outline-color: var(--ink); }
 @media (max-width: 520px) { .cart-panel { right: 12px; left: 12px; width: auto; } }
+
+/* ---------- Contacto: anuncio para reservar llamada ---------- */
+.sx-adbox--paper { background: var(--newsprint); color: var(--ink); outline-color: var(--ink); box-shadow: 6px 6px 0 var(--crimson); padding: 22px 24px; margin: 0; }
+.sx-adbox--paper .sx-adbox__head:first-of-type { padding: 0; }
+.sx-adbox--paper .sx-adbox__big { color: var(--crimson); }
+.sx-adbox--paper .btn { margin-top: 14px; }
