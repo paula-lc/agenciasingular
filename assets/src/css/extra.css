@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Singular Extra · capa de borrador sobre styles.css
+   Aplica el sistema de diseño "Singular Extra" (lógica de imprenta: tintas planas,
+   esquinas rectas, sombras duras, tipografía de revista) sin tocar styles.css.
+   Solo la carga borrador.html. Para generarlo: python3 scripts/build/borrador.py
+   ========================================================================== */
+
+@font-face { font-family: "Besley"; src: url("../../fonts/Besley-Variable.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Besley"; src: url("../../fonts/Besley-Italic-Variable.woff2") format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "League Gothic"; src: url("../../fonts/LeagueGothic-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Caprasimo"; src: url("../../fonts/Caprasimo-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Archivo"; src: url("../../fonts/Archivo-Variable.woff2") format("woff2"); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Archivo Black"; src: url("../../fonts/ArchivoBlack-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Courier Prime"; src: url("../../fonts/CourierPrime-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Courier Prime"; src: url("../../fonts/CourierPrime-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+/* ---------- Tintas y medidas ---------- */
+:root {
+  --paper: #ebe7d0;
+  --paper-soft: #f4f1e2;
+  --newsprint: #f1d5bb;
+  --ink: #261f14;
+  --ink-muted: #5e5343;
+  --deep: #2c4763;          /* panel profundo (antes --blue como fondo) */
+  --pink: #f2578f;
+  --sky: #4fb3dc;
+  --teal: #1f9c84;
+
+  /* Reasignación de las variables antiguas */
+  --blue: var(--ink);        /* texto, filetes y bordes pasan a tinta */
+  --blue-deep: var(--ink);   /* texto sobre amarillo */
+  --white: var(--paper-soft);/* el blanco no existe: papel */
+  --radius-lg: 0px; --radius: 0px; --radius-sm: 0px;
+  --shadow-stamp: 4px 4px 0 var(--ink);
+  --shadow-retro-blue: 6px 6px 0 var(--ink);
+
+  --font-slab: "Besley", "Clarendon", "Rockwell", Georgia, serif;
+  --font-gothic: "League Gothic", "Arial Narrow", Impact, sans-serif;
+  --font-novelty: "Caprasimo", "Cooper Black", Georgia, serif;
+  --font-sans: "Archivo", "Arial Black", system-ui, sans-serif;
+  --font-typewriter: "Courier Prime", "Courier New", ui-monospace, monospace;
+  --font-display: "Archivo Black", "Arial Black", Impact, sans-serif;
+  --font-body: var(--font-slab);
+}
+
+body { color: var(--ink); background: var(--paper); font-weight: 400; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 0; }
+.section--blue :focus-visible, .site-header :focus-visible, .site-footer :focus-visible,
+.pack--featured :focus-visible, .contact-card :focus-visible, .callout :focus-visible { outline-color: var(--paper-soft); }
+::selection { background: var(--yellow); color: var(--ink); }
+
+/* ---------- Paneles profundos ---------- */
+.section--blue, .site-header, .site-footer, .pack--featured, .contact-card, .callout,
+.compare th, .quiz__reco, .pmodal__head, .hola-body { background: var(--deep); }
+.section--blue, .site-footer, .contact-card, .callout { color: var(--paper-soft); }
+@media (max-width: 1120px) { .nav__links { background: var(--deep); } }
+.section + .section, .site-footer { border-top: 6px solid var(--ink); }
+.site-header { border-bottom: 3px solid var(--ink); }
+.site-header.is-scrolled { box-shadow: 0 4px 0 var(--yellow); }
+
+/* ---------- Titulares: slab en caja baja ---------- */
+h1, h2, h3 { font-family: var(--font-slab); font-weight: 900; letter-spacing: -.012em; text-transform: none !important; text-wrap: balance; }
+h4 { font-family: var(--font-sans); font-weight: 800; }
+.section-title { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.02; }
+.section--blue .section-title, .section--blue .faq__intro h2, .article-hero h1, .notfound h1 { color: var(--yellow); text-shadow: 3px 3px 0 var(--crimson); }
+.section-lead, .empathy__lead { font-style: italic; font-weight: 600; font-size: 19px; line-height: 1.45; text-wrap: pretty; }
+.empathy__lead { color: var(--ink); }
+.boxed-title { border: 3px double var(--ink); border-width: 9px; background: var(--paper-soft); box-shadow: var(--shadow-stamp); }
+.boxed-title h2 { font-size: clamp(28px, 3.6vw, 44px); line-height: 1.08; }
+p { text-wrap: pretty; }
+
+/* ---------- Etiquetas ---------- */
+.eyebrow { font-family: var(--font-sans); font-weight: 800; border-radius: 3px; letter-spacing: .08em; color: var(--ink); }
+.badge, .new-tag { border-radius: 3px; }
+.badge { font-family: var(--font-sans); font-weight: 800; background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+.section--blue .badge { color: var(--paper-soft); border-color: var(--paper-soft); }
+.badge--blue { background: var(--ink); color: var(--paper); }
+.new-tag { font-family: var(--font-gothic); font-size: 18px; line-height: 1; letter-spacing: .04em; transform: rotate(-8deg); display: inline-block; }
+
+/* ---------- Botones: sello ---------- */
+.btn {
+  font-family: var(--font-sans); font-weight: 800; letter-spacing: .1em; border-radius: 0; min-height: 44px;
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease, color .12s ease;
+}
+.btn .icon { transition: none; }
+.btn--yellow, .btn--retro, .btn--cream, .btn--crimson { border: 3px solid var(--ink); box-shadow: var(--shadow-stamp); color: var(--ink); }
+.btn--crimson { color: var(--paper-soft); }
+.btn--cream { background: var(--paper-soft); }
+.btn--retro { letter-spacing: .14em; }
+.section--blue .btn--yellow, .section--blue .btn--retro, .site-header .btn--cream, .callout .btn, .contact-card .btn { box-shadow: 4px 4px 0 var(--crimson); }
+.btn--ghost, .btn--ghost-cream { border-width: 3px; }
+@media (hover: hover) {
+  .btn:hover { transform: translate(-2px, -2px); }
+  .btn--yellow:hover, .btn--retro:hover, .btn--cream:hover, .btn--crimson:hover { box-shadow: 8px 8px 0 var(--ink); }
+  .section--blue .btn--yellow:hover, .section--blue .btn--retro:hover, .hero .btn--yellow:hover, .site-header .btn--cream:hover { box-shadow: 8px 8px 0 var(--crimson); }
+}
+.btn:active { transform: translate(4px, 4px); box-shadow: none; }
+.btn.is-bouncing, .alogo--nav.is-bouncing, .btn.is-bouncing .icon { animation: none; }
+.btn--outline { border-width: 2px; min-height: 44px; }
+.nav__ig, .cart-pill, .nav__toggle { border-radius: 0; border-width: 2px; width: 44px; height: 44px; }
+.text-link, .link-btn { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* ---------- Portada ---------- */
+.sx-dateline {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; margin-top: 0;
+  font-family: var(--font-typewriter); font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--paper-soft); border-top: 3px double var(--paper-soft); border-bottom: 1px solid var(--paper-soft);
+  padding: 8px 0; margin-bottom: clamp(20px, 3vw, 36px);
+}
+.hero__tagline { font-family: var(--font-slab); font-style: italic; font-weight: 600; letter-spacing: .02em; }
+.highlight {
+  font-family: var(--font-gothic); font-weight: 400; font-size: clamp(34px, 4.6vw, 60px); line-height: 1.22; letter-spacing: .015em;
+  border-radius: 0; padding: 2px 14px 0; color: var(--ink);
+}
+.hero__copy { font-size: clamp(17px, 1.4vw, 19px); }
+.hero__proof li { font-family: var(--font-typewriter); font-size: 14px; }
+.hero__photo, .hero__photo img { border-radius: 0; }
+
+/* ---------- Cinta ---------- */
+.ticker { border-color: var(--ink); color: var(--ink); }
+.ticker li { font-family: var(--font-gothic); font-size: 26px; line-height: 1.05; letter-spacing: .03em; padding: 12px 18px 8px; }
+.ticker:hover .ticker__track { animation-play-state: paused; }
+
+/* ---------- Foto: duotono con trama ---------- */
+.photo-frame { border-width: 3px; background: var(--paper-soft); box-shadow: 6px 6px 0 var(--deep); padding: 12px; }
+.photo-frame picture { display: block; position: relative; background: var(--yellow); border: 2px solid var(--ink); overflow: hidden; }
+.photo-frame img { border: 0; filter: grayscale(1) contrast(1.25); mix-blend-mode: multiply; }
+.photo-frame picture::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .28; mix-blend-mode: multiply;
+  background-image: radial-gradient(#15120e 1px, transparent 1.6px); background-size: 6px 6px;
+}
+.photo-frame figcaption { font-family: var(--font-typewriter); font-weight: 400; font-size: 13px; letter-spacing: .06em; }
+
+/* ---------- Frase destacada y datos ---------- */
+.quote-box {
+  font-family: var(--font-gothic); font-size: clamp(30px, 3.4vw, 44px); line-height: 1; letter-spacing: .015em;
+  color: var(--ink); border: 3px solid var(--ink); border-left-width: 3px; padding: 16px 22px 12px;
+}
+.pain-stat { background: var(--paper-soft); }
+.pain-stat strong { font-family: var(--font-slab); font-weight: 800; font-size: 20px; text-transform: none; letter-spacing: -.01em; }
+
+/* ---------- Canales ---------- */
+.channel { border-radius: 0; }
+.channel__search { border-radius: 0; font-family: var(--font-typewriter); font-weight: 400; }
+.icon-tile { border-radius: 0; }
+
+/* ---------- Packs: cupones ---------- */
+.pack { border-style: dashed; background: var(--paper-soft); }
+.pack.pack--featured { background: var(--deep); border-style: solid; border-color: var(--ink); box-shadow: 8px 8px 0 var(--ink); color: var(--paper-soft); }
+@media (hover: hover) {
+  .pack:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
+  .pack--featured:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0 var(--ink); }
+}
+.pack h3, .pack__title-btn { font-family: var(--font-slab); font-weight: 800; text-transform: none; letter-spacing: -.01em; }
+.pack .pack__price { font-family: var(--font-gothic); font-weight: 400; font-size: clamp(48px, 4.6vw, 64px); line-height: .95; letter-spacing: .01em; }
+.pack .pack__price small { font-size: 13px; letter-spacing: .04em; }
+.pack__price small, .pack__vat, .pack__was, .packs-note, .pack__kicker { font-family: var(--font-typewriter); }
+.pack__kicker { letter-spacing: .06em; }
+.pack__ribbon { font-family: var(--font-gothic); font-size: 18px; letter-spacing: .05em; border-radius: 0; transform: rotate(-4deg); }
+.pack__tab, .pack__switch-ui, .path-step__num { border-radius: 0; }
+.path-step__num { font-family: var(--font-gothic); font-size: 28px; }
+.add-btn, .service__go { border-radius: 0; font-family: var(--font-sans); }
+
+/* ---------- Pasos ---------- */
+.step { background: var(--paper-soft); }
+.step::before { font-family: var(--font-gothic); font-size: 40px; line-height: 1; padding: 4px 12px 0; color: var(--ink); top: -26px; }
+.step:nth-child(even)::before { background: var(--sky); }
+.step h3 { font-weight: 800; }
+
+/* ---------- Test, sectores, formulario ---------- */
+.quiz, .quiz__opt, .sector-panel, .searches li, .score__ring span { border-radius: 0; }
+.sector-tab { border-radius: 999px; font-family: var(--font-sans); min-height: 44px; }
+.chip span { font-family: var(--font-sans); min-height: 44px; }
+.field label, .field legend { font-family: var(--font-sans); font-weight: 800; font-size: 13px; letter-spacing: .08em; color: var(--ink); }
+.field input, .field select, .field textarea { font-family: var(--font-typewriter); font-weight: 400; border-radius: 0; background: var(--paper-soft); }
+.field input::placeholder, .field textarea::placeholder { color: var(--ink-muted); opacity: 1; }
+.field input:focus, .field textarea:focus, .field select:focus { box-shadow: var(--shadow-stamp); }
+.contact-card { box-shadow: 6px 6px 0 var(--crimson); }
+
+/* ---------- FAQ ---------- */
+.faq details, .faq summary { border-radius: 0; }
+.faq summary { font-family: var(--font-slab); font-weight: 800; font-size: 18px; min-height: 44px; }
+
+/* ---------- Pie ---------- */
+.site-footer h3, .site-footer h4 { font-family: var(--font-sans); font-weight: 800; }
+.footer-bottom { font-family: var(--font-typewriter); }
+
+/* ---------- Movimiento ---------- */
+@media (prefers-reduced-motion: reduce) { .btn, .pack { transition: none; } }
