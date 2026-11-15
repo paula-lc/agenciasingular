@@ -314,3 +314,29 @@ p { text-wrap: pretty; }
 }
 .sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); }
 .sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
+
+/* Anuncio: color #211c16 y estallido superpuesto en el borde derecho (no por encima de la caja) */
+.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); }
+.sx-adbox { background: #211c16; padding: 26px 76px 24px 24px; }
+.sx-adbox .sx-adbox__head:first-of-type { padding: 0; }
+.sx-burst { top: 16%; right: -48px; width: 124px; }
+.sx-burst b { font-size: 38px; }
+.sx-burst span { font-size: 15px; }
+@media (max-width: 860px) {
+  .sx-adbox { margin-top: 24px; padding-right: 92px; }
+  .sx-burst { top: 14%; right: -8px; width: 104px; }
+  .sx-burst b { font-size: 32px; }
+  .sx-burst span { font-size: 13px; }
+  .sx-adbox .sx-adbox__head:first-of-type { padding: 0; }
+}
+.sx-adbox { padding: 26px 40px 24px 24px; }
+.sx-burst { top: 10%; right: -28px; width: 112px; }
+.sx-burst b { font-size: 36px; }
+.sx-burst span { font-size: 14px; }
+@media (max-width: 860px) {
+  .sx-adbox { margin-top: 32px; padding: 64px 24px 24px; }
+  .sx-burst { top: -28px; right: -6px; width: 96px; }
+  .sx-burst b { font-size: 30px; }
+  .sx-burst span { font-size: 13px; }
+}
+@media (max-width: 860px) { .sx-adbox ul { font-size: 13px; } .sx-adbox li { text-wrap: balance; } }
