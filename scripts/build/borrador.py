@@ -76,5 +76,12 @@ for price, saving in (('350', '100'), ('250', '50')):
                    h, count=1, flags=re.S)
     assert n == 1, price
 
+# 13. Iconos retro: sustituyen los símbolos del sprite (assets/src/icons/retro-sprite.svg)
+retro = (root / 'assets/src/icons/retro-sprite.svg').read_text(encoding='utf-8')
+for sid, body in re.findall(r'<symbol id="(i-[\w-]+)"[^>]*>(.*?)</symbol>', retro, re.S):
+    h, n = re.subn(r'<symbol id="' + sid + r'"[^>]*>.*?</symbol>',
+                   lambda m: '<symbol id="' + sid + '" viewBox="0 0 48 48">' + body + '</symbol>', h, count=1, flags=re.S)
+    assert n == 1, sid
+
 (root / 'borrador.html').write_text(h, encoding='utf-8')
 print('borrador.html generado')

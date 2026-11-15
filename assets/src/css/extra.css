@@ -470,3 +470,8 @@ p { text-wrap: pretty; }
   .consent-pop { grid-template-columns: 108px minmax(0, 1fr); column-gap: 10px; }
   .consent-pop::before { background-size: 100% auto; }
 }
+
+/* ---------- Iconos retro: mancha de color desplazada solo a 20 px o más ---------- */
+.icon { --sx-spot: 1; }
+.icon--sm, .nav__links .icon, .channel li .icon, .channel__search .icon, .maps-chip .icon, .hero__proof .icon, .channels-note .icon,
+.pack li .icon, .service-info .icon, .pmodal__time .icon, .pmodal__list .icon, .cart__item .icon, .section-rail .icon, .eyebrow .icon { --sx-spot: 0; }
