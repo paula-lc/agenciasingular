@@ -312,11 +312,9 @@ p { text-wrap: pretty; }
   .sx-burst span { font-size: 13px; }
   .sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
 }
-.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); }
 .sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
 
 /* Anuncio: color #211c16 y estallido superpuesto en el borde derecho (no por encima de la caja) */
-.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); }
 .sx-adbox { background: #211c16; padding: 26px 76px 24px 24px; }
 .sx-adbox .sx-adbox__head:first-of-type { padding: 0; }
 .sx-burst { top: 16%; right: -48px; width: 124px; }
@@ -430,13 +428,22 @@ p { text-wrap: pretty; }
 
 /* ---------- Aviso de cookies: recto y con la jaguar secretaria ---------- */
 .consent-pop { border-radius: 0; border-color: var(--ink); box-shadow: 6px 6px 0 var(--crimson); background: var(--paper-soft); color: var(--ink); overflow: visible; }
-.consent-pop::before {
-  content: ""; position: absolute; right: 14px; top: -92px; width: 100px; height: 93px;
-  background: url("../../img/jaguar-secretaria.svg") no-repeat bottom / contain; pointer-events: none;
-}
 .consent-pop h2 { font-family: var(--font-slab); font-weight: 900; text-transform: none; color: var(--ink); }
 .consent-pop p { font-family: var(--font-slab); }
 .consent-pop a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .consent-pop .btn--yellow { box-shadow: 4px 4px 0 var(--ink); }
 .consent-pop__no { background: transparent; border: 3px solid var(--ink); color: var(--ink); }
 @media (max-width: 1040px) { .sx-burst--founder { margin-top: -34px; width: 92px; } .sx-burst--founder b { font-size: 28px; } }
+
+/* Anuncio junto al titular: dos columnas solo en pantallas anchas */
+@media (min-width: 861px) { .sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); } }
+
+/* Aviso de cookies: la jaguar secretaria dentro de la caja, a la izquierda del texto */
+.consent-pop { display: grid; grid-template-columns: 84px minmax(0, 1fr); column-gap: 14px; align-items: start; }
+.consent-pop::before {
+  content: ""; grid-column: 1; grid-row: 1 / span 3; width: 84px; height: 78px; margin-top: 2px;
+  background: url("../../img/jaguar-secretaria.svg") no-repeat center / contain;
+}
+.consent-pop > * { grid-column: 2; }
+.consent-pop__btns { grid-column: 1 / -1; }
+@media (max-width: 420px) { .consent-pop { grid-template-columns: 64px minmax(0, 1fr); column-gap: 10px; } .consent-pop::before { width: 64px; height: 60px; } }
