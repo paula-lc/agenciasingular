@@ -49,5 +49,32 @@ h, n = re.subn(r'(<div class="boxed-title reveal"><h2 id="pain-title">.*?</h2></
                lambda m: '<div class="sx-pain-head">' + m.group(1) + '\n          ' + ad + '</div>', h, count=1)
 assert n == 1, 'no se encontró el titular del problema'
 
+# 9. Menú: logo en tinta, estático
+h, n = re.subn(r'<div class="alogo alogo--nav" aria-hidden="true">.*?</div>\s*</div>\s*</a>',
+               '<img class="sx-nav-logo" src="assets/img/logo/logo-ink.webp" alt="" width="480" height="189">\n      </a>', h, count=1, flags=re.S)
+assert n == 1, 'no se encontró el logo del menú'
+
+# 10. Lemas de sección como coverlines
+mottos = {
+    '¡Sin textos rellenos, trabajo real!': ('¡Sin textos rellenos,', 'trabajo real!'),
+    'SEO + Maps + IA = más fácil de elegir': ('SEO + Maps + IA', '= más fácil de elegir'),
+}
+for txt, (a1, a2) in mottos.items():
+    h, n = re.subn(r'<span class="badge[^"]*">' + re.escape(txt) + '</span>',
+                   f'<p class="sx-motto"><span>{a1}</span><span>{a2}</span></p>', h)
+    assert n >= 1, txt
+
+# 11. Estallido en la guía gratuita
+h, n = re.subn(r'(<div class="contact-card contact-card--yellow">)',
+               r'\1\n                <span class="sx-burst--plain sx-burst--guide" aria-hidden="true"><b>Gratis</b><span>Guía</span></span>', h)
+assert n == 1
+
+# 12. Estallido de precio fundador junto al precio (se oculta con el bloque de fundador)
+for price, saving in (('350', '100'), ('250', '50')):
+    h, n = re.subn(r'(<div class="pack__prices" data-founder>.*?<p class="pack__price">' + price + r' €<small>\+ IVA</small>)',
+                   r'\1<span class="sx-burst--plain sx-burst--founder" aria-hidden="true"><b>−' + saving + r' €</b><span>Fundador</span></span>',
+                   h, count=1, flags=re.S)
+    assert n == 1, price
+
 (root / 'borrador.html').write_text(h, encoding='utf-8')
 print('borrador.html generado')
