@@ -1845,8 +1845,7 @@ p { text-wrap: pretty; }
 
 /* ---------- Iconos retro: mancha de color desplazada solo a 20 px o más ---------- */
 .icon { --sx-spot: 1; }
-.icon--sm, .nav__links .icon, .channel li .icon, .channel__search .icon, .maps-chip .icon, .hero__proof .icon, .channels-note .icon,
-.pack li .icon, .service-info .icon, .pmodal__time .icon, .pmodal__list .icon, .cart__item .icon, .section-rail .icon, .eyebrow .icon { --sx-spot: 0; }
+.add-btn .icon, .section-rail .icon { --sx-spot: 0; }
 
 /* ==========================================================================
    Ronda 4
@@ -1895,13 +1894,10 @@ p { text-wrap: pretty; }
 .pack.is-selected .sx-bignum { color: var(--yellow); text-shadow: 4px 4px 0 var(--ink); }
 
 /* 6) Animaciones retro: bloques que se revelan a saltos y titulares que giran como el periódico de las películas */
-.reveal { opacity: 1 !important; translate: none !important; clip-path: inset(-40px 100% -40px -40px); transition: clip-path .7s steps(9) !important; }
-.reveal.is-in { clip-path: inset(-40px -90px -40px -40px); }
 .sx-pre { opacity: 0; scale: .05; rotate: -540deg; }
 .sx-pre.sx-spin { animation: sx-news .9s cubic-bezier(.2, .75, .25, 1) both; }
 @keyframes sx-news { 0% { opacity: 0; scale: .05; rotate: -540deg; } 8% { opacity: 1; } 100% { opacity: 1; scale: 1; rotate: 0deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { clip-path: none !important; transition: none !important; }
   .sx-pre { opacity: 1; scale: 1; rotate: 0deg; }
   .sx-pre.sx-spin { animation: none; }
 }
@@ -1923,3 +1919,18 @@ p { text-wrap: pretty; }
   .sx-motto--burst { width: 180px; margin: 24px 0 0; justify-self: start; }
   .sx-motto--burst span:first-child { font-size: 28px; } .sx-motto--burst span + span { font-size: 17px; }
 }
+
+/* ---------- Iconos: más protagonismo ---------- */
+.icon-tile { width: 56px; height: 56px; }
+.icon-tile .icon { width: 34px; height: 34px; }
+
+/* ==========================================================================
+   Movimiento sobrio
+   Un solo gesto de entrada (los sellos giran una vez al llegar), la cinta que corre y el chat que se escribe.
+   Nada más se anima solo y los hover son directos, sin transición.
+   ========================================================================== */
+*, *::before, *::after { transition: none !important; }
+.reveal, .reveal.is-in, .pack.reveal, .service.reveal, .trastienda.reveal { opacity: 1 !important; translate: none !important; clip-path: none !important; }
+.alogo__swing, .hero__logo .alogo__paw, .alogo:hover .alogo__beat--a, .alogo:hover .alogo__beat--s { animation: none !important; }
+.hero__photo::before, .nav__cta::after, .sticky-cta .btn::after { display: none; }
+.btn.is-bouncing, .btn.is-bouncing .icon, .add-btn.is-popping, .cart-pill.is-popping, .alogo--nav.is-bouncing { animation: none !important; }
