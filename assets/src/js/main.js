@@ -69,7 +69,8 @@ if (SITE.amplitude?.apiKey) {
   const { apiKey, serverZone } = SITE.amplitude;
   const s = document.createElement("script");
   s.async = true;
-  s.src = `https://cdn.amplitude.com/script/${apiKey}.js`;
+  // Los proyectos de la región EU se sirven desde cdn.eu.amplitude.com (la CDN global responde 401 a su clave)
+  s.src = `https://cdn${serverZone === "EU" ? ".eu" : ""}.amplitude.com/script/${apiKey}.js`;
   s.addEventListener("load", () => {
     const amp = window.amplitude;
     if (!amp?.init) { console.error("[amplitude] el script no se ha cargado bien: no se enviarán eventos"); return; }
