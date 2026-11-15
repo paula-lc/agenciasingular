@@ -1,6 +1,6 @@
 # Agencia Singular · Web
 
-Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singular**, agencia de marketing para pequeños negocios locales. Diseño basado en el Figma `AGENCIA_SINGULAR` (landing, nodo 67:11): paleta azul pizarra / crema / amarillo / carmesí / naranja, tipografías Archivo Black + Montserrat y el logo del leopardo.
+Web estática (HTML + CSS + JS, sin dependencias ni build) para **Agencia Singular**, agencia de marketing para pequeños negocios locales. Diseño basado en el Figma `AGENCIA_SINGULAR` (landing, nodo 67:11): paleta azul pizarra / crema / amarillo / carmesí / naranja, tipografías Besley, League Gothic, Caprasimo, Archivo y Courier Prime (sistema de diseño «Singular Extra»: lógica de imprenta de los 60-70, esquinas rectas y sombras duras) y el logo del leopardo.
 
 ## Estructura
 
