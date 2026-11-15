@@ -1856,7 +1856,7 @@ p { text-wrap: pretty; }
 
 /* 2) Lemas: caja tipo anuncio (sin botón), pegada al titular */
 @media (min-width: 721px) {
-  .section-head { grid-template-columns: minmax(0, 720px) auto; justify-content: start; column-gap: clamp(24px, 4vw, 48px); }
+  .section-head { grid-template-columns: minmax(0, 720px) auto minmax(0, 1fr); justify-content: stretch; column-gap: clamp(24px, 4vw, 48px); }
 }
 .sx-motto {
   background: var(--newsprint); border: 3px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -8px;
