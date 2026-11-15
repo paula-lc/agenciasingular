@@ -533,3 +533,21 @@ p { text-wrap: pretty; }
   .sx-pre { opacity: 1; scale: 1; rotate: 0deg; }
   .sx-pre.sx-spin { animation: none; }
 }
+
+/* ==========================================================================
+   Ronda 5
+   ========================================================================== */
+/* Lemas: caja tan alta como el bloque de titular y texto, o estallido */
+.sx-motto { align-self: stretch; display: grid; place-content: center; margin: 0; }
+.sx-motto--burst { align-self: center; justify-self: center; aspect-ratio: 1; width: 210px; margin: -24px 0; padding: 0; border: 0; outline: 0; box-shadow: none;
+  background: var(--yellow); clip-path: polygon(50.0% 0.0%,58.0% 9.8%,69.1% 3.8%,72.8% 15.9%,85.4% 14.6%,84.1% 27.2%,96.2% 30.9%,90.2% 42.0%,100.0% 50.0%,90.2% 58.0%,96.2% 69.1%,84.1% 72.8%,85.4% 85.4%,72.8% 84.1%,69.1% 96.2%,58.0% 90.2%,50.0% 100.0%,42.0% 90.2%,30.9% 96.2%,27.2% 84.1%,14.6% 85.4%,15.9% 72.8%,3.8% 69.1%,9.8% 58.0%,0.0% 50.0%,9.8% 42.0%,3.8% 30.9%,15.9% 27.2%,14.6% 14.6%,27.2% 15.9%,30.9% 3.8%,42.0% 9.8%); transform: rotate(-8deg); }
+.sx-motto--burst span:first-child, .sx-motto--burst span + span, .section--blue .sx-motto--burst span:first-child, .section--blue .sx-motto--burst span + span { color: var(--ink); }
+.sx-motto--burst span:first-child { font-size: 32px; }
+.sx-motto--burst span + span { font-size: 20px; margin-top: 2px; }
+.section--blue .sx-motto--burst { background: var(--yellow); }
+.sx-motto--burst.sx-motto--pink, .section--blue .sx-motto--burst.sx-motto--pink { background: var(--pink); }
+@media (max-width: 720px) {
+  .sx-motto { align-self: auto; }
+  .sx-motto--burst { width: 180px; margin: 24px 0 0; justify-self: start; }
+  .sx-motto--burst span:first-child { font-size: 28px; } .sx-motto--burst span + span { font-size: 17px; }
+}

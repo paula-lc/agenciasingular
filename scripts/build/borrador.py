@@ -107,5 +107,9 @@ for old, new in copy:
 h, n = re.subn(r'(<p class="hero__tagline">).*?(</p>)', r'\1tú a lo tuyo, nosotros a lo nuestro\2', h, count=1)
 assert n == 1
 
+# 16. Lemas: cajas altas y estallidos
+_cls = iter(['sx-motto sx-motto--burst', 'sx-motto', 'sx-motto sx-motto--burst sx-motto--pink'])
+h = re.sub(r'<p class="sx-motto">', lambda m: '<p class="%s">' % next(_cls), h)
+
 (root / 'borrador.html').write_text(h, encoding='utf-8')
 print('borrador.html generado')
