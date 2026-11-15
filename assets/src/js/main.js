@@ -633,7 +633,7 @@ if (quiz) {
       });
       track("form-test-de-visibilidad-enviado");
       if (esEmail) document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = contacto; });
-      gateText.textContent = t("¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos. ☕");
+      gateText.textContent = t("¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos.");
       gateForm.hidden = true;
     } catch {
       gateError(gateForm.contacto, t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }));
@@ -1166,7 +1166,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         ? (SITE.whatsapp
           ? t("¡Recibido! En 48 h laborables te mando tu diagnóstico. Si prefieres WhatsApp, escríbeme al {phone}.", { phone: prettyPhone(SITE.whatsapp) })
           : t("¡Recibido! En 48 h laborables te mando tu diagnóstico."))
-        : t("¡Recibido! Te escribimos en menos de 24 h laborables. ☕"), true);
+        : t("¡Recibido! Te escribimos en menos de 24 h laborables."), true);
     } catch {
       setStatus(t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }), false);
     } finally {
