@@ -312,11 +312,9 @@ p { text-wrap: pretty; }
   .sx-burst span { font-size: 13px; }
   .sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
 }
-.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); }
 .sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
 
 /* Anuncio: color #211c16 y estallido superpuesto en el borde derecho (no por encima de la caja) */
-.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); }
 .sx-adbox { background: #211c16; padding: 26px 76px 24px 24px; }
 .sx-adbox .sx-adbox__head:first-of-type { padding: 0; }
 .sx-burst { top: 16%; right: -48px; width: 124px; }
@@ -340,3 +338,135 @@ p { text-wrap: pretty; }
   .sx-burst span { font-size: 13px; }
 }
 @media (max-width: 860px) { .sx-adbox ul { font-size: 13px; } .sx-adbox li { text-wrap: balance; } }
+
+/* ==========================================================================
+   Ronda 3 (revisión de Paula)
+   ========================================================================== */
+
+/* ---------- Menú: Nav de Singular Extra (papel, enlaces con barra) ---------- */
+.site-header { background: var(--paper); border-bottom: 3px solid var(--ink); }
+.site-header.is-scrolled { box-shadow: 0 4px 0 var(--yellow); }
+.sx-nav-logo { display: block; width: 150px; height: auto; }
+.nav__links .btn--outline {
+  background: transparent; color: var(--ink); border: 0; border-bottom: 3px solid transparent; box-shadow: none;
+  min-height: 44px; padding: 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em;
+}
+.nav__links .btn--outline .icon { display: none; }
+.nav__links .btn--outline.is-active, .nav__links .btn--outline[aria-current] { background: transparent; color: var(--ink); border-bottom-color: var(--crimson); }
+@media (hover: hover) { .nav__links .btn--outline:hover { background: transparent; color: var(--ink); border-bottom-color: var(--ink); transform: none; box-shadow: none; } }
+.nav__links { gap: 4px 18px; }
+.site-header .nav__cta { background: var(--yellow); color: var(--ink); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+.site-header .nav__cta .icon { color: var(--crimson); }
+.nav__ig, .cart-pill, .nav__toggle, .lang-switch__btn { color: var(--ink); border-color: var(--ink); background: transparent; }
+.site-header :focus-visible { outline-color: var(--ink); }
+@media (max-width: 1120px) {
+  .nav__links { background: var(--paper); border-bottom: 3px solid var(--ink); }
+  .nav__links .btn--outline { justify-content: flex-start; }
+}
+
+/* ---------- Portada: la data arranca a la altura del lema ---------- */
+.hero__grid { align-items: start; }
+.sx-dateline { margin-top: 4px; }
+
+/* ---------- Lemas de sección: coverlines en vez de cajas ---------- */
+.sx-motto {
+  grid-column: 2; grid-row: 3 / 5; align-self: center; margin: 0; text-align: right;
+  font-family: var(--font-gothic); text-transform: uppercase; line-height: .95; letter-spacing: .015em;
+}
+.sx-motto span { display: block; }
+.sx-motto span:first-child { font-size: clamp(36px, 3.6vw, 48px); color: var(--crimson); }
+.sx-motto span + span { font-size: clamp(24px, 2.2vw, 30px); color: var(--ink); margin-top: 4px; }
+.section--blue .sx-motto span:first-child { color: var(--yellow); }
+.section--blue .sx-motto span + span { color: var(--paper-soft); }
+@media (max-width: 720px) { .sx-motto { grid-column: 1; grid-row: 5; text-align: left; margin-top: 18px; } }
+
+/* ---------- Estallidos: base común ---------- */
+.sx-burst--plain {
+  position: absolute; z-index: 3; display: grid; place-content: center; text-align: center; aspect-ratio: 1;
+  clip-path: polygon(50.0% 0.0%,58.0% 9.8%,69.1% 3.8%,72.8% 15.9%,85.4% 14.6%,84.1% 27.2%,96.2% 30.9%,90.2% 42.0%,100.0% 50.0%,90.2% 58.0%,96.2% 69.1%,84.1% 72.8%,85.4% 85.4%,72.8% 84.1%,69.1% 96.2%,58.0% 90.2%,50.0% 100.0%,42.0% 90.2%,30.9% 96.2%,27.2% 84.1%,14.6% 85.4%,15.9% 72.8%,3.8% 69.1%,9.8% 58.0%,0.0% 50.0%,9.8% 42.0%,3.8% 30.9%,15.9% 27.2%,14.6% 14.6%,27.2% 15.9%,30.9% 3.8%,42.0% 9.8%); transform: rotate(-8deg); pointer-events: none;
+  font-family: var(--font-gothic); text-transform: uppercase; line-height: .95;
+}
+.sx-burst--plain b { display: block; font-weight: 400; }
+.sx-burst--plain span { display: block; letter-spacing: .05em; }
+
+/* Guía gratuita */
+.contact-card--yellow { position: relative; }
+.sx-burst--guide { top: -40px; right: -26px; width: 104px; background: var(--yellow); color: var(--ink); }
+.sx-burst--guide b { font-size: 32px; }
+.sx-burst--guide span { font-size: 14px; }
+.contact-card--yellow h3, .contact-card--yellow p { padding-right: 56px; }
+@media (max-width: 600px) { .sx-burst--guide { right: -6px; } }
+
+/* Precio fundador */
+.pack .pack__price { position: relative; }
+.sx-burst--founder { top: 50%; right: -52px; width: 100px; margin-top: -50px; background: var(--crimson); color: var(--paper-soft); }
+.sx-burst--founder b { font-size: 30px; }
+.sx-burst--founder span { font-size: 13px; }
+@media (max-width: 1040px) { .sx-burst--founder { right: -8px; } }
+
+/* ---------- Tres pasos: borde continuo, número arriba a la izquierda, raíl de flechas ---------- */
+.pack.pack--step { border-style: solid; }
+.packs--steps { padding-top: 26px; }
+.path-step__num { left: 16px; right: auto; top: -22px; transform: none !important; }
+.pack__ribbon { left: auto; right: 16px; top: -16px; }
+.pack--step { padding-top: 34px; }
+/* Raíl: el filete superior de cada caja sigue por el hueco y acaba en flecha antes del número siguiente */
+.path-step__arrow {
+  font-size: 0; color: transparent; background: none; animation: none !important;
+  top: -1.5px; right: -44px; width: 44px; height: 3px; margin: 0;
+}
+.path-step__arrow::before { content: ""; position: absolute; inset: 0 12px 0 0; background: var(--ink); }
+.path-step__arrow::after {
+  content: ""; position: absolute; right: 0; top: 50%; width: 14px; height: 14px; margin-top: -7px;
+  background: var(--ink); clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+@media (max-width: 1040px) {
+  .path-step__arrow { top: auto; bottom: -52px; left: 35px; right: auto; width: 3px; height: 52px; margin: 0; }
+  .path-step__arrow::before { inset: 0 0 12px 0; }
+  .path-step__arrow::after { left: 50%; right: auto; top: auto; bottom: 0; margin: 0 0 0 -7px; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+}
+
+/* ---------- Aviso de cookies: recto y con la jaguar secretaria ---------- */
+.consent-pop { border-radius: 0; border-color: var(--ink); box-shadow: 6px 6px 0 var(--crimson); background: var(--paper-soft); color: var(--ink); overflow: visible; }
+.consent-pop h2 { font-family: var(--font-slab); font-weight: 900; text-transform: none; color: var(--ink); }
+.consent-pop p { font-family: var(--font-slab); }
+.consent-pop a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.consent-pop .btn--yellow { box-shadow: 4px 4px 0 var(--ink); }
+.consent-pop__no { background: transparent; border: 3px solid var(--ink); color: var(--ink); }
+@media (max-width: 1040px) { .sx-burst--founder { margin-top: -34px; width: 92px; } .sx-burst--founder b { font-size: 28px; } }
+
+/* Anuncio junto al titular: dos columnas solo en pantallas anchas */
+@media (min-width: 861px) { .sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); } }
+
+/* Aviso de cookies: la jaguar secretaria dentro de la caja, tan alta como el texto y los botones.
+   Se escala al ancho de su columna y se recorta por abajo: con poco texto se ve hasta los hombros,
+   con más texto (pantallas estrechas) hasta la cintura. */
+.consent-pop { display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 16px; align-items: start; }
+.consent-pop::before {
+  content: ""; grid-column: 1; grid-row: 1 / 4; align-self: stretch; min-height: 120px; margin: -2px 0 -4px;
+  background: url("../../img/jaguar-secretaria.svg") no-repeat 50% 0 / 100% auto;
+}
+.consent-pop > * { grid-column: 2; }
+.consent-pop__btns { grid-column: 2; }
+@media (max-width: 420px) { .consent-pop { grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; } }
+/* Ajuste del recorte: la figura se amplía en su columna (sobra margen a los lados) para que el corte
+   caiga en los hombros o el pecho en escritorio y en la cintura en móvil */
+.consent-pop { width: min(470px, calc(100vw - 32px)); grid-template-columns: 120px minmax(0, 1fr); }
+.consent-pop::before { background-size: 170% auto; }
+@media (max-width: 480px) {
+  .consent-pop { grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; }
+  .consent-pop::before { background-size: 190% auto; }
+  .consent-pop__btns { gap: 8px; }
+  .consent-pop__btns .btn { padding: 10px 12px; font-size: 12px; letter-spacing: .06em; }
+}
+.consent-pop__btns { gap: 10px; }
+.consent-pop__btns .btn { padding: 12px 18px; font-size: 13px; letter-spacing: .08em; }
+@media (max-width: 480px) { .consent-pop::before { background-size: 178% auto; } .consent-pop__btns .btn { padding: 10px 12px; font-size: 12px; letter-spacing: .06em; } }
+
+/* Aviso de cookies: caja más ancha para que la jaguar quepa entera de lado a lado (cola y libreta incluidas) */
+.consent-pop { width: min(580px, calc(100vw - 32px)); grid-template-columns: 150px minmax(0, 1fr); column-gap: 18px; }
+.consent-pop::before { background-size: 100% auto; background-position: 50% 0; margin: 0 0 -4px; }
+@media (max-width: 480px) {
+  .consent-pop { grid-template-columns: 108px minmax(0, 1fr); column-gap: 10px; }
+  .consent-pop::before { background-size: 100% auto; }
+}
