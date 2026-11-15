@@ -718,29 +718,71 @@ const cart = {
   remove(slug) { this.set(this.get().filter((s) => s !== slug)); },
 };
 
-// Contador en el menú (en contratar no hace falta: allí está el resumen)
+// Cesta del menú: siempre visible; se despliega para ver (y quitar) lo elegido
+const CART_NAMES = {
+  "cuidados-esenciales": "Cuidados esenciales", "cuidados-esenciales-distancia": "Cuidados esenciales a distancia",
+  "web-una-pagina": "Web de una página", "web-completa": "Web completa",
+  "plan-basico": "Plan Básico", "plan-siempre-visible": "Plan Siempre visible",
+  fotografia: "Fotografía Local", trastienda: "La Trastienda",
+};
+const CART_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(2 2)"><path d="M9 17h30l-2.5 26h-25z" style="fill:var(--yellow);stroke:none"/></g><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17h30l-2.5 26h-25z"/><path d="M17 17v-3a7 7 0 0114 0v3"/></g></svg>';
+const escHtml = (x) => String(x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cartOpen = () => !document.getElementById("cart-panel")?.hidden;
+function setCartOpen(open, focusPill) {
+  const panel = document.getElementById("cart-panel");
+  const pill = document.querySelector(".cart-pill");
+  if (!panel || !pill) return;
+  panel.hidden = !open;
+  pill.setAttribute("aria-expanded", String(open));
+  if (!open && focusPill) pill.focus();
+}
 function renderCartPill() {
   const actions = document.querySelector(".nav__actions");
-  if (!actions || document.getElementById("hire-form")) return;
-  const n = cart.get().length;
+  if (!actions) return;
+  const list = cart.get(), n = list.length, editable = !document.getElementById("hire-form");
   let pill = actions.querySelector(".cart-pill");
-  if (!n) { pill?.remove(); return; }
-  const isNew = !pill;
-  if (isNew) {
-    pill = document.createElement("a");
+  if (!pill) {
+    pill = document.createElement("button");
+    pill.type = "button";
     pill.className = "cart-pill";
-    pill.href = "contratar.html";
-    pill.title = t("Ver mi propuesta");
-    pill.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span class="cart-pill__count"></span>';
+    pill.innerHTML = CART_ICON + '<span class="cart-pill__count" hidden></span>';
     actions.prepend(pill);
   }
+  pill.setAttribute("aria-haspopup", "true");
+  pill.setAttribute("aria-controls", "cart-panel");
+  if (!pill.hasAttribute("aria-expanded")) pill.setAttribute("aria-expanded", "false");
+  pill.title = t("Mi propuesta");
   const count = pill.querySelector(".cart-pill__count");
-  if (count.textContent !== String(n)) {
-    count.textContent = n;
-    if (!isNew) pop(pill);
+  count.hidden = !n;
+  count.textContent = n;
+  pill.setAttribute("aria-label", n ? t(n === 1 ? "Mi propuesta: {n} servicio elegido" : "Mi propuesta: {n} servicios elegidos", { n }) : t("Mi propuesta: nada elegido todavía"));
+  let panel = document.getElementById("cart-panel");
+  if (!panel) {
+    panel = document.createElement("div");
+    panel.id = "cart-panel";
+    panel.className = "cart-panel";
+    panel.hidden = true;
+    panel.setAttribute("role", "region");
+    (document.querySelector(".site-header") || document.body).appendChild(panel);
   }
-  pill.setAttribute("aria-label", t(n === 1 ? "Mi propuesta: {n} servicio elegido" : "Mi propuesta: {n} servicios elegidos", { n }));
+  panel.setAttribute("aria-label", t("Mi propuesta"));
+  const items = list.map((slug) => {
+    const name = escHtml(t(CART_NAMES[slug] || slug));
+    const rm = editable ? `<button type="button" class="cart-panel__remove" data-cart-remove="${slug}" aria-label="${escHtml(t("Quitar"))}: ${name}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>` : "";
+    return `<li><span class="cart-panel__name">${name}</span>${rm}</li>`;
+  }).join("");
+  panel.innerHTML = `<div class="cart-panel__head"><strong>${escHtml(t("Mi propuesta"))}</strong><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
+    (n ? `<ul class="cart-panel__list">${items}</ul><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a>`
+       : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
 }
+document.addEventListener("click", (e) => {
+  if (e.target.closest(".cart-pill")) { setCartOpen(!cartOpen()); return; }
+  const rm = e.target.closest("[data-cart-remove]");
+  if (rm) { cart.remove(rm.dataset.cartRemove); syncAddButtons(); return; }
+  if (e.target.closest(".cart-panel__close")) { setCartOpen(false, true); return; }
+  if (cartOpen() && !e.target.closest("#cart-panel")) setCartOpen(false);
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && cartOpen()) setCartOpen(false, true); });
 
 // Botones "Añadir" de la portada
 const syncAddButtons = () => {
