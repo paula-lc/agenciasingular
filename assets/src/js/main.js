@@ -355,7 +355,7 @@ if (typingEl) {
 /* ------------------------------------------------------------------
    Pestañas de sectores (patrón ARIA tabs)
    ------------------------------------------------------------------ */
-const tablist = document.querySelector('[role="tablist"]');
+const tablist = document.querySelector('.sector-tabs[role="tablist"]');
 if (tablist) {
   const tabs = [...tablist.querySelectorAll('[role="tab"]')];
   const select = (tab) => {
