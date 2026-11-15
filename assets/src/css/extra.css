@@ -101,12 +101,6 @@ p { text-wrap: pretty; }
 .text-link, .link-btn { text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
 /* ---------- Portada ---------- */
-.sx-dateline {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; margin-top: 0;
-  font-family: var(--font-typewriter); font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--paper-soft); border-top: 3px double var(--paper-soft); border-bottom: 1px solid var(--paper-soft);
-  padding: 8px 0; margin-bottom: clamp(20px, 3vw, 36px);
-}
 .hero__tagline { font-family: var(--font-slab); font-style: italic; font-weight: 600; letter-spacing: .02em; }
 .highlight {
   font-family: var(--font-gothic); font-weight: 400; font-size: clamp(34px, 4.6vw, 60px); line-height: 1.22; letter-spacing: .015em;
@@ -146,10 +140,8 @@ p { text-wrap: pretty; }
 
 /* ---------- Packs: cupones ---------- */
 .pack { border-style: dashed; background: var(--paper-soft); }
-.pack.pack--featured { background: var(--deep); border-style: solid; border-color: var(--ink); box-shadow: 8px 8px 0 var(--ink); color: var(--paper-soft); }
 @media (hover: hover) {
   .pack:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
-  .pack--featured:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0 var(--ink); }
 }
 .pack h3, .pack__title-btn { font-family: var(--font-slab); font-weight: 800; text-transform: none; letter-spacing: -.01em; }
 .pack .pack__price { font-family: var(--font-gothic); font-weight: 400; font-size: clamp(48px, 4.6vw, 64px); line-height: .95; letter-spacing: .01em; }
@@ -187,3 +179,164 @@ p { text-wrap: pretty; }
 
 /* ---------- Movimiento ---------- */
 @media (prefers-reduced-motion: reduce) { .btn, .pack { transition: none; } }
+
+/* ==========================================================================
+   Ronda 2 (revisión de Paula)
+   ========================================================================== */
+
+/* ---------- Todo cuadrado ---------- */
+:where(main, .site-header, .site-footer, .section-rail, dialog) :where(*:not(.score__ring, .score__ring span, .lang-switch__btn)),
+:where(main, .site-header, .site-footer, .section-rail, dialog) :where(*:not(.score__ring, .score__ring span, .lang-switch__btn))::before,
+:where(main, .site-header, .site-footer, .section-rail, dialog) :where(*:not(.score__ring, .score__ring span, .lang-switch__btn))::after { border-radius: 0 !important; }
+.cart-pill__count { border-radius: 0; }
+
+/* ---------- Portada: data de periódico sobre la foto ---------- */
+.sx-hero-side { display: grid; gap: 20px; align-content: center; min-width: 0; }
+.sx-dateline {
+  display: grid; grid-template-columns: 1fr auto; column-gap: 16px; margin: 0 0 0 8%;
+  font-family: var(--font-typewriter); font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--paper-soft); border-top: 4px double var(--paper-soft); border-bottom: 2px solid var(--paper-soft);
+}
+.sx-dateline span { padding: 8px 0 7px; }
+.sx-dateline__wide { grid-column: 1 / -1; border-top: 1px solid var(--paper-soft); }
+@media (max-width: 960px) { .sx-dateline { margin: 0; } .sx-hero-side { width: 100%; max-width: 520px; margin: 0 auto; } }
+
+/* Tarjetas de ejemplo: rectas y con la nota en una línea */
+.ai-card { width: min(380px, 96%); }
+.ai-card__label { font-family: var(--font-typewriter); font-size: 13px; letter-spacing: .02em; white-space: nowrap; color: var(--ink-muted); }
+.maps-chip { font-family: var(--font-slab); }
+.maps-chip small { color: var(--ink-muted); }
+@media (max-width: 520px) { .ai-card__label { font-size: 13px; letter-spacing: 0; } }
+
+/* ---------- Cabeceras de sección: filete encima, doble filete debajo ---------- */
+.section-head {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 32px; align-items: end;
+  border-bottom: 6px double currentColor; padding-bottom: 22px;
+}
+.section-head > div { display: contents; }
+.section-head .eyebrow { grid-column: 1; grid-row: 1; justify-self: start; margin-bottom: 14px; }
+.section-head::before { content: ""; grid-column: 1 / -1; grid-row: 2; border-top: 2px solid currentColor; margin-bottom: 18px; }
+.section-head .section-title { grid-column: 1; grid-row: 3; margin-top: 0 !important; }
+.section-head .section-lead { grid-column: 1; grid-row: 4; max-width: 640px; }
+.section-head > .badge {
+  grid-column: 2; grid-row: 3 / 5; align-self: center; max-width: 11em;
+  background: var(--ink); color: var(--paper-soft); border: 0;
+  font-family: var(--font-gothic); font-weight: 400; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.05; letter-spacing: .02em;
+  padding: 12px 16px 8px; text-align: left; white-space: normal;
+}
+.section--blue .section-head > .badge { background: var(--yellow); color: var(--ink); box-shadow: 4px 4px 0 var(--crimson); }
+@media (max-width: 720px) {
+  .section-head { grid-template-columns: minmax(0, 1fr); }
+  .section-head > .badge { grid-column: 1; grid-row: 5; justify-self: start; margin-top: 18px; }
+}
+
+/* ---------- Tres pasos: cupones ---------- */
+.pack.pack--step { background: var(--paper-soft); color: var(--ink); border: 3px dashed var(--ink); box-shadow: none; cursor: pointer; }
+.pack.pack--recommended { border-style: solid; box-shadow: 8px 8px 0 var(--ink); }
+.pack li .icon { color: var(--crimson); }
+.pack__kicker, .pack__vat, .pack__was, .pack__fine, .pack__title-btn, .pack__more { color: inherit; }
+.pack__alt { border: 2px dashed currentColor; background: var(--paper); }
+.pack__alt strong { font-family: var(--font-sans); font-weight: 900; font-size: 22px; color: var(--crimson); }
+.pack__badge { font-family: var(--font-sans); }
+
+/* Selector de variante: dos mitades rectas */
+.pack__tabs { padding: 0; gap: 0; border: 2px solid currentColor; }
+.pack__tab { min-height: 52px; padding: 8px; font-family: var(--font-slab); font-weight: 800; font-size: 14px; }
+.pack__tab small { font-weight: 400; font-size: 12.5px; }
+.pack__tab[aria-selected="true"] { background: var(--ink); color: var(--paper-soft); }
+.pack__tab:not([aria-selected="true"]):hover { background: var(--paper); }
+.pack__tab:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+.path-step__num { background: var(--crimson); color: var(--paper-soft); border: 3px solid var(--paper); font-family: var(--font-gothic); font-size: 28px; line-height: 1; padding-top: 4px; }
+.path-step__arrow { background: var(--ink); color: var(--yellow); }
+
+/* Botón de selección */
+.add-btn--pack {
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; margin-top: 0;
+  border: 2px solid currentColor; background: transparent; color: inherit;
+  font-family: var(--font-sans); font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+}
+.add-btn--pack[aria-pressed="true"] { background: var(--yellow); color: var(--ink); border-color: var(--ink); }
+@media (hover: hover) { .add-btn--pack:hover { text-decoration: none; background: var(--yellow); color: var(--ink); border-color: var(--ink); } }
+
+/* Seleccionado = azul */
+.pack.pack--step.is-selected { background: var(--deep); color: var(--paper-soft); border-style: solid; box-shadow: 8px 8px 0 var(--ink); }
+.pack.is-selected .pack__price { color: var(--yellow); }
+.pack.is-selected li .icon { color: var(--yellow); }
+.pack.is-selected .pack__alt { background: transparent; }
+.pack.is-selected .pack__alt strong { color: var(--yellow); }
+.pack.is-selected .pack__tab[aria-selected="true"] { background: var(--yellow); color: var(--ink); }
+.pack.is-selected .pack__tab:not([aria-selected="true"]):hover { background: rgba(244, 241, 226, .12); }
+.pack.is-selected .btn--ghost { color: var(--paper-soft); border-color: var(--paper-soft); }
+.pack.is-selected :focus-visible { outline-color: var(--paper-soft); }
+@media (hover: hover) { .pack.pack--step.is-selected:hover { box-shadow: 12px 12px 0 var(--ink); } }
+.pack.is-selected .pack__time .icon, .pack.is-selected .pack__vat .icon { color: var(--yellow); }
+.pack.is-selected .pack__was, .pack.is-selected .pack__was s { color: var(--paper-soft); text-decoration-color: var(--yellow); }
+
+/* ---------- Problema: titular + anuncio de diagnóstico ---------- */
+.sx-pain-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(290px, 340px); gap: clamp(24px, 3vw, 40px); align-items: stretch; }
+.sx-pain-head .boxed-title { max-width: none; display: flex; align-items: center; }
+.sx-adbox {
+  position: relative; background: #15120e; color: var(--paper-soft); text-align: center;
+  border: 3px solid var(--ink); outline: 1px solid var(--paper-soft); outline-offset: -9px;
+  box-shadow: 6px 6px 0 var(--crimson); padding: 26px 24px 24px;
+}
+.sx-adbox__head { font-family: var(--font-slab); font-style: italic; font-weight: 800; font-size: 20px; line-height: 1.15; }
+.sx-adbox__big { margin: 4px 0; font-family: var(--font-novelty); font-size: clamp(40px, 4vw, 52px); line-height: 1; color: var(--yellow); }
+.sx-adbox ul { list-style: none; margin: 12px 0 0; padding: 0; font-family: var(--font-typewriter); font-size: 14px; line-height: 1.5; }
+.sx-adbox .btn { margin-top: 16px; padding: 10px 18px; font-size: 13px; box-shadow: 4px 4px 0 var(--crimson); }
+.sx-adbox :focus-visible { outline-color: var(--paper-soft); }
+.sx-burst {
+  position: absolute; top: -44px; right: -40px; z-index: 2; width: 132px; aspect-ratio: 1;
+  display: grid; place-content: center; text-align: center; background: var(--yellow); color: var(--ink);
+  clip-path: polygon(50.0% 0.0%,58.0% 9.8%,69.1% 3.8%,72.8% 15.9%,85.4% 14.6%,84.1% 27.2%,96.2% 30.9%,90.2% 42.0%,100.0% 50.0%,90.2% 58.0%,96.2% 69.1%,84.1% 72.8%,85.4% 85.4%,72.8% 84.1%,69.1% 96.2%,58.0% 90.2%,50.0% 100.0%,42.0% 90.2%,30.9% 96.2%,27.2% 84.1%,14.6% 85.4%,15.9% 72.8%,3.8% 69.1%,9.8% 58.0%,0.0% 50.0%,9.8% 42.0%,3.8% 30.9%,15.9% 27.2%,14.6% 14.6%,27.2% 15.9%,30.9% 3.8%,42.0% 9.8%); transform: rotate(-8deg);
+  font-family: var(--font-gothic); text-transform: uppercase; line-height: .95; pointer-events: none;
+}
+.sx-burst b { font-weight: 400; font-size: 40px; display: block; }
+.sx-burst span { font-size: 16px; letter-spacing: .05em; display: block; }
+@media (max-width: 860px) {
+  .sx-pain-head { grid-template-columns: minmax(0, 1fr); }
+  .sx-adbox { max-width: 420px; margin-top: 24px; }
+  .sx-burst { right: -10px; top: -40px; width: 112px; }
+  .sx-burst b { font-size: 34px; }
+}
+.sx-adbox { padding-top: 34px; }
+.sx-burst { top: -54px; right: -50px; width: 112px; }
+.sx-burst b { font-size: 34px; }
+.sx-burst span { font-size: 14px; }
+.sx-adbox .sx-adbox__head:first-of-type { padding: 0 44px; }
+@media (max-width: 860px) {
+  .sx-adbox { margin-top: 44px; }
+  .sx-burst { top: -48px; right: -6px; width: 100px; }
+  .sx-burst b { font-size: 30px; }
+  .sx-burst span { font-size: 13px; }
+  .sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
+}
+.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); }
+.sx-adbox .sx-adbox__head:first-of-type { padding: 0 40px 0 0; }
+
+/* Anuncio: color #211c16 y estallido superpuesto en el borde derecho (no por encima de la caja) */
+.sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); }
+.sx-adbox { background: #211c16; padding: 26px 76px 24px 24px; }
+.sx-adbox .sx-adbox__head:first-of-type { padding: 0; }
+.sx-burst { top: 16%; right: -48px; width: 124px; }
+.sx-burst b { font-size: 38px; }
+.sx-burst span { font-size: 15px; }
+@media (max-width: 860px) {
+  .sx-adbox { margin-top: 24px; padding-right: 92px; }
+  .sx-burst { top: 14%; right: -8px; width: 104px; }
+  .sx-burst b { font-size: 32px; }
+  .sx-burst span { font-size: 13px; }
+  .sx-adbox .sx-adbox__head:first-of-type { padding: 0; }
+}
+.sx-adbox { padding: 26px 40px 24px 24px; }
+.sx-burst { top: 10%; right: -28px; width: 112px; }
+.sx-burst b { font-size: 36px; }
+.sx-burst span { font-size: 14px; }
+@media (max-width: 860px) {
+  .sx-adbox { margin-top: 32px; padding: 64px 24px 24px; }
+  .sx-burst { top: -28px; right: -6px; width: 96px; }
+  .sx-burst b { font-size: 30px; }
+  .sx-burst span { font-size: 13px; }
+}
+@media (max-width: 860px) { .sx-adbox ul { font-size: 13px; } .sx-adbox li { text-wrap: balance; } }
