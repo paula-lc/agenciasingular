@@ -11,9 +11,9 @@ const SITE = {
   // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
   formEndpoint: "https://script.google.com/macros/s/AKfycbyK_Dqwi7gZ_pNRRHdVpg8wU9NDWJo0u3jWUuWLwA2bBgMqSTlYpmZll9o6SfKQrvYo/exec",
-  // Código de tu sitio en goatcounter.com (analítica sin cookies): "micodigo" → https://micodigo.goatcounter.com.
-  // Vacío = no se carga nada.
-  goatcounter: "agenciasingular",
+  // Analítica: clave pública del proyecto de Amplitude (solo sirve para enviar eventos; es pública por diseño)
+  // y región de los datos. Vacío = no se carga nada.
+  amplitude: { apiKey: "ca2c789f1493dc7f487513b84c8ee813", serverZone: "EU" },
   // Plazas que quedan del precio fundador de Cuidados esenciales (y de su versión a distancia), de 5 en total.
   // Es el único sitio donde se cambia: con 0 desaparecen la insignia y el precio fundador y queda solo el precio web.
   fundadorPlazas: 5,
@@ -40,25 +40,87 @@ document.querySelectorAll("[data-web-price]").forEach((el) => { el.hidden = foun
 document.querySelectorAll("[data-founder-left]").forEach((el) => { el.textContent = founderLeft; });
 
 /* ------------------------------------------------------------------
-   Analítica sin cookies (GoatCounter): solo se carga si SITE.goatcounter tiene valor.
+   Analítica (Amplitude), en modo híbrido:
+   - Por defecto, SIN identificador: no se guarda nada en el navegador (ni cookies ni localStorage),
+     no se guarda la IP y cada página cuenta como una visita anónima. Mide visitas y clics.
+   - Solo si la persona pulsa «Aceptar» en el aviso: identificador propio de Amplitude (cookie)
+     y grabación de sesiones, para ver recorridos y embudos. Se aplica desde la siguiente página.
+   La elección se guarda en este navegador (localStorage "as-analitica": "accept" | "reject").
    Los eventos se anotan con track("nombre"); si no hay analítica, no hacen nada.
    ------------------------------------------------------------------ */
-if (SITE.goatcounter) {
-  const gc = document.createElement("script");
-  gc.async = true;
-  gc.src = "https://gc.zgo.at/count.js";
-  gc.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
-  document.head.appendChild(gc);
+const CONSENT_KEY = "as-analitica";
+const readConsent = () => { try { return localStorage.getItem(CONSENT_KEY); } catch { return null; } };
+const writeConsent = (v) => { try { v ? localStorage.setItem(CONSENT_KEY, v) : localStorage.removeItem(CONSENT_KEY); } catch { /* navegador sin almacenamiento */ } };
+// Almacén en memoria: sin consentimiento, la cola de eventos de Amplitude no toca el navegador
+const memoryStore = () => {
+  const m = new Map();
+  return {
+    isEnabled: async () => true,
+    get: async (k) => m.get(k),
+    getRaw: async (k) => (m.has(k) ? JSON.stringify(m.get(k)) : undefined),
+    set: async (k, v) => { m.set(k, v); },
+    remove: async (k) => { m.delete(k); },
+    reset: async () => { m.clear(); },
+  };
+};
+let ampReady = false;
+const ampQueue = [];
+if (SITE.amplitude?.apiKey) {
+  const { apiKey, serverZone } = SITE.amplitude;
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = `https://cdn.amplitude.com/script/${apiKey}.js`;
+  s.addEventListener("load", () => {
+    const amp = window.amplitude;
+    if (!amp?.init) { console.error("[amplitude] el script no se ha cargado bien: no se enviarán eventos"); return; }
+    if (readConsent() === "accept") {
+      if (window.sessionReplay?.plugin) amp.add(window.sessionReplay.plugin({ sampleRate: 1, serverZone }));
+      amp.init(apiKey, { serverZone, autocapture: true });
+    } else {
+      amp.init(apiKey, {
+        serverZone,
+        autocapture: true,
+        identityStorage: "none",
+        storageProvider: memoryStore(),
+        trackingOptions: { ipAddress: false },
+      });
+    }
+    ampReady = true;
+    ampQueue.splice(0).forEach(([n, p]) => amp.track(n, p));
+  });
+  document.head.appendChild(s);
+} else {
+  console.error("[amplitude] falta SITE.amplitude.apiKey: no se enviarán eventos");
 }
 const track = (name, detail) => {
-  // count.js se carga de forma asíncrona: si aún no está, se espera a que termine
-  const send = () => {
-    try { window.goatcounter?.count?.({ path: detail ? `${name}/${detail}` : name, title: detail ? `${name} · ${detail}` : name, event: true }); } catch { /* sin analítica */ }
-  };
-  if (!SITE.goatcounter) return;
-  if (window.goatcounter?.count) send();
-  else document.querySelector("script[data-goatcounter]")?.addEventListener("load", send, { once: true });
+  if (!SITE.amplitude?.apiKey) return;
+  const props = detail ? { detalle: detail } : undefined;
+  try { ampReady ? window.amplitude.track(name, props) : ampQueue.push([name, props]); } catch { /* sin analítica */ }
 };
+
+/* Aviso de analítica: solo si la persona aún no ha elegido. En /reserva no se muestra
+   porque esa página ya tiene su propio aviso (el del calendario de HubSpot). */
+const showConsentPop = () => {
+  if (!SITE.amplitude?.apiKey || document.getElementById("cookie-pop") || document.querySelector(".consent-pop")) return;
+  const pop = document.createElement("div");
+  pop.className = "consent-pop";
+  pop.setAttribute("role", "dialog");
+  pop.setAttribute("aria-labelledby", "consent-pop-title");
+  pop.innerHTML = `<h2 id="consent-pop-title"></h2><p><span></span> <a href="/privacidad.html#analitica"></a></p>
+    <div class="consent-pop__btns"><button type="button" class="btn btn--yellow" data-analytics-choice="accept" data-track="analitica-aceptar"></button><button type="button" class="btn consent-pop__no" data-analytics-choice="reject" data-track="analitica-rechazar"></button></div>`;
+  pop.querySelector("h2").textContent = t("¿Te recordamos?");
+  pop.querySelector("p span").textContent = t("Contamos visitas y clics sin guardar nada en tu navegador. Si aceptas, usamos una cookie de analítica para entender mejor cómo se usa la web.");
+  pop.querySelector("p a").textContent = t("Más info");
+  pop.querySelector('[data-analytics-choice="accept"]').textContent = t("Aceptar");
+  pop.querySelector('[data-analytics-choice="reject"]').textContent = t("Ahora no");
+  document.body.appendChild(pop);
+};
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-analytics-choice]");
+  if (b) { writeConsent(b.dataset.analyticsChoice); b.closest(".consent-pop")?.remove(); return; }
+  if (e.target.closest("[data-analytics-reset]")) { writeConsent(null); showConsentPop(); }
+});
+if (!readConsent()) showConsentPop();
 window.AS = { SITE, track, t }; // lo usa /hola/ (assets/src/js/hola.js)
 const slugify = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 // Clic en cualquier elemento con data-track="evento" (o en un botón de diagnóstico gratis)

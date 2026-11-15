@@ -56,7 +56,7 @@ site.webmanifest · favicon.svg
 | **WhatsApp** (se oculta si está vacío) | `assets/src/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/src/js/main.js` → `SITE.formEndpoint` |
 | **Precios** (Cuidados esenciales 450 € / fundador 350 €; a distancia 300 € / fundador 250 €; Web de una página 690 € (250 € para clientes de Cuidados); Web completa desde 1.290 €; planes 59 y 149 €/mes; Fotografía Local 250 €; La Trastienda 120 €). Todos con el total con IVA al 21 %. **Plazas del precio fundador**: `SITE.fundadorPlazas` en `assets/src/js/main.js` (con 0 se oculta solo el precio fundador) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
-| **Analítica sin cookies** (GoatCounter): código de tu sitio en goatcounter.com; vacío = no se carga nada | `assets/src/js/main.js` → `SITE.goatcounter` |
+| **Analítica** (Amplitude, región EU, modo híbrido): clave pública del proyecto; vacío = no se carga nada | `assets/src/js/main.js` → `SITE.amplitude` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
 | **Ciudad o zona**: si trabajáis en una ciudad concreta, añadidla al JSON-LD (`address`, `areaServed`) y a los textos para reforzar el SEO local | `index.html` |
@@ -112,15 +112,13 @@ para que la URL siga siendo la misma.
 Los diagnósticos gratis llegan con el asunto `[Diagnóstico] …` y las columnas `Ficha Google` y `WhatsApp`
 (al final de la hoja; el script añade los encabezados que falten).
 
-## Analítica sin cookies (GoatCounter)
+## Analítica (Amplitude, modo híbrido)
 
-1. Crea tu sitio gratis en goatcounter.com y copia el código (`micodigo` en `micodigo.goatcounter.com`).
-2. Ponlo en `assets/src/js/main.js` → `SITE.goatcounter` y ejecuta `python3 scripts/build/build.py`.
-3. `main.js` carga `count.js` en todas las páginas públicas (también `ca/` y `en/`). Los eventos se anotan con
-   `track("nombre")` o con `data-track="nombre"` en un enlace o botón: `whatsapp`, `cta-diagnostico`,
-   `pack-<id>-lo-quiero`, `plan-avisame`, `test-iniciado`, `test-terminado` y `form-<formulario>-enviado`.
-
-Sin cookies no hace falta banner. `/propuestas/` y `/d/` no cargan `main.js`, así que no llevan analítica.
+- Configuración en `assets/src/js/main.js` → `SITE.amplitude` (`apiKey` pública del proyecto + `serverZone: "EU"`). Luego `python3 scripts/build/build.py`.
+- Sin elección o con «Ahora no»: autocaptura de páginas y clics **sin identificador** (nada en el navegador, sin IP).
+- Con «Aceptar» (localStorage `as-analitica` = `accept`): identificador de Amplitude + Session Replay, desde la siguiente página.
+- Eventos propios: cualquier elemento con `data-track="nombre"` y las llamadas a `track("nombre")`. El aviso no se muestra en `/reserva` (tiene el suyo de HubSpot).
+- Textos legales: `privacidad.html#analitica`.
 
 ## Idiomas (castellano, catalán e inglés) y cómo regenerar la web
 
@@ -156,7 +154,7 @@ de la cabecera lleva a la misma página en el otro idioma.
 
 La nota usa los mismos cortes que el test de la web (los lee de `assets/src/js/main.js`) pero solo sobre lo que se ve en la ficha: no puntúa IA ni páginas por servicio. `/hola/` y `/d/` llevan `noindex, nofollow` y no están en el sitemap, pero **cualquiera con el enlace puede verlos**.
 
-**Medición sin cookies (GoatCounter):** crea una cuenta gratis en goatcounter.com y escribe el código de tu panel en `assets/src/js/main.js` → `SITE.goatcounter`; luego `python3 scripts/build/build.py`. Mientras esté vacío no se mide nada. Eventos (pestaña *Events*): `hola/<src>/<slug>`, `whatsapp/<página>`, `formulario/<tipo>`, `test-iniciado`, `test-terminado`, `test-contacto`. Cloudflare Web Analytics no cuenta eventos, por eso no se ha implementado.
+**Medición (Amplitude):** ver «Analítica (Amplitude, modo híbrido)». Eventos propios: `hola/<src>/<slug>`, `whatsapp/<página>`, `formulario/<tipo>`, `test-iniciado`, `test-terminado`, `test-contacto`. Cloudflare Web Analytics no cuenta eventos, por eso no se ha implementado.
 
 **Foto y opiniones de `/hola/`:** guarda tu foto como `assets/img/paula.webp` y pon `fotoPaula: true` en `assets/src/js/hola.js`. El bloque de opiniones sigue oculto hasta que añadas opiniones reales a `OPINIONES` en ese archivo.
 
