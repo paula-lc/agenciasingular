@@ -21,11 +21,20 @@ h, n = re.subn(r'(<link rel="stylesheet" href="assets/css/styles\.css[^>]*>)',
                r'\1\n  <link rel="stylesheet" href="assets/src/css/extra.css">', h, count=1)
 assert n == 1, 'no se encontró styles.css'
 
-# 4. Data de cabecera de periódico sobre la portada
-dateline = ('<div class="container"><p class="sx-dateline"><span>Barcelona</span>'
-            '<span>Marketing local para pequeños negocios</span><span>Google, Maps e IA</span></p></div>\n        ')
-h, n = re.subn(r'(<div class="container hero__grid">)', dateline + r'\1', h, count=1)
-assert n == 1, 'no se encontró la portada'
+# 4. Data de periódico encima de la foto (columna derecha de la portada)
+dateline = ('<div class="sx-hero-side"><p class="sx-dateline"><span>Barcelona</span><span>Google, Maps e IA</span>'
+            '<span class="sx-dateline__wide">Marketing local para pequeños negocios</span></p>')
+h, n = re.subn(r'(<div class="hero__visual")', dateline + r'\1', h, count=1); assert n == 1, 'no se encontró la foto'
+h, n = re.subn(r'(<span class="ai-card__label">.*?</span>\s*</div>\s*</div>)', r'\1</div>', h, count=1, flags=re.S); assert n == 1
+
+# 5. Azul = seleccionado: el pack recomendado deja de ser azul por defecto
+h, n = re.subn(r'class="pack pack--step pack--featured"', 'class="pack pack--step pack--recommended"', h); assert n == 1
+
+# 6. Lema de sección como sello
+h, n = re.subn(r'(<span class="badge[^"]*">)Sin textos rellenos, trabajo real(</span>)', r'\1¡Sin textos rellenos, trabajo real!\2', h); assert n == 2
+
+# 7. Script del borrador (azul al seleccionar, clic en toda la caja)
+h, n = re.subn(r'(<script src="assets/js/main\.js[^"]*" defer></script>)', r'\1\n  <script src="assets/src/js/extra.js" defer></script>', h); assert n == 1
 
 (root / 'borrador.html').write_text(h, encoding='utf-8')
 print('borrador.html generado')
