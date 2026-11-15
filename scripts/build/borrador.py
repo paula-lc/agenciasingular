@@ -36,5 +36,18 @@ h, n = re.subn(r'(<span class="badge[^"]*">)Sin textos rellenos, trabajo real(</
 # 7. Script del borrador (azul al seleccionar, clic en toda la caja)
 h, n = re.subn(r'(<script src="assets/js/main\.js[^"]*" defer></script>)', r'\1\n  <script src="assets/src/js/extra.js" defer></script>', h); assert n == 1
 
+# 8. Problema: anuncio de diagnóstico junto al titular, con estallido
+ad = ('''<aside class="sx-adbox reveal" aria-label="Diagnóstico gratis">
+            <span class="sx-burst" aria-hidden="true"><b>Gratis</b><span>Diagnóstico</span></span>
+            <p class="sx-adbox__head">Visibilidad de luna…</p>
+            <p class="sx-adbox__big">¡Gratis!</p>
+            <p class="sx-adbox__head">…a precio de barrio.</p>
+            <ul><li>Diagnóstico de tu ficha de Google</li><li>Sin compromiso, respuesta en 48 h</li><li>Barcelona y alrededores</li></ul>
+            <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico">Pedir diagnóstico</a>
+          </aside>''')
+h, n = re.subn(r'(<div class="boxed-title reveal"><h2 id="pain-title">.*?</h2></div>)',
+               lambda m: '<div class="sx-pain-head">' + m.group(1) + '\n          ' + ad + '</div>', h, count=1)
+assert n == 1, 'no se encontró el titular del problema'
+
 (root / 'borrador.html').write_text(h, encoding='utf-8')
 print('borrador.html generado')
