@@ -56,8 +56,8 @@ assert n == 1, 'no se encontró el logo del menú'
 
 # 10. Lemas de sección como coverlines
 mottos = {
-    '¡Sin textos rellenos, trabajo real!': ('¡Sin textos rellenos,', 'trabajo real!'),
-    'SEO + Maps + IA = más fácil de elegir': ('SEO + Maps + IA', '= más fácil de elegir'),
+    '¡Sin textos rellenos, trabajo real!': ('¡Sin relleno!', 'trabajo de verdad'),
+    'SEO + Maps + IA = más fácil de elegir': ('SEO + Maps + IA', '¡el trío ganador!'),
 }
 for txt, (a1, a2) in mottos.items():
     h, n = re.subn(r'<span class="badge[^"]*">' + re.escape(txt) + '</span>',
@@ -75,6 +75,41 @@ for price, saving in (('350', '100'), ('250', '50')):
                    r'\1<span class="sx-burst--plain sx-burst--founder" aria-hidden="true"><b>−' + saving + r' €</b><span>Fundador</span></span>',
                    h, count=1, flags=re.S)
     assert n == 1, price
+
+# 13. Iconos retro: sustituyen los símbolos del sprite (assets/src/icons/retro-sprite.svg)
+retro = (root / 'assets/src/icons/retro-sprite.svg').read_text(encoding='utf-8')
+for sid, body in re.findall(r'<symbol id="(i-[\w-]+)"[^>]*>(.*?)</symbol>', retro, re.S):
+    h, n = re.subn(r'<symbol id="' + sid + r'"[^>]*>.*?</symbol>',
+                   lambda m: '<symbol id="' + sid + '" viewBox="0 0 48 48">' + body + '</symbol>', h, count=1, flags=re.S)
+    assert n == 1, sid
+
+# 14. Pasos: etiqueta con tono de época y número grande delante del título y el subtítulo
+NUM = {'1': 'Para empezar con buen pie', '2': 'Para subir un peldaño', '3': 'El no va más'}
+def pack_block(m):
+    n = re.search(r'Paso (\d)', m.group(1)).group(1)
+    return ('<span class="pack__kicker">' + NUM[n] + '</span>\n              <div class="sx-titlebox"><span class="sx-bignum" aria-hidden="true">' + n +
+            '</span><div>' + m.group(2) + m.group(3) + '</div></div>')
+h, n = re.subn(r'<span class="pack__kicker">([^<]*Paso \d[^<]*)</span>\s*(<h3>.*?</h3>)\s*(<p class="pack__for">.*?</p>)', pack_block, h, flags=re.S)
+assert n >= 6, n
+
+# 15. Copy 60s-70s (borrador de /draft-content): se mantiene el anuncio «Visibilidad de luna…»
+copy = [
+    ('<span class="highlight">Transformamos la imagen digital de tu negocio.</span>', '<span class="highlight">¡Nueva imagen digital para tu negocio!</span>'),
+    ('>Entendemos tu problema<', '>Sabemos lo que te pasa<'),
+    ('>Packs singulares<', '>Ofertas singulares<'),
+    ('</svg>Pide tu diagnóstico gratis</a>', '</svg>¡Pide ya tu diagnóstico gratis!</a>'),
+    ('Empieza por el Paso 1; el resto, cuando lo necesites.', 'Empieza por el primero; el resto, cuando te haga falta.'),
+    ('</svg>¡Hablemos!</a>', '</svg>¡Cuéntanos tu caso!</a>'),
+]
+for old, new in copy:
+    assert old in h, old
+    h = h.replace(old, new)
+h, n = re.subn(r'(<p class="hero__tagline">).*?(</p>)', r'\1tú a lo tuyo, nosotros a lo nuestro\2', h, count=1)
+assert n == 1
+
+# 16. Lemas: cajas altas y estallidos
+_cls = iter(['sx-motto sx-motto--burst', 'sx-motto', 'sx-motto sx-motto--burst sx-motto--pink'])
+h = re.sub(r'<p class="sx-motto">', lambda m: '<p class="%s">' % next(_cls), h)
 
 (root / 'borrador.html').write_text(h, encoding='utf-8')
 print('borrador.html generado')

@@ -470,3 +470,84 @@ p { text-wrap: pretty; }
   .consent-pop { grid-template-columns: 108px minmax(0, 1fr); column-gap: 10px; }
   .consent-pop::before { background-size: 100% auto; }
 }
+
+/* ---------- Iconos retro: mancha de color desplazada solo a 20 px o más ---------- */
+.icon { --sx-spot: 1; }
+.icon--sm, .nav__links .icon, .channel li .icon, .channel__search .icon, .maps-chip .icon, .hero__proof .icon, .channels-note .icon,
+.pack li .icon, .service-info .icon, .pmodal__time .icon, .pmodal__list .icon, .cart__item .icon, .section-rail .icon, .eyebrow .icon { --sx-spot: 0; }
+
+/* ==========================================================================
+   Ronda 4
+   ========================================================================== */
+
+/* 1) Cabecera sin línea amarilla */
+.site-header.is-scrolled { box-shadow: none; }
+
+/* 2) Lemas: caja tipo anuncio (sin botón), pegada al titular */
+@media (min-width: 721px) {
+  .section-head { grid-template-columns: minmax(0, 720px) auto; justify-content: start; column-gap: clamp(24px, 4vw, 48px); }
+}
+.sx-motto {
+  background: var(--newsprint); border: 3px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -8px;
+  box-shadow: 5px 5px 0 var(--crimson); padding: 16px 24px 14px; text-align: center; justify-self: start;
+}
+.sx-motto span:first-child { color: var(--crimson); }
+.sx-motto span + span { color: var(--ink); }
+.section--blue .sx-motto { background: #211c16; outline-color: var(--paper-soft); }
+.section--blue .sx-motto span:first-child { color: var(--yellow); }
+.section--blue .sx-motto span + span { color: var(--paper-soft); }
+@media (max-width: 720px) { .sx-motto { grid-column: 1; grid-row: 5; margin-top: 20px; text-align: center; } }
+
+/* 3) Menú: hover = raya naranja que sube por bloques; clic/sección actual = azul; hover otra vez = negro */
+.nav__links .btn--outline { position: relative; color: var(--ink); border-bottom-color: transparent !important; transition: color .15s; }
+.nav__links .btn--outline::after {
+  content: ""; position: absolute; left: 4px; right: 4px; bottom: 0; height: 3px; background: var(--orange);
+  transform: scaleX(0); transform-origin: left; transition: transform .24s steps(5);
+}
+.nav__links .btn--outline:active, .nav__links .btn--outline.is-active, .nav__links .btn--outline[aria-current] { color: #3e6083; }
+.nav__links .btn--outline.is-active::after, .nav__links .btn--outline[aria-current]::after { background: #3e6083; transform: scaleX(1); }
+@media (hover: hover) {
+  .nav__links .btn--outline:hover { color: var(--ink); }
+  .nav__links .btn--outline:hover::after { background: var(--orange); transform: scaleX(1); }
+}
+
+/* 4) Tres pasos: sin flechas ni burbujas; número grande delante del título y el subtítulo */
+.path-step__arrow, .path-step__num { display: none !important; }
+.packs--steps { gap: 36px; padding-top: 12px; }
+.pack--step { padding-top: 26px; }
+.pack__kicker { font-family: var(--font-gothic); font-weight: 400; font-size: 24px; line-height: 1; letter-spacing: .03em; color: var(--crimson); }
+.pack.is-selected .pack__kicker { color: var(--yellow); }
+.sx-titlebox { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; align-items: start; }
+.sx-titlebox h3 { margin: 0; }
+.sx-bignum { font-family: var(--font-gothic); font-size: 88px; line-height: .78; color: var(--ink); text-shadow: 4px 4px 0 var(--yellow); padding: 6px 4px 0 0; }
+.pack.is-selected .sx-bignum { color: var(--yellow); text-shadow: 4px 4px 0 var(--ink); }
+
+/* 6) Animaciones retro: bloques que se revelan a saltos y titulares que giran como el periódico de las películas */
+.reveal { opacity: 1 !important; translate: none !important; clip-path: inset(-40px 100% -40px -40px); transition: clip-path .7s steps(9) !important; }
+.reveal.is-in { clip-path: inset(-40px -90px -40px -40px); }
+.sx-pre { opacity: 0; scale: .05; rotate: -540deg; }
+.sx-pre.sx-spin { animation: sx-news .9s cubic-bezier(.2, .75, .25, 1) both; }
+@keyframes sx-news { 0% { opacity: 0; scale: .05; rotate: -540deg; } 8% { opacity: 1; } 100% { opacity: 1; scale: 1; rotate: 0deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { clip-path: none !important; transition: none !important; }
+  .sx-pre { opacity: 1; scale: 1; rotate: 0deg; }
+  .sx-pre.sx-spin { animation: none; }
+}
+
+/* ==========================================================================
+   Ronda 5
+   ========================================================================== */
+/* Lemas: caja tan alta como el bloque de titular y texto, o estallido */
+.sx-motto { align-self: stretch; display: grid; place-content: center; margin: 0; }
+.sx-motto--burst { align-self: center; justify-self: center; aspect-ratio: 1; width: 210px; margin: -24px 0; padding: 0; border: 0; outline: 0; box-shadow: none;
+  background: var(--yellow); clip-path: polygon(50.0% 0.0%,58.0% 9.8%,69.1% 3.8%,72.8% 15.9%,85.4% 14.6%,84.1% 27.2%,96.2% 30.9%,90.2% 42.0%,100.0% 50.0%,90.2% 58.0%,96.2% 69.1%,84.1% 72.8%,85.4% 85.4%,72.8% 84.1%,69.1% 96.2%,58.0% 90.2%,50.0% 100.0%,42.0% 90.2%,30.9% 96.2%,27.2% 84.1%,14.6% 85.4%,15.9% 72.8%,3.8% 69.1%,9.8% 58.0%,0.0% 50.0%,9.8% 42.0%,3.8% 30.9%,15.9% 27.2%,14.6% 14.6%,27.2% 15.9%,30.9% 3.8%,42.0% 9.8%); transform: rotate(-8deg); }
+.sx-motto--burst span:first-child, .sx-motto--burst span + span, .section--blue .sx-motto--burst span:first-child, .section--blue .sx-motto--burst span + span { color: var(--ink); }
+.sx-motto--burst span:first-child { font-size: 32px; }
+.sx-motto--burst span + span { font-size: 20px; margin-top: 2px; }
+.section--blue .sx-motto--burst { background: var(--yellow); }
+.sx-motto--burst.sx-motto--pink, .section--blue .sx-motto--burst.sx-motto--pink { background: var(--pink); }
+@media (max-width: 720px) {
+  .sx-motto { align-self: auto; }
+  .sx-motto--burst { width: 180px; margin: 24px 0 0; justify-self: start; }
+  .sx-motto--burst span:first-child { font-size: 28px; } .sx-motto--burst span + span { font-size: 17px; }
+}
