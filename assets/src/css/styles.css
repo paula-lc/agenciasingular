@@ -1880,3 +1880,14 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 :lang(ca) .menu--dia .menu__platos::before { content: "Inclou"; }
 :lang(en) .menu--dia .menu__platos::before { content: "Includes"; }
 :lang(ca) .menu--dia[data-menu="2"] .menu__platos::before, :lang(en) .menu--dia[data-menu="2"] .menu__platos::before { content: none; }
+
+/* El anuncio con foto se ajusta a la altura de «¿Te suena?» (no al revés) */
+@media (min-width: 900px) {
+  .sx-suena { align-items: start; }
+  .sx-suena > .sx-fotoanuncio { align-self: stretch; contain: size; display: flex; flex-direction: column; justify-content: flex-start; padding: 16px 18px 18px; }
+  .sx-fotoanuncio picture { flex: 1 1 auto; min-height: 0; display: block; }
+  .sx-fotoanuncio picture img { height: 100%; aspect-ratio: auto; object-fit: cover; object-position: 50% 30%; }
+  .sx-fotoanuncio__kicker { margin-bottom: 8px; }
+  .sx-fotoanuncio__head { margin-top: 10px; font-size: 26px; }
+  .sx-fotoanuncio__sub { font-size: 15px; }
+}
