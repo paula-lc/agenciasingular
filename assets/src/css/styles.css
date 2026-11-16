@@ -1771,3 +1771,35 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 .sx-adbox > .sx-burst { top: 10%; right: -28px; width: 112px; }
 .sx-adbox > .sx-burst b { font-size: 36px; } .sx-adbox > .sx-burst span { font-size: 14px; }
 @media (max-width: 860px) { .sx-adbox { margin-top: 32px; padding: 64px 24px 24px; } .sx-adbox > .sx-burst { top: -28px; right: -6px; width: 96px; } }
+
+
+/* ---------- Ronda 2: azul profundo de antes, anuncio con foto, vale a dos columnas ---------- */
+:root { --azul-profundo: #2c4763; }
+.section--blue, .hero, .site-footer { background: var(--azul-profundo) !important; }
+
+/* ¿Te suena? + anuncio con foto a la derecha */
+.sx-suena { display: grid; gap: clamp(24px, 3vw, 40px); margin-top: 36px; align-items: start; }
+.sx-suena > .cupon { margin-top: 0; }
+@media (min-width: 900px) { .sx-suena { grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); } }
+.sx-fotoanuncio { position: relative; background: var(--papel-prensa); color: var(--tinta); border: 3px solid var(--tinta);
+  outline: 1px solid var(--tinta); outline-offset: -9px; box-shadow: 6px 6px 0 var(--azul-profundo); padding: 22px 22px 24px; text-align: center; transform: rotate(1.2deg); }
+.sx-fotoanuncio__kicker { margin: 0 0 10px; font-family: var(--font-typewriter); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.sx-fotoanuncio img { display: block; width: 100%; height: auto; aspect-ratio: 588 / 372; object-fit: cover; border: 2px solid var(--tinta); filter: sepia(.25) contrast(1.05) saturate(.9); }
+.sx-fotoanuncio__head { margin: 14px 0 4px; font-family: var(--font-novelty); font-size: clamp(28px, 2.6vw, 34px); line-height: 1.05; color: var(--rojo); }
+.sx-fotoanuncio__sub { margin: 0; font-family: var(--font-slab); font-style: italic; font-weight: 700; font-size: 17px; line-height: 1.3; }
+.sx-fotoanuncio > .sx-burst { top: -26px; left: -26px; right: auto; width: 96px; background: var(--mostaza); }
+.sx-fotoanuncio > .sx-burst b { font-size: 22px; } .sx-fotoanuncio > .sx-burst span { font-size: 12px; }
+@media (max-width: 600px) { .sx-fotoanuncio > .sx-burst { left: -6px; } .sx-fotoanuncio { transform: none; } }
+
+/* Vale a lo ancho con columna lateral */
+@media (min-width: 1000px) {
+  #contacto .sx-contacto { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: start; }
+  #contacto .vale { max-width: none; margin: 0; }
+  #contacto .sx-contacto__lado { margin-top: 36px; display: grid; gap: 40px; }
+  #contacto .guia-cta { margin: 0; max-width: none; }
+}
+.sx-nota { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: center; margin: 32px 0 0; padding: 18px; border: var(--line); background: var(--crema); box-shadow: var(--shadow-stamp); }
+@media (min-width: 1000px) { .sx-nota { margin: 0; } }
+.sx-nota img { width: 96px; height: auto; }
+.sx-nota figcaption { font-family: var(--font-slab); font-style: italic; font-weight: 700; font-size: 18px; line-height: 1.3; }
+.sx-nota figcaption small { display: block; margin-top: 6px; font-family: var(--font-typewriter); font-style: normal; font-weight: 400; font-size: 13px; }
