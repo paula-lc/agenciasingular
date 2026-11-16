@@ -106,7 +106,7 @@ form.addEventListener("submit", async (e) => {
     await fetch(HSITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
     htrack("formulario", `hola-${src}/${slug || "generico"}`);
     form.reset();
-    setStatus(ht("¡Recibido! Te escribo en menos de 24 h laborables. ☕"), true);
+    setStatus(ht("¡Recibido! Te escribo en 48 h laborables. ☕"), true);
   } catch {
     setStatus(ht("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: HSITE.email }), false);
   } finally {

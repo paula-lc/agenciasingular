@@ -31,6 +31,14 @@ const t = (s, vars) => {
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Precios: los genera scripts/build/menus.py desde precios.json (única fuente) en <script id="precios-data"> */
+const PRECIOS = (() => {
+  try { return JSON.parse(document.getElementById("precios-data")?.textContent || "{}"); } catch { return {}; }
+})();
+const PROD = PRECIOS.productos || {};
+const conIva = (x) => Math.round(x * (100 + (PRECIOS.iva ?? 21))) / 100;
+const fmtEur = (x) => `${x.toLocaleString("es-ES", { minimumFractionDigits: x % 1 ? 2 : 0, maximumFractionDigits: 2, useGrouping: "always" })} €`;
+
 /* Precio fundador: [data-founder] (precio fundador, insignia y condiciones) solo se ve si quedan plazas;
    [data-web-price] (precio web sin tachar) solo cuando se han acabado */
 const founderLeft = Math.max(0, Math.min(5, Math.floor(Number(SITE.fundadorPlazas)) || 0));
@@ -409,39 +417,30 @@ const QUESTIONS = [
     tip: t("<strong>Programa una publicación semanal</strong> en tu ficha de Google (ofertas, novedades, eventos). 15 minutos que marcan la diferencia.") },
 ];
 
-// Dónde lleva cada área débil del test; sin enlace (IA, redes) = formulario de contacto
-const ALT_LINK = { "google-maps": "cuidados-esenciales", "diseno-web": "web-una-pagina", "fotografia": "fotografia" };
+// Platos de la carta para cada área débil del test; sin plato (IA, redes) = «Pregúntanos»
+const ALT_LINK = { "diseno-web": "web-una-pagina", "fotografia": "fotografia" };
 const SERVICE_NAMES = {
-  "google-maps": t("Google Maps y reseñas"), "diseno-web": t("Diseño web"), "ia": t("Posicionamiento en IA"),
+  "google-maps": t("Google Maps y reseñas"), "diseno-web": t("Diseño web"), "ia": t("Visibilidad en IA"),
   "fotografia": t("Fotografía local"), "redes-sociales": t("Redes sociales"),
 };
+// El test recomienda uno de los 3 menús del día
 const PACKS = {
-  cuidados: { slug: "cuidados-esenciales", name: t("Cuidados esenciales"), short: t("Cuidados esenciales") },
-  web: { slug: "web-una-pagina", name: t("Web de una página"), short: t("Web de una página") },
-  completa: { slug: "web-completa", name: t("Web completa"), short: t("Web completa") },
-  basico: { slug: "plan-basico", name: t("Plan Básico"), short: t("Plan Básico") },
-  visible: { slug: "plan-siempre-visible", name: t("Plan Siempre visible"), short: t("Siempre visible") },
+  cuidados: { slug: "cuidados-esenciales", name: t("Menú 1 · Cuidados esenciales") },
+  escaparate: { slug: "escaparate-nuevo", name: t("Menú 2 · Escaparate nuevo") },
+  distancia: { slug: "cuidados-esenciales-distancia", name: t("Menú 3 · A distancia") },
 };
 
-/* Elige el producto según qué ha fallado (g(servicio) = puntos perdidos; hasWeb = ya tiene alguna web) */
+/* Elige el menú según qué ha fallado (g(servicio) = puntos perdidos; hasWeb = ya tiene alguna web) */
 function recommend(g, score, hasWeb) {
-  if (g("diseno-web") >= 2 && score < 45) {
-    return { pack: PACKS.cuidados, why: t("Partes casi de cero: empieza por lo que más se nota. Cuidados esenciales deja tu ficha de Google a punto, con botón de reserva, fotos y reseñas; la web va en el paso 2.") };
-  }
-  if (g("diseno-web") >= 2) {
-    return hasWeb
-      ? { pack: PACKS.completa, why: t("Tu web existe pero no está a la altura. La Web completa añade SEO local con una página por servicio clave y datos estructurados para buscadores e IA.") }
-      : { pack: PACKS.web, why: t("Tu web es el punto débil, y es la fuente que leen Google y las IA. Una página clara, rápida y con botón de reserva es el primer paso.") };
+  if (!hasWeb || g("diseno-web") >= 2) {
+    return { pack: PACKS.escaparate, why: t("Tu web es el punto flojo (o no la tienes). El Escaparate nuevo junta tu ficha de Google a punto, la sesión de fotos y una web de una página con tu botón de reservar.") };
   }
   if (score >= 75) {
-    return { pack: PACKS.visible, why: t("Tienes buena base. El Plan Siempre visible mantendrá tu ficha y tu web cuidadas cada mes y vigilará qué dicen las IA de ti.") };
+    return { pack: PACKS.cuidados, why: t("Tienes buena base. Con Cuidados esenciales dejamos tu ficha niquelada y, si quieres, luego seguimos en la sobremesa.") };
   }
-  if (g("google-maps") + g("ia") >= 3) {
-    return { pack: PACKS.cuidados, why: t("Tu web aguanta, pero Google Maps, las reseñas o la IA no te están ayudando. Cuidados esenciales ataca justo eso, rápido y por menos.") };
-  }
-  return { pack: g("redes-sociales") + g("fotografia") >= 2 ? PACKS.basico : PACKS.cuidados,
-    why: t("Te falta constancia más que una gran reforma: pequeñas mejoras cada mes para seguir subiendo en Google, Maps y las IA.") };
+  return { pack: PACKS.cuidados, why: t("Tu web aguanta, pero tu ficha de Google, tus fotos o tus reseñas no te están ayudando. Cuidados esenciales ataca justo eso.") };
 }
+const DISTANCIA_NOTA = t("¿Estás fuera de Barcelona? Mira el Menú 3 · A distancia: lo mismo, sin sesión de fotos.");
 
 const quiz = document.querySelector("[data-quiz]");
 let quizSummary = "";
@@ -501,15 +500,15 @@ if (quiz) {
     if (score < 40) {
       title = t("Eres casi invisible");
       text = t("Tus clientes potenciales no te están encontrando. La buena noticia: hay mucho margen y los primeros cambios se notan rápido.");
-      color = "var(--crimson)";
+      color = "var(--rojo)";
     } else if (score < 75) {
       title = t("Vas por buen camino");
       text = t("Tienes una base, pero hay huecos que están regalando clientes a tu competencia. Con unos ajustes puedes dar el salto.");
-      color = "var(--orange)";
+      color = "var(--rojo-2)";
     } else {
       title = t("¡Eres bastante visible!");
       text = t("Lo estás haciendo bien. El siguiente paso es mantenerte arriba y asegurarte de que la IA te recomienda a ti.");
-      color = "var(--mustard)";
+      color = "var(--mostaza)";
     }
 
     // Puntos perdidos por servicio (0 = perfecto)
@@ -523,7 +522,9 @@ if (quiz) {
     $("[data-score-title]").textContent = `${score}/100 · ${title}`;
     $("[data-score-text]").textContent = text;
     $("[data-reco-name]").textContent = reco.pack.name;
-    $("[data-reco-why]").textContent = reco.why;
+    $("[data-reco-why]").textContent = reco.pack.slug === "escaparate-nuevo" ? reco.why : `${reco.why} ${DISTANCIA_NOTA}`;
+    const recoLink = $("[data-reco-link]");
+    if (recoLink) recoLink.href = `#menu-${reco.pack.slug}`;
 
     // Servicios a la carta: los que más puntos han perdido (máx. 3)
     const alt = Object.entries(gap).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).slice(0, 3);
@@ -532,7 +533,7 @@ if (quiz) {
     alt.forEach(([k]) => {
       const a = document.createElement("a");
       a.className = "quiz__alt-item";
-      a.href = ALT_LINK[k] ? `contratar.html?servicio=${ALT_LINK[k]}&test=${score}` : "#contacto";
+      a.href = ALT_LINK[k] ? "#carta" : "#contacto";
       if (!ALT_LINK[k]) a.dataset.interes = "otra"; // rebranding, redes, SEO o IA: «Pregúntanos»
       a.textContent = SERVICE_NAMES[k];
       altList.appendChild(a);
@@ -568,9 +569,6 @@ if (quiz) {
     }
 
     quizSummary = t("Resultado del test de visibilidad: {score}/100 ({title}). Recomendación: {pack}.", { score, title, pack: reco.pack.name });
-    const cta = $("[data-quiz-cta]");
-    cta.href = `contratar.html?servicio=${reco.pack.slug}&test=${score}`;
-    cta.innerHTML = `${t("Pedir propuesta")}<span class="cta-pack">: ${reco.pack.short}</span>`;
 
     report = {
       score, title, pack: reco.pack.name,
@@ -591,7 +589,7 @@ if (quiz) {
   const sendLead = async (data) => {
     const servicio = report.pack;
     const sections = [
-      { titulo: "Resultado del test", filas: [["Nota", `${report.score}/100 (${report.title})`], ["Pack recomendado", servicio], ["Áreas más flojas", report.weak || "—"]] },
+      { titulo: "Resultado del test", filas: [["Nota", `${report.score}/100 (${report.title})`], ["Menú recomendado", servicio], ["Áreas más flojas", report.weak || "—"]] },
       { titulo: "Respuestas del test", filas: report.answers },
     ];
     const subject = `[Test] ${data.negocio || data.contacto} · ${report.score}/100${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}`;
@@ -633,7 +631,7 @@ if (quiz) {
       });
       track("form-test-de-visibilidad-enviado");
       if (esEmail) document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = contacto; });
-      gateText.textContent = t("¡Recibido! Te escribo en menos de 24 h laborables con tus 3 arreglos.");
+      gateText.textContent = t("¡Recibido! Te escribo en 48 h laborables con tus 3 arreglos.");
       gateForm.hidden = true;
     } catch {
       gateError(gateForm.contacto, t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }));
@@ -685,11 +683,11 @@ document.querySelectorAll("[data-whatsapp]").forEach((item) => {
 const CART_KEY = "mi-propuesta";
 // Pasos: de cada paso solo se elige un producto (Cuidados esenciales o a distancia, una web, un plan mensual)
 const STEP_OF = {
-  "cuidados-esenciales": 1, "cuidados-esenciales-distancia": 1,
+  "cuidados-esenciales": 1, "escaparate-nuevo": 1, "cuidados-esenciales-distancia": 1,
   "web-una-pagina": 2, "web-completa": 2,
   "plan-basico": 3, "plan-siempre-visible": 3,
 };
-// Servicios a la carta que existen (lo guardado de servicios retirados se ignora)
+// Platos de la carta que existen (lo guardado de servicios retirados se ignora)
 const SERVICE_SLUGS = ["fotografia", "trastienda"];
 // Enlaces y propuestas guardadas con los nombres antiguos
 const LEGACY_SLUGS = { "pack-encuentren": "cuidados-esenciales", "pack-escaparate-remoto": "cuidados-esenciales-distancia", "pack-visible": "plan-siempre-visible" };
@@ -720,12 +718,12 @@ const cart = {
 
 // Cesta del menú: siempre visible; se despliega para ver (y quitar) lo elegido
 const CART_NAMES = {
-  "cuidados-esenciales": "Cuidados esenciales", "cuidados-esenciales-distancia": "Cuidados esenciales a distancia",
+  "cuidados-esenciales": "Menú 1 · Cuidados esenciales", "escaparate-nuevo": "Menú 2 · Escaparate nuevo", "cuidados-esenciales-distancia": "Menú 3 · A distancia",
   "web-una-pagina": "Web de una página", "web-completa": "Web completa",
   "plan-basico": "Plan Básico", "plan-siempre-visible": "Plan Siempre visible",
   fotografia: "Fotografía Local", trastienda: "La Trastienda",
 };
-const CART_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(2 2)"><path d="M9 17h30l-2.5 26h-25z" style="fill:var(--yellow);stroke:none"/></g><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17h30l-2.5 26h-25z"/><path d="M17 17v-3a7 7 0 0114 0v3"/></g></svg>';
+const CART_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(2 2)"><path d="M9 17h30l-2.5 26h-25z" style="fill:var(--mostaza);stroke:none"/></g><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17h30l-2.5 26h-25z"/><path d="M17 17v-3a7 7 0 0114 0v3"/></g></svg>';
 const escHtml = (x) => String(x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const cartOpen = () => !document.getElementById("cart-panel")?.hidden;
 function setCartOpen(open, focusPill) {
@@ -810,47 +808,6 @@ window.addEventListener("storage", (e) => {
   if (e.key === CART_KEY) { syncAddButtons(); renderCartPill(); }
 });
 
-/* Cajas de los pasos: el interruptor (Paso 1) o las pestañas (pasos 2 y 3) cambian la variante visible.
-   Un enlace #<variante> abre la caja con esa variante a la vista. Cada cambio se anota para medir qué se mira. */
-const variantBoxes = [...document.querySelectorAll("[data-variants]")];
-const showVariant = (box, slug) => {
-  box.querySelectorAll("[data-variant-tab]").forEach((tab) => {
-    const on = tab.dataset.variantTab === slug;
-    tab.setAttribute("aria-selected", String(on));
-    tab.tabIndex = on ? 0 : -1;
-  });
-  box.querySelectorAll("[data-variant-switch]").forEach((sw) => { sw.checked = sw.dataset.variantSwitch === slug; });
-  box.querySelectorAll("[data-variant]").forEach((panel) => { panel.hidden = panel.dataset.variant !== slug; });
-};
-variantBoxes.forEach((box) => {
-  const tabs = [...box.querySelectorAll("[data-variant-tab]")];
-  tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => { showVariant(box, tab.dataset.variantTab); track(`variante-${tab.dataset.variantTab}`); });
-    tab.addEventListener("keydown", (e) => {
-      const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
-      if (next === undefined) return;
-      e.preventDefault();
-      const target = tabs[(next + tabs.length) % tabs.length];
-      showVariant(box, target.dataset.variantTab);
-      target.focus();
-    });
-  });
-  box.querySelectorAll("[data-variant-switch]").forEach((sw) => sw.addEventListener("change", () => {
-    const slug = sw.checked ? sw.dataset.variantSwitch : sw.dataset.variantBase;
-    showVariant(box, slug);
-    track(`variante-${slug}`);
-  }));
-});
-const openLinkedVariant = () => {
-  const id = location.hash.slice(1);
-  const panel = id && variantBoxes.length && document.querySelector(`[data-variant="${CSS.escape(id)}"]`);
-  if (!panel) return;
-  showVariant(panel.closest("[data-variants]"), id);
-  panel.closest("[data-variants]").scrollIntoView({ block: "center" });
-};
-openLinkedVariant();
-window.addEventListener("hashchange", openLinkedVariant);
-
 /* Opción de «¿Qué te interesa?» que se marca al llegar desde un botón: data-interes="diagnostico" | "otra" (Pregúntanos)
    (también con ?interes=diagnostico en la dirección o #contacto?interes=diagnostico) */
 const preselectInteres = (key) => {
@@ -876,7 +833,6 @@ document.addEventListener("click", (e) => {
   const target = document.getElementById("contacto");
   if (!a || !target || e.metaKey || e.ctrlKey || e.shiftKey) return;
   e.preventDefault();
-  document.querySelectorAll("dialog[open]").forEach((d) => d.close()); // el botón de una ventana de detalle
   if (a.dataset.interes) preselectInteres(a.dataset.interes);
   target.scrollIntoView({ behavior: "instant", block: "start" });
   history.pushState(null, "", "#contacto");
@@ -892,33 +848,8 @@ document.querySelectorAll("[data-lang-switch]").forEach((box) => {
   box.addEventListener("keydown", (e) => { if (e.key === "Escape") { set(false); btn.focus(); } });
 });
 
-/* Packs y servicios: ventana con el detalle (también se abre con #detalle-… en la URL) */
-document.querySelectorAll("dialog.pmodal").forEach((dlg) => {
-  const close = () => dlg.close();
-  dlg.addEventListener("close", () => {
-    if (location.hash === `#${dlg.id}`) history.replaceState(null, "", location.pathname + location.search);
-  });
-  dlg.querySelector("[data-pmodal-close]")?.addEventListener("click", close);
-  // Clic fuera de la ventana (en el fondo oscuro) = cerrar
-  dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
-});
-document.querySelectorAll("[data-pmodal]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const dlg = document.getElementById(btn.dataset.pmodal);
-    if (!dlg) return;
-    dlg.showModal();
-    dlg.querySelector(".pmodal__body").scrollTop = 0;
-    history.replaceState(null, "", `#${dlg.id}`);
-  });
-});
-const openLinkedPack = () => {
-  const dlg = location.hash.startsWith("#detalle-") && document.getElementById(location.hash.slice(1));
-  // Enlaces antiguos a ventanas que ya no existen (packs retirados, rebranding, web, SEO, IA, redes): a la sección de packs
-  if (location.hash.startsWith("#detalle-") && !dlg) { location.hash = "#packs"; return; }
-  if (dlg?.showModal && !dlg.open) dlg.showModal();
-};
-openLinkedPack();
-window.addEventListener("hashchange", openLinkedPack);
+/* Enlaces antiguos a ventanas de detalle (#detalle-…) o a la sección de servicios: al menú de la casa */
+if (/^#(detalle-|servicios$|cuidados-esenciales|web-|plan-)/.test(location.hash)) location.hash = "#packs";
 
 /* Página de contratación: packs y servicios elegidos, sus preguntas y el resumen */
 const hireForm = document.getElementById("hire-form");
@@ -964,26 +895,74 @@ if (hireForm) {
     applyFold();
   }));
 
-  // Precio de cada elegido: el de fundador mientras queden plazas y el de cliente de Cuidados esenciales en la web de una página
-  const priceOf = (input, slugs) => {
-    const d = input.dataset;
-    if (d.priceFounder && founderOn) return d.priceFounder;
-    if (d.priceClient && slugs.some((s) => s.startsWith("cuidados-esenciales"))) return d.priceClient;
-    return d.price;
+  // Precio de cada plato apuntado (de PRECIOS): fundador mientras queden plazas; la web, como suplemento si va con el Menú 3
+  const priceOf = (slug, slugs) => {
+    const p = PROD[slug];
+    if (!p) return null;
+    if (slug === "web-una-pagina") {
+      const dist = slugs.map((x) => PROD[x]).find((x) => x?.suplementoWeb);
+      if (dist) return { base: dist.suplementoWeb, mensual: false };
+    }
+    if (p.desde) return { base: p.precio, desde: true };
+    if (p.tipo === "menu" && !founderOn && p.sinFundador) return { base: p.sinFundador };
+    return { base: p.precio, mensual: !!p.mensual };
   };
+  const priceText = (pr) => !pr ? t("Precio a medida en tu propuesta")
+    : pr.desde ? t("desde {p} + IVA", { p: fmtEur(pr.base) })
+    : `${fmtEur(pr.base)}${pr.mensual ? t("/mes") : ""} + ${t("IVA")}`;
   const cartItem = (input, slugs) => {
     const li = document.createElement("li");
-    li.className = "cart__item";
-    li.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#${input.dataset.icon}"/></svg><span class="cart__name"></span><button type="button" class="cart__remove">×</button>`;
-    const name = li.querySelector(".cart__name");
-    name.textContent = input.value;
-    const small = document.createElement("small");
-    small.textContent = priceOf(input, slugs) || t("Precio a medida en tu propuesta");
-    name.append(small);
+    li.className = "menu__plato";
+    li.innerHTML = '<span class="menu__linea"><span class="menu__nombre"></span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio"></span><button type="button" class="cart__remove">×</button></span>';
+    li.querySelector(".menu__nombre").textContent = input.value;
+    li.querySelector(".menu__precio").textContent = priceText(priceOf(input.dataset.slug, slugs));
     const remove = li.querySelector(".cart__remove");
     remove.setAttribute("aria-label", t("Quitar {name}", { name: input.value }));
     remove.addEventListener("click", () => { input.checked = false; update(); });
     return li;
+  };
+  // Totales: lo puntual (+ IVA y con IVA) y, aparte, lo mensual y lo que va con presupuesto
+  const renderTotals = (slugs) => {
+    const box = cartBox.querySelector("[data-cart-total]");
+    let once = 0, monthly = 0; const quote = [];
+    slugs.forEach((sl) => {
+      const pr = priceOf(sl, slugs);
+      if (!pr) return;
+      if (pr.desde) quote.push(bySlug(sl).value);
+      else if (pr.mensual) monthly += pr.base;
+      else once += pr.base;
+    });
+    box.hidden = !slugs.length;
+    box.querySelector("[data-total-base]").textContent = `${fmtEur(once)} + ${t("IVA")}`;
+    box.querySelector("[data-total-iva]").textContent = fmtEur(conIva(once));
+    const notes = [];
+    if (monthly) notes.push(t("Y cada mes: {p} + IVA ({t} IVA incl.).", { p: fmtEur(monthly), t: fmtEur(conIva(monthly)) }));
+    if (quote.length) notes.push(t("{names}: con presupuesto a medida.", { names: quote.join(", ") }));
+    const nota = box.querySelector("[data-total-nota]");
+    nota.textContent = notes.join(" ");
+    nota.hidden = !notes.length;
+  };
+  // Si lo apuntado suelto ya forma un menú más barato, lo sugerimos (con un enlace que cambia la comanda)
+  const renderTip = (slugs) => {
+    const menu = Object.entries(PROD).find(([k, p]) => p.tipo === "menu" && p.incluye?.length && !slugs.includes(k) &&
+      p.incluye.every((x) => slugs.includes(x)));
+    if (!menu) { tipBox.hidden = true; return; }
+    const [slug, p] = menu;
+    const suelto = p.incluye.reduce((acc, x) => acc + (priceOf(x, slugs)?.base || 0), 0);
+    const enMenu = priceOf(slug, slugs).base;
+    if (suelto <= enMenu) { tipBox.hidden = true; return; }
+    tipBox.innerHTML = "";
+    const txt = document.createElement("p");
+    txt.textContent = t("Si te apuntas ficha + web, el menú Escaparate nuevo te sale más a cuenta");
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "link-btn"; btn.dataset.track = "comanda-cambiar-menu";
+    btn.textContent = t("Cambiar mi comanda por el menú");
+    btn.addEventListener("click", () => {
+      p.incluye.forEach((x) => { const i = bySlug(x); if (i) i.checked = false; });
+      bySlug(slug).checked = true; lastTouched = slug; update();
+    });
+    tipBox.append(txt, btn);
+    tipBox.hidden = false;
   };
 
   const update = () => {
@@ -1012,7 +991,8 @@ if (hireForm) {
     // Resumen
     cartBox.hidden = !slugs.length;
     cartList.replaceChildren(...slugs.map((s) => cartItem(bySlug(s), slugs)));
-    tipBox.hidden = true;
+    renderTotals(slugs);
+    renderTip(slugs);
 
     // Título
     const names = slugs.map((s) => bySlug(s).dataset.short);
@@ -1108,7 +1088,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const choice = form.querySelector("[data-need-choice]");
     if (choice && !choice.querySelector("input:checked")) {
       choice.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-      setStatus(t("Elige al menos un pack o un servicio."), false);
+      setStatus(t("Apunta al menos un menú o un plato."), false);
       return;
     }
     const invalid = [...form.querySelectorAll("[required]")].find((el) => {
@@ -1123,7 +1103,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         t(invalid.type === "radio" ? "Elige el servicio que quieres contratar."
         : invalid.type === "checkbox" ? "Necesitamos que aceptes la política de privacidad."
         : invalid.name === "ciudad" ? "Indica tu ciudad o barrio para preparar el diagnóstico."
-        : "Revisa los campos marcados: nombre, negocio y un email válido."), false);
+        : "Revisa los campos marcados: tu nombre, el de tu salón y cómo contactarte."), false);
       return;
     }
     // Formularios con WhatsApp: hace falta el email o el WhatsApp (al menos uno)
@@ -1160,7 +1140,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     const body = report.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n");
 
     const data = new FormData(form);
-    const diag = !!diagChip?.checked;
+    const diag = !!diagChip?.checked || form.dataset.subject === "Diagnóstico";
     const formulario = diag ? "Diagnóstico" : (form.dataset.subject || "Contacto");
     const servicio = [...data.getAll("paso1"), ...data.getAll("paso2"), ...data.getAll("paso3"), ...data.getAll("servicio")].join(" + ");
     const subject = `${diag ? "Diagnóstico gratis" : form.dataset.subject || "Contacto"}${LANG !== "es" ? ` [${LANG.toUpperCase()}]` : ""}${servicio ? ` ${servicio}` : ""} · ${data.get("negocio")}`;
@@ -1178,9 +1158,13 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         // Google Apps Script (scripts/formularios-google-apps-script.gs): guarda la solicitud en la hoja
         // y envía el informe en PDF. No devuelve cabeceras CORS, así que se envía sin leer la respuesta.
         const get = (n) => (data.get(n) || "").toString();
+        // El vale pide «WhatsApp o email» en un solo campo: se reparte en la columna que toca
+        const contacto = get("contacto").trim();
+        const email = get("email") || (contacto.includes("@") ? contacto : "");
+        const whatsapp = get("whatsapp") || (contacto && !contacto.includes("@") ? contacto : "");
         // En el informe no se repite lo que ya va en el resumen (servicios y datos de contacto)
         const summary = ["Qué quiere contratar"];
-        const contactKeys = ["nombre", "negocio", "email", "telefono", "whatsapp", "ficha", "sector", "ciudad", "interes"].map((n) => {
+        const contactKeys = ["nombre", "negocio", "email", "contacto", "telefono", "whatsapp", "ficha", "sector", "ciudad", "interes"].map((n) => {
           const el = form.querySelector(`[name="${n}"]`);
           return el ? fieldLabel(el) : n;
         });
@@ -1191,7 +1175,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
           .filter((s) => s.filas.length);
         const payload = new URLSearchParams({
           formulario, asunto: subject, servicios: servicio || data.getAll("interes").join(", "),
-          nombre: get("nombre"), negocio: get("negocio"), email: get("email"), telefono: get("telefono"), whatsapp: get("whatsapp"), ficha: get("ficha"),
+          nombre: get("nombre"), negocio: get("negocio"), email, telefono: get("telefono"), whatsapp, ficha: get("ficha"),
           sector: get("sector"), ciudad: get("ciudad"), pagina: location.href, secciones: JSON.stringify(detail),
         });
         await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
@@ -1208,7 +1192,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         ? (SITE.whatsapp
           ? t("¡Recibido! En 48 h laborables te mando tu diagnóstico. Si prefieres WhatsApp, escríbeme al {phone}.", { phone: prettyPhone(SITE.whatsapp) })
           : t("¡Recibido! En 48 h laborables te mando tu diagnóstico."))
-        : t("¡Recibido! Te escribimos en menos de 24 h laborables."), true);
+        : t("¡Recibido! Te respondemos en 48 h laborables."), true);
     } catch {
       setStatus(t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }), false);
     } finally {
@@ -1219,34 +1203,6 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
 
 /* Año del pie */
 document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
-
-/* Singular Extra · borrador
-   - Un pack añadido a "Mi propuesta" se pinta en azul (clase is-selected).
-   - Clic en cualquier zona libre de la caja = pulsar su botón "Añadir a mi propuesta". */
-(function () {
-  var packs = [].slice.call(document.querySelectorAll(".pack--step"));
-  if (!packs.length) return;
-  var btnOf = function (p) {
-    return p.querySelector(".pack__variant:not([hidden]) .add-btn--pack") || p.querySelector(".add-btn--pack");
-  };
-  var sync = function () {
-    packs.forEach(function (p) {
-      var b = btnOf(p);
-      p.classList.toggle("is-selected", !!b && b.getAttribute("aria-pressed") === "true");
-    });
-  };
-  var mo = new MutationObserver(sync);
-  packs.forEach(function (p) {
-    mo.observe(p, { subtree: true, attributes: true, attributeFilter: ["aria-pressed", "hidden"] });
-    p.addEventListener("click", function (e) {
-      if (e.target.closest("a, button, input, label, select, textarea, summary, [role='tab']")) return;
-      if (String(window.getSelection ? window.getSelection() : "")) return;
-      var b = btnOf(p);
-      if (b) b.click();
-    });
-  });
-  sync();
-})();
 
 /* Titulares y sellos que giran al entrar en pantalla, como el periódico que da vueltas en las películas */
 (function () {
