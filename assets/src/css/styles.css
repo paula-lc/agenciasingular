@@ -1903,3 +1903,25 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 .menu__plato--check .menu__nota { margin-left: 40px; }
 .menu__check { align-items: flex-start; }
 .menu__check .menu__caja { margin-top: -3px; }
+
+/* Pie de los menús: letra pequeña a tres columnas de periódico y banda hacia La carta */
+.menus-pie { max-width: none; margin-top: 40px; gap: 0; }
+@media (min-width: 900px) {
+  .menus-pie { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 0; }
+  .menus-pie > p:not(.menus-pie__puente) { padding: 0 24px; border-left: 1px solid var(--tinta); }
+  .menus-pie > p:first-child { padding-left: 0; border-left: 0; }
+}
+.menus-pie > p:not(.menus-pie__puente) { margin: 0 0 12px; font-size: 14px; line-height: 1.55; }
+.menus-pie__puente { grid-column: 1 / -1; margin: 24px 0 0; }
+.menus-pie__puente a { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 16px 20px; background: var(--tinta); color: var(--mostaza) !important; border: 3px solid var(--tinta); outline: 1px solid var(--crema); outline-offset: -8px; box-shadow: 6px 6px 0 var(--rojo); font-family: var(--font-novelty); font-style: normal; font-size: clamp(20px, 2.4vw, 28px); text-decoration: none; transition: transform .22s cubic-bezier(.34, 1.56, .64, 1), box-shadow .22s; }
+@media (hover: hover) { .menus-pie__puente a:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--rojo); } }
+
+/* Menús: entrada visible, uno tras otro, como cartas que caen sobre la mesa */
+.menu { opacity: 0; translate: 0 28px; rotate: -1.5deg; transition: opacity .45s ease, translate .6s cubic-bezier(.34, 1.56, .64, 1), rotate .6s cubic-bezier(.34, 1.56, .64, 1), transform .22s cubic-bezier(.34, 1.56, .64, 1), box-shadow .22s; }
+.menu.is-in { opacity: 1; translate: 0 0; rotate: 0deg; }
+.menu--dia[data-menu="2"].is-in { transition-delay: .12s, .12s, .12s, 0s, 0s; }
+.menu--dia[data-menu="3"].is-in { transition-delay: .24s, .24s, .24s, 0s, 0s; }
+@media (prefers-reduced-motion: reduce) { .menu { opacity: 1; translate: none; rotate: none; } }
+.no-js .menu, .no-js .menu .menu__plato, .no-js .menu .menu__sello { opacity: 1; translate: none; rotate: none; scale: 1; }
+.no-js .menu .menu__puntos { transform: translateY(-4px); }
+.no-js .sx-hl { background-size: 100% 48%; }
