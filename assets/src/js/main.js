@@ -1354,3 +1354,11 @@ document.querySelectorAll('.sx-modo input[name="modo"]').forEach((r) => r.addEve
     if (v && cart.get().includes("redes-sociales")) msg.value = `${t("Redes sociales")}: ${v}`;
   }
 })();
+
+/* Rotulador al pulsar cualquier botón */
+document.addEventListener("pointerdown", (e) => {
+  const b = e.target.closest(".btn");
+  if (!b || reduceMotion) return;
+  b.classList.remove("is-pulsado"); void b.offsetWidth; b.classList.add("is-pulsado");
+});
+document.addEventListener("animationend", (e) => { if (e.animationName === "sx-rotulador") e.target.classList.remove("is-pulsado"); });

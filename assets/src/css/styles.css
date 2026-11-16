@@ -2181,3 +2181,36 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 .sellos.is-in .sello { background-size: 100% 82% !important; color: var(--tinta); }
 .sellos.is-in .sello:nth-child(2) { transition-delay: .25s !important; } .sellos.is-in .sello:nth-child(3) { transition-delay: .5s !important; }
 .no-js .sello, .no-js .fila__sello { background-size: 100% 82% !important; }
+
+
+/* Sellos: el rotulador rellena la caja entera */
+.sello, .hero .sello, .fila__sello, .menu__sello { background-image: linear-gradient(var(--mostaza), var(--mostaza)) !important; background-position: 0 0 !important; }
+@media (hover: hover) { .sello:hover, .hero .sello:hover { background-size: 100% 100% !important; } }
+.tablon.is-in .fila__sello, .sellos.is-in .sello, .no-js .sello, .no-js .fila__sello { background-size: 100% 100% !important; }
+.sello, .hero .sello { background-size: 0% 100% !important; }
+.fila__sello { background-size: 0% 100% !important; }
+.tablon.is-in .fila__sello { background-size: 100% 100% !important; }
+.sellos.is-in .sello { background-size: 100% 100% !important; }
+
+/* Al pulsar un botón: un trazo de rotulador lo rellena de izquierda a derecha */
+.btn, .sx-modo span, .sector-tab, .quiz__opt, .pack-link { background-repeat: no-repeat; }
+.btn { position: relative; isolation: isolate; }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; transform: scaleX(0); transform-origin: left center;
+  background: color-mix(in srgb, var(--tinta) 22%, transparent); }
+.btn.is-pulsado::before { animation: sx-rotulador .4s cubic-bezier(.65, 0, .35, 1) forwards; }
+@keyframes sx-rotulador { 0% { transform: scaleX(0); opacity: 1; } 70% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+/* Interruptores y pestañas: el elegido se rellena de izquierda a derecha y se queda relleno */
+.sx-modo span { background-image: linear-gradient(var(--tinta), var(--tinta)); background-size: 0% 100%; background-position: 0 0; transition: background-size .35s cubic-bezier(.65, 0, .35, 1), color .2s .1s, transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s; }
+.sx-modo input:checked + span { background-color: var(--crema); background-size: 100% 100%; }
+.sector-tab { background-image: linear-gradient(var(--pizarra), var(--pizarra)); background-size: 0% 100%; background-position: 0 0; transition: background-size .35s cubic-bezier(.65, 0, .35, 1), color .2s .1s; }
+.sector-tab[aria-selected="true"] { background-color: transparent; background-size: 100% 100%; animation: none; }
+@media (prefers-reduced-motion: reduce) { .btn.is-pulsado::before { animation: none; } .sx-modo span, .sector-tab { transition: none; } }
+
+/* Café virtual bajo «Lo que siempre nos preguntan» */
+.sx-adbox--cafe { margin-top: 36px; max-width: 380px; }
+.sx-adbox--cafe .sx-adbox__big { font-size: clamp(34px, 3.4vw, 44px); }
+.sx-adbox--cafe > .sx-burst { top: -30px; right: -30px; width: 108px; }
+.sx-adbox--cafe > .sx-burst b { font-size: 40px; } .sx-adbox--cafe > .sx-burst span { font-size: 11px; }
+@media (max-width: 860px) { .sx-adbox--cafe { display: none; } }
+.sx-modo input:checked + span { background-image: linear-gradient(var(--tinta), var(--tinta)); background-repeat: no-repeat; background-position: 0 0; background-size: 100% 100%; }
+.sector-tab[aria-selected="true"] { background-image: linear-gradient(var(--pizarra), var(--pizarra)); background-repeat: no-repeat; background-position: 0 0; background-size: 100% 100%; background-color: transparent; }
