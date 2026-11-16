@@ -688,7 +688,7 @@ const CART_KEY = "mi-propuesta";
 const STEP_OF = {
   "cuidados-esenciales": 1, "escaparate-nuevo": 1, "cuidados-esenciales-distancia": 1,
   "web-una-pagina": 2, "web-completa": 2,
-  "plan-basico": 3, "plan-siempre-visible": 3,
+  "plan-basico": 0, "plan-siempre-visible": 0, "redes-sociales": 0,
 };
 // Platos de la carta que existen (lo guardado de servicios retirados se ignora)
 const SERVICE_SLUGS = ["fotografia", "trastienda"];
@@ -714,7 +714,10 @@ const cart = {
   },
   add(slug) {
     const step = stepOf(slug);
-    this.set([...this.get().filter((s) => s !== slug && !(step && stepOf(s) === step)), slug]);
+    // Mismo paso = se sustituyen, salvo si un menú incluye al otro (Escaparate + Cuidados esenciales conviven y se descuenta)
+    const incluye = (a, b) => (PROD[a]?.incluye || []).includes(b);
+    const dentro = (s) => incluye(slug, s) && PROD[s]?.tipo !== "menu";
+    this.set([...this.get().filter((s) => s !== slug && !dentro(s) && !(step && stepOf(s) === step && !incluye(slug, s) && !incluye(s, slug))), slug]);
   },
   remove(slug) { this.set(this.get().filter((s) => s !== slug)); },
 };
@@ -723,7 +726,7 @@ const cart = {
 const CART_NAMES = {
   "cuidados-esenciales": "Menú 1 · Cuidados esenciales", "escaparate-nuevo": "Menú 2 · Escaparate nuevo", "cuidados-esenciales-distancia": "Menú 3 · A distancia",
   "web-una-pagina": "Web de una página", "web-completa": "Web completa",
-  "plan-basico": "Plan Básico", "plan-siempre-visible": "Plan Siempre visible",
+  "plan-basico": "Plan Básico", "plan-siempre-visible": "Plan Siempre visible", "redes-sociales": "Gestión de redes sociales",
   fotografia: "Fotografía Local", trastienda: "La Trastienda",
 };
 const CART_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(2 2)"><path d="M9 17h30l-2.5 26h-25z" style="fill:var(--mostaza);stroke:none"/></g><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17h30l-2.5 26h-25z"/><path d="M17 17v-3a7 7 0 0114 0v3"/></g></svg>';
@@ -733,11 +736,50 @@ function setCartOpen(open, focusPill) {
   const panel = document.getElementById("cart-panel");
   const pill = document.querySelector(".cart-pill");
   if (!panel || !pill) return;
+  if (panel.hidden === !open) return; // ya está así: no se vuelve a animar
   panel.hidden = !open;
   pill.setAttribute("aria-expanded", String(open));
   if (!open && focusPill) pill.focus();
 }
+function renderUpgrade() {
+  // En la caja del Escaparate: si ya tienes Cuidados esenciales en la propuesta, cuánto te suma de verdad
+  const list = cart.get();
+  document.querySelectorAll("[data-upgrade]").forEach((el) => {
+    const slug = el.closest(".menu, .fila")?.querySelector("[data-add-check]")?.dataset.addCheck;
+    const pr = PROD[slug];
+    const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && typeof PROD[inc]?.precio === "number");
+    if (!pr || !ya.length) { el.hidden = true; return; }
+    const resto = pr.precio - ya.reduce((s, inc) => s + PROD[inc].precio, 0);
+    el.innerHTML = `${escHtml(t("Ya tienes {a} en tu propuesta: el Escaparate te suma solo", { a: t(PROD[ya[0]].nombre) }))} <b>${fmtEur(resto)}</b> + ${escHtml(t("IVA"))}`;
+    el.hidden = false;
+  });
+}
+let cuentaTimer;
+function asomarCuenta() {
+  // La cuenta se asoma unos segundos para ver cómo va el total; si pasas el ratón por encima, se queda
+  setCartOpen(true);
+  const panel = document.getElementById("cart-panel");
+  clearTimeout(cuentaTimer);
+  const cerrar = () => { if (!panel.matches(":hover, :focus-within")) setCartOpen(false); else cuentaTimer = setTimeout(cerrar, 1500); };
+  cuentaTimer = setTimeout(cerrar, 3500);
+}
+function renderUpgradePrecio() {
+  // Línea del Escaparate: si Cuidados esenciales ya está marcado, se tacha su precio y aparece lo que suma de verdad
+  const list = cart.get();
+  document.querySelectorAll("[data-upgrade-precio]").forEach((el) => {
+    const fila = el.closest(".fila");
+    const pr = PROD[fila?.querySelector("[data-add-check]")?.dataset.addCheck];
+    const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && PROD[inc]?.tipo === "menu" && typeof PROD[inc]?.precio === "number");
+    const on = !!(pr && ya.length);
+    fila.classList.toggle("is-upgrade", on);
+    el.hidden = !on;
+    const html = on ? `<b>${fmtEur(pr.precio - ya.reduce((s, inc) => s + PROD[inc].precio, 0))}</b>` : "";
+    if (el.dataset.v !== html) { el.dataset.v = html; el.innerHTML = html; }
+  });
+}
 function renderCartPill() {
+  renderUpgrade();
+  renderUpgradePrecio();
   const actions = document.querySelector(".nav__actions");
   if (!actions) return;
   const list = cart.get(), n = list.length, editable = !document.getElementById("hire-form");
@@ -767,27 +809,85 @@ function renderCartPill() {
     (document.querySelector(".site-header") || document.body).appendChild(panel);
   }
   panel.setAttribute("aria-label", t("Mi propuesta"));
+  // La cesta como cuenta de restaurante: líneas con precio, base, IVA y total
+  let base = 0, mes = 0, desde = false;
   const items = list.map((slug) => {
     const name = escHtml(t(CART_NAMES[slug] || slug));
+    const pr = PROD[slug] || {};
+    let precio = pr.mensual && pr.precio == null ? `<small>${escHtml(t("según mercado"))}</small>` : "";
+    if (typeof pr.precio === "number") {
+      if (pr.mensual) { mes += pr.precio; precio = `${fmtEur(pr.precio)}${escHtml(t("/mes"))}`; }
+      else { base += pr.precio; if (pr.desde) desde = true; precio = (pr.desde ? `<small>${escHtml(t("desde"))}</small> ` : "") + fmtEur(pr.precio); }
+    }
     const rm = editable ? `<button type="button" class="cart-panel__remove" data-cart-remove="${slug}" aria-label="${escHtml(t("Quitar"))}: ${name}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>` : "";
-    return `<li><span class="cart-panel__name">${name}</span>${rm}</li>`;
+    return `<li><span class="cart-panel__qty">1</span><span class="cart-panel__name">${name}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">${precio}</span>${rm}</li>`;
   }).join("");
-  panel.innerHTML = `<div class="cart-panel__head"><strong>${escHtml(t("Mi propuesta"))}</strong><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
-    (n ? `<ul class="cart-panel__list">${items}</ul><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a>`
-       : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
+  // Descuento: si un menú ya incluye otro servicio elegido (Escaparate nuevo incluye Cuidados esenciales), no se cobra dos veces
+  const dtos = [];
+  list.forEach((slug) => (PROD[slug]?.incluye || []).forEach((inc) => {
+    const pi = PROD[inc];
+    if (list.includes(inc) && pi && pi.tipo === "menu" && typeof pi.precio === "number" && !pi.mensual) {
+      base -= pi.precio;
+      dtos.push(`<li class="cart-panel__dto"><span class="cart-panel__name">${escHtml(t("Dto. {a} ya incluido en {b}", { a: t(pi.nombre), b: t(PROD[slug].nombre) }))}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">−${fmtEur(pi.precio)}</span></li>`);
+    }
+  }));
+  // Si lo marcado por separado es exactamente un menú, se propone cambiarlo (sale más barato)
+  let sugerencia = "";
+  const menuEntero = Object.entries(PROD).find(([k, pm]) => pm.tipo === "menu" && pm.incluye?.length && !list.includes(k) && pm.incluye.every((x) => list.includes(x)));
+  if (menuEntero) {
+    const [mslug, pm] = menuEntero;
+    const suelto = pm.incluye.reduce((acc, x) => acc + (typeof PROD[x]?.precio === "number" ? PROD[x].precio : 0), 0);
+    if (suelto > pm.precio) sugerencia = `<div class="cart-panel__sugerencia">
+      <span class="cart-panel__sug-sello">${escHtml(t("Ahorras {x}", { x: fmtEur(suelto - pm.precio) }))}</span>
+      <p class="cart-panel__sug-k">${escHtml(t("Sugerencia de la casa"))}</p>
+      <p class="cart-panel__sug-t">${escHtml(t("Eso que has pedido tiene nombre:"))} <strong>${escHtml(t(pm.nombre))}</strong></p>
+      <p class="cart-panel__sug-p"><s>${fmtEur(suelto)}</s> <b>${fmtEur(pm.precio)}</b> <small>+ ${escHtml(t("IVA"))}</small></p>
+      <button type="button" class="cart-panel__cambiar" data-cambiar-menu="${mslug}">${escHtml(t("Cambiar por el menú"))} →</button></div>`;
+  }
+  const d = new Date(), pad = (x) => String(x).padStart(2, "0");
+  const fecha = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const iva = PRECIOS.iva ?? 21;
+  const fila = (k, v, cls = "") => `<p class="cart-panel__row ${cls}"><span>${k}</span><span>${v}</span></p>`;
+  const pre = desde ? `<small>${escHtml(t("desde"))}</small> ` : "";
+  const totales = (base ? fila(escHtml(t("Base")), pre + fmtEur(base)) + fila(escHtml(t("IVA {n} %", { n: iva })), pre + fmtEur(conIva(base) - base)) + fila(escHtml(t("Total")), pre + fmtEur(conIva(base)), "cart-panel__row--total") : "")
+    + (mes ? fila(escHtml(t("Cada mes")), `${fmtEur(conIva(mes))} ${escHtml(t("IVA incl."))}`, "cart-panel__row--mes") : "");
+  panel.innerHTML = `<div class="cart-panel__head"><div class="cart-panel__casa"><strong>Agencia Singular</strong><span>${escHtml(t("Cuenta · Mesa del barrio"))}</span><span>${fecha}</span></div><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
+    (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul>${sugerencia}<div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Hacer mi pedido →" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
+       : `<p class="cart-panel__empty">${escHtml(t("La mesa está puesta, pero aún no has pedido nada."))}</p><p class="cart-panel__empty cart-panel__empty--sub">${escHtml(t("Marca lo que te apetezca en el menú y lo irás viendo aquí, con su total."))}</p><a class="cart-panel__ver" href="#packs">${escHtml(t("Ver el menú"))} ↓</a>`);
 }
 document.addEventListener("click", (e) => {
   if (e.target.closest(".cart-pill")) { setCartOpen(!cartOpen()); return; }
   const rm = e.target.closest("[data-cart-remove]");
   if (rm) { cart.remove(rm.dataset.cartRemove); syncAddButtons(); return; }
   if (e.target.closest(".cart-panel__close")) { setCartOpen(false, true); return; }
-  if (cartOpen() && !e.target.closest("#cart-panel")) setCartOpen(false);
+  if (e.target.closest(".cart-panel__ver")) { setCartOpen(false); return; }
+  const cambio = e.target.closest("[data-cambiar-menu]");
+  if (cambio) {
+    const slug = cambio.dataset.cambiarMenu;
+    cart.set([...cart.get().filter((x) => !(PROD[slug]?.incluye || []).includes(x)), slug]);
+    syncAddButtons();
+    return;
+  }
+  // Marcar otra casilla con la cuenta abierta no la cierra (si no, se vuelve a imprimir entera)
+  if (cartOpen() && !e.target.closest("#cart-panel") && !e.target.closest(".fila__linea, .menu__check")) setCartOpen(false);
 });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && cartOpen()) setCartOpen(false, true); });
 
 // Botones "Añadir" de la portada
 const syncAddButtons = () => {
   const list = cart.get();
+  const incluidos = list.flatMap((s) => (PROD[s]?.incluye || []).filter((x) => PROD[x]?.tipo !== "menu"));
+  document.querySelectorAll("[data-add-check]").forEach((cb) => {
+    const slug = cb.dataset.addCheck, dentro = incluidos.includes(slug);
+    cb.checked = list.includes(slug) || dentro;
+    cb.disabled = dentro;
+    const fila = cb.closest(".fila");
+    if (fila) {
+      fila.classList.toggle("is-incluido", dentro);
+      const com = fila.querySelector("[data-comanda]");
+      if (com) com.hidden = !cb.checked;
+    }
+  });
   document.querySelectorAll("[data-add]").forEach((b) => {
     const on = list.includes(b.dataset.add);
     const isPackBtn = b.classList.contains("add-btn--pack");
@@ -803,6 +903,14 @@ document.querySelectorAll("[data-add]").forEach((b) => {
     if (cart.get().includes(slug)) cart.remove(slug); else cart.add(slug);
     syncAddButtons();
     pop(b);
+  });
+});
+document.querySelectorAll("[data-add-check]").forEach((cb) => {
+  cb.addEventListener("change", () => {
+    const slug = cb.dataset.addCheck;
+    if (cb.checked) cart.add(slug); else cart.remove(slug);
+    syncAddButtons();
+    if (cb.checked && matchMedia("(min-width: 980px)").matches) asomarCuenta();
   });
 });
 syncAddButtons();
@@ -1215,4 +1323,85 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("sx-spin"); io.unobserve(e.target); } });
   }, { threshold: 0.35 });
   els.forEach(function (el) { el.classList.add("sx-pre"); io.observe(el); });
+})();
+
+/* Singular Extra: subrayado amarillo y entrada de los menús al hacer scroll */
+(() => {
+  const els = document.querySelectorAll(".sx-hl, .menu, .tablon, .garantia .sellos");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("is-in")); return; }
+  // Los bloques altos (el tablón en móvil) nunca llegan al 35 % visible: basta con que asomen un poco
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    const alto = e.boundingClientRect.height > innerHeight * 0.8;
+    if (e.isIntersecting && (e.intersectionRatio >= 0.35 || (alto && e.intersectionRect.height > innerHeight * 0.25))) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+  }), { threshold: [0, 0.1, 0.2, 0.35] });
+  els.forEach((e) => io.observe(e));
+})();
+
+/* La carta se sirve al pedirla: el enlace «¿Solo te apetece un plato?» la despliega */
+(() => {
+  const carta = document.querySelector(".carta-y-sobremesa");
+  const links = document.querySelectorAll('a[href="#carta"]');
+  if (!carta || !links.length) return;
+  carta.id = carta.id || "carta-servida";
+  const set = (open) => {
+    carta.hidden = !open;
+    links.forEach((a) => { a.setAttribute("aria-expanded", String(open)); a.setAttribute("aria-controls", carta.id); });
+  };
+  const abrir = (scroll) => {
+    if (carta.hidden) { set(true); carta.classList.remove("is-served"); void carta.offsetWidth; carta.classList.add("is-served"); carta.querySelectorAll(".menu").forEach((m) => m.classList.add("is-in")); }
+    if (scroll) document.getElementById("carta")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  };
+  set(location.hash === "#carta");
+  if (location.hash === "#carta") abrir(true);
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href="#carta"]');
+    if (!a) return;
+    e.preventDefault();
+    if (!carta.hidden && a.closest(".menus-pie__puente")) { set(false); return; }
+    abrir(true);
+  });
+})();
+
+/* Interruptor En Barcelona / A distancia: al cambiar, el menú que aparece entra ya visible */
+document.querySelectorAll('.sx-modo input[name="modo"]').forEach((r) => r.addEventListener("change", () => {
+  document.querySelectorAll(".menus .menu, .tablon").forEach((m) => m.classList.add("is-in"));
+}));
+
+/* Comanda de redes: se guarda en el navegador y llega al formulario de contratar */
+(() => {
+  const KEY = "comanda-redes";
+  const ta = document.getElementById("comanda-redes");
+  if (ta) {
+    try { ta.value = localStorage.getItem(KEY) || ""; } catch {}
+    ta.addEventListener("input", () => { try { localStorage.setItem(KEY, ta.value); } catch {} });
+  }
+  const msg = document.getElementById("f-mensaje");
+  if (msg && !msg.value) {
+    let v = ""; try { v = localStorage.getItem(KEY) || ""; } catch {}
+    if (v && cart.get().includes("redes-sociales")) msg.value = `${t("Redes sociales")}: ${v}`;
+  }
+})();
+
+/* Rotulador al pulsar cualquier botón */
+document.addEventListener("pointerdown", (e) => {
+  const b = e.target.closest(".btn");
+  if (!b || reduceMotion) return;
+  b.classList.remove("is-pulsado"); void b.offsetWidth; b.classList.add("is-pulsado");
+});
+document.addEventListener("animationend", (e) => { if (e.animationName === "sx-rotulador") e.target.classList.remove("is-pulsado"); });
+
+/* Guía: la lista de la abuela recuerda lo que ya has marcado */
+(() => {
+  const checks = document.querySelectorAll(".guia .checklist input[type=checkbox]");
+  if (!checks.length) return;
+  const KEY = "guia-checklist";
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || []; } catch {}
+  checks.forEach((cb, i) => {
+    cb.checked = saved.includes(i);
+    cb.addEventListener("change", () => {
+      const on = [...checks].map((c, j) => (c.checked ? j : -1)).filter((j) => j >= 0);
+      try { localStorage.setItem(KEY, JSON.stringify(on)); } catch {}
+    });
+  });
 })();
