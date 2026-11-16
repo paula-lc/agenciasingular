@@ -130,6 +130,7 @@ def jsonld(s):
     data = json.loads(m.group(2))
     org = next(x for x in data['@graph'] if 'Organization' in (x['@type'] if isinstance(x['@type'], list) else [x['@type']]))
     org.pop('hasOfferCatalog', None); org.pop('makesOffer', None)
+    org['knowsAbout'] = ['Google Business Profile', 'Google Maps', 'Diseño web', 'Fotografía comercial', 'Peluquerías', 'Centros de estética']
     org['slogan'] = 'Que tu escaparate digital trabaje por ti'
     org['description'] = ('Agencia boutique de Barcelona para peluquerías, uñas y centros de estética, y otros comercios de la zona. '
                           'Cuida su ficha de Google, sus fotos y su web para que les encuentren y reserven. Precios cerrados y sin permanencia. '
