@@ -2476,3 +2476,11 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
   .sx-modo legend { grid-column: 1 / -1; }
   .sx-modo span { padding: 10px 8px; font-size: 12px; text-align: center; white-space: nowrap; }
 }
+@media (max-width: 420px) {
+  .tablon { padding-left: 12px; padding-right: 12px; }
+  .tablon__cab { padding: 8px 18px 8px 62px; min-height: 58px; gap: 8px; }
+  .tablon__cab::after { width: 10px; }
+  .tablon__ilus { width: 58px; left: -8px; }
+  .tablon__t { font-size: 19px; line-height: 1.05; }
+  .tablon__sub { font-size: 12.5px; line-height: 1.3; }
+}
