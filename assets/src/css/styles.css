@@ -1891,3 +1891,15 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
   .sx-fotoanuncio__head { margin-top: 10px; font-size: 26px; }
   .sx-fotoanuncio__sub { font-size: 15px; }
 }
+
+/* Casillas de La carta: casilla de imprenta con sombra, visto rojo a mano y subrayado al marcar */
+.menu__check { align-items: center; gap: 14px; }
+.menu__caja { width: 26px; height: 26px; top: 0; border: 2.5px solid var(--tinta); background: var(--crema); box-shadow: 3px 3px 0 var(--tinta); }
+.menu__check:hover .menu__caja { background: var(--mostaza); transform: translate(-1px, -1px) rotate(-4deg); box-shadow: 4px 4px 0 var(--tinta); }
+.menu__check input:checked + .menu__caja { background: var(--mostaza); border-color: var(--tinta); transform: rotate(-6deg); box-shadow: 3px 3px 0 var(--rojo); }
+.menu__check input:checked + .menu__caja::after { left: 7px; top: -9px; width: 10px; height: 24px; border-color: var(--rojo); border-width: 0 5px 5px 0; border-radius: 0 0 3px 0; transform: rotate(40deg); animation: sx-visto .25s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes sx-visto { from { transform: rotate(40deg) scale(0); } to { transform: rotate(40deg) scale(1); } }
+.menu__check input:checked ~ .menu__linea .menu__nombre { background: linear-gradient(var(--mostaza), var(--mostaza)) no-repeat 0 92% / 100% 45%; }
+.menu__plato--check .menu__nota { margin-left: 40px; }
+.menu__check { align-items: flex-start; }
+.menu__check .menu__caja { margin-top: -3px; }
