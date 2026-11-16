@@ -736,6 +736,7 @@ function setCartOpen(open, focusPill) {
   const panel = document.getElementById("cart-panel");
   const pill = document.querySelector(".cart-pill");
   if (!panel || !pill) return;
+  if (panel.hidden === !open) return; // ya está así: no se vuelve a animar
   panel.hidden = !open;
   pill.setAttribute("aria-expanded", String(open));
   if (!open && focusPill) pill.focus();
@@ -846,7 +847,8 @@ document.addEventListener("click", (e) => {
   const rm = e.target.closest("[data-cart-remove]");
   if (rm) { cart.remove(rm.dataset.cartRemove); syncAddButtons(); return; }
   if (e.target.closest(".cart-panel__close")) { setCartOpen(false, true); return; }
-  if (cartOpen() && !e.target.closest("#cart-panel")) setCartOpen(false);
+  // Marcar otra casilla con la cuenta abierta no la cierra (si no, se vuelve a imprimir entera)
+  if (cartOpen() && !e.target.closest("#cart-panel") && !e.target.closest(".fila__linea, .menu__check")) setCartOpen(false);
 });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && cartOpen()) setCartOpen(false, true); });
 
