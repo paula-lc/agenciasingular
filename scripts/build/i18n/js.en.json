@@ -148,5 +148,7 @@
   "Ya tienes {a} en tu propuesta: el Escaparate te suma solo": "You already have {a} in your proposal: the Shop Window only adds",
   "según mercado": "market price",
   "Gestión de redes sociales": "Social media management",
-  "Hacer mi pedido →": "Place my order →"
+  "Hacer mi pedido →": "Place my order →",
+  "Esto es nuestro {menu}: te sale a {a} en vez de {b}.": "This is our {menu}: it comes to {a} instead of {b}.",
+  "Cambiar por el menú": "Swap for the menu"
 }

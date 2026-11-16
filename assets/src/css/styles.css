@@ -2250,3 +2250,9 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 .tablon__notas p:not(.tablon__notas-t) { margin: 0; padding-left: 14px; position: relative; font-size: 13px; line-height: 1.5; }
 .tablon__notas p:not(.tablon__notas-t)::before { content: "*"; position: absolute; left: 0; color: var(--rojo); font-weight: 700; }
 .tablon__notas p[hidden] { display: none; }
+
+/* Cuenta: sugerencia de cambiar lo suelto por el menú */
+.cart-panel__sugerencia { margin: 4px 0 0; padding: 10px 12px; background: var(--mostaza); border: 2px solid var(--tinta); rotate: -1deg; display: grid; gap: 8px; animation: sx-servir .4s cubic-bezier(.34, 1.56, .64, 1); }
+.cart-panel__sugerencia p { margin: 0; font-size: 13px; line-height: 1.4; font-weight: 700; }
+.cart-panel__cambiar { justify-self: start; padding: 6px 12px; border: 2px solid var(--tinta); background: var(--tinta); color: var(--mostaza); font-family: var(--font-typewriter); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+.cart-panel__cambiar:hover { background: var(--rojo); border-color: var(--rojo); color: var(--crema); }

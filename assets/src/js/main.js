@@ -831,6 +831,14 @@ function renderCartPill() {
       dtos.push(`<li class="cart-panel__dto"><span class="cart-panel__name">${escHtml(t("Dto. {a} ya incluido en {b}", { a: t(pi.nombre), b: t(PROD[slug].nombre) }))}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">−${fmtEur(pi.precio)}</span></li>`);
     }
   }));
+  // Si lo marcado por separado es exactamente un menú, se propone cambiarlo (sale más barato)
+  let sugerencia = "";
+  const menuEntero = Object.entries(PROD).find(([k, pm]) => pm.tipo === "menu" && pm.incluye?.length && !list.includes(k) && pm.incluye.every((x) => list.includes(x)));
+  if (menuEntero) {
+    const [mslug, pm] = menuEntero;
+    const suelto = pm.incluye.reduce((acc, x) => acc + (typeof PROD[x]?.precio === "number" ? PROD[x].precio : 0), 0);
+    if (suelto > pm.precio) sugerencia = `<div class="cart-panel__sugerencia"><p>${escHtml(t("Esto es nuestro {menu}: te sale a {a} en vez de {b}.", { menu: t(pm.nombre), a: fmtEur(pm.precio), b: fmtEur(suelto) }))}</p><button type="button" class="cart-panel__cambiar" data-cambiar-menu="${mslug}">${escHtml(t("Cambiar por el menú"))}</button></div>`;
+  }
   const d = new Date(), pad = (x) => String(x).padStart(2, "0");
   const fecha = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   const iva = PRECIOS.iva ?? 21;
@@ -839,7 +847,7 @@ function renderCartPill() {
   const totales = (base ? fila(escHtml(t("Base")), pre + fmtEur(base)) + fila(escHtml(t("IVA {n} %", { n: iva })), pre + fmtEur(conIva(base) - base)) + fila(escHtml(t("Total")), pre + fmtEur(conIva(base)), "cart-panel__row--total") : "")
     + (mes ? fila(escHtml(t("Cada mes")), `${fmtEur(conIva(mes))} ${escHtml(t("IVA incl."))}`, "cart-panel__row--mes") : "");
   panel.innerHTML = `<div class="cart-panel__head"><div class="cart-panel__casa"><strong>Agencia Singular</strong><span>${escHtml(t("Cuenta · Mesa del barrio"))}</span><span>${fecha}</span></div><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
-    (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul><div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Hacer mi pedido →" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
+    (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul>${sugerencia}<div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Hacer mi pedido →" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
        : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
 }
 document.addEventListener("click", (e) => {
@@ -847,6 +855,13 @@ document.addEventListener("click", (e) => {
   const rm = e.target.closest("[data-cart-remove]");
   if (rm) { cart.remove(rm.dataset.cartRemove); syncAddButtons(); return; }
   if (e.target.closest(".cart-panel__close")) { setCartOpen(false, true); return; }
+  const cambio = e.target.closest("[data-cambiar-menu]");
+  if (cambio) {
+    const slug = cambio.dataset.cambiarMenu;
+    cart.set([...cart.get().filter((x) => !(PROD[slug]?.incluye || []).includes(x)), slug]);
+    syncAddButtons();
+    return;
+  }
   // Marcar otra casilla con la cuenta abierta no la cierra (si no, se vuelve a imprimir entera)
   if (cartOpen() && !e.target.closest("#cart-panel") && !e.target.closest(".fila__linea, .menu__check")) setCartOpen(false);
 });
