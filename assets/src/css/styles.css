@@ -2391,3 +2391,33 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
 .guia .toc a { background: none !important; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: .45em; text-underline-offset: -.28em; text-decoration-skip-ink: none; transition: text-decoration-color .2s; }
 .guia .toc a:hover, .guia .toc a:focus-visible { text-decoration-color: var(--mostaza); }
 .guia .prose ul:not(.checklist), .guia .prose ol { display: flow-root; }
+
+
+/* Guía: dibujitos propios de cada paso, dentro del titular (no tocan el texto) y con animaciones suaves en bucle */
+.guia .prose h2[id^="paso-"] { display: flex; align-items: center; gap: 18px; }
+.guia-h2-t { flex: 1 1 auto; min-width: 0; }
+.guia-h2-ilus { flex: none; width: clamp(84px, 10vw, 120px); margin: -6px 0 -10px; rotate: 3deg; }
+.guia .prose h2[id^="paso-"]:nth-of-type(even) .guia-h2-ilus { rotate: -3deg; }
+.guia-ilus { display: block; width: 100%; height: auto; overflow: visible; stroke: var(--tinta); }
+.guia-ilus * { transform-box: fill-box; transform-origin: center; }
+.a-bota { animation: g-bota 1.8s ease-in-out infinite; }
+@keyframes g-bota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.a-brillo { animation: g-brillo 2.4s ease-in-out infinite; }
+.a-brillo:nth-of-type(2n) { animation-delay: .8s; } .a-brillo:nth-of-type(3n) { animation-delay: 1.6s; }
+@keyframes g-brillo { 0%, 100% { transform: scale(.75) rotate(0deg); } 50% { transform: scale(1.1) rotate(18deg); } }
+.a-llenar { animation: g-llenar 4.2s ease-in-out infinite; }
+@keyframes g-llenar { 0%, 8% { fill: var(--crema); transform: scale(1); } 14% { fill: var(--mostaza); transform: scale(1.25); } 20%, 82% { fill: var(--mostaza); transform: scale(1); } 92%, 100% { fill: var(--crema); } }
+.a-latido { animation: g-latido 1.6s ease-in-out infinite; }
+@keyframes g-latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.a-clic { animation: g-clic 1.6s ease-in-out infinite; }
+@keyframes g-clic { 0%, 100% { transform: translate(0, 0); } 45%, 55% { transform: translate(-14px, -6px); } }
+.a-hormiga { animation: g-hormiga 1.2s linear infinite; }
+@keyframes g-hormiga { to { stroke-dashoffset: -20; } }
+.a-onda { animation: g-onda 1.8s ease-out infinite; opacity: 0; }
+@keyframes g-onda { 0% { opacity: 0; transform: translateX(-4px); } 30% { opacity: 1; } 70%, 100% { opacity: 0; transform: translateX(4px); } }
+.a-barra { transform-origin: 50% 100%; animation: g-barra 2.6s cubic-bezier(.34, 1.56, .64, 1) infinite; }
+@keyframes g-barra { 0%, 100% { transform: scaleY(.45); } 40%, 70% { transform: scaleY(1); } }
+.a-gira { animation: g-gira 6s linear infinite; }
+@keyframes g-gira { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .guia-ilus * { animation: none !important; opacity: 1 !important; } }
+@media (max-width: 600px) { .guia .prose h2[id^="paso-"] { gap: 10px; } .guia-h2-ilus { width: 68px; margin: 0; } }
