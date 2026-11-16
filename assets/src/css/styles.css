@@ -2376,3 +2376,5 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
 .guia .prose h2#errores ~ ol li { counter-increment: err; position: relative; padding: 8px 0 8px 56px; border-bottom: 1px dotted var(--tinta); }
 .guia .prose h2#errores ~ ol li::before { content: counter(err); position: absolute; left: 0; top: 0; font-family: var(--font-gothic); font-size: 40px; line-height: 1; color: var(--rojo); }
 .guia .prose strong { background: none; }
+/* Cinta: el doble de largo de texto, así la velocidad no cambia aunque haya más palabras */
+.ticker__track { animation-duration: 120s !important; }
