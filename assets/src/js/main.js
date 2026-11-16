@@ -767,13 +767,28 @@ function renderCartPill() {
     (document.querySelector(".site-header") || document.body).appendChild(panel);
   }
   panel.setAttribute("aria-label", t("Mi propuesta"));
+  // La cesta como cuenta de restaurante: líneas con precio, base, IVA y total
+  let base = 0, mes = 0, desde = false;
   const items = list.map((slug) => {
     const name = escHtml(t(CART_NAMES[slug] || slug));
+    const pr = PROD[slug] || {};
+    let precio = "";
+    if (typeof pr.precio === "number") {
+      if (pr.mensual) { mes += pr.precio; precio = `${fmtEur(pr.precio)}${escHtml(t("/mes"))}`; }
+      else { base += pr.precio; if (pr.desde) desde = true; precio = (pr.desde ? `<small>${escHtml(t("desde"))}</small> ` : "") + fmtEur(pr.precio); }
+    }
     const rm = editable ? `<button type="button" class="cart-panel__remove" data-cart-remove="${slug}" aria-label="${escHtml(t("Quitar"))}: ${name}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>` : "";
-    return `<li><span class="cart-panel__name">${name}</span>${rm}</li>`;
+    return `<li><span class="cart-panel__qty">1</span><span class="cart-panel__name">${name}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">${precio}</span>${rm}</li>`;
   }).join("");
-  panel.innerHTML = `<div class="cart-panel__head"><strong>${escHtml(t("Mi propuesta"))}</strong><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
-    (n ? `<ul class="cart-panel__list">${items}</ul><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a>`
+  const d = new Date(), pad = (x) => String(x).padStart(2, "0");
+  const fecha = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const iva = PRECIOS.iva ?? 21;
+  const fila = (k, v, cls = "") => `<p class="cart-panel__row ${cls}"><span>${k}</span><span>${v}</span></p>`;
+  const pre = desde ? `<small>${escHtml(t("desde"))}</small> ` : "";
+  const totales = (base ? fila(escHtml(t("Base")), pre + fmtEur(base)) + fila(escHtml(t("IVA {n} %", { n: iva })), pre + fmtEur(conIva(base) - base)) + fila(escHtml(t("Total")), pre + fmtEur(conIva(base)), "cart-panel__row--total") : "")
+    + (mes ? fila(escHtml(t("Cada mes")), `${fmtEur(conIva(mes))} ${escHtml(t("IVA incl."))}`, "cart-panel__row--mes") : "");
+  panel.innerHTML = `<div class="cart-panel__head"><div class="cart-panel__casa"><strong>Agencia Singular</strong><span>${escHtml(t("Cuenta · Mesa del barrio"))}</span><span>${fecha}</span></div><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
+    (n ? `<ul class="cart-panel__list">${items}</ul><div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
        : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
 }
 document.addEventListener("click", (e) => {
@@ -1231,4 +1246,29 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("is-in")); return; }
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { threshold: 0.35 });
   els.forEach((e) => io.observe(e));
+})();
+
+/* La carta se sirve al pedirla: el enlace «¿Solo te apetece un plato?» la despliega */
+(() => {
+  const carta = document.querySelector(".carta-y-sobremesa");
+  const links = document.querySelectorAll('a[href="#carta"]');
+  if (!carta || !links.length) return;
+  carta.id = carta.id || "carta-servida";
+  const set = (open) => {
+    carta.hidden = !open;
+    links.forEach((a) => { a.setAttribute("aria-expanded", String(open)); a.setAttribute("aria-controls", carta.id); });
+  };
+  const abrir = (scroll) => {
+    if (carta.hidden) { set(true); carta.classList.remove("is-served"); void carta.offsetWidth; carta.classList.add("is-served"); carta.querySelectorAll(".menu").forEach((m) => m.classList.add("is-in")); }
+    if (scroll) document.getElementById("carta")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  };
+  set(location.hash === "#carta");
+  if (location.hash === "#carta") abrir(true);
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href="#carta"]');
+    if (!a) return;
+    e.preventDefault();
+    if (!carta.hidden && a.closest(".menus-pie__puente")) { set(false); return; }
+    abrir(true);
+  });
 })();

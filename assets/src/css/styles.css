@@ -1925,3 +1925,37 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 .no-js .menu, .no-js .menu .menu__plato, .no-js .menu .menu__sello { opacity: 1; translate: none; rotate: none; scale: 1; }
 .no-js .menu .menu__puntos { transform: translateY(-4px); }
 .no-js .sx-hl { background-size: 100% 48%; }
+
+
+/* ---------- La cesta como cuenta de restaurante (tique de caja) ---------- */
+.cart-panel { --zz: 10px; background: #f7f3e6; color: var(--tinta); border: 0; box-shadow: 4px 6px 0 rgba(38, 31, 20, .25); padding: 18px 20px calc(18px + var(--zz)); gap: 10px;
+  font-family: var(--font-typewriter); rotate: -1deg; transform-origin: top right; animation: sx-tique .35s cubic-bezier(.2, .8, .2, 1);
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--zz)) 100%;
+          mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--zz)) 100%; }
+@keyframes sx-tique { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+.cart-panel__head { align-items: flex-start; border-bottom: 2px dashed var(--tinta); padding-bottom: 12px; }
+.cart-panel__casa { display: grid; gap: 2px; text-align: center; flex: 1; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+.cart-panel__casa strong { font-family: var(--font-gothic); font-weight: 400; font-size: 30px; line-height: 1; letter-spacing: .04em; }
+.cart-panel__list li { min-height: 0; padding: 8px 0; gap: 8px; border-bottom: 0; align-items: baseline; font-family: var(--font-typewriter); font-weight: 700; font-size: 14px; }
+.cart-panel__qty { flex: none; }
+.cart-panel__qty::after { content: " ×"; font-weight: 400; }
+.cart-panel__name { flex: 0 1 auto; min-width: 0; }
+.cart-panel__dots { flex: 1 0 12px; border-bottom: 2px dotted var(--tinta); transform: translateY(-4px); }
+.cart-panel__price { flex: none; white-space: nowrap; }
+.cart-panel__price small, .cart-panel__row small { font-weight: 400; font-size: 11px; }
+.cart-panel__remove, .cart-panel__close { width: 30px; height: 30px; border: 0; color: var(--rojo); align-self: center; }
+.cart-panel__remove:hover, .cart-panel__close:hover { background: var(--rojo); color: #f7f3e6; }
+.cart-panel__totales { border-top: 2px dashed var(--tinta); padding-top: 8px; display: grid; gap: 4px; }
+.cart-panel__row { display: flex; justify-content: space-between; margin: 0; font-size: 13px; }
+.cart-panel__row--total { margin-top: 4px; padding-top: 6px; border-top: 3px double var(--tinta); font-size: 18px; font-weight: 700; text-transform: uppercase; }
+.cart-panel__row--mes { font-style: italic; }
+.cart-panel__gracias { margin: 0; text-align: center; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+.cart-panel__empty { font-family: var(--font-typewriter); font-style: normal; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .cart-panel { animation: none; } }
+
+/* La carta, servida al pedirla */
+.carta-y-sobremesa.is-served > * { animation: sx-servir .55s cubic-bezier(.34, 1.56, .64, 1) both; }
+.carta-y-sobremesa.is-served > :nth-child(2) { animation-delay: .12s; }
+@keyframes sx-servir { from { opacity: 0; translate: 0 -24px; rotate: 1.5deg; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
+.menus-pie__puente a[aria-expanded="true"] { background: var(--crema); color: var(--tinta) !important; }
+@media (prefers-reduced-motion: reduce) { .carta-y-sobremesa.is-served > * { animation: none; } }
