@@ -2484,3 +2484,8 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
   .tablon__t { font-size: 19px; line-height: 1.05; }
   .tablon__sub { font-size: 12.5px; line-height: 1.3; }
 }
+
+/* Raya superior de los titulares a todo el ancho (como la doble de abajo); el texto conserva su medida */
+.section-head { grid-template-columns: minmax(0, 1fr) !important; }
+.section-head .section-title, .section-head .section-lead { max-width: 860px; }
+.section-head .sx-motto { justify-self: start !important; margin-left: min(calc(860px - clamp(112px, 17vw, 190px) + 8px), calc(100% - clamp(112px, 17vw, 190px) + 8px)) !important; margin-right: 0 !important; }
