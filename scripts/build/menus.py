@@ -78,11 +78,11 @@ def menu_dia(m, modo=None):
                 <ul class="menu__platos">{platos}</ul>
                 {foto(m["ilustracion"], m["alt"], "menu__foto")}
               </div>
-              <div class="menu__cuenta">{cuenta}<p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{esc(m["plazo"])}</p></div>
+              <div class="menu__cuenta">{cuenta}{'<p class="menu__upgrade" data-upgrade hidden></p>' if m.get('incluye') else ''}<p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{esc(m["plazo"])}</p></div>
               {sup}
               <div class="menu__acciones">
                 <a class="btn btn--crimson" href="contratar.html?servicio={m["slug"]}" data-track="menu-{m["num"]}">{esc(m["cta"])}</a>
-                <button type="button" class="add-btn add-btn--pack" data-add="{m["slug"]}" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
+                <label class="menu__check menu__check--pack"><input type="checkbox" data-add-check="{m["slug"]}"><span class="menu__caja" aria-hidden="true"></span><span class="menu__check-t">Añadir a mi propuesta</span></label>
               </div>
             </article>'''
 

@@ -714,7 +714,9 @@ const cart = {
   },
   add(slug) {
     const step = stepOf(slug);
-    this.set([...this.get().filter((s) => s !== slug && !(step && stepOf(s) === step)), slug]);
+    // Mismo paso = se sustituyen, salvo si un menú incluye al otro (Escaparate + Cuidados esenciales conviven y se descuenta)
+    const incluye = (a, b) => (PROD[a]?.incluye || []).includes(b);
+    this.set([...this.get().filter((s) => s !== slug && !(step && stepOf(s) === step && !incluye(slug, s) && !incluye(s, slug))), slug]);
   },
   remove(slug) { this.set(this.get().filter((s) => s !== slug)); },
 };
@@ -737,7 +739,21 @@ function setCartOpen(open, focusPill) {
   pill.setAttribute("aria-expanded", String(open));
   if (!open && focusPill) pill.focus();
 }
+function renderUpgrade() {
+  // En la caja del Escaparate: si ya tienes Cuidados esenciales en la propuesta, cuánto te suma de verdad
+  const list = cart.get();
+  document.querySelectorAll("[data-upgrade]").forEach((el) => {
+    const slug = el.closest(".menu")?.querySelector("[data-add-check]")?.dataset.addCheck;
+    const pr = PROD[slug];
+    const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && typeof PROD[inc]?.precio === "number");
+    if (!pr || !ya.length) { el.hidden = true; return; }
+    const resto = pr.precio - ya.reduce((s, inc) => s + PROD[inc].precio, 0);
+    el.innerHTML = `${escHtml(t("Ya tienes {a} en tu propuesta: el Escaparate te suma solo", { a: t(PROD[ya[0]].nombre) }))} <b>${fmtEur(resto)}</b> + ${escHtml(t("IVA"))}`;
+    el.hidden = false;
+  });
+}
 function renderCartPill() {
+  renderUpgrade();
   const actions = document.querySelector(".nav__actions");
   if (!actions) return;
   const list = cart.get(), n = list.length, editable = !document.getElementById("hire-form");
@@ -780,6 +796,15 @@ function renderCartPill() {
     const rm = editable ? `<button type="button" class="cart-panel__remove" data-cart-remove="${slug}" aria-label="${escHtml(t("Quitar"))}: ${name}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>` : "";
     return `<li><span class="cart-panel__qty">1</span><span class="cart-panel__name">${name}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">${precio}</span>${rm}</li>`;
   }).join("");
+  // Descuento: si un menú ya incluye otro servicio elegido (Escaparate nuevo incluye Cuidados esenciales), no se cobra dos veces
+  const dtos = [];
+  list.forEach((slug) => (PROD[slug]?.incluye || []).forEach((inc) => {
+    const pi = PROD[inc];
+    if (list.includes(inc) && pi && typeof pi.precio === "number" && !pi.mensual) {
+      base -= pi.precio;
+      dtos.push(`<li class="cart-panel__dto"><span class="cart-panel__name">${escHtml(t("Dto. {a} ya incluido en {b}", { a: t(pi.nombre), b: t(PROD[slug].nombre) }))}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">−${fmtEur(pi.precio)}</span></li>`);
+    }
+  }));
   const d = new Date(), pad = (x) => String(x).padStart(2, "0");
   const fecha = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   const iva = PRECIOS.iva ?? 21;
@@ -788,7 +813,7 @@ function renderCartPill() {
   const totales = (base ? fila(escHtml(t("Base")), pre + fmtEur(base)) + fila(escHtml(t("IVA {n} %", { n: iva })), pre + fmtEur(conIva(base) - base)) + fila(escHtml(t("Total")), pre + fmtEur(conIva(base)), "cart-panel__row--total") : "")
     + (mes ? fila(escHtml(t("Cada mes")), `${fmtEur(conIva(mes))} ${escHtml(t("IVA incl."))}`, "cart-panel__row--mes") : "");
   panel.innerHTML = `<div class="cart-panel__head"><div class="cart-panel__casa"><strong>Agencia Singular</strong><span>${escHtml(t("Cuenta · Mesa del barrio"))}</span><span>${fecha}</span></div><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
-    (n ? `<ul class="cart-panel__list">${items}</ul><div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
+    (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul><div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
        : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
 }
 document.addEventListener("click", (e) => {

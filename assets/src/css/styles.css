@@ -2009,3 +2009,12 @@ body:has(.sx-modo input[value="dist"]:checked) .menus [data-solo-dist] { display
 
 .menu--sobremesa .menu__check .menu__linea { flex-wrap: wrap; row-gap: 2px; }
 .menu--sobremesa .menu__check .menu__puntos { flex-basis: 12px; }
+
+
+/* Packs: también con casilla */
+.menu__check--pack { align-items: center; justify-content: center; padding: 10px 12px; border: 2px dashed var(--tinta); font-family: var(--font-display); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.menu__check--pack .menu__caja { margin-top: 0; }
+.menu__check--pack:has(input:checked) { border-style: solid; background: color-mix(in srgb, var(--mostaza) 35%, transparent); }
+.menu__upgrade { margin: 10px 0 0; padding: 8px 10px; background: var(--tinta); color: var(--crema); font-size: 13px; line-height: 1.4; text-align: center; rotate: -1deg; animation: sx-servir .4s cubic-bezier(.34, 1.56, .64, 1); }
+.menu__upgrade b { color: var(--mostaza); font-family: var(--font-gothic); font-weight: 400; font-size: 22px; }
+.cart-panel__dto { color: var(--rojo); font-style: italic; }

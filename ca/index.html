@@ -34,7 +34,7 @@
 <link rel="apple-touch-icon" href="../assets/img/icon-180.png">
 <link rel="manifest" href="../site.webmanifest">
 <link rel="alternate" type="text/plain" title="Resum per a IA (llms.txt)" href="../llms.txt">
-<link rel="stylesheet" href="../assets/css/styles.css?v=94">
+<link rel="stylesheet" href="../assets/css/styles.css?v=95">
 <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
 <script type="application/ld+json">
   {
@@ -500,11 +500,11 @@
 <ul class="menu__platos"><li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">Tot el Menú 1</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio menu__precio--txt">450 € a la carta</span></span></li><li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">Web d'una pàgina amb les teves fotos i el teu botó de reserves</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio menu__precio--txt">690 € a la carta</span></span></li></ul>
 <figure class="foto menu__foto" role="img" aria-label="Il·lustració: aparador de botiga amb rètol de neó i un televisor de tub que mostra el web, amb el jaguar de la marca traient el cap"><svg class="ilus" viewbox="0 0 200 160" aria-hidden="true" focusable="false"><rect class="f-c" x="0" y="0" width="200" height="160"></rect><path class="f-r" d="M10 14h180l-8 22H18z"></path><path class="f-c" d="M40 14l-4 22M70 14l-2 22M100 14v22M130 14l2 22M160 14l4 22"></path><rect class="f-ht" x="18" y="44" width="164" height="104"></rect><rect class="f-n" x="18" y="44" width="164" height="104"></rect><rect class="f-n neon" x="34" y="52" width="70" height="20" rx="10"></rect><path class="f-n neon" d="M44 62c6-8 10 8 16 0s10 8 16 0 10 8 16 0"></path><rect class="f-p" x="96" y="80" width="70" height="56" rx="6"></rect><rect class="f-c" x="104" y="87" width="46" height="40" rx="8"></rect><path class="f-r" d="M110 94h34v8h-34z" stroke-width="2"></path><path class="f-n" d="M110 108h26M110 114h20" stroke-width="2"></path><rect class="f-m" x="128" y="118" width="16" height="6" stroke-width="2"></rect><circle class="f-m" cx="158" cy="94" r="3"></circle><circle class="f-m" cx="158" cy="104" r="3"></circle><path class="f-n" d="M112 136l-6 10M150 136l6 10"></path><path class="f-m" d="M30 148c0-26 12-40 30-40s30 14 30 40z"></path><path class="f-m" d="M38 116l-4-14 14 8M82 116l4-14-14 8"></path><circle class="f-p" cx="50" cy="126" r="3.5"></circle><circle class="f-p" cx="70" cy="126" r="3.5"></circle><path class="f-r" d="M56 134h8l-4 5z" stroke-width="2"></path><circle class="f-p" cx="42" cy="140" r="2"></circle><circle class="f-p" cx="78" cy="140" r="2"></circle><circle class="f-p" cx="60" cy="116" r="2"></circle></svg></figure>
 </div>
-<div class="menu__cuenta"><div class="sx-fundador"><span class="sx-burst sx-burst--fundador" aria-hidden="true"><b>−540 €</b><span>Fundador</span></span><p class="menu__tachado">Comanda a la carta <s>1.140 €</s></p><p class="menu__en">En menú:</p><p class="menu__total">600 €<small> + IVA</small></p><p class="menu__iva-total">726 € IVA incl.</p><p class="menu__sello" data-founder="">Preu fundador</p></div><p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>2-3 setmanes</p></div>
+<div class="menu__cuenta"><div class="sx-fundador"><span class="sx-burst sx-burst--fundador" aria-hidden="true"><b>−540 €</b><span>Fundador</span></span><p class="menu__tachado">Comanda a la carta <s>1.140 €</s></p><p class="menu__en">En menú:</p><p class="menu__total">600 €<small> + IVA</small></p><p class="menu__iva-total">726 € IVA incl.</p><p class="menu__sello" data-founder="">Preu fundador</p></div><p class="menu__upgrade" data-upgrade="" hidden=""></p><p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>2-3 setmanes</p></div>
 <p class="menu__distancia" data-solo-dist=""><strong>Fora de Barcelona?</strong> <span>A distància i amb web:</span> <b>500 €<small> + IVA</small></b></p>
 <div class="menu__acciones">
 <a class="btn btn--crimson" href="contratar.html?servicio=escaparate-nuevo" data-track="menu-2">Vull el meu aparador nou</a>
-<button type="button" class="add-btn add-btn--pack" data-add="escaparate-nuevo" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+<label class="menu__check menu__check--pack"><input type="checkbox" data-add-check="escaparate-nuevo"><span class="menu__caja" aria-hidden="true"></span><span class="menu__check-t">Afegeix a la meva proposta</span></label>
 </div>
 </article>
 <div class="menu-slot">
@@ -521,7 +521,7 @@
 <div class="menu__cuenta"><div data-founder=""><div class="sx-fundador"><span class="sx-burst sx-burst--fundador" aria-hidden="true"><b>−100 €</b><span>Fundador</span></span><p class="menu__tachado"><s>450 €</s></p><p class="menu__total">350 €<small> + IVA</small></p><p class="menu__iva-total">423,50 € IVA incl.</p><p class="menu__sello" data-founder="">Preu fundador</p></div></div><div data-web-price="" hidden=""><p class="menu__total">450 €<small> + IVA</small></p><p class="menu__iva-total">544,50 € IVA incl.</p></div><p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>1-2 setmanes</p></div>
 <div class="menu__acciones">
 <a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales" data-track="menu-1">Vull Cures essencials</a>
-<button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+<label class="menu__check menu__check--pack"><input type="checkbox" data-add-check="cuidados-esenciales"><span class="menu__caja" aria-hidden="true"></span><span class="menu__check-t">Afegeix a la meva proposta</span></label>
 </div>
 </article>
 <article class="menu menu--dia" id="menu-cuidados-esenciales-distancia" data-menu="3" data-modo="dist" aria-labelledby="menu-cuidados-esenciales-distancia-t">
@@ -538,7 +538,7 @@
 <p class="menu__suplemento"><strong>Suplement web:</strong> +250 € + IVA <span>(500 € + IVA en total, 605 € IVA incl.)</span></p>
 <div class="menu__acciones">
 <a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="menu-3">Vull la versió a distància</a>
-<button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Afegeix a la meva proposta</span></button>
+<label class="menu__check menu__check--pack"><input type="checkbox" data-add-check="cuidados-esenciales-distancia"><span class="menu__caja" aria-hidden="true"></span><span class="menu__check-t">Afegeix a la meva proposta</span></label>
 </div>
 </article>
 </div>
@@ -902,7 +902,7 @@
 <aside class="sticky-cta" data-sticky-cta="" aria-label="Diagnosi gratuïta">
 <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="cta-diagnostico-flotante"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"></use></svg>Diagnosi gratuïta</a>
 </aside>
-<script src="../assets/js/i18n.js?v=94" defer=""></script>
-  <script src="../assets/js/main.js?v=94" defer=""></script>
+<script src="../assets/js/i18n.js?v=95" defer=""></script>
+  <script src="../assets/js/main.js?v=95" defer=""></script>
 </body>
 </html>
