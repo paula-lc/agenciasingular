@@ -31,7 +31,7 @@
   <link rel="apple-touch-icon" href="assets/img/icon-180.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="alternate" type="text/plain" title="Resumen para IA (llms.txt)" href="llms.txt">
-  <link rel="stylesheet" href="assets/css/styles.css?v=93">
+  <link rel="stylesheet" href="assets/css/styles.css?v=94">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -496,6 +496,11 @@
             </div><p class="sx-motto sx-motto--rosa"><span>¡Sin relleno!</span><span>trabajo de verdad</span></p>
           </div>
 
+          <fieldset class="sx-modo">
+            <legend>¿Dónde está tu negocio?</legend>
+            <label><input type="radio" name="modo" value="bcn" checked><span>En Barcelona</span></label>
+            <label><input type="radio" name="modo" value="dist"><span>A distancia</span></label>
+          </fieldset>
           <div class="menus">
           <!-- precios:menus -->
             <article class="menu menu--dia menu--destacado" id="menu-escaparate-nuevo" data-menu="2" aria-labelledby="menu-escaparate-nuevo-t">
@@ -509,13 +514,14 @@
                 <figure class="foto menu__foto" role="img" aria-label="Ilustración: escaparate de tienda con rótulo de neón y un televisor de tubo que muestra la web, con el jaguar de la marca asomando"><svg class="ilus" viewBox="0 0 200 160" aria-hidden="true" focusable="false"><rect class="f-c" x="0" y="0" width="200" height="160"/><path class="f-r" d="M10 14h180l-8 22H18z"/><path class="f-c" d="M40 14l-4 22M70 14l-2 22M100 14v22M130 14l2 22M160 14l4 22" /><rect class="f-ht" x="18" y="44" width="164" height="104"/><rect class="f-n" x="18" y="44" width="164" height="104"/><rect class="f-n neon" x="34" y="52" width="70" height="20" rx="10"/><path class="f-n neon" d="M44 62c6-8 10 8 16 0s10 8 16 0 10 8 16 0"/><rect class="f-p" x="96" y="80" width="70" height="56" rx="6"/><rect class="f-c" x="104" y="87" width="46" height="40" rx="8"/><path class="f-r" d="M110 94h34v8h-34z" stroke-width="2"/><path class="f-n" d="M110 108h26M110 114h20" stroke-width="2"/><rect class="f-m" x="128" y="118" width="16" height="6" stroke-width="2"/><circle class="f-m" cx="158" cy="94" r="3"/><circle class="f-m" cx="158" cy="104" r="3"/><path class="f-n" d="M112 136l-6 10M150 136l6 10"/><path class="f-m" d="M30 148c0-26 12-40 30-40s30 14 30 40z"/><path class="f-m" d="M38 116l-4-14 14 8M82 116l4-14-14 8"/><circle class="f-p" cx="50" cy="126" r="3.5"/><circle class="f-p" cx="70" cy="126" r="3.5"/><path class="f-r" d="M56 134h8l-4 5z" stroke-width="2"/><circle class="f-p" cx="42" cy="140" r="2"/><circle class="f-p" cx="78" cy="140" r="2"/><circle class="f-p" cx="60" cy="116" r="2"/></svg></figure>
               </div>
               <div class="menu__cuenta"><div class="sx-fundador"><span class="sx-burst sx-burst--fundador" aria-hidden="true"><b>−540 €</b><span>Fundador</span></span><p class="menu__tachado">Pedido a la carta <s>1.140 €</s></p><p class="menu__en">En menú:</p><p class="menu__total">600 €<small> + IVA</small></p><p class="menu__iva-total">726 € IVA incl.</p><p class="menu__sello" data-founder>Precio fundador</p></div><p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>2-3 semanas</p></div>
-              
+              <p class="menu__distancia" data-solo-dist><strong>¿Fuera de Barcelona?</strong> <span>A distancia y con web:</span> <b>500 €<small> + IVA</small></b></p>
               <div class="menu__acciones">
                 <a class="btn btn--crimson" href="contratar.html?servicio=escaparate-nuevo" data-track="menu-2">Quiero mi escaparate nuevo</a>
                 <button type="button" class="add-btn add-btn--pack" data-add="escaparate-nuevo" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
-            <article class="menu menu--dia" id="menu-cuidados-esenciales" data-menu="1" aria-labelledby="menu-cuidados-esenciales-t">
+          <div class="menu-slot">
+            <article class="menu menu--dia" id="menu-cuidados-esenciales" data-menu="1" data-modo="bcn" aria-labelledby="menu-cuidados-esenciales-t">
               <header class="menu__head">
                 <p class="menu__kicker">Menú 1</p>
                 <h3 class="menu__title" id="menu-cuidados-esenciales-t">Cuidados esenciales</h3>
@@ -532,9 +538,9 @@
                 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
-            <article class="menu menu--dia" id="menu-cuidados-esenciales-distancia" data-menu="3" aria-labelledby="menu-cuidados-esenciales-distancia-t">
+            <article class="menu menu--dia" id="menu-cuidados-esenciales-distancia" data-menu="3" data-modo="dist" aria-labelledby="menu-cuidados-esenciales-distancia-t">
               <header class="menu__head">
-                <p class="menu__kicker">Menú 3 · Para llevar</p>
+                <p class="menu__kicker">Menú 1 · Para llevar</p>
                 <h3 class="menu__title" id="menu-cuidados-esenciales-distancia-t">A distancia</h3>
                 <p class="menu__para">Estoy fuera de Barcelona</p>
               </header>
@@ -549,6 +555,16 @@
                 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span></button>
               </div>
             </article>
+          </div>
+          <article class="menu menu--sobremesa" id="sobremesa" aria-labelledby="sobremesa-t">
+            <header class="menu__head">
+              <p class="menu__kicker">Cada mes · Para clientas de la casa</p>
+              <h3 class="menu__title" id="sobremesa-t">La sobremesa</h3>
+              <p class="menu__para">Cuando tu escaparate ya esté a punto, podemos seguir cuidándolo cada mes. Sin permanencia.</p>
+            </header>
+            <ul class="menu__platos"><li class="menu__plato menu__plato--check"><label class="menu__check"><input type="checkbox" data-add-check="plan-basico"><span class="menu__caja" aria-hidden="true"></span><span class="menu__linea"><span class="menu__nombre">Plan Básico</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">59 €/mes <small>+ IVA</small><small class="menu__iva">71,39 €/mes IVA incl.</small></span></span></label><em class="menu__nota">Una publicación al mes en tu ficha y todas tus reseñas respondidas.</em></li><li class="menu__plato menu__plato--check"><label class="menu__check"><input type="checkbox" data-add-check="plan-siempre-visible"><span class="menu__caja" aria-hidden="true"></span><span class="menu__linea"><span class="menu__nombre">Plan Siempre visible</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">149 €/mes <small>+ IVA</small><small class="menu__iva">180,29 €/mes IVA incl.</small></span></span></label><em class="menu__nota">Ficha y web cuidadas cada mes, con informe. Requiere web con nosotras.</em></li></ul>
+            <div class="menu__acciones"><a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="sobremesa">Lo hablamos en la sobremesa</a></div>
+          </article>
           <!-- /precios:menus -->
           </div>
 
@@ -586,15 +602,6 @@
           </article>
           <!-- /precios:carta -->
           <!-- precios:sobremesa -->
-          <article class="menu menu--sobremesa" id="sobremesa" aria-labelledby="sobremesa-t">
-            <header class="menu__head">
-              <p class="menu__kicker">Para clientas de la casa</p>
-              <h3 class="menu__title" id="sobremesa-t">La sobremesa</h3>
-              <p class="menu__para">Cuando tu escaparate ya esté a punto, podemos seguir cuidándolo cada mes. Sin permanencia.</p>
-            </header>
-            <ul class="menu__platos"><li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">Plan Básico</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">59 €/mes <small>+ IVA</small><small class="menu__iva">71,39 €/mes IVA incl.</small></span></span><em class="menu__nota">Una publicación al mes en tu ficha y todas tus reseñas respondidas.</em></li><li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">Plan Siempre visible</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">149 €/mes <small>+ IVA</small><small class="menu__iva">180,29 €/mes IVA incl.</small></span></span><em class="menu__nota">Ficha y web cuidadas cada mes, con informe. Requiere web con nosotras.</em></li></ul>
-            <div class="menu__acciones"><a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="sobremesa">Lo hablamos en la sobremesa</a></div>
-          </article>
           <!-- /precios:sobremesa -->
           </div>
         </div>
@@ -925,6 +932,6 @@
     <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="cta-diagnostico-flotante"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
   </aside>
 
-  <script src="assets/js/main.js?v=93" defer></script>
+  <script src="assets/js/main.js?v=94" defer></script>
 </body>
 </html>

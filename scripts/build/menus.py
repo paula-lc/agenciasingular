@@ -42,7 +42,7 @@ def bloque_precio(precio, iva=True):
     return (f'<p class="menu__total">{num(precio)} €<small> + IVA</small></p>'
             f'<p class="menu__iva-total">{num(con_iva(precio))} € IVA incl.</p>')
 
-def menu_dia(m):
+def menu_dia(m, modo=None):
     destacado = ' menu--destacado' if m['num'] == 2 else ''
     etiqueta = f' · {esc(m["etiqueta"])}' if m.get('etiqueta') else ''
     platos = ''.join(plato(n, (f'{num(p)} € a la carta' if isinstance(p, (int, float)) else p)) for n, p in m['platos'])
@@ -58,14 +58,19 @@ def menu_dia(m):
     else:
         cuenta = fundador
     sup = ''
+    dist = next((x for x in D['menus'] if x.get('suplementoWeb')), None)
+    if m['num'] == 2 and dist:
+        tot = dist['precio'] + dist['suplementoWeb']
+        sup = (f'<p class="menu__distancia" data-solo-dist><strong>¿Fuera de Barcelona?</strong> <span>A distancia y con web:</span> '
+               f'<b>{num(tot)} €<small> + IVA</small></b></p>')
     if m.get('suplementoWeb'):
         tot = m['precio'] + m['suplementoWeb']
         sup = (f'<p class="menu__suplemento"><strong>Suplemento web:</strong> +{num(m["suplementoWeb"])} € + IVA '
                f'<span>({num(tot)} € + IVA en total, {num(con_iva(tot))} € IVA incl.)</span></p>')
     return f'''
-            <article class="menu menu--dia{destacado}" id="menu-{m["slug"]}" data-menu="{m["num"]}" aria-labelledby="menu-{m["slug"]}-t">
+            <article class="menu menu--dia{destacado}" id="menu-{m["slug"]}" data-menu="{m["num"]}"{f' data-modo="{modo}"' if modo else ''} aria-labelledby="menu-{m["slug"]}-t">
               <header class="menu__head">
-                <p class="menu__kicker">Menú {m["num"]}{etiqueta}</p>
+                <p class="menu__kicker">Menú {1 if modo == "dist" else m["num"]}{etiqueta}</p>
                 <h3 class="menu__title" id="menu-{m["slug"]}-t">{esc(m["nombre"])}</h3>
                 <p class="menu__para">{esc(m["para"])}</p>
               </header>
@@ -82,11 +87,11 @@ def menu_dia(m):
             </article>'''
 
 def sobremesa():
-    platos = ''.join(plato(p['nombre'], p['precio'], p['nota'], mensual=True) for p in D['planes'])
+    platos = ''.join(plato(p['nombre'], p['precio'], p['nota'], mensual=True, slug=p['slug']) for p in D['planes'])
     return f'''
           <article class="menu menu--sobremesa" id="sobremesa" aria-labelledby="sobremesa-t">
             <header class="menu__head">
-              <p class="menu__kicker">Para clientas de la casa</p>
+              <p class="menu__kicker">Cada mes · Para clientas de la casa</p>
               <h3 class="menu__title" id="sobremesa-t">La sobremesa</h3>
               <p class="menu__para">Cuando tu escaparate ya esté a punto, podemos seguir cuidándolo cada mes. Sin permanencia.</p>
             </header>
@@ -170,8 +175,10 @@ def put(s, key, content):
 if __name__ == '__main__':
     s = open(ROOT + 'index.html').read()
     menus = sorted(D['menus'], key=lambda m: (m['num'] != 2, m['num']))  # en móvil, el Menú 2 primero
-    s = put(s, 'menus', ''.join(menu_dia(m) for m in menus))
-    s = put(s, 'sobremesa', sobremesa())
+    por_num = {m['num']: m for m in D['menus']}
+    caja1 = '<div class="menu-slot">' + menu_dia(por_num[1], 'bcn') + menu_dia(por_num[3], 'dist') + '\n          </div>'
+    s = put(s, 'menus', menu_dia(por_num[2]) + '\n          ' + caja1 + sobremesa())
+    s = put(s, 'sobremesa', '')
     s = put(s, 'carta', carta())
     s = re.sub(r'<script type="application/json" id="precios-data">.*?</script>',
                f'<script type="application/json" id="precios-data">{datos_js()}</script>', s, flags=re.S)

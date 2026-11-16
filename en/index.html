@@ -34,7 +34,7 @@
 <link rel="apple-touch-icon" href="../assets/img/icon-180.png">
 <link rel="manifest" href="../site.webmanifest">
 <link rel="alternate" type="text/plain" title="Summary for AI (llms.txt)" href="../llms.txt">
-<link rel="stylesheet" href="../assets/css/styles.css?v=93">
+<link rel="stylesheet" href="../assets/css/styles.css?v=94">
 <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
 <script type="application/ld+json">
   {
@@ -483,6 +483,11 @@
 <p class="section-lead">Do you have a website? Are you in Barcelona? That's all you need to know which one is yours. VAT is extra and we always tell you the total.</p>
 </div><p class="sx-motto sx-motto--rosa"><span>No filler!</span><span>real work</span></p>
 </div>
+<fieldset class="sx-modo">
+<legend>Where is your business?</legend>
+<label><input type="radio" name="modo" value="bcn" checked=""><span>In Barcelona</span></label>
+<label><input type="radio" name="modo" value="dist"><span>Remote</span></label>
+</fieldset>
 <div class="menus">
 <!-- precios:menus -->
 <article class="menu menu--dia menu--destacado" id="menu-escaparate-nuevo" data-menu="2" aria-labelledby="menu-escaparate-nuevo-t">
@@ -496,12 +501,14 @@
 <figure class="foto menu__foto" role="img" aria-label="Illustration: shop window with a neon sign and a tube TV showing the website, with the brand's jaguar peeking out"><svg class="ilus" viewbox="0 0 200 160" aria-hidden="true" focusable="false"><rect class="f-c" x="0" y="0" width="200" height="160"></rect><path class="f-r" d="M10 14h180l-8 22H18z"></path><path class="f-c" d="M40 14l-4 22M70 14l-2 22M100 14v22M130 14l2 22M160 14l4 22"></path><rect class="f-ht" x="18" y="44" width="164" height="104"></rect><rect class="f-n" x="18" y="44" width="164" height="104"></rect><rect class="f-n neon" x="34" y="52" width="70" height="20" rx="10"></rect><path class="f-n neon" d="M44 62c6-8 10 8 16 0s10 8 16 0 10 8 16 0"></path><rect class="f-p" x="96" y="80" width="70" height="56" rx="6"></rect><rect class="f-c" x="104" y="87" width="46" height="40" rx="8"></rect><path class="f-r" d="M110 94h34v8h-34z" stroke-width="2"></path><path class="f-n" d="M110 108h26M110 114h20" stroke-width="2"></path><rect class="f-m" x="128" y="118" width="16" height="6" stroke-width="2"></rect><circle class="f-m" cx="158" cy="94" r="3"></circle><circle class="f-m" cx="158" cy="104" r="3"></circle><path class="f-n" d="M112 136l-6 10M150 136l6 10"></path><path class="f-m" d="M30 148c0-26 12-40 30-40s30 14 30 40z"></path><path class="f-m" d="M38 116l-4-14 14 8M82 116l4-14-14 8"></path><circle class="f-p" cx="50" cy="126" r="3.5"></circle><circle class="f-p" cx="70" cy="126" r="3.5"></circle><path class="f-r" d="M56 134h8l-4 5z" stroke-width="2"></path><circle class="f-p" cx="42" cy="140" r="2"></circle><circle class="f-p" cx="78" cy="140" r="2"></circle><circle class="f-p" cx="60" cy="116" r="2"></circle></svg></figure>
 </div>
 <div class="menu__cuenta"><div class="sx-fundador"><span class="sx-burst sx-burst--fundador" aria-hidden="true"><b>−540 €</b><span>Founder</span></span><p class="menu__tachado">Ordered à la carte <s>1.140 €</s></p><p class="menu__en">On the menu:</p><p class="menu__total">600 €<small> + VAT</small></p><p class="menu__iva-total">€726 incl. VAT</p><p class="menu__sello" data-founder="">Founder price</p></div><p class="menu__plazo"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"></use></svg>2-3 weeks</p></div>
+<p class="menu__distancia" data-solo-dist=""><strong>Outside Barcelona?</strong> <span>Remote, with website:</span> <b>500 €<small> + VAT</small></b></p>
 <div class="menu__acciones">
 <a class="btn btn--crimson" href="contratar.html?servicio=escaparate-nuevo" data-track="menu-2">I want my new shop window</a>
 <button type="button" class="add-btn add-btn--pack" data-add="escaparate-nuevo" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Add to my proposal</span></button>
 </div>
 </article>
-<article class="menu menu--dia" id="menu-cuidados-esenciales" data-menu="1" aria-labelledby="menu-cuidados-esenciales-t">
+<div class="menu-slot">
+<article class="menu menu--dia" id="menu-cuidados-esenciales" data-menu="1" data-modo="bcn" aria-labelledby="menu-cuidados-esenciales-t">
 <header class="menu__head">
 <p class="menu__kicker">Menu 1</p>
 <h3 class="menu__title" id="menu-cuidados-esenciales-t">Essential Care</h3>
@@ -517,9 +524,9 @@
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Add to my proposal</span></button>
 </div>
 </article>
-<article class="menu menu--dia" id="menu-cuidados-esenciales-distancia" data-menu="3" aria-labelledby="menu-cuidados-esenciales-distancia-t">
+<article class="menu menu--dia" id="menu-cuidados-esenciales-distancia" data-menu="3" data-modo="dist" aria-labelledby="menu-cuidados-esenciales-distancia-t">
 <header class="menu__head">
-<p class="menu__kicker">Menu 3 · To go</p>
+<p class="menu__kicker">Menú 1 · Para llevar</p>
 <h3 class="menu__title" id="menu-cuidados-esenciales-distancia-t">Remote</h3>
 <p class="menu__para">I'm outside Barcelona</p>
 </header>
@@ -533,6 +540,16 @@
 <a class="btn btn--crimson" href="contratar.html?servicio=cuidados-esenciales-distancia" data-track="menu-3">I want the remote version</a>
 <button type="button" class="add-btn add-btn--pack" data-add="cuidados-esenciales-distancia" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg><span data-add-label="">Add to my proposal</span></button>
 </div>
+</article>
+</div>
+<article class="menu menu--sobremesa" id="sobremesa" aria-labelledby="sobremesa-t">
+<header class="menu__head">
+<p class="menu__kicker">Monthly · For our clients</p>
+<h3 class="menu__title" id="sobremesa-t">After-dinner</h3>
+<p class="menu__para">Once your shop window is all set, we can keep looking after it every month. No lock-in.</p>
+</header>
+<ul class="menu__platos"><li class="menu__plato menu__plato--check"><label class="menu__check"><input type="checkbox" data-add-check="plan-basico"><span class="menu__caja" aria-hidden="true"></span><span class="menu__linea"><span class="menu__nombre">Basic Plan</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">€59/month <small>+ VAT</small><small class="menu__iva">€71.39/month VAT incl.</small></span></span></label><em class="menu__nota">One post a month on your profile and all your reviews answered.</em></li><li class="menu__plato menu__plato--check"><label class="menu__check"><input type="checkbox" data-add-check="plan-siempre-visible"><span class="menu__caja" aria-hidden="true"></span><span class="menu__linea"><span class="menu__nombre">Always Visible Plan</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">€149/month <small>+ VAT</small><small class="menu__iva">€180.29/month VAT incl.</small></span></span></label><em class="menu__nota">Profile and website looked after every month, with a report. Requires a website made with us.</em></li></ul>
+<div class="menu__acciones"><a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="sobremesa">Let's talk over coffee</a></div>
 </article>
 <!-- /precios:menus -->
 </div>
@@ -569,15 +586,6 @@
 </article>
 <!-- /precios:carta -->
 <!-- precios:sobremesa -->
-<article class="menu menu--sobremesa" id="sobremesa" aria-labelledby="sobremesa-t">
-<header class="menu__head">
-<p class="menu__kicker">For house clients</p>
-<h3 class="menu__title" id="sobremesa-t">After-dinner</h3>
-<p class="menu__para">Once your shop window is all set, we can keep looking after it every month. No lock-in.</p>
-</header>
-<ul class="menu__platos"><li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">Basic Plan</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">€59/month <small>+ VAT</small><small class="menu__iva">€71.39/month VAT incl.</small></span></span><em class="menu__nota">One post a month on your profile and all your reviews answered.</em></li><li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">Always Visible Plan</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio">€149/month <small>+ VAT</small><small class="menu__iva">€180.29/month VAT incl.</small></span></span><em class="menu__nota">Profile and website looked after every month, with a report. Requires a website made with us.</em></li></ul>
-<div class="menu__acciones"><a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="sobremesa">Let's talk over coffee</a></div>
-</article>
 <!-- /precios:sobremesa -->
 </div>
 </div>
@@ -894,7 +902,7 @@
 <aside class="sticky-cta" data-sticky-cta="" aria-label="Free audit">
 <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="cta-diagnostico-flotante"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"></use></svg>Free audit</a>
 </aside>
-<script src="../assets/js/i18n.js?v=93" defer=""></script>
-  <script src="../assets/js/main.js?v=93" defer=""></script>
+<script src="../assets/js/i18n.js?v=94" defer=""></script>
+  <script src="../assets/js/main.js?v=94" defer=""></script>
 </body>
 </html>

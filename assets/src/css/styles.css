@@ -1959,3 +1959,53 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 @keyframes sx-servir { from { opacity: 0; translate: 0 -24px; rotate: 1.5deg; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
 .menus-pie__puente a[aria-expanded="true"] { background: var(--crema); color: var(--tinta) !important; }
 @media (prefers-reduced-motion: reduce) { .carta-y-sobremesa.is-served > * { animation: none; } }
+
+
+/* ---------- Menús: interruptor general, Menú 1 / A distancia en la misma caja, planes mensuales en la tercera ---------- */
+.sx-modo { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin: 28px 0 0; padding: 0; border: 0; }
+.sx-modo legend { float: left; margin-right: 6px; font-family: var(--font-slab); font-style: italic; font-weight: 800; font-size: 19px; }
+.sx-modo label { position: relative; cursor: pointer; }
+.sx-modo input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.sx-modo span { display: block; padding: 10px 18px; border: 2.5px solid var(--tinta); background: var(--crema); box-shadow: 3px 3px 0 var(--tinta);
+  font-family: var(--font-display); font-size: 14px; text-transform: uppercase; letter-spacing: .06em; transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), background .15s, box-shadow .2s; }
+.sx-modo label:hover span { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--tinta); }
+.sx-modo input:checked + span { background: var(--tinta); color: var(--mostaza); box-shadow: 3px 3px 0 var(--rojo); transform: rotate(-1.5deg); }
+.sx-modo input:focus-visible + span { outline: 3px solid var(--mostaza); outline-offset: 3px; }
+
+.menus [data-modo="dist"], .menus [data-solo-dist] { display: none; }
+body:has(.sx-modo input[value="dist"]:checked) .menus [data-modo="bcn"] { display: none; }
+body:has(.sx-modo input[value="dist"]:checked) .menus [data-modo="dist"] { display: flex; }
+body:has(.sx-modo input[value="dist"]:checked) .menus [data-solo-dist] { display: block; }
+.menu-slot { display: grid; min-width: 0; }
+.menu-slot > .menu { height: 100%; }
+.menu-slot > .menu.is-in, body:has(.sx-modo input:checked) .menu-slot > .menu { animation: sx-voltear .45s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes sx-voltear { from { rotate: y 90deg; } to { rotate: y 0deg; } }
+.menu__distancia { margin: 12px 0 0; padding: 10px 12px; background: var(--mostaza); border: 2px solid var(--tinta); text-align: center; font-size: 14px; }
+.menu__distancia b { display: block; font-family: var(--font-gothic); font-weight: 400; font-size: 26px; color: var(--tinta); }
+.menu__distancia small { font-family: var(--font-typewriter); font-size: 13px; }
+@media (min-width: 980px) {
+  .menus > .menu-slot { order: 1; }
+  .menus > .menu--dia[data-menu="2"] { order: 2; }
+  .menus > .menu--sobremesa { order: 3; }
+}
+.menus > .menu--sobremesa { display: flex; flex-direction: column; }
+.menus > .menu--sobremesa .menu__acciones { margin-top: auto; padding-top: var(--menu-gap); }
+.menu--sobremesa .menu__plato--check .menu__nota { margin-left: 40px; }
+
+/* La carta, a todo el ancho y en tres columnas */
+.carta-y-sobremesa { grid-template-columns: 1fr !important; }
+@media (min-width: 980px) {
+  .menu--carta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 0; }
+  .menu--carta > .menu__head, .menu--carta > .menu__grupo--fuera { grid-column: 1 / -1; }
+  .menu--carta > .menu__grupo:not(.menu__grupo--fuera) { padding: 8px 28px 20px; border-bottom: 0; border-left: 1px solid var(--tinta); }
+  .menu--carta > .menu__grupo:nth-of-type(1) { padding-left: 0; border-left: 0; }
+  .menu--carta > .menu__grupo:nth-of-type(3) { padding-right: 0; }
+  .menu--carta .menu__body { grid-template-columns: 1fr !important; }
+  .menu--carta .menu__foto--sm { order: -1; max-width: 120px; justify-self: start; }
+  .menu--carta > .menu__grupo--fuera { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; border-top: 2px dashed var(--tinta); padding-top: 20px; }
+  .menu--carta > .menu__grupo--fuera .menu__grupo-t { margin: 0; }
+  .menu--carta > .menu__grupo--fuera .btn { margin: 0 0 0 auto; }
+}
+
+.menu--sobremesa .menu__check .menu__linea { flex-wrap: wrap; row-gap: 2px; }
+.menu--sobremesa .menu__check .menu__puntos { flex-basis: 12px; }

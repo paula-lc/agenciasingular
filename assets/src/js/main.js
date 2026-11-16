@@ -1272,3 +1272,8 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
     abrir(true);
   });
 })();
+
+/* Interruptor En Barcelona / A distancia: al cambiar, el menú que aparece entra ya visible */
+document.querySelectorAll('.sx-modo input[name="modo"]').forEach((r) => r.addEventListener("change", () => {
+  document.querySelectorAll(".menus .menu").forEach((m) => m.classList.add("is-in"));
+}));
