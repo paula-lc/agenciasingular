@@ -39,6 +39,7 @@ EXTRA={
  'escaparate-nuevo':dict(icon='i-monitor',intro='Para salones sin web, o con una que no les gusta.',fields=[FICHA,RESENAS,chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),WEB,text('url','Dirección de tu web actual','https://…'),DOMINIO,text('direccion','Dirección del local','Calle, número y ciudad'),text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
  'cuidados-esenciales-distancia':dict(icon='i-pin',intro='Para salones fuera de Barcelona.',fields=[FICHA,RESENAS,chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),text('direccion','Dirección del local','Calle, número y ciudad')]),
  'plan-basico':dict(icon='i-pin',intro='Mes a mes, sin permanencia.',fields=[FICHA]),
+ 'redes-sociales':dict(icon='i-chart',intro='Mes a mes, sin permanencia. Precio según la comanda.',fields=[text('redes','¿Qué redes usas?','@tusalon en Instagram, Facebook…')]),
  'plan-siempre-visible':dict(icon='i-chart',intro='Mes a mes, sin permanencia. Requiere web con nosotras.',fields=[FICHA,text('url','Dirección de tu web','https://…')]),
  'trastienda':dict(icon='i-chart',intro='',fields=[chips('temas','¿Qué te preocupa?',['Precios','Márgenes','Qué servicios potenciar','Captar clientas nuevas','Fidelizar clientas','Abrir o ampliar el negocio'])]),
  'fotografia':dict(icon='i-aperture',intro='',fields=[chips('que_fotos','¿Qué quieres fotografiar?',['El local','El equipo','Trabajos (uñas, peinados…)','Ambiente con clientas']),text('direccion','¿Dónde está tu salón?','Ciudad y barrio')]),
@@ -49,7 +50,7 @@ def item(slug,name,precio,group,step=0,mensual=False,desde=False,inc=None,plazo=
     u='€/mes' if mensual else '€'
     e=EXTRA[slug]
     return dict(slug=slug,name=name,short=name,icon=e['icon'],step=step,group=group,
-                price=f'{"desde " if desde else ""}{num(precio)} {u} + IVA',vat=('' if desde else f'{num(iva(precio))} {u} IVA incl.'),
+                price=('Según mercado' if precio is None else f'{"desde " if desde else ""}{num(precio)} {u} + IVA'),vat=('' if desde or precio is None else f'{num(iva(precio))} {u} IVA incl.'),
                 intro=intro if intro is not None else e['intro'],inc=inc or [],plazo=plazo,fields=e['fields'])
 P=[item(m['slug'],f'Menú {m["num"]} · {m["nombre"]}',m['precio'],'packs',1,inc=[x[0] for x in m['platos']],plazo=m['plazo'],intro=m['para']+'.') for m in sorted(D['menus'],key=lambda m:m['num'])]
 P+=[item(p['slug'],p['nombre'],p['precio'],'planes',3,mensual=True,intro=p['nota']) for p in D['planes']]
@@ -57,7 +58,7 @@ S=[item(x['slug'],x['nombre'],x['precio'],'carta',desde=x.get('desde',False),int
 def price_attrs(s):
     return f' data-price="{s["price"]}{" · "+s["vat"] if s["vat"] else ""}"'
 def chip_(s, g):
-    radio = g in ('packs','planes')
+    radio = g == 'packs'
     kind = 'radio' if radio else 'checkbox'
     name = f'paso{s["step"]}' if radio else 'servicio'
     return (f'<label class="chip chip--service" data-group="{g}"><input type="{kind}" name="{name}" value="{s["name"]}" data-slug="{s["slug"]}"'
@@ -65,7 +66,7 @@ def chip_(s, g):
             f'{s.get("short", s["name"])}</span></label>')
 head_=lambda g, t: f'<button type="button" class="chips__group" data-group-toggle="{g}" aria-expanded="true">{t} <span class="chips__arrow" aria-hidden="true">▾</span></button>'
 picker=(head_('packs','El menú <small>(uno)</small>')+''.join(chip_(x,'packs') for x in P if x['group']=='packs')
-                +head_('planes','La sobremesa <small>(uno)</small>')+''.join(chip_(x,'planes') for x in P if x['group']=='planes')
+                +head_('planes','La sobremesa')+''.join(chip_(x,'planes') for x in P if x['group']=='planes')
 
                 +head_('carta','A la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
 ALL=P+S

@@ -175,6 +175,8 @@ def put(s, key, content):
 
 # ---------- Carta de cafetería: un servicio por línea, con casilla ----------
 def precio_fila(precio, tachado=None, web=None, mensual=False, desde=False):
+    if precio is None:
+        return '<span class="fila__precio"><b class="fila__sm">Según mercado</b></span>'
     u = ' €/mes' if mensual else ' €'
     pre = '<small>desde</small> ' if desde else ''
     if tachado:
@@ -214,8 +216,10 @@ def tablon():
     por = {m['num']: m for m in D['menus']}
     carta_f = ''.join(fila(p['slug'], p['nombre'], precio_fila(p['precio'], desde=p.get('desde')),
                            f'<p class="fila__desc">{esc(p["nota"])}</p>' if p.get('nota') else '') for g in D['carta'] for p in g['platos'])
+    comanda = ('<div class="fila__comanda" data-comanda hidden><label for="comanda-redes">¿Qué te apetece? Apúntanos tu comanda <small>(opcional)</small></label>'
+               '<textarea id="comanda-redes" rows="2" placeholder="Ej.: dos platos a la semana en Instagram, historias los viernes y respuestas a comentarios. Sin picante."></textarea></div>')
     planes = ''.join(fila(p['slug'], p['nombre'], precio_fila(p['precio'], mensual=True),
-                          f'<p class="fila__desc">{esc(p["nota"])}</p>') for p in D['planes'])
+                          f'<p class="fila__desc">{esc(p["nota"])}</p>' + (comanda if p['precio'] is None else '')) for p in D['planes'])
     izq = (cabecera('Los menús de la casa', 'Todo incluido, a precio cerrado.', 'escaparate')
            + '<ul class="tablon__lista">' + fila_menu(por[1], 'bcn') + fila_menu(por[3], 'dist') + fila_menu(por[2]) + '</ul>'
            + cabecera('La sobremesa', 'Cada mes, sin permanencia.', 'plano', 'sobremesa') + f'<ul class="tablon__lista">{planes}</ul>')

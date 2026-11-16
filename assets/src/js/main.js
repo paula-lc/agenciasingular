@@ -688,7 +688,7 @@ const CART_KEY = "mi-propuesta";
 const STEP_OF = {
   "cuidados-esenciales": 1, "escaparate-nuevo": 1, "cuidados-esenciales-distancia": 1,
   "web-una-pagina": 2, "web-completa": 2,
-  "plan-basico": 3, "plan-siempre-visible": 3,
+  "plan-basico": 0, "plan-siempre-visible": 0, "redes-sociales": 0,
 };
 // Platos de la carta que existen (lo guardado de servicios retirados se ignora)
 const SERVICE_SLUGS = ["fotografia", "trastienda"];
@@ -716,7 +716,8 @@ const cart = {
     const step = stepOf(slug);
     // Mismo paso = se sustituyen, salvo si un menú incluye al otro (Escaparate + Cuidados esenciales conviven y se descuenta)
     const incluye = (a, b) => (PROD[a]?.incluye || []).includes(b);
-    this.set([...this.get().filter((s) => s !== slug && !(step && stepOf(s) === step && !incluye(slug, s) && !incluye(s, slug))), slug]);
+    const dentro = (s) => incluye(slug, s) && PROD[s]?.tipo !== "menu";
+    this.set([...this.get().filter((s) => s !== slug && !dentro(s) && !(step && stepOf(s) === step && !incluye(slug, s) && !incluye(s, slug))), slug]);
   },
   remove(slug) { this.set(this.get().filter((s) => s !== slug)); },
 };
@@ -725,7 +726,7 @@ const cart = {
 const CART_NAMES = {
   "cuidados-esenciales": "Menú 1 · Cuidados esenciales", "escaparate-nuevo": "Menú 2 · Escaparate nuevo", "cuidados-esenciales-distancia": "Menú 3 · A distancia",
   "web-una-pagina": "Web de una página", "web-completa": "Web completa",
-  "plan-basico": "Plan Básico", "plan-siempre-visible": "Plan Siempre visible",
+  "plan-basico": "Plan Básico", "plan-siempre-visible": "Plan Siempre visible", "redes-sociales": "Gestión de redes sociales",
   fotografia: "Fotografía Local", trastienda: "La Trastienda",
 };
 const CART_ICON = '<svg viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(2 2)"><path d="M9 17h30l-2.5 26h-25z" style="fill:var(--mostaza);stroke:none"/></g><g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17h30l-2.5 26h-25z"/><path d="M17 17v-3a7 7 0 0114 0v3"/></g></svg>';
@@ -752,17 +753,27 @@ function renderUpgrade() {
     el.hidden = false;
   });
 }
+let cuentaTimer;
+function asomarCuenta() {
+  // La cuenta se asoma unos segundos para ver cómo va el total; si pasas el ratón por encima, se queda
+  setCartOpen(true);
+  const panel = document.getElementById("cart-panel");
+  clearTimeout(cuentaTimer);
+  const cerrar = () => { if (!panel.matches(":hover, :focus-within")) setCartOpen(false); else cuentaTimer = setTimeout(cerrar, 1500); };
+  cuentaTimer = setTimeout(cerrar, 3500);
+}
 function renderUpgradePrecio() {
   // Línea del Escaparate: si Cuidados esenciales ya está marcado, se tacha su precio y aparece lo que suma de verdad
   const list = cart.get();
   document.querySelectorAll("[data-upgrade-precio]").forEach((el) => {
     const fila = el.closest(".fila");
     const pr = PROD[fila?.querySelector("[data-add-check]")?.dataset.addCheck];
-    const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && typeof PROD[inc]?.precio === "number");
+    const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && PROD[inc]?.tipo === "menu" && typeof PROD[inc]?.precio === "number");
     const on = !!(pr && ya.length);
     fila.classList.toggle("is-upgrade", on);
     el.hidden = !on;
-    if (on) el.innerHTML = `<b>${fmtEur(pr.precio - ya.reduce((s, inc) => s + PROD[inc].precio, 0))}</b>`;
+    const html = on ? `<b>${fmtEur(pr.precio - ya.reduce((s, inc) => s + PROD[inc].precio, 0))}</b>` : "";
+    if (el.dataset.v !== html) { el.dataset.v = html; el.innerHTML = html; }
   });
 }
 function renderCartPill() {
@@ -802,7 +813,7 @@ function renderCartPill() {
   const items = list.map((slug) => {
     const name = escHtml(t(CART_NAMES[slug] || slug));
     const pr = PROD[slug] || {};
-    let precio = "";
+    let precio = pr.mensual && pr.precio == null ? `<small>${escHtml(t("según mercado"))}</small>` : "";
     if (typeof pr.precio === "number") {
       if (pr.mensual) { mes += pr.precio; precio = `${fmtEur(pr.precio)}${escHtml(t("/mes"))}`; }
       else { base += pr.precio; if (pr.desde) desde = true; precio = (pr.desde ? `<small>${escHtml(t("desde"))}</small> ` : "") + fmtEur(pr.precio); }
@@ -814,7 +825,7 @@ function renderCartPill() {
   const dtos = [];
   list.forEach((slug) => (PROD[slug]?.incluye || []).forEach((inc) => {
     const pi = PROD[inc];
-    if (list.includes(inc) && pi && typeof pi.precio === "number" && !pi.mensual) {
+    if (list.includes(inc) && pi && pi.tipo === "menu" && typeof pi.precio === "number" && !pi.mensual) {
       base -= pi.precio;
       dtos.push(`<li class="cart-panel__dto"><span class="cart-panel__name">${escHtml(t("Dto. {a} ya incluido en {b}", { a: t(pi.nombre), b: t(PROD[slug].nombre) }))}</span><span class="cart-panel__dots" aria-hidden="true"></span><span class="cart-panel__price">−${fmtEur(pi.precio)}</span></li>`);
     }
@@ -827,7 +838,7 @@ function renderCartPill() {
   const totales = (base ? fila(escHtml(t("Base")), pre + fmtEur(base)) + fila(escHtml(t("IVA {n} %", { n: iva })), pre + fmtEur(conIva(base) - base)) + fila(escHtml(t("Total")), pre + fmtEur(conIva(base)), "cart-panel__row--total") : "")
     + (mes ? fila(escHtml(t("Cada mes")), `${fmtEur(conIva(mes))} ${escHtml(t("IVA incl."))}`, "cart-panel__row--mes") : "");
   panel.innerHTML = `<div class="cart-panel__head"><div class="cart-panel__casa"><strong>Agencia Singular</strong><span>${escHtml(t("Cuenta · Mesa del barrio"))}</span><span>${fecha}</span></div><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
-    (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul><div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Pedir propuesta" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
+    (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul><div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Hacer mi pedido →" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
        : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
 }
 document.addEventListener("click", (e) => {
@@ -842,7 +853,18 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape" && cartOpen
 // Botones "Añadir" de la portada
 const syncAddButtons = () => {
   const list = cart.get();
-  document.querySelectorAll("[data-add-check]").forEach((cb) => { cb.checked = list.includes(cb.dataset.addCheck); });
+  const incluidos = list.flatMap((s) => (PROD[s]?.incluye || []).filter((x) => PROD[x]?.tipo !== "menu"));
+  document.querySelectorAll("[data-add-check]").forEach((cb) => {
+    const slug = cb.dataset.addCheck, dentro = incluidos.includes(slug);
+    cb.checked = list.includes(slug) || dentro;
+    cb.disabled = dentro;
+    const fila = cb.closest(".fila");
+    if (fila) {
+      fila.classList.toggle("is-incluido", dentro);
+      const com = fila.querySelector("[data-comanda]");
+      if (com) com.hidden = !cb.checked;
+    }
+  });
   document.querySelectorAll("[data-add]").forEach((b) => {
     const on = list.includes(b.dataset.add);
     const isPackBtn = b.classList.contains("add-btn--pack");
@@ -865,6 +887,7 @@ document.querySelectorAll("[data-add-check]").forEach((cb) => {
     const slug = cb.dataset.addCheck;
     if (cb.checked) cart.add(slug); else cart.remove(slug);
     syncAddButtons();
+    if (cb.checked && matchMedia("(min-width: 980px)").matches) asomarCuenta();
   });
 });
 syncAddButtons();
@@ -1316,3 +1339,18 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
 document.querySelectorAll('.sx-modo input[name="modo"]').forEach((r) => r.addEventListener("change", () => {
   document.querySelectorAll(".menus .menu, .tablon").forEach((m) => m.classList.add("is-in"));
 }));
+
+/* Comanda de redes: se guarda en el navegador y llega al formulario de contratar */
+(() => {
+  const KEY = "comanda-redes";
+  const ta = document.getElementById("comanda-redes");
+  if (ta) {
+    try { ta.value = localStorage.getItem(KEY) || ""; } catch {}
+    ta.addEventListener("input", () => { try { localStorage.setItem(KEY, ta.value); } catch {} });
+  }
+  const msg = document.getElementById("f-mensaje");
+  if (msg && !msg.value) {
+    let v = ""; try { v = localStorage.getItem(KEY) || ""; } catch {}
+    if (v && cart.get().includes("redes-sociales")) msg.value = `${t("Redes sociales")}: ${v}`;
+  }
+})();
