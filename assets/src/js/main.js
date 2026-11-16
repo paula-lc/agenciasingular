@@ -10,7 +10,7 @@ const SITE = {
   // Dirección que recibe los formularios: la URL de la aplicación web de Google Apps Script
   // (ver README → "Recibir los formularios por email") o de Formspree/Web3Forms.
   // Vacío = el formulario abre el correo del usuario con el mensaje ya escrito.
-  formEndpoint: "https://script.google.com/macros/s/AKfycbyK_Dqwi7gZ_pNRRHdVpg8wU9NDWJo0u3jWUuWLwA2bBgMqSTlYpmZll9o6SfKQrvYo/exec",
+  formEndpoint: "https://script.google.com/macros/s/AKfycbyx7VZxdA3DCte-WR_VCaeMRa6PXU4ByoQ7AQMnScW_WiLnlIcHlKFRDQ8Y1Bobdcwq/exec",
   // Analítica: clave pública del proyecto de Amplitude (solo sirve para enviar eventos; es pública por diseño)
   // y región de los datos. Vacío = no se carga nada.
   amplitude: { apiKey: "ca2c789f1493dc7f487513b84c8ee813", serverZone: "EU" },
