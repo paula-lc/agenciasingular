@@ -1650,3 +1650,32 @@ button.cart-pill { padding: 0; cursor: pointer; font: inherit; }
 }
 
 .cupon .btn, .menu__acciones .btn { white-space: normal; letter-spacing: 1px; text-align: center; }
+
+/* ==========================================================================
+   Contraste AA con la paleta de 5 colores
+   Solo crema/pizarra llega a 4,5:1 (5,26). Rojo/crema se queda en 4,48 y pizarra/mostaza en 3,62,
+   así que el rojo y la mostaza se usan para texto grande (≥ 19 px en negrita), fondos de botón grande,
+   bordes y adornos; el texto pequeño va siempre en crema sobre pizarra o pizarra sobre crema.
+   ========================================================================== */
+:root { --tinta-suave: var(--pizarra); --texto-grande: 19px; }
+.btn--yellow, .btn--retro, .btn--crimson, .btn--send { font-size: var(--texto-grande); letter-spacing: .04em; }
+.nav .btn--yellow, .nav__cta, .consent-pop .btn { font-size: var(--texto-grande); }
+.topbar, .new-tag { background: var(--pizarra); color: var(--crema); }
+.topbar { border-bottom: 3px solid var(--rojo); }
+mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
+.hero__copy .script, .section--blue p .script { color: var(--crema); text-decoration: underline 3px var(--mostaza); text-underline-offset: 4px; }
+.menu__kicker, .menus-pie__puente a, .menu__grupo-t { color: var(--pizarra); }
+.menus-pie__puente a { text-decoration-color: var(--rojo); }
+.menu__sello, .eyebrow, .sector-tab[aria-selected="true"] { background: var(--pizarra); border-color: var(--pizarra); color: var(--crema); }
+.sector-tab[aria-selected="true"] { box-shadow: 3px 3px 0 var(--mostaza); }
+.channel--ia { background: var(--crema); border: 4px solid var(--mostaza); }
+.sector-panel__side h4, .pack-link { color: var(--crema); }
+.pack-link { text-decoration: underline 2px var(--mostaza); text-underline-offset: 3px; }
+.menu--destacado .menu__head { background: var(--pizarra); }
+.menu--destacado .menu__kicker, .menu--destacado .menu__para { color: var(--crema); }
+.menu__tachado, .menu__tachado s { color: var(--pizarra); }
+.hero__ctas .btn--yellow, .form .btn--send { font-size: var(--texto-grande); }
+.eyebrow .script { color: var(--crema); }
+.form .btn--send { font-weight: 800; }
+.breadcrumbs a { color: var(--crema); text-decoration: underline 2px var(--mostaza); }
+.chips__group, .chips__group small { color: var(--pizarra); }
