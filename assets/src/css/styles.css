@@ -1406,8 +1406,8 @@ p { text-wrap: pretty; }
    Un solo gesto de entrada (los sellos giran una vez al llegar), la cinta que corre y el chat que se escribe.
    Nada más se anima solo y los hover son directos, sin transición.
    ========================================================================== */
-/* Hover a trompicones: todas las transiciones van por saltos, como el cine mudo */
-*, *::before, *::after { transition-timing-function: steps(4, end) !important; }
+/* Movimiento a trocitos (stop-motion): ver «Fotogramas» al final del archivo */
+*, *::before, *::after { transition-timing-function: var(--a-trocitos) !important; }
 @media (prefers-reduced-motion: no-preference) {
   .btn,
 .btn .icon,
@@ -1426,7 +1426,7 @@ p { text-wrap: pretty; }
 .site-footer a,
 .contact-card a {
     transition-property: transform, translate, scale, rotate, box-shadow, background-color, color, border-color, fill, text-decoration-color !important;
-    transition-duration: .3s !important;
+    transition-duration: var(--t-trocitos) !important;
   }
 }
 .reveal,
@@ -1436,7 +1436,7 @@ p { text-wrap: pretty; }
 .btn.is-bouncing, .btn.is-bouncing .icon, .add-btn.is-popping, .cart-pill.is-popping, .alogo--nav.is-bouncing { animation: none !important; }
 
 /* ---------- Animaciones que sí se conservan (todo lo demás, directo) ---------- */
-.nav__links .btn--outline::after { transition: transform .24s steps(5) !important; }
+.nav__links .btn--outline::after { transition: transform calc(var(--fotograma) * 4) steps(4, jump-start) !important; }
 .sx-nav-logo:hover { animation: alogo-pulse .6s ease-out; }
 @media (prefers-reduced-motion: reduce) { .nav__links .btn--outline::after { transition: none !important; } .sx-nav-logo:hover { animation: none; } }
 
@@ -1679,3 +1679,26 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 .form .btn--send { font-weight: 800; }
 .breadcrumbs a { color: var(--crema); text-decoration: underline 2px var(--mostaza); }
 .chips__group, .chips__group small { color: var(--pizarra); }
+
+/* ==========================================================================
+   Fotogramas: todo el movimiento va «a trocitos», como animación stop-motion a ~9 fps.
+   Para que se lea como intencionado y no como lag:
+   · fotogramas largos (110 ms) y pocos saltos;
+   · el primer salto es inmediato (jump-start): el hover responde al instante;
+   · desplazamientos grandes, para que cada salto se vea.
+   ========================================================================== */
+:root {
+  --fotograma: 110ms;
+  --a-trocitos: steps(3, jump-start);
+  --t-trocitos: calc(var(--fotograma) * 3);
+  --salto: -6px;
+}
+.btn:hover, .nav .btn:hover { transform: translate(var(--salto), var(--salto)); }
+.add-btn:hover, .chip:hover span, .sector-tab:hover, .pack-link:hover, .quiz__alt-item:hover { transform: translateY(var(--salto)); }
+/* Animaciones: mismo paso de fotograma */
+.ticker__track { animation-timing-function: steps(364) !important; }              /* 40 s / 110 ms */
+.sx-pre.sx-spin { animation-duration: calc(var(--fotograma) * 8); animation-timing-function: steps(8, jump-start); }
+.sector-tab[aria-selected="true"], .sector-panel:not([hidden]), .service-info:not([hidden]) { animation-timing-function: steps(4, jump-start); }
+.chip--service.is-unfolding { animation-timing-function: steps(3, jump-start); }
+.sx-nav-logo:hover, .alogo:hover .alogo__beat--a, .alogo:hover .alogo__beat--s, .nanny img:hover { animation-timing-function: steps(5, jump-start); }
+@media (prefers-reduced-motion: reduce) { .ticker__track { animation: none !important; } }
