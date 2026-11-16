@@ -1,5 +1,6 @@
 # Genera contratar.html: un formulario adaptado a cada servicio
-import re, html
+import re, html, sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 ROOT=str(__import__('pathlib').Path(__file__).resolve().parents[2])+'/'
 idx=open(ROOT+'index.html').read(); gui=open(ROOT+'guia-aparecer-en-ia-y-google-maps.html').read()
 sprite=re.search(r'  <!-- Sprite de iconos -->\n(  <svg width="0".*?</svg>\n)', idx, re.S).group(1)
@@ -24,94 +25,52 @@ def chips(name,label,opts,kind='checkbox'):
 
 BOOK=['Booksy','Fresha','Treatwell','WhatsApp','Teléfono','Nada todavía']
 FICHA=chips('ficha','¿Tienes ficha en Google Maps?',['Sí, y tengo acceso','Sí, pero no tengo acceso','No tengo','No lo sé'],'radio')
-# Cada producto lleva: precio web, total con IVA y, si lo hay, precio fundador (founder) o de cliente (client)
-P=[
- dict(slug='cuidados-esenciales',name='Cuidados esenciales',short='Cuidados esenciales',icon='i-pin',step=1,
-  price='450 € + IVA',vat='544,50 € IVA incl.',founder=('350 € + IVA','423,50 € IVA incl.'),
-  intro='Que te encuentren en Google, te elijan y reserven sin intermediarios.',
-  inc=['Ficha de Google completa y cuidada: categorías, servicios, horarios y descripción','Botón «Reservar» conectado a tu Booksy, Fresha o Treatwell','Sesión de fotos de 1 h en tu local: 10–12 fotos editadas','Cartel con QR para conseguir reseñas y plantillas para responderlas','Alta en Apple Maps y Bing','Informe de resultados a los 60 días'],
-  plazo='1–2 semanas',
-  fields=[FICHA,
-          select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50']),
-          chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),
-          text('direccion','Dirección del local','Calle, número y ciudad'),
-          text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
- dict(slug='cuidados-esenciales-distancia',name='Cuidados esenciales a distancia',short='Cuidados a distancia',icon='i-pin',step=1,
-  price='300 € + IVA',vat='363 € IVA incl.',founder=('250 € + IVA','302,50 € IVA incl.'),
-  intro='Lo mismo que Cuidados esenciales, sin sesión de fotos. Para negocios fuera de Barcelona.',
-  inc=['Todo lo de Cuidados esenciales, excepto la sesión de fotos','Guía para hacer buenas fotos con el móvil','Edición de tus fotos'],
-  plazo='1–2 semanas',
-  fields=[FICHA,
-          select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50']),
-          chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),
-          text('direccion','Dirección del local','Calle, número y ciudad')]),
- dict(slug='web-una-pagina',name='Web de una página',short='Web de una página',icon='i-monitor',step=2,
-  price='690 € + IVA',vat='834,90 € IVA incl.',client=('250 € + IVA','302,50 € IVA incl.'),
-  intro='Tu escaparate propio, con tu botón de reservas.',
-  inc=['Una página clara, rápida y pensada para el móvil','Botón de reserva de Booksy o Fresha integrado','2 rondas de cambios','Dominio y alojamiento el primer año'],
-  plazo='',
-  fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
-          text('url','Dirección de tu web actual','https://…'),
-          chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),
-          chips('dominio','¿Tienes dominio (tunegocio.es)?',['Sí','No','No lo sé'],'radio')]),
- dict(slug='web-completa',name='Web completa',short='Web completa',icon='i-monitor',step=2,
-  price='desde 1.290 € + IVA',vat='1.560,90 € IVA incl.',
-  intro='Para negocios con muchos servicios que contar. Presupuesto a medida.',
-  inc=['Hasta 6 páginas','SEO local con una página por servicio clave','Preguntas frecuentes y datos estructurados para buscadores e IA','30 min de La Trastienda'],
-  plazo='',
-  fields=[chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio'),
-          text('url','Dirección de tu web actual','https://…'),
-          chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Pedidos por WhatsApp','Tienda online','Carta o menú']),
-          chips('dominio','¿Tienes dominio (tunegocio.es)?',['Sí','No','No lo sé'],'radio')]),
- dict(slug='plan-basico',name='Plan Básico',short='Plan Básico',icon='i-pin',step=3,
-  price='59 €/mes + IVA',vat='71,39 €/mes IVA incl.',
-  intro='Tu ficha, siempre al día. Mes a mes, sin permanencia.',
-  inc=['1 publicación al mes en tu ficha de Google','Respuesta a todas tus reseñas'],
-  plazo='Mes a mes, sin permanencia',
-  fields=[FICHA]),
- dict(slug='plan-siempre-visible',name='Plan Siempre visible',short='Siempre visible',icon='i-chart',step=3,
-  price='149 €/mes + IVA',vat='180,29 €/mes IVA incl.',
-  intro='Ficha y web, cuidadas cada mes. Para clientes con web. Mes a mes, sin permanencia.',
-  inc=['Todo lo del Plan Básico','Mantenimiento web (hasta 1 h de cambios, copias, dominio y alojamiento)','Contenido SEO','Seguimiento de tu visibilidad en IA','Informe mensual'],
-  plazo='Mes a mes, sin permanencia',
-  fields=[FICHA,
-          text('url','Dirección de tu web','https://…')]),
-]
-
-S=[
- dict(slug='fotografia',name='Fotografía Local',icon='i-aperture',price='250 € + IVA',vat='302,50 € IVA incl.',
-  intro='Fotos de tu espacio y tus productos. Nada de bancos de imágenes.',
-  inc=['Sesión en tu local con dirección de arte','Fotos editadas para web, Google Maps y redes','Derechos de uso para siempre'],
-  plazo='Entrega en 1 a 2 semanas',
-  fields=[chips('que_fotos','¿Qué quieres fotografiar?',['El local','El equipo','Productos','Platos o bebidas','Trabajos (uñas, peinados…)','Ambiente con clientes']),
-          text('direccion','¿Dónde está tu negocio?','Ciudad y barrio'),
-          text('fecha','¿Para cuándo las necesitas?','Ej.: antes de la campaña de Navidad')]),
- dict(slug='trastienda',name='La Trastienda',icon='i-chart',price='120 € + IVA',vat='145,20 € IVA incl.',
-  intro='Sesión de consultoría de marketing para tu comercio: precios, márgenes y estrategia comercial para vender mejor.',
-  inc=['Sesión de diagnóstico de tu negocio','Revisión de precios, márgenes y oferta','Plan de acción claro y priorizado'],
-  plazo='Sesiones de 90 minutos',
-  fields=[chips('temas','¿Qué te preocupa?',['Precios','Márgenes','Qué productos o servicios potenciar','Captar clientes nuevos','Fidelizar clientes','Abrir o ampliar el negocio']),
-          select('antiguedad','¿Cuánto tiempo lleva abierto tu negocio?',['Aún no he abierto','Menos de 1 año','1 a 3 años','Más de 3 años'])]),
-]
-
+# Productos y precios: de precios.json (única fuente). Aquí solo van las preguntas y los textos de cada uno.
+import json, os
+D=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'precios.json')))
+def num(x):
+    c=int(round(x*100)); s=f'{c//100:,}'.replace(',','.'); return s+(f',{c%100:02d}' if c%100 else '')
+def iva(x): return x*(100+D['iva'])/100
+RESENAS=select('resenas','¿Cuántas reseñas tienes?',['Ninguna','Menos de 10','Entre 10 y 50','Más de 50'])
+WEB=chips('web_actual','¿Tienes web ahora?',['No tengo','Sí, pero está anticuada','Sí, pero no me trae clientes'],'radio')
+DOMINIO=chips('dominio','¿Tienes dominio (tunegocio.es)?',['Sí','No','No lo sé'],'radio')
+EXTRA={
+ 'cuidados-esenciales':dict(icon='i-pin',intro='Para salones que ya tienen web.',fields=[FICHA,RESENAS,chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),text('direccion','Dirección del local','Calle, número y ciudad'),text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
+ 'escaparate-nuevo':dict(icon='i-monitor',intro='Para salones sin web, o con una que no les gusta.',fields=[FICHA,RESENAS,chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),WEB,text('url','Dirección de tu web actual','https://…'),DOMINIO,text('direccion','Dirección del local','Calle, número y ciudad'),text('fotos','¿Cuándo te vendría bien la sesión de fotos?','Ej.: mañanas entre semana')]),
+ 'cuidados-esenciales-distancia':dict(icon='i-pin',intro='Para salones fuera de Barcelona.',fields=[FICHA,RESENAS,chips('reservas','¿Cómo te reservan ahora?',BOOK,'radio'),text('direccion','Dirección del local','Calle, número y ciudad')]),
+ 'plan-basico':dict(icon='i-pin',intro='Mes a mes, sin permanencia.',fields=[FICHA]),
+ 'plan-siempre-visible':dict(icon='i-chart',intro='Mes a mes, sin permanencia. Requiere web con nosotras.',fields=[FICHA,text('url','Dirección de tu web','https://…')]),
+ 'trastienda':dict(icon='i-chart',intro='',fields=[chips('temas','¿Qué te preocupa?',['Precios','Márgenes','Qué servicios potenciar','Captar clientas nuevas','Fidelizar clientas','Abrir o ampliar el negocio'])]),
+ 'fotografia':dict(icon='i-aperture',intro='',fields=[chips('que_fotos','¿Qué quieres fotografiar?',['El local','El equipo','Trabajos (uñas, peinados…)','Ambiente con clientas']),text('direccion','¿Dónde está tu salón?','Ciudad y barrio')]),
+ 'web-una-pagina':dict(icon='i-monitor',intro='',fields=[WEB,text('url','Dirección de tu web actual','https://…'),DOMINIO]),
+ 'web-completa':dict(icon='i-monitor',intro='',fields=[WEB,text('url','Dirección de tu web actual','https://…'),chips('funciones','¿Qué debe poder hacer tu web?',['Mostrar servicios y precios','Reservas o citas','Varias sedes','Tienda online']),DOMINIO]),
+}
+def item(slug,name,precio,group,step=0,mensual=False,desde=False,inc=None,plazo='',intro=None):
+    u='€/mes' if mensual else '€'
+    e=EXTRA[slug]
+    return dict(slug=slug,name=name,short=name,icon=e['icon'],step=step,group=group,
+                price=f'{"desde " if desde else ""}{num(precio)} {u} + IVA',vat=('' if desde else f'{num(iva(precio))} {u} IVA incl.'),
+                intro=intro if intro is not None else e['intro'],inc=inc or [],plazo=plazo,fields=e['fields'])
+P=[item(m['slug'],f'Menú {m["num"]} · {m["nombre"]}',m['precio'],'packs',1,inc=[x[0] for x in m['platos']],plazo=m['plazo'],intro=m['para']+'.') for m in sorted(D['menus'],key=lambda m:m['num'])]
+P+=[item(p['slug'],p['nombre'],p['precio'],'planes',3,mensual=True,intro=p['nota']) for p in D['planes']]
+S=[item(x['slug'],x['nombre'],x['precio'],'carta',desde=x.get('desde',False),intro=x['nota']) for g in D['carta'] for x in g['platos']]
 def price_attrs(s):
-    """Precio que ve el cesto (data-price) y, si lo hay, el de fundador o el de cliente de Cuidados"""
-    a=f' data-price="{s["price"]} · {s["vat"]}"'
-    if s.get('founder'): a+=f' data-price-founder="{s["founder"][0]} · {s["founder"][1]}"'
-    if s.get('client'): a+=f' data-price-client="{s["client"][0]} · {s["client"][1]}"'
-    return a
+    return f' data-price="{s["price"]}{" · "+s["vat"] if s["vat"] else ""}"'
 def chip_(s, g):
-    radio = g == 'packs'
+    radio = g in ('packs','planes')
     kind = 'radio' if radio else 'checkbox'
     name = f'paso{s["step"]}' if radio else 'servicio'
     return (f'<label class="chip chip--service" data-group="{g}"><input type="{kind}" name="{name}" value="{s["name"]}" data-slug="{s["slug"]}"'
             f' data-short="{s.get("short", s["name"])}" data-icon="{s["icon"]}"{price_attrs(s)}><span><svg class="icon icon--sm" aria-hidden="true"><use href="#{s["icon"]}"/></svg>'
             f'{s.get("short", s["name"])}</span></label>')
 head_=lambda g, t: f'<button type="button" class="chips__group" data-group-toggle="{g}" aria-expanded="true">{t} <span class="chips__arrow" aria-hidden="true">▾</span></button>'
-picker=(head_('packs','Packs y planes <small>(uno por paso)</small>')+''.join(chip_(x,'packs') for x in P)
+picker=(head_('packs','El menú <small>(uno)</small>')+''.join(chip_(x,'packs') for x in P if x['group']=='packs')
+                +head_('planes','La sobremesa <small>(uno)</small>')+''.join(chip_(x,'planes') for x in P if x['group']=='planes')
 
                 +head_('carta','A la carta <small>(los que quieras)</small>')+''.join(chip_(x,'carta') for x in S))
 ALL=P+S
+from menus import datos_js
+DATOS=datos_js()
 
 fieldsets=''
 aside=''
@@ -123,16 +82,13 @@ for s in ALL:
               </fieldset>'''
     lis=''.join(f'<li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>{x}</li>' for x in s['inc'])
     precio=f'<p class="service-info__price">{s["price"]}<small class="service-info__vat">{s["vat"]}</small></p>'
-    if s.get('founder'): precio+=f'<p class="service-info__founder" data-founder>Precio fundador: <strong>{s["founder"][0]}</strong> · {s["founder"][1]}</p>'
-    if s.get('client'): precio+=f'<p class="service-info__founder">Si ya eres cliente de Cuidados esenciales: <strong>{s["client"][0]}</strong> · {s["client"][1]}</p>'
     tiempo=f'<p class="service-info__time"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{s["plazo"]}</p>' if s['plazo'] else ''
     aside+=f'''
               <div class="contact-card service-info" data-info="{s["slug"]}" hidden>
                 <span class="icon-tile"><svg class="icon" aria-hidden="true"><use href="#{s["icon"]}"/></svg></span>
                 <h3>{s["name"]}</h3>{precio}
                 <p>{s["intro"]}</p>
-                <h4>Qué incluye</h4>
-                <ul>{lis}</ul>
+                {"<h4>Qué incluye</h4><ul>"+lis+"</ul>" if lis else ""}
                 {tiempo}
               </div>'''
 
@@ -142,7 +98,7 @@ page=f'''<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contratar un servicio · Agencia Singular</title>
-  <meta name="description" content="Cuéntanos qué quieres contratar (Cuidados esenciales, web, planes mensuales, fotografía o consultoría) y te enviamos una propuesta cerrada en 48 horas.">
+  <meta name="description" content="Apunta tu menú y te enviamos la propuesta con el total cerrado en 48 h laborables.">
   <link rel="canonical" href="https://agenciasingular.es/contratar.html">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#3e6083">
@@ -150,11 +106,8 @@ page=f'''<!doctype html>
   <link rel="icon" href="assets/img/icon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-180.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"></noscript>
   <link rel="stylesheet" href="assets/css/styles.css?v={VER}">
+  <script type="application/json" id="precios-data">{DATOS}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -164,10 +117,10 @@ page=f'''<!doctype html>
       <section class="section section--blue article-hero">
         <div class="container">
           <nav class="breadcrumbs" aria-label="Migas de pan">
-            <ol><li><a href="./">Inicio</a></li><li><a href="./#servicios">Servicios</a></li><li aria-current="page">Contratar</li></ol>
+            <ol><li><a href="./">Inicio</a></li><li><a href="./#packs">El menú</a></li><li aria-current="page">La comanda</li></ol>
           </nav>
           <h1 class="hire-title"><span class="hire-title__kicker" data-hire-kicker>Cuéntanos</span><span class="hire-title__name"><span data-hire-title>Qué necesitas</span></span></h1>
-          <p data-hire-lead>Elige un pack o los servicios que quieras, responde unas preguntas rápidas sobre tu negocio y te enviamos una propuesta con precio cerrado en 48 horas. Sin compromiso.</p>
+          <p data-hire-lead>Apunta un menú y los platos que quieras, responde unas preguntas rápidas sobre tu salón y te enviamos la propuesta con el total cerrado en 48 h laborables. Sin compromiso.</p>
           <p class="hire-wa"><a class="btn btn--yellow" href="#" data-whatsapp data-whatsapp-link target="_blank" rel="noopener" hidden><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Prefiero escribir por WhatsApp</a></p>
         </div>
       </section>
@@ -191,7 +144,7 @@ page=f'''<!doctype html>
               {text("telefono","Teléfono","Para llamarte si lo prefieres","tel",auto="tel")}
             </div>
             <div class="form__row">
-              {select("sector","Sector",["Uñas y estética","Peluquería / barbería","Floristería","Taller","Tienda de ropa / comercio","Cafetería / restaurante","Espacio local","Otro"])}
+              {select("sector","Sector",["Peluquería","Uñas","Centro de estética","Otro comercio"])}
               {text("ciudad","Ciudad o barrio","Ej.: Barcelona, Gràcia")}
             </div>
             {area("mensaje","¿Algo más que debamos saber?","Plazos, presupuesto, ideas…")}
@@ -200,23 +153,28 @@ page=f'''<!doctype html>
               <input type="checkbox" name="privacidad" required>
               <span>He leído y acepto la <a href="privacidad.html">política de privacidad</a>. Usaremos tus datos solo para responderte.</span>
             </label>
-            <button class="btn btn--send" type="submit">Pedir propuesta</button>
+            <button class="btn btn--send" type="submit" data-track="pedir-la-cuenta-enviar">Pedir la cuenta</button>
             <p class="form__status" role="status" data-form-status></p>
           </form>
 
           <aside class="contact-aside">
-            <div class="contact-card cart" data-cart hidden>
-              <h3>Tu propuesta</h3>
-              <ul class="cart__list" data-cart-list></ul>
-              <p class="cart__total" data-cart-total hidden></p>
-              <div class="cart__tip" data-cart-tip hidden></div>
-              <p class="cart__note">Te enviamos el precio cerrado de todo junto en 48 horas. Sin compromiso.</p>
+            <div class="menu menu--comanda" data-cart hidden>
+              <header class="menu__head"><p class="menu__kicker">Mesa: tu salón</p><h3 class="menu__title">La comanda</h3></header>
+              <ul class="menu__platos" data-cart-list></ul>
+              <div class="menu__cuenta" data-cart-total hidden>
+                <p class="menu__linea"><span class="menu__nombre">Total</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio" data-total-base></span></p>
+                <p class="menu__linea"><span class="menu__nombre">Con IVA</span><span class="menu__puntos" aria-hidden="true"></span><span class="menu__precio" data-total-iva></span></p>
+                <p class="menu__nota" data-total-nota hidden></p>
+              </div>
+              <div class="menu__aviso" data-cart-tip hidden></div>
+              <p class="menu__nota">Te enviamos el total cerrado en 48 h laborables. Sin compromiso.</p>
+              <a class="btn btn--crimson btn--block" href="#f-nombre" data-track="pedir-la-cuenta">Pedir la cuenta</a>
             </div>
             <div class="contact-card service-info" data-info="" >
               <h3>¿Cómo funciona?</h3>
               <ul>
-                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Combinas un pack y servicios sueltos</li>
-                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Te enviamos una propuesta cerrada en 48 h</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Apuntas un menú y los platos sueltos que quieras</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Te enviamos el total cerrado en 48 h laborables</li>
                 <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sin permanencia y todo a tu nombre</li>
               </ul>
             </div>{aside}
@@ -238,4 +196,4 @@ page=f'''<!doctype html>
 </html>
 '''
 open(ROOT+'contratar.html','w').write(page)
-print('slugs', [s['slug'] for s in ALL])
+print('ok')

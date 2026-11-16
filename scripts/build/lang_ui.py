@@ -10,7 +10,7 @@ def switcher(lang, page):
     cur=[l for l in LANGS if l[0]==lang][0]
     items=''.join(f'<li><a href="{url(c,page)}" lang="{c}" hreflang="{c}"{CUR if c==lang else ""}>{name}</a></li>' for c,name,_ in LANGS)
     return (f'<div class="lang-switch" data-lang-switch>'
-            f'<button type="button" class="lang-switch__btn" aria-expanded="false" aria-controls="lang-menu" aria-label="{LABEL[lang]}: {cur[1]}">{cur[2]}</button>'
+            f'<button type="button" class="lang-switch__btn" aria-expanded="false" aria-controls="lang-menu" aria-label="{cur[2]} · {LABEL[lang]}: {cur[1]}">{cur[2]}</button>'
             f'<ul class="lang-switch__menu" id="lang-menu" hidden>{items}</ul></div>')
 def footer_langs(lang, page):
     links=' · '.join(f'<a href="{url(c,page)}" lang="{c}" hreflang="{c}"{CUR if c==lang else ""}>{name}</a>' for c,name,_ in LANGS)

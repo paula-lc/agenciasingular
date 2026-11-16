@@ -1,0 +1,61 @@
+{
+  "_nota": "ÚNICA fuente de precios de la web: menús, sobremesa, carta, comanda (contratar.html) y JSON-LD. Precios sin IVA, en euros. El total con IVA lo calcula el build (IVA 21 %). Tras cambiar algo: python3 scripts/build/build.py",
+  "iva": 21,
+  "menus": [
+    {
+      "slug": "cuidados-esenciales", "num": 1, "nombre": "Cuidados esenciales", "para": "Ya tengo web",
+      "precio": 350, "tachado": 450, "precioSinFundador": 450, "plazo": "1-2 semanas",
+      "cta": "Quiero Cuidados esenciales", "ilustracion": "telefono",
+      "alt": "Ilustración: polaroid de un salón con un teléfono de disco cuya pantalla es una ficha de Google con estrellas y botón Reservar",
+      "platos": [
+        ["Ficha de Google a punto", "incluido"],
+        ["Botón de reservar conectado a tu Booksy, Fresha o Treatwell", "incluido"],
+        ["Sesión de fotos de 1 h, 10-12 fotos editadas", "incluido"],
+        ["Cartel con QR para reseñas", "incluido"],
+        ["Apple Maps y Bing", "incluido"],
+        ["Informe a los 60 días", "incluido"]
+      ]
+    },
+    {
+      "slug": "escaparate-nuevo", "num": 2, "nombre": "Escaparate nuevo", "etiqueta": "La especialidad de la casa",
+      "para": "No tengo web, o no me gusta la que tengo",
+      "precio": 600, "tachado": 1140, "tachadoTexto": "Pedido a la carta", "precioSinFundador": null, "plazo": "2-3 semanas",
+      "cta": "Quiero mi escaparate nuevo", "ilustracion": "escaparate", "incluye": ["cuidados-esenciales", "web-una-pagina"],
+      "alt": "Ilustración: escaparate de tienda con rótulo de neón y un televisor de tubo que muestra la web, con el jaguar de la marca asomando",
+      "platos": [
+        ["Todo el Menú 1", 450],
+        ["Web de una página con tus fotos y tu botón de reservas", 690]
+      ]
+    },
+    {
+      "slug": "cuidados-esenciales-distancia", "num": 3, "nombre": "A distancia", "etiqueta": "Para llevar",
+      "para": "Estoy fuera de Barcelona",
+      "precio": 250, "tachado": 300, "precioSinFundador": 300, "plazo": "1-2 semanas",
+      "cta": "Quiero la versión a distancia", "ilustracion": "sobre",
+      "suplementoWeb": 250,
+      "alt": "Ilustración: sobre de correo con sellos, mapa de España con una chincheta y un móvil con la guía de fotos",
+      "platos": [
+        ["Todo el Menú 1 sin sesión de fotos", "incluido"],
+        ["Guía de fotos con el móvil y edición de tus fotos", "incluido"]
+      ]
+    }
+  ],
+  "planes": [
+    { "slug": "plan-basico", "nombre": "Plan Básico", "precio": 59, "mensual": true,
+      "nota": "Una publicación al mes en tu ficha y todas tus reseñas respondidas." },
+    { "slug": "plan-siempre-visible", "nombre": "Plan Siempre visible", "precio": 149, "mensual": true,
+      "nota": "Ficha y web cuidadas cada mes, con informe. Requiere web con nosotras." }
+  ],
+  "carta": [
+    { "grupo": "Para picar", "ilustracion": "cafe", "platos": [
+      { "slug": "trastienda", "nombre": "La Trastienda", "precio": 120, "nota": "90 minutos de consultoría para ordenar tu marketing." }
+    ]},
+    { "grupo": "Segundos", "ilustracion": "camara", "platos": [
+      { "slug": "fotografia", "nombre": "Fotografía Local", "precio": 250, "nota": "Tu salón y tu trabajo, con luz de revista." },
+      { "slug": "web-una-pagina", "nombre": "Web de una página suelta", "precio": 690, "nota": "Si solo quieres la web." }
+    ]},
+    { "grupo": "Por encargo", "ilustracion": "plano", "platos": [
+      { "slug": "web-completa", "nombre": "Web completa", "precio": 1290, "desde": true, "nota": "Para salones con muchos servicios o varias sedes." }
+    ]}
+  ]
+}

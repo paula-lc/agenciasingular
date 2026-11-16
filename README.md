@@ -55,7 +55,7 @@ site.webmanifest · favicon.svg
 | **Email** (`hola@agenciasingular.es`) | `assets/src/js/main.js` (`SITE.email`), HTML, `llms.txt` |
 | **WhatsApp** (se oculta si está vacío) | `assets/src/js/main.js` → `SITE.whatsapp` |
 | **Envío del formulario**: sin endpoint abre el correo del usuario. Recomendado: Google Apps Script (ver abajo) | `assets/src/js/main.js` → `SITE.formEndpoint` |
-| **Precios** (Cuidados esenciales 450 € / fundador 350 €; a distancia 300 € / fundador 250 €; Web de una página 690 € (250 € para clientes de Cuidados); Web completa desde 1.290 €; planes 59 y 149 €/mes; Fotografía Local 250 €; La Trastienda 120 €). Todos con el total con IVA al 21 %. **Plazas del precio fundador**: `SITE.fundadorPlazas` en `assets/src/js/main.js` (con 0 se oculta solo el precio fundador) | `index.html` (tarjetas, FAQ y JSON-LD), `scripts/build/modals.py` y `contratar.py`, `llms.txt` |
+| **Precios**: única fuente en `scripts/build/precios.json` (menús, sobremesa, carta, comanda y JSON-LD). Tras cambiarlos, `python3 scripts/build/build.py`. **Plazas del precio fundador**: `SITE.fundadorPlazas` en `assets/src/js/main.js` (barra superior y menús; con 0 se ocultan) | `scripts/build/precios.json` |
 | **Analítica** (Amplitude, región EU, modo híbrido): clave pública del proyecto; vacío = no se carga nada | `assets/src/js/main.js` → `SITE.amplitude` |
 | **Instagram** (`@agenciasingular.es`) | HTML y JSON-LD (`sameAs`) |
 | **Datos legales** (titular, NIF, dirección) | `aviso-legal.html`, `privacidad.html` |
@@ -128,7 +128,7 @@ inglés (`/en/`) se **generan** con las traducciones de `scripts/build/i18n/`:
 - `ca.json` y `en.json`: texto en castellano → traducción (textos de las páginas).
 - `js.ca.json` y `js.en.json`: textos del JavaScript (test, cesta, avisos del formulario). Se vuelcan en `assets/js/i18n.js` (generado).
 
-Después de cambiar algo en castellano (o el contenido de las ventanas en `scripts/build/services_data.py` y `modals.py`, o
+Después de cambiar algo en castellano (o los precios en `scripts/build/precios.json`, las ilustraciones en `ilustraciones.py`, o
 el formulario en `contratar.py`), ejecuta:
 
 ```bash
