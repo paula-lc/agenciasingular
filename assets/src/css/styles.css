@@ -2471,3 +2471,8 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
 .sx-motto span:first-child { font-size: clamp(16px, 2.4vw, 30px) !important; }
 .sx-motto span + span { font-size: clamp(10px, 1.4vw, 18px) !important; }
 @media (max-width: 720px) { .section-head .section-title { padding-right: 100px; } }
+@media (max-width: 600px) {
+  .sx-modo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
+  .sx-modo legend { grid-column: 1 / -1; }
+  .sx-modo span { padding: 10px 8px; font-size: 12px; text-align: center; white-space: nowrap; }
+}
