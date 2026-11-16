@@ -1329,7 +1329,11 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
 (() => {
   const els = document.querySelectorAll(".sx-hl, .menu, .tablon, .garantia .sellos");
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("is-in")); return; }
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { threshold: 0.35 });
+  // Los bloques altos (el tablón en móvil) nunca llegan al 35 % visible: basta con que asomen un poco
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    const alto = e.boundingClientRect.height > innerHeight * 0.8;
+    if (e.isIntersecting && (e.intersectionRatio >= 0.35 || (alto && e.intersectionRect.height > innerHeight * 0.25))) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+  }), { threshold: [0, 0.1, 0.2, 0.35] });
   els.forEach((e) => io.observe(e));
 })();
 

@@ -2421,3 +2421,32 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
 @keyframes g-gira { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .guia-ilus * { animation: none !important; opacity: 1 !important; } }
 @media (max-width: 600px) { .guia .prose h2[id^="paso-"] { gap: 10px; } .guia-h2-ilus { width: 68px; margin: 0; } }
+
+
+/* ---------- Ajustes de móvil y pantallas pequeñas ---------- */
+/* Pestañas de sectores: la elegida en amarillo (en azul sobre azul no se veía) */
+.section--blue .sector-tab[aria-selected="true"] { background-image: linear-gradient(var(--mostaza), var(--mostaza)); color: var(--tinta); border-color: var(--mostaza); box-shadow: 3px 3px 0 var(--rojo); }
+.section--blue .sector-tab[aria-selected="true"] svg { color: var(--tinta); }
+
+@media (max-width: 899px) {
+  /* El anuncio de foto se oculta en móvil */
+  .sx-fotoanuncio { display: none !important; }
+}
+@media (max-width: 720px) {
+  /* Lemas en estallido: más pequeños, a la derecha y sin hueco */
+  .sx-motto { width: 128px; margin: 4px 0 -8px auto; justify-self: end; }
+  .sx-motto span:first-child { font-size: 19px; } .sx-motto span + span { font-size: 12px; }
+}
+@media (max-width: 600px) {
+  /* Tablón: lo incluido en lista vertical, todo alineado */
+  .fila__incluye { flex-direction: column; gap: 2px; }
+  .fila__incluye li::before, .fila__incluye li + li::before { content: "·"; margin: 0 7px 0 0; color: var(--rojo); font-weight: 700; }
+  .tablon { padding: 16px 14px; box-shadow: 5px 5px 0 var(--tinta); }
+  .tablon__cab { padding-left: 76px; }
+  .tablon__ilus { width: 70px; left: -6px; }
+  .tablon__t { font-size: 21px; }
+  .fila--destacada { margin: 12px 0 0; padding: 14px 10px 10px; }
+  .fila--destacada::after { right: 6px; font-size: 10px; }
+  .fila__n { font-size: 16px; }
+  .sx-modo { gap: 10px; } .sx-modo legend { float: none; width: 100%; margin-bottom: 4px; }
+}
