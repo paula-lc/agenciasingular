@@ -2243,3 +2243,10 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 .quiz__gate-text { color: var(--tinta); }
 .sx-burst--gate { top: -26px; right: -18px; width: 96px; }
 .sx-burst--gate b { font-size: 30px; } .sx-burst--gate span { font-size: 12px; }
+
+/* Letra pequeña dentro del tablón, en el hueco bajo La carta */
+.tablon__notas { margin-top: 22px; padding: 14px 16px; border: 1.5px dashed var(--tinta); background: #f7f3e6; display: grid; gap: 8px; }
+.tablon__notas-t { margin: 0; font-family: var(--font-typewriter); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--rojo); }
+.tablon__notas p:not(.tablon__notas-t) { margin: 0; padding-left: 14px; position: relative; font-size: 13px; line-height: 1.5; }
+.tablon__notas p:not(.tablon__notas-t)::before { content: "*"; position: absolute; left: 0; color: var(--rojo); font-weight: 700; }
+.tablon__notas p[hidden] { display: none; }

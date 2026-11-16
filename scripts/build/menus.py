@@ -212,6 +212,8 @@ def cabecera(titulo, sub, ilus, ident=None):
     return (f'<header class="tablon__cab"{i}><figure class="tablon__ilus" aria-hidden="true">{ILUS[ilus]}</figure>'
             f'<div><h3 class="tablon__t">{esc(titulo)}</h3><p class="tablon__sub">{esc(sub)}</p></div></header>')
 
+NOTAS = '<div class="tablon__notas"><p class="tablon__notas-t">Letra pequeña de la casa</p><p class="menus-pie__fundador" data-founder><strong>Precio fundador.</strong> A cambio, nos dejas una reseña, nos permites enseñar el antes y el después y compartes las estadísticas de tu ficha durante 60 días.</p><p>Precios para negocios, cerrados para el alcance descrito. IVA (21 %) no incluido; te indicamos el total. Pago 50 % al empezar y 50 % a la entrega. Sin permanencia.</p><p>Los plazos cuentan desde que tenemos lo que necesitamos de ti y dependen de cuándo encaje la sesión de fotos en tu agenda. Cuanto antes nos respondas, antes lo tienes.</p></div>'
+
 def tablon():
     por = {m['num']: m for m in D['menus']}
     carta_f = ''.join(fila(p['slug'], p['nombre'], precio_fila(p['precio'], desde=p.get('desde')),
@@ -224,6 +226,7 @@ def tablon():
            + '<ul class="tablon__lista">' + fila_menu(por[1], 'bcn') + fila_menu(por[3], 'dist') + fila_menu(por[2]) + '</ul>'
            + cabecera('La sobremesa', 'Cada mes, sin permanencia.', 'plano', 'sobremesa') + f'<ul class="tablon__lista">{planes}</ul>')
     der = cabecera('La carta de la casa', '¿Solo te apetece un plato?', 'cafe', 'carta') + f'<ul class="tablon__lista">{carta_f}</ul>'
+    der += NOTAS
     pie = ('<div class="tablon__pie"><p><strong>¿Buscas otra cosa?</strong> Redes, rebranding o visibilidad en IA: pregúntanos y te respondemos en 48 h laborables.</p>'
            '<a class="btn btn--outline-ink" href="#contacto" data-interes="otra" data-track="cta-preguntanos">Pregúntanos</a>'
            '<a class="btn btn--crimson" href="contratar.html" data-track="tablon-pedir">Hacer mi pedido →</a></div>')
