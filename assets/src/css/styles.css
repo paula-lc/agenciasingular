@@ -2457,3 +2457,17 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
   .fila__precio { flex: 0 0 auto; flex-basis: auto; margin-left: auto; padding-left: 8px; text-align: right; align-self: flex-start; }
   .fila__precio b { font-size: 21px; }
 }
+
+/* Hero: el sello «Gratis» del botón del test va delante del texto, sin taparlo */
+.btn--test { padding-left: 18px; }
+.btn--test__sello { position: static; translate: none; margin: -4px 10px -4px -4px; display: inline-block; font-size: 16px; padding: 2px 7px; }
+
+/* Lemas en estallido: medio superpuestos al titular, en su esquina, sin tapar letras */
+.section-head { grid-template-columns: minmax(0, 1fr) !important; }
+@media (min-width: 721px) { .section-head { grid-template-columns: minmax(0, 860px) !important; } }
+.section-head .section-title { padding-right: clamp(84px, 14vw, 150px); }
+.sx-motto { grid-column: 1 !important; grid-row: 3 !important; justify-self: end !important; align-self: start !important; z-index: 2;
+  width: clamp(112px, 17vw, 190px) !important; margin: clamp(-46px, -4vw, -26px) clamp(-24px, -2vw, -8px) 0 0 !important; }
+.sx-motto span:first-child { font-size: clamp(16px, 2.4vw, 30px) !important; }
+.sx-motto span + span { font-size: clamp(10px, 1.4vw, 18px) !important; }
+@media (max-width: 720px) { .section-head .section-title { padding-right: 100px; } }
