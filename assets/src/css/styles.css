@@ -2214,3 +2214,32 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 @media (max-width: 860px) { .sx-adbox--cafe { display: none; } }
 .sx-modo input:checked + span { background-image: linear-gradient(var(--tinta), var(--tinta)); background-repeat: no-repeat; background-position: 0 0; background-size: 100% 100%; }
 .sector-tab[aria-selected="true"] { background-image: linear-gradient(var(--pizarra), var(--pizarra)); background-repeat: no-repeat; background-position: 0 0; background-size: 100% 100%; background-color: transparent; }
+
+
+/* ---------- Test gratis con más presencia ---------- */
+/* Anuncio a lo ancho al final de «Lo bueno de tu salón…» */
+.sx-adbox--test { margin-top: clamp(36px, 5vw, 56px); display: grid; gap: 16px 32px; align-items: center; justify-items: center; text-align: center; padding: 28px 28px 26px; }
+@media (min-width: 861px) { .sx-adbox--test { grid-template-columns: 1fr auto; justify-items: start; text-align: left; padding: 26px 150px 26px 36px; } }
+.sx-adbox--test .sx-adbox__big { margin: 2px 0 4px; }
+.sx-adbox--test__sub { margin: 0; font-family: var(--font-typewriter); font-size: 14px; letter-spacing: .04em; color: var(--crema); }
+.sx-adbox--test .btn { font-size: 18px; padding: 16px 26px; }
+.sx-adbox--test > .sx-burst { top: 50%; right: 24px; width: 104px; translate: 0 -50%; }
+.sx-adbox--test > .sx-burst b { font-size: 34px; } .sx-adbox--test > .sx-burst span { font-size: 13px; }
+@media (max-width: 860px) { .sx-adbox--test { padding-top: 70px; } .sx-adbox--test > .sx-burst { top: -26px; right: -6px; translate: none; width: 96px; } }
+
+/* Hero: el test como botón secundario visible */
+.btn--test { position: relative; background: var(--crema); color: var(--tinta); border: 3px solid var(--crema); box-shadow: 4px 4px 0 var(--rojo); padding-left: 64px; }
+.btn--test:hover { background: var(--mostaza); border-color: var(--mostaza); color: var(--tinta); }
+.btn--test__sello { position: absolute; left: -10px; top: 50%; translate: 0 -50%; rotate: -10deg; padding: 4px 8px; background: var(--rojo); color: var(--crema);
+  font-family: var(--font-gothic); font-size: 18px; letter-spacing: .04em; text-transform: uppercase; box-shadow: 2px 2px 0 var(--tinta); }
+
+/* Resultado: el contacto sube justo debajo de la nota y se presenta como un vale */
+.quiz__result.is-visible { display: flex; }
+.quiz__result > * { order: 3; }
+.quiz__result > .score { order: 1; }
+.quiz__result > .quiz__gate { order: 2; position: relative; padding: 22px 22px 22px !important; border: 3px dashed var(--tinta) !important; background: #f7f3e6; box-shadow: 5px 5px 0 var(--tinta); }
+.quiz__gate-kicker { font-family: var(--font-typewriter); }
+.quiz__gate-title { color: var(--tinta); padding-right: 70px; }
+.quiz__gate-text { color: var(--tinta); }
+.sx-burst--gate { top: -26px; right: -18px; width: 96px; }
+.sx-burst--gate b { font-size: 30px; } .sx-burst--gate span { font-size: 12px; }

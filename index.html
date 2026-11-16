@@ -31,7 +31,7 @@
   <link rel="apple-touch-icon" href="assets/img/icon-180.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="alternate" type="text/plain" title="Resumen para IA (llms.txt)" href="llms.txt">
-  <link rel="stylesheet" href="assets/css/styles.css?v=101">
+  <link rel="stylesheet" href="assets/css/styles.css?v=102">
 
   <!-- Datos estructurados: ayudan a Google y a los asistentes de IA a entender quiénes somos -->
   <script type="application/ld+json">
@@ -375,7 +375,7 @@
             </ul>
             <div class="hero__ctas">
               <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="cta-diagnostico-hero"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>La casa invita: quiero mi diagnóstico gratis</a>
-              <a class="btn btn--ghost-cream" href="#test" data-track="cta-test-hero">¿Te encuentran? Haz el test en 2 minutos <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn--test" href="#test" data-track="cta-test-hero"><span class="btn--test__sello" aria-hidden="true">Gratis</span>Haz el test en 2 minutos <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </div>
 
@@ -460,6 +460,15 @@
             <p class="sx-fotoanuncio__sub">Que en Google se vea igual de bien que cuando entras por la puerta.</p>
           </aside>
           </div>
+          <aside class="sx-adbox sx-adbox--test reveal" aria-label="Test gratis de visibilidad">
+            <span class="sx-burst" aria-hidden="true"><b>Gratis</b><span>2 minutos</span></span>
+            <div class="sx-adbox--test__txt">
+              <p class="sx-adbox__head">¿Cómo de visible es tu salón?</p>
+              <p class="sx-adbox__big">¡Ponte nota!</p>
+              <p class="sx-adbox--test__sub">8 preguntas · tu nota al momento · el menú que te encaja</p>
+            </div>
+            <a class="btn btn--yellow" href="#test" data-track="cta-test-problema">Hacer el test</a>
+          </aside>
         </div>
       </section>
 
@@ -571,7 +580,7 @@
               <p class="quiz__tips-title">Lo que puedes hacer tú hoy mismo</p>
               <ul class="quiz__tips" data-quiz-tips></ul>
               <div class="quiz__gate" data-quiz-gate>
-                <p class="quiz__gate-kicker">Opcional</p>
+                <span class="sx-burst sx-burst--gate" aria-hidden="true"><b>Gratis</b><span>En 48 h</span></span><p class="quiz__gate-kicker">Tu informe, gratis</p>
                 <h3 class="quiz__gate-title">¿Te mando los 3 arreglos de tu ficha, hechos para tu negocio?</h3>
                 <p class="quiz__gate-text">Déjame tu WhatsApp o tu email y te escribo con lo primero que yo cambiaría en tu caso. Sin spam.</p>
                 <form class="form" data-quiz-gate-form novalidate>
@@ -858,6 +867,6 @@
     <a class="btn btn--yellow" href="#contacto" data-interes="diagnostico" data-track="cta-diagnostico-flotante"><svg class="icon icon--line" aria-hidden="true"><use href="#i-steth"/></svg>Diagnóstico gratis</a>
   </aside>
 
-  <script src="assets/js/main.js?v=101" defer></script>
+  <script src="assets/js/main.js?v=102" defer></script>
 </body>
 </html>
