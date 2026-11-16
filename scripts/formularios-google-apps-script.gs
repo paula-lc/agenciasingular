@@ -74,7 +74,7 @@ function doPost(e) {
     const primera = libro.getSheets()[0];
     hoja = primera.getLastRow() === 0 ? primera.setName(HOJA) : libro.insertSheet(HOJA);
     hoja.appendRow(COLUMNAS);
-    hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight("bold").setBackground("#3e6083").setFontColor("#ffffff");
+    hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight("bold").setBackground("#2c4763").setFontColor("#ffffff");
     hoja.setFrozenRows(1);
   }
   asegurarColumnas_(hoja);
@@ -102,7 +102,7 @@ function asegurarColumnas_(hoja) {
   COLUMNAS.forEach((nombre) => {
     if (actuales.indexOf(nombre) === -1) {
       const col = hoja.getLastColumn() + 1;
-      hoja.getRange(1, col).setValue(nombre).setFontWeight("bold").setBackground("#3e6083").setFontColor("#ffffff");
+      hoja.getRange(1, col).setValue(nombre).setFontWeight("bold").setBackground("#2c4763").setFontColor("#ffffff");
     }
   });
 }
@@ -121,7 +121,7 @@ function esc_(v) {
 }
 
 function informe_(d, secciones, fecha, urlHoja) {
-  const azul = "#3e6083", crema = "#f4f1e2", amarillo = "#fab419", carmesi = "#bf2e59";
+  const azul = "#2c4763", crema = "#f4f1e2", amarillo = "#fab419", carmesi = "#bf2e59";
   const fila = (k, v) => v ? `<tr><td style="padding:7px 12px 7px 0;color:${azul};font-weight:bold;vertical-align:top;width:38%">${esc_(k)}</td><td style="padding:7px 0;vertical-align:top">${esc_(v)}</td></tr>` : "";
   const bloque = (titulo, filas) => `
     <h2 style="font-family:Arial Black,Arial,sans-serif;font-size:14px;text-transform:uppercase;color:${carmesi};margin:26px 0 8px;letter-spacing:.5px">${esc_(titulo)}</h2>

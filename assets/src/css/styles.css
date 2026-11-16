@@ -6,7 +6,7 @@
 :root {
   /* Paleta: los 5 únicos colores de la web. Todo lo demás (transparencias incluidas) se deriva de aquí */
   --crema: #EBE7D0;
-  --pizarra: #3e6083;
+  --pizarra: #2c4763;
   --rojo: #bf2f5a;
   --rojo-2: #C13D3A;
   --mostaza: #fab419;
@@ -1709,7 +1709,7 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
    Tinta negra en lo claro, cabecera de papel, estallidos, anuncio de la luna
    y movimiento retro: rápido, con un pequeño rebote de dibujo animado (sin saltos).
    ========================================================================== */
-:root { --tinta: #261f14; --papel-prensa: #f1d5bb; --naranja: #ed5921; --rosa: #f2578f; --azul: #3e6083; }
+:root { --tinta: #261f14; --papel-prensa: #f1d5bb; --naranja: #ed5921; --rosa: #f2578f; --azul: #2c4763; }
 .section--cream, .section--soft, .site-header {
   --pizarra: var(--tinta); --line: 2px solid var(--tinta); --shadow-stamp: 4px 4px 0 var(--tinta); --shadow-stamp-lg: 6px 6px 0 var(--tinta);
   --tinta-suave: var(--tinta); --trama: color-mix(in srgb, var(--tinta) 14%, transparent); color: var(--tinta);

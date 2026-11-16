@@ -101,7 +101,7 @@ page=f'''<!doctype html>
   <meta name="description" content="Apunta tu menú y te enviamos la propuesta con el total cerrado en 48 h laborables.">
   <link rel="canonical" href="https://agenciasingular.es/contratar.html">
   <meta name="robots" content="noindex, follow">
-  <meta name="theme-color" content="#3e6083">
+  <meta name="theme-color" content="#2c4763">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/icon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-180.png">
