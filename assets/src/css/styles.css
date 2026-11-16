@@ -2018,3 +2018,22 @@ body:has(.sx-modo input[value="dist"]:checked) .menus [data-solo-dist] { display
 .menu__upgrade { margin: 10px 0 0; padding: 8px 10px; background: var(--tinta); color: var(--crema); font-size: 13px; line-height: 1.4; text-align: center; rotate: -1deg; animation: sx-servir .4s cubic-bezier(.34, 1.56, .64, 1); }
 .menu__upgrade b { color: var(--mostaza); font-family: var(--font-gothic); font-weight: 400; font-size: 22px; }
 .cart-panel__dto { color: var(--rojo); font-style: italic; }
+
+/* Pasos: los pares, fondo azul con número en crema (antes tinta sobre tinta) */
+.step:nth-child(even)::before { background: var(--azul-profundo); color: var(--crema); }
+
+/* La carta: ilustración pequeña arriba a la derecha de cada grupo, platos debajo a todo el ancho */
+@media (min-width: 980px) {
+  .menu--carta > .menu__grupo:not(.menu__grupo--fuera) { position: relative; }
+  .menu--carta .menu__grupo .menu__body { display: block; }
+  .menu--carta .menu__grupo-t { min-height: 92px; padding-right: 110px; display: flex; align-items: flex-start; }
+  .menu--carta .menu__foto--sm { position: absolute; top: 2px; right: 24px; width: 96px; max-width: none; margin: 0; rotate: 4deg; padding: 5px 5px 14px; }
+  .menu--carta > .menu__grupo:nth-of-type(3) .menu__foto--sm { right: 0; }
+  .menu--carta .menu__grupo:nth-of-type(2) .menu__foto--sm { rotate: -3deg; }
+}
+.menu__check .menu__nombre { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.menu__check input:checked ~ .menu__linea .menu__nombre { background-size: 100% 40%; background-position: 0 85%; }
+
+.menu--carta .menu__grupo--fuera .menu__grupo-t { min-height: 0; padding-right: 0; }
+/* Subrayado amarillo línea a línea (sirve en nombres de dos líneas) */
+.menu__check input:checked ~ .menu__linea .menu__nombre, .menu__check:hover .menu__nombre { background: none !important; text-decoration: underline; text-decoration-color: var(--mostaza); text-decoration-thickness: .5em; text-underline-offset: -.3em; text-decoration-skip-ink: none; }
