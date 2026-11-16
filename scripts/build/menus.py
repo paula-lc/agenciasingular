@@ -172,14 +172,68 @@ def put(s, key, content):
     i, j = s.index(a) + len(a), s.index(b)
     return s[:i] + content + '\n          ' + s[j:]
 
+
+# ---------- Carta de cafetería: un servicio por línea, con casilla ----------
+def precio_fila(precio, tachado=None, web=None, mensual=False, desde=False):
+    u = ' €/mes' if mensual else ' €'
+    pre = '<small>desde</small> ' if desde else ''
+    if tachado:
+        fund = f'<span data-founder><s>{num(tachado)} €</s> <b>{num(precio)} €</b></span>'
+        sinf = f'<span data-web-price hidden><b>{num(web)} €</b></span>' if web else ''
+        return f'<span class="fila__precio">{fund}{sinf}<small> + IVA</small></span>'
+    return f'<span class="fila__precio">{pre}<b>{num(precio)}{u}</b><small> + IVA</small></span>'
+
+def fila(slug, nombre, precio_html, desc='', kicker='', meta='', cls='', modo=None, ident=None):
+    k = f'<small class="fila__kicker">{esc(kicker)}</small>' if kicker else ''
+    i = f' id="{ident}"' if ident else ''
+    md = f' data-modo="{modo}"' if modo else ''
+    return (f'<li class="fila{cls}"{i}{md}><label class="fila__linea"><input type="checkbox" data-add-check="{slug}">'
+            f'<span class="menu__caja" aria-hidden="true"></span><span class="fila__nombre">{k}<span class="fila__n">{esc(nombre)}</span></span>'
+            f'<span class="menu__puntos" aria-hidden="true"></span>{precio_html}</label>{desc}{meta}</li>')
+
+def fila_menu(m, modo=None):
+    desc = '<ul class="fila__incluye">' + ''.join(f'<li>{esc(n)}</li>' for n, _ in m['platos']) + '</ul>'
+    num_menu = 1 if modo == 'dist' else m['num']
+    kicker = f'Menú {num_menu} · {m["para"]}'
+    meta = (f'<p class="fila__meta"><span class="fila__sello" data-founder>Precio fundador</span>'
+            f'<span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{esc(m["plazo"])}</span></p>')
+    if m.get('incluye'):
+        meta += '<p class="menu__upgrade" data-upgrade hidden></p>'
+    dist = next((x for x in D['menus'] if x.get('suplementoWeb')), None)
+    if m['num'] == 2 and dist:
+        tot = dist['precio'] + dist['suplementoWeb']
+        meta += (f'<p class="menu__distancia" data-solo-dist><strong>¿Fuera de Barcelona?</strong> <span>A distancia y con web:</span> '
+                 f'<b>{num(tot)} €<small> + IVA</small></b></p>')
+    cls = ' fila--destacada' if m['num'] == 2 else ''
+    return fila(m['slug'], m['nombre'], precio_fila(m['precio'], m['tachado'], m.get('precioSinFundador')), desc, kicker, meta, cls, modo, f'menu-{m["slug"]}')
+
+def cabecera(titulo, sub, ilus, ident=None):
+    i = f' id="{ident}"' if ident else ''
+    return (f'<header class="tablon__cab"{i}><figure class="tablon__ilus" aria-hidden="true">{ILUS[ilus]}</figure>'
+            f'<div><h3 class="tablon__t">{esc(titulo)}</h3><p class="tablon__sub">{esc(sub)}</p></div></header>')
+
+def tablon():
+    por = {m['num']: m for m in D['menus']}
+    carta_f = ''.join(fila(p['slug'], p['nombre'], precio_fila(p['precio'], desde=p.get('desde')),
+                           f'<p class="fila__desc">{esc(p["nota"])}</p>' if p.get('nota') else '') for g in D['carta'] for p in g['platos'])
+    planes = ''.join(fila(p['slug'], p['nombre'], precio_fila(p['precio'], mensual=True),
+                          f'<p class="fila__desc">{esc(p["nota"])}</p>') for p in D['planes'])
+    izq = (cabecera('Los menús de la casa', 'Todo incluido, a precio cerrado.', 'escaparate')
+           + '<ul class="tablon__lista">' + fila_menu(por[1], 'bcn') + fila_menu(por[3], 'dist') + fila_menu(por[2]) + '</ul>'
+           + cabecera('La sobremesa', 'Cada mes, sin permanencia.', 'plano', 'sobremesa') + f'<ul class="tablon__lista">{planes}</ul>')
+    der = cabecera('La carta de la casa', '¿Solo te apetece un plato?', 'cafe', 'carta') + f'<ul class="tablon__lista">{carta_f}</ul>'
+    pie = ('<div class="tablon__pie"><p><strong>¿Buscas otra cosa?</strong> Redes, rebranding o visibilidad en IA: pregúntanos y te respondemos en 48 h laborables.</p>'
+           '<a class="btn btn--outline-ink" href="#contacto" data-interes="otra" data-track="cta-preguntanos">Pregúntanos</a>'
+           '<a class="btn btn--crimson" href="contratar.html" data-track="tablon-pedir">Pedir propuesta con lo marcado</a></div>')
+    return ('\n          <div class="tablon">\n            <section class="tablon__col">' + izq + '</section>\n            <section class="tablon__col">'
+            + der + pie + '</section>\n          </div>')
+
 if __name__ == '__main__':
     s = open(ROOT + 'index.html').read()
     menus = sorted(D['menus'], key=lambda m: (m['num'] != 2, m['num']))  # en móvil, el Menú 2 primero
-    por_num = {m['num']: m for m in D['menus']}
-    caja1 = '<div class="menu-slot">' + menu_dia(por_num[1], 'bcn') + menu_dia(por_num[3], 'dist') + '\n          </div>'
-    s = put(s, 'menus', menu_dia(por_num[2]) + '\n          ' + caja1 + sobremesa())
+    s = put(s, 'menus', tablon())
     s = put(s, 'sobremesa', '')
-    s = put(s, 'carta', carta())
+    s = put(s, 'carta', '')
     s = re.sub(r'<script type="application/json" id="precios-data">.*?</script>',
                f'<script type="application/json" id="precios-data">{datos_js()}</script>', s, flags=re.S)
     s = jsonld(s)

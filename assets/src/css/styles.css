@@ -2037,3 +2037,92 @@ body:has(.sx-modo input[value="dist"]:checked) .menus [data-solo-dist] { display
 .menu--carta .menu__grupo--fuera .menu__grupo-t { min-height: 0; padding-right: 0; }
 /* Subrayado amarillo línea a línea (sirve en nombres de dos líneas) */
 .menu__check input:checked ~ .menu__linea .menu__nombre, .menu__check:hover .menu__nombre { background: none !important; text-decoration: underline; text-decoration-color: var(--mostaza); text-decoration-thickness: .5em; text-underline-offset: -.3em; text-decoration-skip-ink: none; }
+
+
+/* ==========================================================================
+   Servicios como carta de cafetería: un servicio por línea, con casilla. Todo a la vista.
+   ========================================================================== */
+.menus { display: block !important; margin-top: 20px; }
+.carta-y-sobremesa[hidden] { display: none !important; }
+.tablon { display: grid; gap: 22px 40px; background: var(--crema); border: 3px solid var(--tinta); outline: 1px solid var(--tinta); outline-offset: -9px;
+  box-shadow: 8px 8px 0 var(--tinta); padding: clamp(18px, 2.4vw, 28px); }
+@media (min-width: 980px) { .tablon { grid-template-columns: 1.1fr 1fr; } .tablon__col + .tablon__col { border-left: 2px dashed var(--tinta); padding-left: 40px; } }
+.tablon__col { min-width: 0; }
+.tablon__pie { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; border-top: 3px double var(--tinta); padding-top: 16px; }
+.tablon__pie p { flex: 1 1 360px; margin: 0; font-size: 14px; }
+.tablon__pie .btn { padding: 12px 18px; }
+.btn--outline-ink { background: transparent; color: var(--tinta); border: 2.5px solid var(--tinta); }
+.btn--outline-ink:hover { background: var(--mostaza); }
+
+/* Cabecera de grupo: banda de tinta con ilustración, como en las cartas de diner */
+.tablon__cab { position: relative; display: flex; align-items: center; gap: 14px; margin: 0 0 6px; padding: 8px 28px 8px 8px;
+  background: var(--tinta); color: var(--crema); clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 0 100%); scroll-margin-top: 120px; }
+.tablon__lista + .tablon__cab { margin-top: 18px; }
+.tablon__ilus { flex: none; width: 58px; margin: 0; background: var(--crema); border: 2px solid var(--crema); rotate: -5deg; }
+.tablon__ilus svg { display: block; width: 100%; height: auto; }
+.tablon__t { margin: 0; font-family: var(--font-novelty); font-weight: 400; font-size: clamp(22px, 2.2vw, 28px); line-height: 1; color: var(--mostaza); }
+.tablon__sub { margin: 2px 0 0; font-family: var(--font-slab); font-style: italic; font-size: 14px; color: var(--crema); }
+
+/* Cada servicio, una línea */
+.tablon__lista { list-style: none; margin: 0; padding: 0; }
+.fila { padding: 10px 0; border-bottom: 1px dotted color-mix(in srgb, var(--tinta) 45%, transparent); }
+.fila:last-child { border-bottom: 0; }
+.fila__linea { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+.fila__linea input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.fila .menu__caja { flex: none; margin-top: 0; }
+.fila__nombre { flex: 0 1 auto; min-width: 0; display: grid; }
+.fila__n { font-family: var(--font-slab); font-weight: 800; font-size: 17px; line-height: 1.2; }
+.fila__kicker { font-family: var(--font-typewriter); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--rojo); }
+.fila .menu__puntos { flex: 1 0 16px; align-self: flex-end; transform: translateY(-6px); }
+.fila__precio { flex: none; align-self: flex-end; text-align: right; white-space: nowrap; font-family: var(--font-typewriter); font-size: 13px; }
+.fila__precio b { font-family: var(--font-gothic); font-weight: 400; font-size: 26px; line-height: 1; color: var(--rojo); }
+.fila__precio s { text-decoration-color: var(--rojo); text-decoration-thickness: 2px; color: var(--tinta); }
+.fila__precio small { font-size: 11px; }
+.fila__desc, .fila__incluye, .fila__meta { margin: 4px 0 0 38px; font-size: 14px; line-height: 1.45; }
+.fila__desc { font-family: var(--font-slab); font-style: italic; }
+.fila__incluye { list-style: none; padding: 0; display: flex; flex-wrap: wrap; }
+.fila__incluye li + li::before { content: "·"; margin: 0 7px; color: var(--rojo); font-weight: 700; }
+.fila__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-family: var(--font-typewriter); font-size: 12px; }
+.fila__meta > span { display: inline-flex; align-items: center; gap: 4px; }
+.fila__sello { padding: 1px 8px; background: var(--mostaza); font-weight: 700; text-transform: uppercase; rotate: -2deg; }
+.fila .menu__upgrade, .fila .menu__distancia { margin: 8px 0 0 38px; rotate: 0deg; text-align: left; }
+.fila .menu__distancia b { display: inline; font-size: 20px; }
+.fila--destacada { position: relative; margin: 10px -12px 0; padding: 14px 12px 12px; background: color-mix(in srgb, var(--mostaza) 22%, transparent); border: 2px solid var(--rojo); box-shadow: 4px 4px 0 var(--rojo); }
+.fila--destacada::after { content: "La especialidad de la casa"; position: absolute; top: -11px; right: 12px; padding: 1px 8px; background: var(--rojo); color: var(--crema);
+  font-family: var(--font-typewriter); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+:lang(ca) .fila--destacada::after { content: "L'especialitat de la casa"; }
+:lang(en) .fila--destacada::after { content: "House speciality"; }
+.fila__linea:hover .menu__caja { background: var(--mostaza); transform: translate(-1px, -1px) rotate(-4deg); box-shadow: 4px 4px 0 var(--tinta); }
+.fila__linea input:checked + .menu__caja { background: var(--mostaza); transform: rotate(-6deg); box-shadow: 3px 3px 0 var(--rojo); }
+.fila__linea input:checked + .menu__caja::after { content: ""; position: absolute; left: 7px; top: -9px; width: 10px; height: 24px; border: solid var(--rojo); border-width: 0 5px 5px 0; border-radius: 0 0 3px 0; transform: rotate(40deg); animation: sx-visto .25s cubic-bezier(.34, 1.56, .64, 1); }
+.fila__linea input:focus-visible + .menu__caja { outline: 3px solid var(--mostaza); outline-offset: 2px; }
+.fila__linea input:checked ~ .fila__nombre .fila__n, .fila__linea:hover .fila__n { text-decoration: underline; text-decoration-color: var(--mostaza); text-decoration-thickness: .5em; text-underline-offset: -.3em; text-decoration-skip-ink: none; }
+
+/* Interruptor: filas */
+.tablon .fila[data-modo="dist"] { display: none; }
+body:has(.sx-modo input[value="dist"]:checked) .tablon .fila[data-modo="bcn"] { display: none; }
+body:has(.sx-modo input[value="dist"]:checked) .tablon .fila[data-modo="dist"] { display: block; }
+.tablon [data-solo-dist] { display: none; }
+body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { display: block; }
+
+/* Entrada: las filas aparecen escalonadas */
+.tablon .fila { animation: sx-fila .45s cubic-bezier(.34, 1.56, .64, 1) both; animation-play-state: paused; }
+.tablon.is-in .fila { animation-play-state: running; }
+.tablon__lista .fila:nth-child(2) { animation-delay: .06s; } .tablon__lista .fila:nth-child(3) { animation-delay: .12s; } .tablon__lista .fila:nth-child(4) { animation-delay: .18s; }
+@keyframes sx-fila { from { opacity: 0; translate: -14px 0; } to { opacity: 1; translate: 0 0; } }
+.no-js .tablon .fila { animation: none; }
+@media (prefers-reduced-motion: reduce) { .tablon .fila { animation: none; } }
+@media (max-width: 600px) { .fila__desc, .fila__incluye, .fila__meta, .fila .menu__upgrade, .fila .menu__distancia { margin-left: 0; } .fila__precio b { font-size: 22px; } .fila--destacada { margin-left: -6px; margin-right: -6px; } }
+
+/* Pie del tablón dentro de la columna de la carta: rellena el hueco y deja el botón a la vista */
+.tablon__col:last-child { display: flex; flex-direction: column; }
+.tablon__col .tablon__pie { margin-top: auto; padding-top: 18px; border-top: 3px double var(--tinta); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tablon__col .tablon__pie p { grid-column: 1 / -1; }
+.tablon__col .tablon__pie .btn--crimson { order: -1; grid-column: 1 / -1; }
+@media (max-width: 979px) { .tablon__col .tablon__pie { margin-top: 18px; } }
+@media (max-width: 600px) {
+  .fila__linea { flex-wrap: wrap; row-gap: 2px; }
+  .fila__nombre { flex: 1 1 calc(100% - 40px); }
+  .fila .menu__puntos { display: none; }
+  .fila__precio { flex-basis: 100%; text-align: left; padding-left: 38px; }
+}

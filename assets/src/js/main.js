@@ -743,7 +743,7 @@ function renderUpgrade() {
   // En la caja del Escaparate: si ya tienes Cuidados esenciales en la propuesta, cuánto te suma de verdad
   const list = cart.get();
   document.querySelectorAll("[data-upgrade]").forEach((el) => {
-    const slug = el.closest(".menu")?.querySelector("[data-add-check]")?.dataset.addCheck;
+    const slug = el.closest(".menu, .fila")?.querySelector("[data-add-check]")?.dataset.addCheck;
     const pr = PROD[slug];
     const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && typeof PROD[inc]?.precio === "number");
     if (!pr || !ya.length) { el.hidden = true; return; }
@@ -1267,7 +1267,7 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
 
 /* Singular Extra: subrayado amarillo y entrada de los menús al hacer scroll */
 (() => {
-  const els = document.querySelectorAll(".sx-hl, .menu");
+  const els = document.querySelectorAll(".sx-hl, .menu, .tablon");
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("is-in")); return; }
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { threshold: 0.35 });
   els.forEach((e) => io.observe(e));
@@ -1300,5 +1300,5 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
 
 /* Interruptor En Barcelona / A distancia: al cambiar, el menú que aparece entra ya visible */
 document.querySelectorAll('.sx-modo input[name="modo"]').forEach((r) => r.addEventListener("change", () => {
-  document.querySelectorAll(".menus .menu").forEach((m) => m.classList.add("is-in"));
+  document.querySelectorAll(".menus .menu, .tablon").forEach((m) => m.classList.add("is-in"));
 }));
