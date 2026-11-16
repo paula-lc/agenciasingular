@@ -788,6 +788,7 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape" && cartOpen
 // Botones "Añadir" de la portada
 const syncAddButtons = () => {
   const list = cart.get();
+  document.querySelectorAll("[data-add-check]").forEach((cb) => { cb.checked = list.includes(cb.dataset.addCheck); });
   document.querySelectorAll("[data-add]").forEach((b) => {
     const on = list.includes(b.dataset.add);
     const isPackBtn = b.classList.contains("add-btn--pack");
@@ -803,6 +804,13 @@ document.querySelectorAll("[data-add]").forEach((b) => {
     if (cart.get().includes(slug)) cart.remove(slug); else cart.add(slug);
     syncAddButtons();
     pop(b);
+  });
+});
+document.querySelectorAll("[data-add-check]").forEach((cb) => {
+  cb.addEventListener("change", () => {
+    const slug = cb.dataset.addCheck;
+    if (cb.checked) cart.add(slug); else cart.remove(slug);
+    syncAddButtons();
   });
 });
 syncAddButtons();
@@ -1215,4 +1223,12 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("sx-spin"); io.unobserve(e.target); } });
   }, { threshold: 0.35 });
   els.forEach(function (el) { el.classList.add("sx-pre"); io.observe(el); });
+})();
+
+/* Singular Extra: subrayado amarillo y entrada de los menús al hacer scroll */
+(() => {
+  const els = document.querySelectorAll(".sx-hl, .menu");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("is-in")); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { threshold: 0.35 });
+  els.forEach((e) => io.observe(e));
 })();

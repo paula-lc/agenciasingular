@@ -18,7 +18,7 @@ def eur(x): return f'{num(x)} €'
 def con_iva(x): return x * (100 + IVA) / 100
 esc = html.escape
 
-def plato(nombre, precio=None, nota=None, desde=False, mensual=False, iva=True):
+def plato(nombre, precio=None, nota=None, desde=False, mensual=False, iva=True, slug=None):
     if isinstance(precio, str): p = f'<span class="menu__precio menu__precio--txt">{esc(precio)}</span>'
     elif precio is None: p = ''
     else:
@@ -27,7 +27,12 @@ def plato(nombre, precio=None, nota=None, desde=False, mensual=False, iva=True):
         tot = f'<small class="menu__iva">{num(con_iva(precio))} {unidad} IVA incl.</small>' if iva and not desde else ''
         p = f'<span class="menu__precio">{pre}{num(precio)} {unidad} <small>+ IVA</small>{tot}</span>'
     n = f'<em class="menu__nota">{esc(nota)}</em>' if nota else ''
-    return (f'<li class="menu__plato"><span class="menu__linea"><span class="menu__nombre">{esc(nombre)}</span>'
+    if slug:
+        return (f'<li class="menu__plato menu__plato--check"><label class="menu__check"><input type="checkbox" data-add-check="{slug}">'
+                f'<span class="menu__caja" aria-hidden="true"></span><span class="menu__linea"><span class="menu__nombre">{esc(nombre)}</span>'
+                f'<span class="menu__puntos" aria-hidden="true"></span>{p}</span></label>{n}</li>')
+    incl = ' menu__plato--incl' if precio == 'incluido' else ''
+    return (f'<li class="menu__plato{incl}"><span class="menu__linea"><span class="menu__nombre">{esc(nombre)}</span>'
             f'<span class="menu__puntos" aria-hidden="true"></span>{p}</span>{n}</li>')
 
 def foto(clave, alt, cls=''):
@@ -92,13 +97,11 @@ def sobremesa():
 def carta():
     grupos = ''
     for g in D['carta']:
-        platos = ''.join(plato(p['nombre'], p['precio'], p['nota'], desde=p.get('desde')) for p in g['platos'])
-        botones = ''.join(f'<button type="button" class="add-btn add-btn--pack" data-add="{p["slug"]}" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-add-label>Añadir a mi propuesta</span> <span class="add-btn__que">{esc(p["nombre"])}</span></button>' for p in g['platos'])
+        platos = ''.join(plato(p['nombre'], p['precio'], p['nota'], desde=p.get('desde'), slug=p['slug']) for p in g['platos'])
         grupos += f'''
               <section class="menu__grupo">
                 <h4 class="menu__grupo-t">{esc(g["grupo"])}</h4>
                 <div class="menu__body"><ul class="menu__platos">{platos}</ul>{foto(g["ilustracion"], ALT_CARTA[g["ilustracion"]], "menu__foto menu__foto--sm")}</div>
-                <div class="menu__acciones menu__acciones--sm">{botones}</div>
               </section>'''
     return f'''
           <article class="menu menu--carta" id="carta" aria-labelledby="carta-t">
