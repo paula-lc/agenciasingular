@@ -344,16 +344,19 @@ if (typingEl) {
   if (reduceMotion) {
     typingEl.innerHTML = toHtml(raw);
   } else {
+    // Se escribe a trocitos: una palabra por fotograma (110 ms), como el resto del movimiento
+    const FOTOGRAMA = 110;
     let i = 0;
     typingEl.classList.add("typing");
     const tick = () => {
-      i++;
+      const next = raw.indexOf(" ", i + 1);
+      i = next === -1 ? raw.length : next;
       // No cortar dentro de una marca **…**
       let partial = raw.slice(0, i);
       const opens = (partial.match(/\*\*/g) || []).length;
       if (opens % 2 === 1) partial += "**";
       typingEl.innerHTML = toHtml(partial);
-      if (i < raw.length) setTimeout(tick, raw[i] === " " ? 30 : 22);
+      if (i < raw.length) setTimeout(tick, FOTOGRAMA);
       else typingEl.classList.remove("typing");
     };
     setTimeout(tick, 900);
