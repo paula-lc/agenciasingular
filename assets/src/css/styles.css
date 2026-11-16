@@ -1702,3 +1702,72 @@ mark, .ai-card mark { background: var(--pizarra); color: var(--crema); }
 .chip--service.is-unfolding { animation-timing-function: steps(3, jump-start); }
 .sx-nav-logo:hover, .alogo:hover .alogo__beat--a, .alogo:hover .alogo__beat--s, .nanny img:hover { animation-timing-function: steps(5, jump-start); }
 @media (prefers-reduced-motion: reduce) { .ticker__track { animation: none !important; } }
+
+
+/* ==========================================================================
+   Singular Extra · capa de vuelta sobre la Landing v5
+   Tinta negra en lo claro, cabecera de papel, estallidos, anuncio de la luna
+   y movimiento retro: rápido, con un pequeño rebote de dibujo animado (sin saltos).
+   ========================================================================== */
+:root { --tinta: #261f14; --papel-prensa: #f1d5bb; --naranja: #ed5921; --rosa: #f2578f; --azul: #3e6083; }
+.section--cream, .section--soft, .site-header {
+  --pizarra: var(--tinta); --line: 2px solid var(--tinta); --shadow-stamp: 4px 4px 0 var(--tinta); --shadow-stamp-lg: 6px 6px 0 var(--tinta);
+  --tinta-suave: var(--tinta); --trama: color-mix(in srgb, var(--tinta) 14%, transparent); color: var(--tinta);
+}
+.section--cream .menu--destacado { --pizarra: var(--azul); }
+
+/* Cabecera de papel (Nav de Singular Extra) */
+.site-header { background: var(--crema) !important; border-bottom: 3px solid var(--tinta); }
+.site-header .nav__links { background: var(--crema); }
+.site-header .nav__links .btn--outline { color: var(--tinta); background: transparent; border-color: transparent; }
+.site-header .nav__links .btn--outline::after { background: var(--naranja); }
+.site-header .nav__links .btn--outline.is-active, .site-header .nav__links .btn--outline[aria-current] { color: var(--azul); }
+.site-header .nav__links .btn--outline.is-active::after, .site-header .nav__links .btn--outline[aria-current]::after { background: var(--azul); }
+@media (hover: hover) { .site-header .nav__links .btn--outline:hover { color: var(--tinta); } .site-header .nav__links .btn--outline:hover::after { background: var(--naranja); } }
+.site-header .nav__ig, .site-header .cart-pill, .site-header .nav__toggle, .site-header .lang-switch__btn { color: var(--tinta); border-color: var(--tinta); background: transparent; }
+.site-header .cart-pill[aria-expanded="true"] { background: var(--tinta); color: var(--crema); }
+
+/* Movimiento retro: rápido y con rebote, nada de fotogramas */
+:root { --a-trocitos: cubic-bezier(.34, 1.56, .64, 1); --t-trocitos: 200ms; --salto: -3px; }
+.nav__links .btn--outline::after { transition: transform .22s cubic-bezier(.34, 1.56, .64, 1) !important; }
+.ticker__track { animation-timing-function: linear !important; }
+.sx-pre.sx-spin { animation-duration: .9s; animation-timing-function: cubic-bezier(.2, .75, .25, 1); }
+.sector-tab[aria-selected="true"], .sector-panel:not([hidden]), .service-info:not([hidden]), .chip--service.is-unfolding { animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+.sx-nav-logo:hover, .alogo:hover .alogo__beat--a, .alogo:hover .alogo__beat--s, .nanny img:hover { animation-timing-function: ease-out; }
+
+/* Estallidos */
+.sx-burst { position: absolute; z-index: 3; display: grid; place-content: center; text-align: center; aspect-ratio: 1; clip-path: polygon(50.0% 0.0%,58.0% 9.8%,69.1% 3.8%,72.8% 15.9%,85.4% 14.6%,84.1% 27.2%,96.2% 30.9%,90.2% 42.0%,100.0% 50.0%,90.2% 58.0%,96.2% 69.1%,84.1% 72.8%,85.4% 85.4%,72.8% 84.1%,69.1% 96.2%,58.0% 90.2%,50.0% 100.0%,42.0% 90.2%,30.9% 96.2%,27.2% 84.1%,14.6% 85.4%,15.9% 72.8%,3.8% 69.1%,9.8% 58.0%,0.0% 50.0%,9.8% 42.0%,3.8% 30.9%,15.9% 27.2%,14.6% 14.6%,27.2% 15.9%,30.9% 3.8%,42.0% 9.8%);
+  transform: rotate(-8deg); pointer-events: none; font-family: var(--font-gothic); text-transform: uppercase; line-height: .95; background: var(--mostaza); color: var(--tinta); }
+.sx-burst b { display: block; font-weight: 400; }
+.sx-burst span { display: block; letter-spacing: .05em; }
+.sx-fundador { position: relative; }
+.sx-burst--fundador { top: 34px; right: -34px; width: 98px; background: var(--rojo); color: var(--crema); }
+.sx-burst--fundador b { font-size: 28px; } .sx-burst--fundador span { font-size: 13px; }
+.guia-cta { position: relative; }
+.sx-burst--guia { top: -40px; right: -22px; width: 104px; }
+.sx-burst--guia b { font-size: 32px; } .sx-burst--guia span { font-size: 14px; }
+@media (max-width: 600px) { .sx-burst--fundador { right: -8px; } .sx-burst--guia { right: -6px; } }
+
+/* Lemas en estallido junto al titular */
+@media (min-width: 721px) { .section-head { grid-template-columns: minmax(0, 720px) auto minmax(0, 1fr); column-gap: clamp(24px, 4vw, 48px); } }
+.sx-motto { grid-column: 2; grid-row: 3 / 5; align-self: center; justify-self: start; margin: -24px 0; width: 210px; aspect-ratio: 1;
+  display: grid; place-content: center; text-align: center; background: var(--mostaza); color: var(--tinta); clip-path: polygon(50.0% 0.0%,58.0% 9.8%,69.1% 3.8%,72.8% 15.9%,85.4% 14.6%,84.1% 27.2%,96.2% 30.9%,90.2% 42.0%,100.0% 50.0%,90.2% 58.0%,96.2% 69.1%,84.1% 72.8%,85.4% 85.4%,72.8% 84.1%,69.1% 96.2%,58.0% 90.2%,50.0% 100.0%,42.0% 90.2%,30.9% 96.2%,27.2% 84.1%,14.6% 85.4%,15.9% 72.8%,3.8% 69.1%,9.8% 58.0%,0.0% 50.0%,9.8% 42.0%,3.8% 30.9%,15.9% 27.2%,14.6% 14.6%,27.2% 15.9%,30.9% 3.8%,42.0% 9.8%); transform: rotate(-8deg);
+  font-family: var(--font-gothic); text-transform: uppercase; line-height: .95; letter-spacing: .015em; }
+.sx-motto span { display: block; color: var(--tinta); }
+.sx-motto span:first-child { font-size: 32px; } .sx-motto span + span { font-size: 20px; margin-top: 2px; }
+.sx-motto--rosa { background: var(--rosa); }
+@media (max-width: 720px) { .sx-motto { grid-column: 1; grid-row: 5; width: 170px; margin: 20px 0 0; } .sx-motto span:first-child { font-size: 26px; } .sx-motto span + span { font-size: 16px; } }
+
+/* El anuncio de la luna, junto al titular del problema */
+.sx-pain-head { display: grid; gap: clamp(24px, 3vw, 40px); align-items: stretch; }
+@media (min-width: 861px) { .sx-pain-head { grid-template-columns: minmax(0, 1fr) minmax(320px, 380px); } }
+.sx-pain-head .boxed-title { max-width: none; display: flex; align-items: center; margin: 0; }
+.sx-adbox { position: relative; background: #211c16; color: var(--crema); text-align: center; border: 3px solid var(--tinta); outline: 1px solid var(--crema);
+  outline-offset: -9px; box-shadow: 6px 6px 0 var(--rojo); padding: 26px 40px 24px 24px; }
+.sx-adbox__head { margin: 0; font-family: var(--font-slab); font-style: italic; font-weight: 800; font-size: 20px; line-height: 1.15; color: var(--crema); }
+.sx-adbox__big { margin: 4px 0; font-family: var(--font-novelty); font-size: clamp(40px, 4vw, 52px); line-height: 1; color: var(--mostaza); }
+.sx-adbox ul { list-style: none; margin: 12px 0 0; padding: 0; font-family: var(--font-typewriter); font-size: 14px; line-height: 1.5; }
+.sx-adbox .btn { margin-top: 16px; }
+.sx-adbox > .sx-burst { top: 10%; right: -28px; width: 112px; }
+.sx-adbox > .sx-burst b { font-size: 36px; } .sx-adbox > .sx-burst span { font-size: 14px; }
+@media (max-width: 860px) { .sx-adbox { margin-top: 32px; padding: 64px 24px 24px; } .sx-adbox > .sx-burst { top: -28px; right: -6px; width: 96px; } }

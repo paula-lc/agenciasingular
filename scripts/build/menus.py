@@ -42,10 +42,12 @@ def menu_dia(m):
     etiqueta = f' · {esc(m["etiqueta"])}' if m.get('etiqueta') else ''
     platos = ''.join(plato(n, (f'{num(p)} € a la carta' if isinstance(p, (int, float)) else p)) for n, p in m['platos'])
     tachado_txt = esc(m.get('tachadoTexto', '')) + ' ' if m.get('tachadoTexto') else ''
-    fundador = (f'<p class="menu__tachado">{tachado_txt}<s>{eur(m["tachado"])}</s></p>'
+    ahorro = m['tachado'] - m['precio']
+    fundador = ('<div class="sx-fundador">' + f'<span class="sx-burst sx-burst--fundador" aria-hidden="true"><b>−{num(ahorro)} €</b><span>Fundador</span></span>'
+                + f'<p class="menu__tachado">{tachado_txt}<s>{eur(m["tachado"])}</s></p>'
                 + (f'<p class="menu__en">En menú:</p>' if m.get('tachadoTexto') else '')
                 + bloque_precio(m['precio'])
-                + '<p class="menu__sello" data-founder>Precio fundador</p>')
+                + '<p class="menu__sello" data-founder>Precio fundador</p></div>')
     if m.get('precioSinFundador'):
         cuenta = f'<div data-founder>{fundador}</div><div data-web-price hidden>{bloque_precio(m["precioSinFundador"])}</div>'
     else:
