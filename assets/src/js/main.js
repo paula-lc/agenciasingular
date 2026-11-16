@@ -752,8 +752,22 @@ function renderUpgrade() {
     el.hidden = false;
   });
 }
+function renderUpgradePrecio() {
+  // Línea del Escaparate: si Cuidados esenciales ya está marcado, se tacha su precio y aparece lo que suma de verdad
+  const list = cart.get();
+  document.querySelectorAll("[data-upgrade-precio]").forEach((el) => {
+    const fila = el.closest(".fila");
+    const pr = PROD[fila?.querySelector("[data-add-check]")?.dataset.addCheck];
+    const ya = (pr?.incluye || []).filter((inc) => list.includes(inc) && typeof PROD[inc]?.precio === "number");
+    const on = !!(pr && ya.length);
+    fila.classList.toggle("is-upgrade", on);
+    el.hidden = !on;
+    if (on) el.innerHTML = `<b>${fmtEur(pr.precio - ya.reduce((s, inc) => s + PROD[inc].precio, 0))}</b>`;
+  });
+}
 function renderCartPill() {
   renderUpgrade();
+  renderUpgradePrecio();
   const actions = document.querySelector(".nav__actions");
   if (!actions) return;
   const list = cart.get(), n = list.length, editable = !document.getElementById("hire-form");

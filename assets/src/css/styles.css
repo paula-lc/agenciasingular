@@ -2126,3 +2126,20 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
   .fila .menu__puntos { display: none; }
   .fila__precio { flex-basis: 100%; text-align: left; padding-left: 38px; }
 }
+
+/* Dibujos de las cabeceras: más grandes y saliéndose de la banda */
+.tablon__cab { clip-path: none; overflow: visible; padding-left: 96px; min-height: 68px; }
+.tablon__cab::after { content: ""; position: absolute; top: 0; right: -1px; width: 16px; height: 100%; background: var(--crema); clip-path: polygon(100% 0, 0 50%, 100% 100%); }
+.tablon__ilus { position: absolute; left: -10px; top: 50%; width: 92px; translate: 0 -50%; rotate: -7deg; border: 3px solid var(--crema); box-shadow: 4px 4px 0 var(--rojo); z-index: 1; transition: rotate .3s cubic-bezier(.34, 1.56, .64, 1); }
+.tablon__cab:hover .tablon__ilus { rotate: 3deg; }
+.tablon__col:last-child .tablon__ilus { rotate: 6deg; }
+.tablon__lista + .tablon__cab { margin-top: 30px; }
+.tablon__cab:first-child { margin-top: 12px; }
+/* Escaparate con Cuidados esenciales marcado: precio tachado y precio final */
+.fila.is-upgrade [data-founder] s { display: none; }
+.fila.is-upgrade [data-founder] b { font-size: 18px; color: var(--tinta); text-decoration: line-through; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; }
+.fila__final b { margin-left: 6px; animation: sx-visto-precio .35s cubic-bezier(.34, 1.56, .64, 1); display: inline-block; }
+@keyframes sx-visto-precio { from { scale: 1.6; rotate: -8deg; } to { scale: 1; rotate: 0deg; } }
+/* Pie: botón principal ancho y «Pregúntanos» centrado */
+.tablon__col .tablon__pie { grid-template-columns: 1fr; text-align: center; }
+.tablon__col .tablon__pie .btn--outline-ink { justify-self: center; }

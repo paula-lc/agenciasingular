@@ -180,7 +180,7 @@ def precio_fila(precio, tachado=None, web=None, mensual=False, desde=False):
     if tachado:
         fund = f'<span data-founder><s>{num(tachado)} €</s> <b>{num(precio)} €</b></span>'
         sinf = f'<span data-web-price hidden><b>{num(web)} €</b></span>' if web else ''
-        return f'<span class="fila__precio">{fund}{sinf}<small> + IVA</small></span>'
+        return f'<span class="fila__precio">{fund}{sinf}<span class="fila__final" data-upgrade-precio hidden></span><small> + IVA</small></span>'
     return f'<span class="fila__precio">{pre}<b>{num(precio)}{u}</b><small> + IVA</small></span>'
 
 def fila(slug, nombre, precio_html, desc='', kicker='', meta='', cls='', modo=None, ident=None):
@@ -197,8 +197,6 @@ def fila_menu(m, modo=None):
     kicker = f'Menú {num_menu} · {m["para"]}'
     meta = (f'<p class="fila__meta"><span class="fila__sello" data-founder>Precio fundador</span>'
             f'<span><svg class="icon icon--sm" aria-hidden="true"><use href="#i-clock"/></svg>{esc(m["plazo"])}</span></p>')
-    if m.get('incluye'):
-        meta += '<p class="menu__upgrade" data-upgrade hidden></p>'
     dist = next((x for x in D['menus'] if x.get('suplementoWeb')), None)
     if m['num'] == 2 and dist:
         tot = dist['precio'] + dist['suplementoWeb']
@@ -224,7 +222,7 @@ def tablon():
     der = cabecera('La carta de la casa', '¿Solo te apetece un plato?', 'cafe', 'carta') + f'<ul class="tablon__lista">{carta_f}</ul>'
     pie = ('<div class="tablon__pie"><p><strong>¿Buscas otra cosa?</strong> Redes, rebranding o visibilidad en IA: pregúntanos y te respondemos en 48 h laborables.</p>'
            '<a class="btn btn--outline-ink" href="#contacto" data-interes="otra" data-track="cta-preguntanos">Pregúntanos</a>'
-           '<a class="btn btn--crimson" href="contratar.html" data-track="tablon-pedir">Pedir propuesta con lo marcado</a></div>')
+           '<a class="btn btn--crimson" href="contratar.html" data-track="tablon-pedir">Hacer mi pedido →</a></div>')
     return ('\n          <div class="tablon">\n            <section class="tablon__col">' + izq + '</section>\n            <section class="tablon__col">'
             + der + pie + '</section>\n          </div>')
 
