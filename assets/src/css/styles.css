@@ -2450,3 +2450,10 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
   .fila__n { font-size: 16px; }
   .sx-modo { gap: 10px; } .sx-modo legend { float: none; width: 100%; margin-bottom: 4px; }
 }
+
+/* Móvil: el precio a la derecha del nombre; si no cabe, baja pero sigue a la derecha */
+@media (max-width: 600px) {
+  .fila__nombre { flex: 1 1 140px; }
+  .fila__precio { flex: 0 0 auto; flex-basis: auto; margin-left: auto; padding-left: 8px; text-align: right; align-self: flex-start; }
+  .fila__precio b { font-size: 21px; }
+}
