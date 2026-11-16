@@ -2276,3 +2276,103 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 .cart-panel__empty { margin: 0; font-family: var(--font-slab) !important; font-style: italic; font-size: 16px !important; font-weight: 700; text-align: center; }
 .cart-panel__empty--sub { font-family: var(--font-typewriter) !important; font-style: normal; font-weight: 400; font-size: 12px !important; line-height: 1.5; }
 .cart-panel__ver { justify-self: center; font-family: var(--font-display); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--rojo); text-decoration: underline; text-decoration-color: var(--mostaza); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+
+/* ==========================================================================
+   Todas las casillas del sitio como las del menú (formularios, privacidad, contratar…)
+   ========================================================================== */
+input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-check]):not(.visually-hidden) {
+  appearance: none; -webkit-appearance: none; flex: none; position: relative; width: 26px; height: 26px; margin: -2px 0 0; padding: 0;
+  border: 2.5px solid var(--tinta); border-radius: 0; background: var(--crema); box-shadow: 3px 3px 0 var(--tinta); cursor: pointer; vertical-align: middle;
+  transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), background .15s, box-shadow .2s;
+}
+input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-check]):not(.visually-hidden):hover { background: var(--mostaza); transform: translate(-1px, -1px) rotate(-4deg); box-shadow: 4px 4px 0 var(--tinta); }
+input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-check]):not(.visually-hidden):checked {
+  background: var(--mostaza) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M5 13.5l5.5 5.5L22 4' fill='none' stroke='%23bf2f5a' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 24px no-repeat;
+  transform: rotate(-6deg); box-shadow: 3px 3px 0 var(--rojo);
+}
+input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-check]):not(.visually-hidden):focus-visible { outline: 3px solid var(--mostaza); outline-offset: 3px; }
+.section--blue input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-check]) { border-color: var(--crema); box-shadow: 3px 3px 0 var(--crema); }
+
+/* ==========================================================================
+   Guía: periódico de barrio (Singular Extra)
+   ========================================================================== */
+.guia .article { --pizarra: var(--tinta); --line: 2px solid var(--tinta); --shadow-stamp: 4px 4px 0 var(--tinta); --tinta-suave: var(--tinta); color: var(--tinta); }
+
+/* Portada */
+.guia .article-hero { position: relative; overflow: hidden; background: var(--azul-profundo) !important; border-bottom: 4px double var(--crema); }
+.guia .article-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .14;
+  background-image: radial-gradient(circle, var(--crema) 0 1px, transparent 1.4px); background-size: 6px 6px; }
+.guia .article-hero .container { position: relative; z-index: 1; }
+.guia__kicker { display: inline-block; margin: 22px 0 0 !important; padding: 4px 12px; background: var(--rojo); color: var(--crema); font-family: var(--font-typewriter); font-size: 13px !important; letter-spacing: .1em; text-transform: uppercase; rotate: -1.5deg; }
+.guia .article-hero h1 { font-family: var(--font-slab); font-weight: 900; text-transform: none; font-size: clamp(34px, 5vw, 64px); line-height: 1.02; color: var(--mostaza);
+  text-shadow: 3px 3px 0 var(--rojo); max-width: 900px; margin-top: 14px; }
+.guia .article-hero p:not(.guia__kicker) { font-family: var(--font-slab); font-style: italic; color: var(--crema); }
+.guia .article-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--font-typewriter) !important; font-style: normal !important; font-size: 13px !important; text-transform: uppercase; letter-spacing: .06em; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--crema) 50%, transparent); max-width: 900px !important; }
+.guia__burst { top: clamp(40px, 6vw, 70px); right: clamp(16px, 6vw, 90px); width: clamp(110px, 12vw, 150px); background: var(--mostaza); }
+.guia__burst b { font-size: clamp(32px, 3.4vw, 44px); } .guia__burst span { font-size: 14px; }
+@media (max-width: 720px) { .guia__burst { top: 14px; right: 10px; width: 92px; } .guia__burst b { font-size: 26px; } .guia__burst span { font-size: 11px; } .guia .article-hero h1 { padding-right: 70px; } }
+
+/* Índice: sumario de periódico */
+.guia .toc { background: #f7f3e6; border: 3px solid var(--tinta); border-radius: 0; outline: 1px solid var(--tinta); outline-offset: -8px; box-shadow: 6px 6px 0 var(--tinta); padding: 22px 20px; }
+.guia .toc h2 { font-family: var(--font-gothic); font-weight: 400; font-size: 26px; letter-spacing: .04em; text-transform: uppercase; color: var(--tinta); border-bottom: 3px double var(--tinta); padding-bottom: 8px; }
+.guia .toc ol { list-style: none; padding: 0; counter-reset: toc; gap: 0; }
+.guia .toc li { counter-increment: toc; display: grid; grid-template-columns: 34px 1fr; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted color-mix(in srgb, var(--tinta) 50%, transparent); }
+.guia .toc li::before { content: counter(toc, decimal-leading-zero); font-family: var(--font-gothic); font-size: 20px; color: var(--rojo); }
+.guia .toc a { font-family: var(--font-slab); font-weight: 700; color: var(--tinta); background: linear-gradient(var(--mostaza), var(--mostaza)) no-repeat 0 90% / 0 40%; transition: background-size .3s cubic-bezier(.65, 0, .35, 1); }
+.guia .toc a:hover { color: var(--tinta); background-size: 100% 40%; }
+
+/* Texto */
+.guia .prose { font-size: 17px; line-height: 1.65; }
+.guia .prose p, .guia .prose li { color: var(--tinta); }
+.guia .prose h2 { font-family: var(--font-slab); font-weight: 900; color: var(--tinta); font-size: clamp(26px, 2.8vw, 36px); line-height: 1.1; padding-top: 18px; border-top: 3px double var(--tinta); }
+.guia .prose h2[id^="paso-"] { position: relative; padding-left: 74px; min-height: 64px; }
+.guia .prose h2[id^="paso-"]::before { content: attr(data-n); position: absolute; left: 0; top: 16px; width: 58px; height: 58px; display: grid; place-items: center;
+  background: var(--mostaza); border: 3px solid var(--tinta); box-shadow: 3px 3px 0 var(--rojo); font-family: var(--font-gothic); font-weight: 400; font-size: 38px; line-height: 1; rotate: -3deg; }
+.guia .prose h2#paso-1::before { content: "01"; } .guia .prose h2#paso-2::before { content: "02"; background: var(--azul-profundo); color: var(--crema); }
+.guia .prose h2#paso-3::before { content: "03"; } .guia .prose h2#paso-4::before { content: "04"; background: var(--azul-profundo); color: var(--crema); }
+.guia .prose h2#paso-5::before { content: "05"; } .guia .prose h2#paso-6::before { content: "06"; background: var(--azul-profundo); color: var(--crema); }
+.guia .prose h3 { font-family: var(--font-slab); font-weight: 800; color: var(--tinta); }
+.guia .prose strong { background: linear-gradient(var(--mostaza), var(--mostaza)) no-repeat 0 92% / 100% 35%; }
+.guia .prose a:not(.btn) { color: var(--rojo); text-decoration-color: var(--mostaza); text-decoration-thickness: 3px; }
+.guia .prose ul:not(.checklist) li::marker { color: var(--rojo); }
+
+/* Resumen: recorte amarillo */
+.guia .tldr { position: relative; border-radius: 0; background: var(--mostaza); color: var(--tinta); border: 3px solid var(--tinta); box-shadow: 6px 6px 0 var(--tinta); padding: 26px 26px 22px; rotate: -.6deg; }
+.guia .tldr h2 { border: 0; padding: 0; font-family: var(--font-novelty) !important; font-weight: 400; text-transform: none !important; font-size: 26px !important; color: var(--tinta) !important; }
+.guia .tldr strong { background: none; }
+.guia .tldr li::marker { content: "★ "; color: var(--rojo); }
+
+/* La lista de la abuela */
+.guia .checklist li { background: #f7f3e6; border: 2px solid var(--tinta); border-radius: 0; padding: 12px 14px; box-shadow: 3px 3px 0 color-mix(in srgb, var(--tinta) 25%, transparent); }
+.guia__check { display: flex; align-items: flex-start; gap: 14px; width: 100%; cursor: pointer; }
+.guia__check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.guia__check .menu__caja { margin-top: 0; }
+.guia__check:hover .menu__caja { background: var(--mostaza); transform: translate(-1px, -1px) rotate(-4deg); box-shadow: 4px 4px 0 var(--tinta); }
+.guia__check input:checked + .menu__caja { background: var(--mostaza); transform: rotate(-6deg); box-shadow: 3px 3px 0 var(--rojo); }
+.guia__check input:checked + .menu__caja::after { content: ""; position: absolute; left: 7px; top: -9px; width: 10px; height: 24px; border: solid var(--rojo); border-width: 0 5px 5px 0; border-radius: 0 0 3px 0; transform: rotate(40deg); animation: sx-visto .25s cubic-bezier(.34, 1.56, .64, 1); }
+.guia__check input:focus-visible + .menu__caja { outline: 3px solid var(--mostaza); outline-offset: 2px; }
+.guia .checklist li:has(input:checked) { background: color-mix(in srgb, var(--mostaza) 22%, #f7f3e6); }
+.guia .checklist li:has(input:checked) span:last-child { text-decoration: line-through; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; }
+
+/* Anuncios dentro de la guía */
+.guia .guia__ad { position: relative; border-radius: 0; text-align: left; margin: 36px 0; padding: 28px 130px 26px 28px; }
+.guia .guia__ad h3 { font-family: var(--font-novelty) !important; font-weight: 400; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.1; color: var(--mostaza) !important; }
+.guia .guia__ad p { color: var(--crema) !important; }
+.guia .guia__ad > .sx-burst { top: 50%; right: 18px; width: 100px; translate: 0 -50%; }
+.guia .guia__ad > .sx-burst b { font-size: 30px; } .guia .guia__ad > .sx-burst span { font-size: 12px; }
+@media (max-width: 720px) { .guia .guia__ad { padding: 66px 22px 24px; } .guia .guia__ad > .sx-burst { top: -24px; right: -6px; translate: none; width: 92px; } }
+
+/* Comparativa: tabla de periódico */
+.guia .table-wrap { border: 3px solid var(--tinta); box-shadow: 6px 6px 0 var(--tinta); }
+.guia .compare { border-radius: 0; background: #f7f3e6; font-size: 15px; }
+.guia .compare th { background: var(--tinta) !important; color: var(--mostaza) !important; font-family: var(--font-gothic); font-size: 18px; letter-spacing: .04em; text-transform: uppercase; }
+.guia .compare td { border-bottom: 1px dotted var(--tinta); }
+.guia .compare td:first-child { font-family: var(--font-slab); font-weight: 800; }
+.guia .compare tr:nth-child(even) td { background: color-mix(in srgb, var(--mostaza) 12%, transparent); }
+
+/* Errores: números grandes en rojo */
+.guia .prose h2#errores + p + ol, .guia .prose h2#errores ~ ol { list-style: none; counter-reset: err; padding: 0; display: grid; gap: 10px; }
+.guia .prose h2#errores ~ ol li { counter-increment: err; position: relative; padding: 8px 0 8px 56px; border-bottom: 1px dotted var(--tinta); }
+.guia .prose h2#errores ~ ol li::before { content: counter(err); position: absolute; left: 0; top: 0; font-family: var(--font-gothic); font-size: 40px; line-height: 1; color: var(--rojo); }
+.guia .prose strong { background: none; }

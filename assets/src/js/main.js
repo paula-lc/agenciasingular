@@ -1385,3 +1385,19 @@ document.addEventListener("pointerdown", (e) => {
   b.classList.remove("is-pulsado"); void b.offsetWidth; b.classList.add("is-pulsado");
 });
 document.addEventListener("animationend", (e) => { if (e.animationName === "sx-rotulador") e.target.classList.remove("is-pulsado"); });
+
+/* Guía: la lista de la abuela recuerda lo que ya has marcado */
+(() => {
+  const checks = document.querySelectorAll(".guia .checklist input[type=checkbox]");
+  if (!checks.length) return;
+  const KEY = "guia-checklist";
+  let saved = [];
+  try { saved = JSON.parse(localStorage.getItem(KEY)) || []; } catch {}
+  checks.forEach((cb, i) => {
+    cb.checked = saved.includes(i);
+    cb.addEventListener("change", () => {
+      const on = [...checks].map((c, j) => (c.checked ? j : -1)).filter((j) => j >= 0);
+      try { localStorage.setItem(KEY, JSON.stringify(on)); } catch {}
+    });
+  });
+})();
