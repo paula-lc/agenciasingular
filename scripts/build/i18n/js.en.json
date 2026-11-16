@@ -156,5 +156,8 @@
   "Eso que has pedido tiene nombre:": "What you ordered has a name:",
   "La mesa está puesta, pero aún no has pedido nada.": "The table's set, but you haven't ordered yet.",
   "Marca lo que te apetezca en el menú y lo irás viendo aquí, con su total.": "Tick whatever you fancy on the menu and you'll see it here, with the total.",
-  "Ver el menú": "See the menu"
+  "Ver el menú": "See the menu",
+  "¡Recibido!": "Got it!",
+  "Ya tenemos tu test. Te escribimos en 48 h laborables con tus 3 arreglos.": "We've got your test. We'll write to you within 48 working hours with your 3 fixes.",
+  "Lo hemos enviado. Si en 48 h laborables no tienes noticias nuestras, escríbenos a {email}.": "We've sent it. If you don't hear from us within 48 working hours, email us at {email}."
 }

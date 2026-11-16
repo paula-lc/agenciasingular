@@ -31,6 +31,18 @@ const t = (s, vars) => {
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Envío a Google Apps Script leyendo la respuesta: true = guardado y avisado; null = no se puede saber (el navegador
+   no deja leer la respuesta); si el script responde con error, lanza una excepción para avisar a quien envía. */
+const enviarAGoogle = async (payload) => {
+  let res;
+  try { res = await fetch(SITE.formEndpoint, { method: "POST", body: payload }); }
+  catch { return null; } // sin red o sin permiso para leer la respuesta: no se reenvía para no duplicar
+  const j = await res.json().catch(() => null);
+  if (res.ok && j && j.ok) return true;
+  throw new Error("El receptor de formularios ha respondido con un error");
+};
+
+
 /* Precios: los genera scripts/build/menus.py desde precios.json (única fuente) en <script id="precios-data"> */
 const PRECIOS = (() => {
   try { return JSON.parse(document.getElementById("precios-data")?.textContent || "{}"); } catch { return {}; }
@@ -601,13 +613,14 @@ if (quiz) {
         formulario: "Test visibilidad", asunto: subject, servicios: servicio, nombre: "", negocio: data.negocio, email: data.email,
         telefono: data.telefono, whatsapp: "", ficha: "", sector: "", ciudad: "", pagina: location.href, secciones: JSON.stringify(sections),
       });
-      await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
+      return enviarAGoogle(payload);
     } else {
       const body = new FormData();
       body.set("contacto", data.contacto); body.set("negocio", data.negocio); body.set("_subject", subject);
       body.set("resumen", sections.map((s) => `${s.titulo.toUpperCase()}\n${s.filas.map(([k, v]) => `${k}: ${v}`).join("\n")}`).join("\n\n"));
       const res = await fetch(SITE.formEndpoint, { method: "POST", body, headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(res.statusText);
+      return true;
     }
   };
 
@@ -628,13 +641,17 @@ if (quiz) {
     const btn = gateForm.querySelector('button[type="submit"]');
     btn.disabled = true;
     try {
-      await sendLead({
+      const seguro = await sendLead({
         contacto, negocio: gateForm.negocio.value.trim(),
         email: esEmail ? contacto : "", telefono: esEmail ? "" : contacto,
       });
       track("form-test-de-visibilidad-enviado");
       if (esEmail) document.querySelectorAll('[data-contact-form] [name="email"]').forEach((el) => { if (!el.value) el.value = contacto; });
-      gateText.textContent = t("¡Recibido! Te escribo en 48 h laborables con tus 3 arreglos.");
+      gate.querySelector(".quiz__gate-title").textContent = t("¡Recibido!");
+      gateText.textContent = seguro
+        ? t("Ya tenemos tu test. Te escribimos en 48 h laborables con tus 3 arreglos.")
+        : t("Lo hemos enviado. Si en 48 h laborables no tienes noticias nuestras, escríbenos a {email}.", { email: SITE.email });
+      gate.classList.add("is-enviado");
       gateForm.hidden = true;
     } catch {
       gateError(gateForm.contacto, t("No hemos podido enviarlo. Escríbenos a {email} y te respondemos enseguida.", { email: SITE.email }));
@@ -1267,7 +1284,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     try {
       if (SITE.formEndpoint.includes("script.google.com")) {
         // Google Apps Script (scripts/formularios-google-apps-script.gs): guarda la solicitud en la hoja
-        // y envía el informe en PDF. No devuelve cabeceras CORS, así que se envía sin leer la respuesta.
+        // y envía el informe en PDF. Se lee su respuesta para avisar si algo falla (ver enviarAGoogle).
         const get = (n) => (data.get(n) || "").toString();
         // El vale pide «WhatsApp o email» en un solo campo: se reparte en la columna que toca
         const contacto = get("contacto").trim();
@@ -1289,7 +1306,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
           nombre: get("nombre"), negocio: get("negocio"), email, telefono: get("telefono"), whatsapp, ficha: get("ficha"),
           sector: get("sector"), ciudad: get("ciudad"), pagina: location.href, secciones: JSON.stringify(detail),
         });
-        await fetch(SITE.formEndpoint, { method: "POST", mode: "no-cors", body: payload });
+        await enviarAGoogle(payload);
       } else {
         data.delete("web_hp");
         data.set("_subject", subject);

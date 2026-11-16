@@ -156,5 +156,8 @@
   "Eso que has pedido tiene nombre:": "Això que has demanat té nom:",
   "La mesa está puesta, pero aún no has pedido nada.": "La taula està parada, però encara no has demanat res.",
   "Marca lo que te apetezca en el menú y lo irás viendo aquí, con su total.": "Marca el que et vingui de gust al menú i ho aniràs veient aquí, amb el total.",
-  "Ver el menú": "Veure el menú"
+  "Ver el menú": "Veure el menú",
+  "¡Recibido!": "Rebut!",
+  "Ya tenemos tu test. Te escribimos en 48 h laborables con tus 3 arreglos.": "Ja tenim el teu test. T'escrivim en 48 h laborables amb els teus 3 arranjaments.",
+  "Lo hemos enviado. Si en 48 h laborables no tienes noticias nuestras, escríbenos a {email}.": "L'hem enviat. Si en 48 h laborables no en tens notícies, escriu-nos a {email}."
 }
