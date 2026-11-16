@@ -1304,7 +1304,7 @@ document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new 
 
 /* Singular Extra: subrayado amarillo y entrada de los menús al hacer scroll */
 (() => {
-  const els = document.querySelectorAll(".sx-hl, .menu, .tablon");
+  const els = document.querySelectorAll(".sx-hl, .menu, .tablon, .garantia .sellos");
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach((e) => e.classList.add("is-in")); return; }
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { threshold: 0.35 });
   els.forEach((e) => io.observe(e));

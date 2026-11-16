@@ -2158,3 +2158,26 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 /* El total salta un poco cada vez que cambia */
 .cart-panel__row--total span:last-child { display: inline-block; animation: sx-visto-precio .35s cubic-bezier(.34, 1.56, .64, 1); }
 @media (max-width: 600px) { .fila__comanda { margin-left: 0; } }
+
+/* ¿Te suena?: casillas como las del menú */
+.cupon__casillas label { align-items: flex-start; gap: 14px; }
+.cupon__casillas input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.cupon__casillas .menu__caja { margin-top: -2px; }
+.cupon__casillas label:hover .menu__caja { background: var(--mostaza); transform: translate(-1px, -1px) rotate(-4deg); box-shadow: 4px 4px 0 var(--tinta); }
+.cupon__casillas input:checked + .menu__caja { background: var(--mostaza); transform: rotate(-6deg); box-shadow: 3px 3px 0 var(--rojo); }
+.cupon__casillas input:checked + .menu__caja::after { content: ""; position: absolute; left: 7px; top: -9px; width: 10px; height: 24px; border: solid var(--rojo); border-width: 0 5px 5px 0; border-radius: 0 0 3px 0; transform: rotate(40deg); animation: sx-visto .25s cubic-bezier(.34, 1.56, .64, 1); }
+.cupon__casillas input:focus-visible + .menu__caja { outline: 3px solid var(--mostaza); outline-offset: 2px; }
+.cupon__casillas input:checked ~ span:last-child { text-decoration: underline; text-decoration-color: var(--mostaza); text-decoration-thickness: .5em; text-underline-offset: -.3em; text-decoration-skip-ink: none; }
+
+/* Sellos (precios cerrados, sin permanencia, garantía…): se rellenan de izquierda a derecha, como con rotulador */
+.sello, .hero .sello, .fila__sello, .menu__sello {
+  background-image: linear-gradient(100deg, transparent 0 3px, var(--mostaza) 3px calc(100% - 4px), transparent calc(100% - 4px)) !important;
+  background-repeat: no-repeat !important; background-position: 0 50% !important; background-size: 0% 82% !important;
+  transition: background-size .45s cubic-bezier(.65, 0, .35, 1), color .2s !important;
+}
+@media (hover: hover) { .sello:hover, .hero .sello:hover { background-size: 100% 82% !important; color: var(--tinta); } }
+.fila__sello, .menu__sello { background-color: transparent !important; }
+.tablon.is-in .fila__sello { background-size: 100% 82% !important; transition-delay: .5s !important; }
+.sellos.is-in .sello { background-size: 100% 82% !important; color: var(--tinta); }
+.sellos.is-in .sello:nth-child(2) { transition-delay: .25s !important; } .sellos.is-in .sello:nth-child(3) { transition-delay: .5s !important; }
+.no-js .sello, .no-js .fila__sello { background-size: 100% 82% !important; }
