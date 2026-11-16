@@ -2256,3 +2256,23 @@ body:has(.sx-modo input[value="dist"]:checked) .tablon [data-solo-dist] { displa
 .cart-panel__sugerencia p { margin: 0; font-size: 13px; line-height: 1.4; font-weight: 700; }
 .cart-panel__cambiar { justify-self: start; padding: 6px 12px; border: 2px solid var(--tinta); background: var(--tinta); color: var(--mostaza); font-family: var(--font-typewriter); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
 .cart-panel__cambiar:hover { background: var(--rojo); border-color: var(--rojo); color: var(--crema); }
+
+/* Sugerencia de la casa, más bonita: nota del camarero grapada al tique */
+.cart-panel__sugerencia { position: relative; margin: 6px 2px 2px; padding: 14px 14px 14px; background: var(--crema); border: 2px dashed var(--rojo); rotate: -1.2deg;
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--tinta) 25%, transparent); display: grid; gap: 6px; text-align: center; }
+.cart-panel__sugerencia::before { content: ""; position: absolute; top: -7px; left: 50%; width: 34px; height: 8px; translate: -50% 0; border: 2px solid #8a8a8a; border-bottom: 0; }
+.cart-panel__sug-k { margin: 0; font-family: var(--font-novelty); font-size: 20px; line-height: 1; color: var(--rojo); }
+.cart-panel__sug-t { margin: 0; font-family: var(--font-slab); font-style: italic; font-weight: 400; font-size: 14px; line-height: 1.35; }
+.cart-panel__sug-t strong { font-style: normal; font-weight: 800; }
+.cart-panel__sug-p { margin: 2px 0 4px; font-family: var(--font-typewriter); }
+.cart-panel__sug-p s { font-size: 14px; text-decoration-color: var(--rojo); text-decoration-thickness: 2px; }
+.cart-panel__sug-p b { font-family: var(--font-gothic); font-weight: 400; font-size: 34px; line-height: 1; color: var(--rojo); margin-left: 6px; }
+.cart-panel__sug-p small { font-size: 11px; }
+.cart-panel__sug-sello { position: absolute; top: -12px; right: -10px; padding: 3px 8px; background: var(--mostaza); color: var(--tinta); border: 2px solid var(--tinta);
+  font-family: var(--font-gothic); font-size: 15px; letter-spacing: .04em; text-transform: uppercase; rotate: 8deg; box-shadow: 2px 2px 0 var(--tinta); }
+.cart-panel__cambiar { justify-self: stretch; padding: 9px 12px; font-size: 13px; background: var(--rojo); border-color: var(--rojo); color: var(--crema); box-shadow: 3px 3px 0 var(--tinta); transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s; }
+.cart-panel__cambiar:hover { background: var(--rojo); color: var(--crema); transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--tinta); }
+/* Cuenta vacía */
+.cart-panel__empty { margin: 0; font-family: var(--font-slab) !important; font-style: italic; font-size: 16px !important; font-weight: 700; text-align: center; }
+.cart-panel__empty--sub { font-family: var(--font-typewriter) !important; font-style: normal; font-weight: 400; font-size: 12px !important; line-height: 1.5; }
+.cart-panel__ver { justify-self: center; font-family: var(--font-display); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--rojo); text-decoration: underline; text-decoration-color: var(--mostaza); text-decoration-thickness: 3px; text-underline-offset: 4px; }

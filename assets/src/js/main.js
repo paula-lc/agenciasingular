@@ -837,7 +837,12 @@ function renderCartPill() {
   if (menuEntero) {
     const [mslug, pm] = menuEntero;
     const suelto = pm.incluye.reduce((acc, x) => acc + (typeof PROD[x]?.precio === "number" ? PROD[x].precio : 0), 0);
-    if (suelto > pm.precio) sugerencia = `<div class="cart-panel__sugerencia"><p>${escHtml(t("Esto es nuestro {menu}: te sale a {a} en vez de {b}.", { menu: t(pm.nombre), a: fmtEur(pm.precio), b: fmtEur(suelto) }))}</p><button type="button" class="cart-panel__cambiar" data-cambiar-menu="${mslug}">${escHtml(t("Cambiar por el menú"))}</button></div>`;
+    if (suelto > pm.precio) sugerencia = `<div class="cart-panel__sugerencia">
+      <span class="cart-panel__sug-sello">${escHtml(t("Ahorras {x}", { x: fmtEur(suelto - pm.precio) }))}</span>
+      <p class="cart-panel__sug-k">${escHtml(t("Sugerencia de la casa"))}</p>
+      <p class="cart-panel__sug-t">${escHtml(t("Eso que has pedido tiene nombre:"))} <strong>${escHtml(t(pm.nombre))}</strong></p>
+      <p class="cart-panel__sug-p"><s>${fmtEur(suelto)}</s> <b>${fmtEur(pm.precio)}</b> <small>+ ${escHtml(t("IVA"))}</small></p>
+      <button type="button" class="cart-panel__cambiar" data-cambiar-menu="${mslug}">${escHtml(t("Cambiar por el menú"))} →</button></div>`;
   }
   const d = new Date(), pad = (x) => String(x).padStart(2, "0");
   const fecha = `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} · ${pad(d.getHours())}:${pad(d.getMinutes())}`;
@@ -848,13 +853,14 @@ function renderCartPill() {
     + (mes ? fila(escHtml(t("Cada mes")), `${fmtEur(conIva(mes))} ${escHtml(t("IVA incl."))}`, "cart-panel__row--mes") : "");
   panel.innerHTML = `<div class="cart-panel__head"><div class="cart-panel__casa"><strong>Agencia Singular</strong><span>${escHtml(t("Cuenta · Mesa del barrio"))}</span><span>${fecha}</span></div><button type="button" class="cart-panel__close" aria-label="${escHtml(t("Cerrar"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>` +
     (n ? `<ul class="cart-panel__list">${items}${dtos.join("")}</ul>${sugerencia}<div class="cart-panel__totales">${totales}</div><a class="btn btn--yellow btn--block cart-panel__cta" href="contratar.html" data-track="cesta-pedir-propuesta">${escHtml(t(editable ? "Hacer mi pedido →" : "Ver mi propuesta"))}</a><p class="cart-panel__gracias">${escHtml(t("¡Gracias por su visita!"))}</p>`
-       : `<p class="cart-panel__empty">${escHtml(t("Aún no has elegido nada. Pulsa «Añadir a mi propuesta» en un pack o un servicio y aparecerá aquí."))}</p>`);
+       : `<p class="cart-panel__empty">${escHtml(t("La mesa está puesta, pero aún no has pedido nada."))}</p><p class="cart-panel__empty cart-panel__empty--sub">${escHtml(t("Marca lo que te apetezca en el menú y lo irás viendo aquí, con su total."))}</p><a class="cart-panel__ver" href="#packs">${escHtml(t("Ver el menú"))} ↓</a>`);
 }
 document.addEventListener("click", (e) => {
   if (e.target.closest(".cart-pill")) { setCartOpen(!cartOpen()); return; }
   const rm = e.target.closest("[data-cart-remove]");
   if (rm) { cart.remove(rm.dataset.cartRemove); syncAddButtons(); return; }
   if (e.target.closest(".cart-panel__close")) { setCartOpen(false, true); return; }
+  if (e.target.closest(".cart-panel__ver")) { setCartOpen(false); return; }
   const cambio = e.target.closest("[data-cambiar-menu]");
   if (cambio) {
     const slug = cambio.dataset.cambiarMenu;
