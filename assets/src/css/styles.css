@@ -2378,3 +2378,16 @@ input[type="checkbox"]:not(:has(+ .menu__caja)):not(.chip input):not([data-add-c
 .guia .prose strong { background: none; }
 /* Cinta: el doble de largo de texto, así la velocidad no cambia aunque haya más palabras */
 .ticker__track { animation-duration: 120s !important; }
+
+/* Guía: dibujitos del menú junto a cada paso */
+.guia__foto { width: clamp(150px, 22vw, 210px); margin: 6px 0 14px; shape-margin: 12px; }
+.guia__foto--der { float: right; margin-left: 26px; transform: rotate(3deg); }
+.guia__foto--izq { float: left; margin-right: 26px; transform: rotate(-3deg); }
+.guia .prose h2 { clear: both; }
+.guia .prose .checklist, .guia .prose .guia__ad, .guia .prose .table-wrap { clear: both; }
+@media (max-width: 600px) { .guia__foto--der, .guia__foto--izq { float: none; display: block; margin: 8px auto 16px; width: 170px; } }
+
+/* Sumario: subrayado de rotulador línea a línea */
+.guia .toc a { background: none !important; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: .45em; text-underline-offset: -.28em; text-decoration-skip-ink: none; transition: text-decoration-color .2s; }
+.guia .toc a:hover, .guia .toc a:focus-visible { text-decoration-color: var(--mostaza); }
+.guia .prose ul:not(.checklist), .guia .prose ol { display: flow-root; }
