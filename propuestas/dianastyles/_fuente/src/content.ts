@@ -34,13 +34,13 @@ export const SERVICES: Service[] = [
 
 export const PORTFOLIO = [
   { src: 'portafolio-01.jpg', alt: 'Corte de caballero' },
-  { src: 'portafolio-02.jpg', alt: 'Balayage' },
-  { src: 'portafolio-03.jpg', alt: 'Trenzas' },
-  { src: 'portafolio-04.jpg', alt: 'Corte de dama' },
-  { src: 'portafolio-05.jpg', alt: 'Corte de caballero' },
-  { src: 'portafolio-06.jpg', alt: 'Corte de niños' },
-  { src: 'portafolio-07.jpg', alt: 'Balayage' },
-  { src: 'portafolio-08.jpg', alt: 'Trenzas' },
+  { src: 'portafolio-02.jpg', alt: 'Corte bob y color' },
+  { src: 'portafolio-03.jpg', alt: 'Diseño con navaja' },
+  { src: 'portafolio-04.jpg', alt: 'Corte de dama y ondas' },
+  { src: 'portafolio-05.jpg', alt: 'Corte y peinado de caballero' },
+  { src: 'portafolio-06.jpg', alt: 'Asesoría de color' },
+  { src: 'portafolio-07.jpg', alt: 'Balayage y brushing' },
+  { src: 'portafolio-08.jpg', alt: 'Diana en el estudio' },
 ]
 
 export const ABOUT = {
