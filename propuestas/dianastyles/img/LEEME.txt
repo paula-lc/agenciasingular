@@ -1,0 +1,5 @@
+Pon aquí las fotos de Diana con estos nombres (jpg, png o webp). Si falta alguna, la web muestra un recuadro indicando cuál.
+
+hero.jpg, estudio.jpg, sobre-mi.jpg, contacto.jpg
+corte-hombre.jpg, corte-dama.jpg, corte-ninos.jpg, balayage.jpg, trenzas.jpg
+portafolio-01.jpg ... portafolio-08.jpg
